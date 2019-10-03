@@ -127,3 +127,17 @@ def verify(request):
             return redirect('transfer')
 
     return render(request, 'transfer.html')
+
+
+def profile(request):
+    c_user = request.user.username
+    show = Account.objects.all().get(username=c_user)
+    context = {'show': show}
+    return render(request, 'profile.html', context)
+
+
+def activity(request):
+    c_user = request.user.username
+    show = Transactions.objects.filter(sender=c_user)
+    context = {'show': show}
+    return render(request, 'activity.html', context)

@@ -1,5 +1,4 @@
 from django.db import models
-from datetime import datetime
 
 
 class Account(models.Model):
@@ -16,4 +15,4 @@ class Transactions(models.Model):
     receiver = models.CharField(max_length=50)
     amount = models.CharField(max_length=200)
     ref_no = models.CharField(max_length=40)
-    date = models.DateTimeField(default=datetime.now())
+    date = models.DateField(auto_now=True)
