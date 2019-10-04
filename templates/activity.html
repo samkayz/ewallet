@@ -338,8 +338,8 @@
                               </div>
                             </th>
                             <th>Sender</th>
+                            <th>Receiver</th>
                             <th>Ref No</th>
-                            <th>Amount</th>
                             <th>Date</th>
                             <th>Amount</th>
                             <th>Action</th>
@@ -355,21 +355,16 @@
                                 <label for="checkbox-4" class="custom-control-label">&nbsp;</label>
                               </div>
                             </td>
-                            <td>Input data</td>
+                            <td>{{ data.sender }}</td>
                             <td class="align-middle">
-                              <div class="progress progress-xs">
-                                <div class="progress-bar bg-success width-per-40"></div>
-                              </div>
+                                <div >{{ data.receiver }}</div>
                             </td>
                             <td>
-                              <img alt="image" src="assets/img/users/user-2.png" width="35">
-                              <img alt="image" src="assets/img/users/user-5.png" width="35">
-                              <img alt="image" src="assets/img/users/user-4.png" width="35">
-                              <img alt="image" src="assets/img/users/user-1.png" width="35">
+                              {{ data.ref_no }}
                             </td>
-                            <td>2018-01-16</td>
+                            <td>{{ data.date }}</td>
                             <td>
-                              <div class="badge badge-success badge-shadow">Completed</div>
+                              <div class="badge badge-success badge-shadow">₦ {{ data.amount }}</div>
                             </td>
                             <td><a href="#" class="btn btn-primary">Detail</a></td>
                           </tr>

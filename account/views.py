@@ -1,7 +1,8 @@
+from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User, auth
-from .models import Account, Transactions
+from .models import Account, Transactions, Voucher
 import random
 import string
 import uuid
@@ -90,7 +91,7 @@ def transfer(request):
         bal = Account.objects.values('bal').get(phone_no=r_number)['bal']
         s_bal = Account.objects.values('bal').get(username=s_username)['bal']
         show = Account.objects.values().get(phone_no=r_number)['username']
-        print("Hello: ", show)
+        # print("Hello: ", show)
         sb = (float(s_bal))
         rb = (float(bal))
         am = (float(amount))
@@ -107,7 +108,7 @@ def transfer(request):
             Account.objects.filter(username=s_username).update(bal=new_2)
 
             trans = Transactions(sender=s_username,
-                                 receiver=r_number,
+                                 receiver=show,
                                  amount=amount,
                                  ref_no=ref_no,)
             trans.save()
@@ -138,6 +139,53 @@ def profile(request):
 
 def activity(request):
     c_user = request.user.username
-    show = Transactions.objects.filter(sender=c_user)
+    show = Transactions.objects.filter(Q(sender=c_user) | Q(receiver=c_user))
+    print("Hello:", show)
     context = {'show': show}
     return render(request, 'activity.html', context)
+
+
+def voucher(request):
+    N = 10
+    code = ''.join(random.choices(string.digits, k=N))
+    ref_no = uuid.uuid4().hex[:10].upper()
+    c_user = request.user.username
+    if request.method == 'POST':
+        v_username = request.POST['v_username']
+        amount = request.POST['amount']
+        s_bal = Account.objects.values('bal').get(username=v_username)['bal']
+        sb = (float(s_bal))
+        am = (float(amount))
+        if am > sb:
+            messages.info(request, 'Insufficient Balance')
+        else:
+            new_2 = sb - am
+            Account.objects.filter(username=v_username).update(bal=new_2)
+            v_save = Voucher(v_creator=v_username,
+                             v_code=code,
+                             v_amount=am,
+                             ref_no=ref_no,
+                             v_status='open',
+                             )
+            trans = Transactions(sender=v_username,
+                                 receiver='voucher',
+                                 amount=amount,
+                                 ref_no=ref_no, )
+            trans.save()
+            v_save.save()
+            messages.info(request, "Transaction Successful!!")
+    show = Voucher.objects.filter(Q(v_creator=c_user))
+    context = {'show': show}
+    return render(request, 'voucher.html', context)
+
+
+def load_voucher(request):
+    # c_user = request.user.username
+    # if request.method == 'POST':
+    #     l_username = request.POST['l_username']
+    #     vcode = request.POST['v_code']
+    #     get_creator = Voucher.objects.values('bal').get(v_creator=l_username)['v_creator']
+    #
+    # show = Voucher.objects.filter(Q(v_creator=c_user))
+    # context = {'show': show}
+    return render(request, 'load_voucher.html')

@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="{% static 'assets/css/style.css'%}">
   <link rel="stylesheet" href="{% static 'assets/css/components.css'%}">
   <!-- Custom style CSS -->
-  <link rel="stylesheet" href="assets/css/custom.css'%}">
+  <link rel="stylesheet" href="{% static 'assets/css/custom.css'%}">
   <link rel='shortcut icon' type='image/x-icon' href="{% static 'assets/img/favicon.ico'%}" />
 </head>
 
@@ -104,7 +104,7 @@
               <div class="dropdown-title">Hello {{ user.first_name }}</div>
               <a href="#" class="dropdown-item has-icon"> <i class="far
 										fa-user"></i> Profile
-              </a> <a href="#" class="dropdown-item has-icon"> <i class="fas fa-bolt"></i>
+              </a> <a href="activity" class="dropdown-item has-icon"> <i class="fas fa-bolt"></i>
                 Activities
               </a> <a href="#" class="dropdown-item has-icon"> <i class="fas fa-cog"></i>
                 Settings
@@ -142,21 +142,10 @@
               <a href="transfer"><i data-feather="credit-card"></i><span>Transfer</span></a>
             </li>
             <li class="dropdown">
-              <a href="#" class="nav-link has-dropdown"><i data-feather="command"></i><span>Apps</span></a>
-              <ul class="dropdown-menu">
-                <li><a class="nav-link" href="chat.html">Chat</a></li>
-                <li><a class="nav-link" href="portfolio.html">Portfolio</a></li>
-                <li><a class="nav-link" href="blog.html">Blog</a></li>
-                <li><a class="nav-link" href="calendar.html">Calendar</a></li>
-              </ul>
+              <a href="activity" ><i data-feather="activity"></i><span>Activity</span></a>
             </li>
             <li class="dropdown">
-              <a href="#" class="nav-link has-dropdown"><i data-feather="mail"></i><span>Email</span></a>
-              <ul class="dropdown-menu">
-                <li><a class="nav-link" href="email-inbox.html">Inbox</a></li>
-                <li><a class="nav-link" href="email-compose.html">Compose</a></li>
-                <li><a class="nav-link" href="email-read.html">read</a></li>
-              </ul>
+              <a href="voucher"><i data-feather="share"></i><span>Voucher</span></a>
             </li>
             <li class="menu-header">UI Elements</li>
             <li class="dropdown">

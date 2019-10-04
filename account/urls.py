@@ -10,5 +10,7 @@ urlpatterns = [
     path('verify', views.verify, name='verify'),
     path('profile', views.profile, name='profile'),
     path('activity', views.activity, name='activity'),
+    path('voucher', views.voucher, name='voucher'),
+    path('load_voucher', views.load_voucher, name='load_voucher'),
 
 ]
