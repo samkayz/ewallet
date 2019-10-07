@@ -1,11 +1,12 @@
 from django.db.models import Q
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.models import User, auth
-from .models import Account, Transactions, Voucher
+from .models import Account, Transactions, Voucher, Ticket, Merchant
 import random
 import string
 import uuid
+import datetime
 
 
 def login(request):
@@ -140,7 +141,7 @@ def profile(request):
 def activity(request):
     c_user = request.user.username
     show = Transactions.objects.filter(Q(sender=c_user) | Q(receiver=c_user))
-    print("Hello:", show)
+    # print("Hello:", show)
     context = {'show': show}
     return render(request, 'activity.html', context)
 
@@ -180,12 +181,78 @@ def voucher(request):
 
 
 def load_voucher(request):
-    # c_user = request.user.username
-    # if request.method == 'POST':
-    #     l_username = request.POST['l_username']
-    #     vcode = request.POST['v_code']
-    #     get_creator = Voucher.objects.values('bal').get(v_creator=l_username)['v_creator']
-    #
-    # show = Voucher.objects.filter(Q(v_creator=c_user))
-    # context = {'show': show}
-    return render(request, 'load_voucher.html')
+    ref_no = uuid.uuid4().hex[:10].upper()
+    now = datetime.datetime.now()
+    c_user = request.user.username
+    if request.method == 'POST':
+        v_code = request.POST['v_code']
+        l_username = request.POST['l_username']
+        ju = Voucher.objects.filter(v_code=v_code)
+        get_object_or_404(ju, v_code=v_code)
+        v_am = Voucher.objects.values('v_amount').get(v_code=v_code)['v_amount']
+        status = Voucher.objects.values('v_status').get(v_code=v_code)['v_status']
+        loader = Voucher.objects.values('v_creator').get(v_code=v_code)['v_creator']
+        bal = Account.objects.values('bal').get(username=c_user)['bal']
+        sb = (float(bal))
+        am = (float(v_am))
+
+        if status == 'close':
+            messages.info(request, "Voucher Used")
+        elif loader == l_username:
+            messages.info(request, "You Cant load the Voucher you Created")
+        else:
+            new = sb + am
+            Account.objects.filter(username=l_username).update(bal=new)
+            Voucher.objects.filter(v_code=v_code).update(v_status='close', v_loader=c_user, v_date_load=now)
+            messages.info(request, "Transaction Successful!!")
+
+            trans = Transactions(sender='Voucher', receiver=l_username, amount=am, ref_no=ref_no,)
+            trans.save()
+    show = Voucher.objects.filter(Q(v_creator=c_user))
+    context = {'show': show}
+    return render(request, 'load_voucher.html', context)
+
+
+def ticket(request):
+    N = 6
+    ticket_id = ''.join(random.choices(string.digits, k=N))
+    c_user = request.user.username
+    if request.method == 'POST':
+        subject = request.POST['subject']
+        category = request.POST['category']
+        content = request.POST['content']
+        priority = request.POST['priority']
+
+        t_save = Ticket(subject=subject,
+                        category=category,
+                        owner=c_user,
+                        content=content,
+                        priority=priority,
+                        status='open',
+                        ticket_id=ticket_id,)
+        t_save.save()
+        messages.info(request, "Ticket Created")
+    return render(request, 'ticket.html')
+
+
+def dispute(request):
+    c_user = request.user.username
+    show = Ticket.objects.filter(Q(owner=c_user))
+    context = {'show': show}
+    return render(request, 'dispute.html', context)
+
+
+def merchant(request):
+    c_user = request.user.username
+    if request.method == 'POST':
+        b_name = request.POST['b_name']
+        b_address = request.POST['b_address']
+        b_email = request.POST['b_email']
+        b_tel = request.POST['b_tel']
+        b_url = request.POST['b_url']
+
+        b_save = Merchant(bus_owner_username=c_user, bus_name=b_name, bus_address=b_address, bus_email=b_email,
+                          bus_no=b_tel, bus_website=b_url,)
+        b_save.save()
+        # messages.info(request, "Merchant Registration Successful")
+    return render(request, 'profile.html')

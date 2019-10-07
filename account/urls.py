@@ -12,5 +12,8 @@ urlpatterns = [
     path('activity', views.activity, name='activity'),
     path('voucher', views.voucher, name='voucher'),
     path('load_voucher', views.load_voucher, name='load_voucher'),
+    path('ticket', views.ticket, name='ticket'),
+    path('dispute', views.dispute, name='dispute'),
+    path('merchant', views.profile, name='merchant'),
 
 ]

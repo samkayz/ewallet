@@ -27,3 +27,26 @@ class Voucher(models.Model):
     v_loader = models.CharField(max_length=100)
     v_date_load = models.CharField(max_length=100)
     v_date = models.DateField(auto_now=True)
+
+
+class Ticket(models.Model):
+    subject = models.CharField(max_length=500)
+    category = models.CharField(max_length=100)
+    owner = models.CharField(max_length=100)
+    content = models.CharField(max_length=1000)
+    priority = models.CharField(max_length=100)
+    status = models.CharField(max_length=20)
+    ticket_id = models.CharField(max_length=10)
+    date_created = models.DateField(auto_now=True)
+    date_action = models.CharField(max_length=100)
+
+
+class Merchant(models.Model):
+    bus_owner_username = models.CharField(max_length=100)
+    bus_name = models.CharField(max_length=200)
+    bus_address = models.CharField(max_length=200)
+    bus_email = models.CharField(max_length=100)
+    bus_no = models.CharField(max_length=20)
+    bus_website = models.CharField(max_length=200)
+    api_test_key = models.CharField(max_length=200)
+    api_live_key = models.CharField(max_length=200)
