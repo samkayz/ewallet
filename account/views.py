@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.models import User, auth
 from .models import Account, Transactions, Voucher, Ticket, Merchant
+from super.models import Resolution
 import random
 import string
 import uuid
@@ -131,11 +132,13 @@ def verify(request):
     return render(request, 'transfer.html')
 
 
-def profile(request):
+def settings(request):
     c_user = request.user.username
     show = Account.objects.all().get(username=c_user)
-    context = {'show': show}
-    return render(request, 'profile.html', context)
+    s_show = Merchant.objects.all().get(bus_owner_username=c_user)
+    m_show = Merchant.objects.all().get(bus_owner_username=c_user)
+    context = {'show': show, 's_show': s_show, 'm_show': m_show}
+    return render(request, 'settings.html', context)
 
 
 def activity(request):
@@ -251,8 +254,34 @@ def merchant(request):
         b_tel = request.POST['b_tel']
         b_url = request.POST['b_url']
 
-        b_save = Merchant(bus_owner_username=c_user, bus_name=b_name, bus_address=b_address, bus_email=b_email,
-                          bus_no=b_tel, bus_website=b_url,)
-        b_save.save()
-        # messages.info(request, "Merchant Registration Successful")
-    return render(request, 'profile.html')
+        if Merchant.objects.filter(bus_owner_username=c_user).exists():
+            messages.info(request, "You are a Merchant Already")
+            return redirect('settings')
+
+        else:
+            b_save = Merchant(bus_owner_username=c_user, bus_name=b_name, bus_address=b_address, bus_email=b_email,
+                              bus_no=b_tel, bus_website=b_url,)
+            b_save.save()
+            messages.info(request, "Merchant Registration Successful")
+    return render(request, 'settings.html')
+
+
+def api(request):
+    api_test = uuid.uuid4().hex[:50].lower()
+    api_live = uuid.uuid4().hex[:50].lower()
+    if request.method == 'POST':
+        user = request.POST['user']
+
+        Merchant.objects.filter(bus_owner_username=user).update(api_test_key=api_test, api_live_key=api_live)
+        messages.info(request, "Please Find Your API key on API Tab")
+        return redirect('settings')
+    return render(request, 'settings.html')
+
+
+def reply(request, ticket_id):
+    show = Ticket.objects.all().get(ticket_id=ticket_id)
+    r_show = Resolution.objects.filter(Q(ticket_id=ticket_id))
+    context = {'show': show, 'r_show': r_show}
+    return render(request, 'reply.html', context)
+
+

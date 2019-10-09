@@ -8,12 +8,14 @@ urlpatterns = [
     path('dashboard', views.dashboard, name='dashboard'),
     path('transfer', views.transfer, name='transfer'),
     path('verify', views.verify, name='verify'),
-    path('profile', views.profile, name='profile'),
+    path('settings', views.settings, name='settings'),
     path('activity', views.activity, name='activity'),
     path('voucher', views.voucher, name='voucher'),
     path('load_voucher', views.load_voucher, name='load_voucher'),
     path('ticket', views.ticket, name='ticket'),
     path('dispute', views.dispute, name='dispute'),
-    path('merchant', views.profile, name='merchant'),
+    path('merchant', views.merchant, name='merchant'),
+    path('api', views.api, name='api'),
+    path('reply/<ticket_id>', views.reply, name='reply'),
 
 ]

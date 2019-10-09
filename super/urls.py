@@ -10,4 +10,8 @@ urlpatterns = [
     path('logout', views.logout, name='logout'),
     path('user', views.user, name='user'),
     path('view/<id>', views.view, name='view'),
+    path('voucher', views.voucher, name='admin_voucher'),
+    path('dispute', views.dispute, name='admin_dispute'),
+    path('solve/<ticket_id>', views.solve, name='solve'),
+    path('resolution', views.resolution, name='resolution'),
 ]
