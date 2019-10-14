@@ -8,4 +8,26 @@ class Resolution(models.Model):
     content = models.CharField(max_length=500)
     date = models.DateField(auto_now=True)
 
+    class Meta:
+        db_table = "resolution"
+
+
+class Settings(models.Model):
+    about_us = models.CharField(max_length=1000)
+    contact_us = models.CharField(max_length=1000)
+    pricing = models.CharField(max_length=1000)
+
+    class Meta:
+        db_table = "settings"
+
+
+class Details(models.Model):
+    address = models.CharField(max_length=200)
+    email = models.CharField(max_length=50)
+    phone_no = models.CharField(max_length=20)
+    fax = models.CharField(max_length=20)
+
+    class Meta:
+        db_table = "details"
+
 

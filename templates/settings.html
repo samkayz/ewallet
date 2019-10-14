@@ -127,13 +127,19 @@
               <div class="user-role">{{ user.email }}</div>
             </div>
           </div>
-          <ul class="sidebar-menu">
+           <ul class="sidebar-menu">
             <li class="menu-header">Main</li>
             <li class="dropdown">
               <a href="dashboard"><i data-feather="monitor"></i><span>Dashboard</span></a>
             </li>
             <li class="dropdown">
-              <a href="transfer"><i data-feather="credit-card"></i><span>Transfer</span></a>
+              <a href="transfer"><i data-feather="send"></i><span>Transfer</span></a>
+            </li>
+            <li class="dropdown">
+              <a href="deposit"><i data-feather="arrow-up-circle"></i><span>Load Wallet</span></a>
+            </li>
+            <li class="dropdown">
+              <a href="withdraw"><i data-feather="menu"></i><span>Withdraw</span></a>
             </li>
             <li class="dropdown">
               <a href="activity"><i data-feather="activity"></i><span>Activity</span></a>
@@ -141,13 +147,13 @@
             <li class="dropdown">
               <a href="voucher"><i data-feather="share"></i><span>Voucher</span></a>
             </li>
-            <li class="dropdown">
+             <li class="dropdown">
               <a href="ticket"><i data-feather="copy"></i><span>Create Ticket</span></a>
             </li>
             <li class="dropdown">
               <a href="dispute"><i data-feather="shopping-bag"></i><span>Dispute</span></a>
             </li>
-            <li class="dropdown active">
+             <li class="dropdown active">
               <a href="settings"><i data-feather="settings"></i><span>Settings</span></a>
             </li>
           </ul>
@@ -193,7 +199,7 @@
                           Phone
                         </span>
                         <span class="float-right text-muted">
-                          {{ show.phone_no }}
+                          {{ show }}
                         </span>
                       </p>
                       <p class="clearfix">
@@ -209,7 +215,7 @@
                           Customer ID
                         </span>
                         <span class="float-right text-muted">
-                          <a href="#">{{ show.customer_id }}</a>
+                          <a href="#">{{ cus_id }}</a>
                         </span>
                       </p>
                     </div>
@@ -243,6 +249,10 @@
                       <li class="nav-item">
                         <a class="nav-link" id="profile-tab2" data-toggle="tab" href="#api" role="tab"
                           aria-selected="false">API</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="profile-tab2" data-toggle="tab" href="#bank" role="tab"
+                          aria-selected="false">Bank</a>
                       </li>
                     </ul>
                     <div class="tab-content tab-bordered" id="myTab3Content">
@@ -278,7 +288,7 @@
                               </div>
                               <div class="form-group col-md-5 col-12">
                                 <label>Phone</label>
-                                <input type="tel" class="form-control" value="{{ show.phone_no }}" readonly>
+                                <input type="tel" class="form-control" value="{{ show }}" readonly>
                               </div>
                             </div>
                           </div>
@@ -297,14 +307,14 @@
                             <div class="row">
                               <div class="form-group col-md-6 col-12">
                                 <label>Business Name</label>
-                                <input type="text" value="{{ m_show.bus_name }}" name="b_name" class="form-control">
+                                <input type="text" value="{{ s_show.bus_name }}" name="b_name" class="form-control">
                                 <div class="invalid-feedback">
                                   Please fill in the first name
                                 </div>
                               </div>
                               <div class="form-group col-md-6 col-12">
                                 <label>Business Address</label>
-                                <input type="text" value="{{ m_show.bus_address }}" name="b_address" class="form-control">
+                                <input type="text" value="{{ s_show.bus_address }}" name="b_address" class="form-control">
                                 <div class="invalid-feedback">
                                   Please fill in the last name
                                 </div>
@@ -313,14 +323,14 @@
                             <div class="row">
                               <div class="form-group col-md-7 col-12">
                                 <label>Business Email</label>
-                                <input type="email" value="{{ m_show.bus_email }}" name="b_email" class="form-control">
+                                <input type="email" value="{{ s_show.bus_email }}" name="b_email" class="form-control">
                                 <div class="invalid-feedback">
                                   Please fill in the email
                                 </div>
                               </div>
                               <div class="form-group col-md-5 col-12">
                                 <label>Phone</label>
-                                <input type="tel" name="b_tel" class="form-control" value="{{ show.phone_no }}" readonly>
+                                <input type="tel" name="b_tel" class="form-control" value="{{ show }}" readonly>
                               </div>
                             </div>
                             <div class="row">
@@ -332,7 +342,7 @@
 {#                            </div>#}
                             <div class="form-group">
                                 <label>Company Website</label>
-                                <input type="url" name="b_url" value="{{ m_show.bus_website }}" class="form-control" placeholder="http://www.abc.com">
+                                <input type="url" name="b_url" value="{{ s_show.bus_website }}" class="form-control" placeholder="http://www.abc.com">
                             </div>
                           </div>
                           <div class="card-footer text-right">
@@ -367,6 +377,47 @@
                           </div>
                           <div class="card-footer text-right">
                             <input type="submit" name="submit" value="Get API" class="btn btn-primary">
+                          </div>
+                        </form>
+                      </div>
+                      <div class="tab-pane fade" id="bank" role="tabpanel" aria-labelledby="profile-tab2">
+                        <form method="POST" action="bank" >
+                            {% csrf_token %}
+                          <div class="card-header">
+                            <h4>Add Bank Details</h4>
+                          </div>
+                          <div class="card-body">
+                            <div class="row">
+                              <div class="form-group col-md-6 col-12">
+                                <label>Account Name</label>
+                                <input type="text" value="" name="acct_name" class="form-control">
+                                <div class="invalid-feedback">
+                                  Please fill in the first name
+                                </div>
+                              </div>
+                              <div class="form-group col-md-6 col-12">
+                                <label>Account Number</label>
+                                <input type="text" value="" name="acct_no" class="form-control">
+                                <div class="invalid-feedback">
+                                  Please fill in the last name
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="form-group col-md-7 col-12">
+                                <label>Bank Name</label>
+                                <input type="text" value="" name="bank_name" class="form-control">
+                                <div class="invalid-feedback">
+                                  Please fill in the email
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+
+                            </div>
+                          </div>
+                          <div class="card-footer text-right">
+                            <input type="submit" name="submit" value="Save" class="btn btn-primary">
                           </div>
                         </form>
                       </div>

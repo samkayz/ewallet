@@ -17,5 +17,11 @@ urlpatterns = [
     path('merchant', views.merchant, name='merchant'),
     path('api', views.api, name='api'),
     path('reply/<ticket_id>', views.reply, name='reply'),
+    path('resolution', views.resolution, name='resolution'),
+    path('bank', views.bank, name='bank'),
+    path('withdraw', views.withdraw, name='withdraw'),
+    path('deposit', views.deposit, name='deposit'),
+    path('confirm', views.confirm, name='confirm'),
+    path('payment', views.payment, name='payment'),
 
 ]

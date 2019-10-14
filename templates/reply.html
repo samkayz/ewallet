@@ -100,15 +100,13 @@
                 class="user-img-radious-style"> <span class="d-sm-none d-lg-inline-block"></span></a>
             <div class="dropdown-menu dropdown-menu-right pullDown">
               <div class="dropdown-title">Hello {{ user.first_name }}</div>
-              <a href="/super/profile" class="dropdown-item has-icon"> <i class="far
-										fa-user"></i> Profile
-              </a> <a href="/super/admin_activity" class="dropdown-item has-icon"> <i class="fas fa-bolt"></i>
+               <a href="/account/activity" class="dropdown-item has-icon"> <i class="fas fa-bolt"></i>
                 Activities
-              </a> <a href="#" class="dropdown-item has-icon"> <i class="fas fa-cog"></i>
+              </a> <a href="/account/settings" class="dropdown-item has-icon"> <i class="fas fa-cog"></i>
                 Settings
               </a>
               <div class="dropdown-divider"></div>
-              <a href="/super/logout" class="dropdown-item has-icon text-danger"> <i class="fas fa-sign-out-alt"></i>
+              <a href="/account/logout" class="dropdown-item has-icon text-danger"> <i class="fas fa-sign-out-alt"></i>
                 Logout
               </a>
             </div>
@@ -118,7 +116,7 @@
       <div class="main-sidebar sidebar-style-2">
         <aside id="sidebar-wrapper">
           <div class="sidebar-brand">
-            <a href="/super/dashboard"> <img alt="image" src="{% static 'assets/img/logo.png'%}" class="header-logo" /> <span
+            <a href="/account/dashboard"> <img alt="image" src="{% static 'assets/img/logo.png'%}" class="header-logo" /> <span
                 class="logo-name">Wallet</span>
             </a>
           </div>
@@ -133,24 +131,23 @@
           </div>
           <ul class="sidebar-menu">
             <li class="menu-header">Main</li>
-            <li class="dropdown active">
-              <a href="/super/dashboard"><i data-feather="monitor"></i><span>Dashboard</span></a>
+            <li class="dropdown">
+              <a href="/account/dashboard"><i data-feather="monitor"></i><span>Dashboard</span></a>
             </li>
             <li class="dropdown">
-              <a href="/super/user"><i data-feather="user"></i><span>User</span></a>
+              <a href="/account/user"><i data-feather="user"></i><span>User</span></a>
             </li>
             <li class="dropdown">
-              <a href="/super/activity"><i data-feather="activity"></i><span>Activity</span></a>
+              <a href="/account/activity"><i data-feather="activity"></i><span>Activity</span></a>
             </li>
             <li class="dropdown">
-              <a href="/super/voucher"><i data-feather="share"></i><span>Voucher</span></a>
+              <a href="/account/voucher"><i data-feather="share"></i><span>Voucher</span></a>
             </li>
-            <li class="menu-header">UI Elements</li>
              <li class="dropdown">
-              <a href="/super/ticket"><i data-feather="copy"></i><span>Create Ticket</span></a>
+              <a href="/account/ticket"><i data-feather="copy"></i><span>Create Ticket</span></a>
             </li>
-            <li class="dropdown">
-              <a href="/super/dispute"><i data-feather="shopping-bag"></i><span>Dispute</span></a>
+            <li class="dropdown active">
+              <a href="/account/dispute"><i data-feather="shopping-bag"></i><span>Dispute</span></a>
             </li>
           </ul>
         </aside>
@@ -192,7 +189,7 @@
                   <div class="card-header">
                     <h4>Respond to Ticket</h4>
                   </div>
-                   <form method="post" action="/super/resolution">
+                   <form method="post" action="/account/resolution">
                    {% csrf_token %}
                     <div class="card-body">
                     <div class="form-group row mb-4">
@@ -217,7 +214,7 @@
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
                       <div class="col-sm-12 col-md-7">
-                        <input type="submit" name="submit" value="Attend" class="btn btn-primary">
+                        <input type="submit" name="submit" value="Respond" class="btn btn-primary">
                       </div>
                     </div>
                   </div>

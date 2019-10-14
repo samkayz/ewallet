@@ -9,6 +9,9 @@ class Account(models.Model):
     customer_id = models.CharField(max_length=10)
     bal = models.CharField(max_length=200)
 
+    class Meta:
+        db_table = "account"
+
 
 class Transactions(models.Model):
     sender = models.CharField(max_length=50)
@@ -16,6 +19,9 @@ class Transactions(models.Model):
     amount = models.CharField(max_length=200)
     ref_no = models.CharField(max_length=40)
     date = models.DateField(auto_now=True)
+
+    class Meta:
+        db_table = "transactions"
 
 
 class Voucher(models.Model):
@@ -27,6 +33,9 @@ class Voucher(models.Model):
     v_loader = models.CharField(max_length=100)
     v_date_load = models.CharField(max_length=100)
     v_date = models.DateField(auto_now=True)
+
+    class Meta:
+        db_table = "voucher"
 
 
 class Ticket(models.Model):
@@ -40,6 +49,9 @@ class Ticket(models.Model):
     date_created = models.DateField(auto_now=True)
     date_action = models.CharField(max_length=100)
 
+    class Meta:
+        db_table = "ticket"
+
 
 class Merchant(models.Model):
     bus_owner_username = models.CharField(max_length=100)
@@ -50,3 +62,39 @@ class Merchant(models.Model):
     bus_website = models.CharField(max_length=200)
     api_test_key = models.CharField(max_length=200)
     api_live_key = models.CharField(max_length=200)
+
+    class Meta:
+        db_table = "merchant"
+
+
+class MerchantPayment(models.Model):
+    bus_owner_username = models.CharField(max_length=100)
+    payee = models.CharField(max_length=100)
+    amount = models.CharField(max_length=200)
+
+    class Meta:
+        db_table = "merchantPayment"
+
+
+class Bank(models.Model):
+    username = models.CharField(max_length=100)
+    account_name = models.CharField(max_length=100)
+    account_no = models.CharField(max_length=100)
+    bank_name = models.CharField(max_length=20)
+
+    class Meta:
+        db_table = "bank"
+
+
+class Withdraw(models.Model):
+    username = models.CharField(max_length=100)
+    amount = models.CharField(max_length=100)
+    acct_name = models.CharField(max_length=200)
+    acct_no = models.CharField(max_length=200)
+    bank_name = models.CharField(max_length=100)
+    ref_no = models.CharField(max_length=100)
+    status = models.CharField(max_length=100)
+    date = models.DateField(auto_now=True)
+
+    class Meta:
+        db_table = "withdraw"

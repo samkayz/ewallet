@@ -14,4 +14,9 @@ urlpatterns = [
     path('dispute', views.dispute, name='admin_dispute'),
     path('solve/<ticket_id>', views.solve, name='solve'),
     path('resolution', views.resolution, name='resolution'),
+    path('page', views.page, name='page'),
+    path('about', views.about, name='about'),
+    path('withdraw', views.withdraw, name='withdraw'),
+    path('approve/<id>', views.approve, name='approve'),
+    path('details', views.details, name='details'),
 ]

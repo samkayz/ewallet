@@ -18,6 +18,12 @@ from .import views
 
 urlpatterns = [
     path('', views.landing, name='landing'),
+    path('index', views.landing, name='landing'),
+    path('about', views.about, name='about'),
+    path('pricing', views.pricing, name='pricing'),
+    path('contact', views.contact, name='contact'),
     path('super/', include('super.urls')),
     path('account/', include('account.urls')),
+    path('api/', include('account.api.urls', 'api')),
+    path('pay/', include('pay.urls')),
 ]
