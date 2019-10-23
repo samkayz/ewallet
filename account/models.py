@@ -62,6 +62,7 @@ class Merchant(models.Model):
     bus_website = models.CharField(max_length=200)
     api_test_key = models.CharField(max_length=200)
     api_live_key = models.CharField(max_length=200)
+    bus_logo = models.FileField(upload_to='media')
 
     class Meta:
         db_table = "merchant"
@@ -98,3 +99,17 @@ class Withdraw(models.Model):
 
     class Meta:
         db_table = "withdraw"
+
+
+class Invoice(models.Model):
+    sender = models.CharField(max_length=100)
+    receiver = models.CharField(max_length=100)
+    amount = models.CharField(max_length=100)
+    content = models.CharField(max_length=500)
+    date = models.DateField(auto_now=True)
+    status = models.CharField(max_length=10)
+    date_paid = models.CharField(max_length=100)
+    action = models.CharField(max_length=50)
+
+    class Meta:
+        db_table = "invoice"

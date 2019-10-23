@@ -31,7 +31,6 @@ def contact(request):
     return render(request, 'contact.html', context)
 
 
-@csrf_exempt
 def payme(request, username):
     first_name = Account.objects.values('first_name').get(username=username)['first_name']
     last_name = Account.objects.values('last_name').get(username=username)['last_name']

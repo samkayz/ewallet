@@ -344,13 +344,13 @@
                         '#512DA8',
                         '#fa8c16',
                         '#52c41a',
-                        '#f44336'
+                        '#512DA8'
                     ],
                     hoverBackgroundColor: [
                         '#512DA8',
                         '#fa8c16',
                         '#52c41a',
-                        '#f44336'
+                        '#512DA8'
                     ]
                 }
             ]
@@ -534,7 +534,7 @@
                             "radius": "90%",
                             "innerRadius": "85%"
                         }, {
-                            "color": "#f44336",
+                            "color": "#512DA8",
                             "startValue": 0,
                             "endValue": 6,
                             "radius": "90%",

@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.models import User, auth
 from django.contrib.auth.decorators import login_required
-from .models import Account, Transactions, Voucher, Ticket, Merchant, Bank, Withdraw
+from .models import Account, Transactions, Voucher, Ticket, Merchant, Bank, Withdraw, Invoice
 from super.models import Resolution
 import random
 import string
@@ -252,7 +252,10 @@ def ticket(request):
                         ticket_id=ticket_id,)
         t_save.save()
         messages.info(request, "Ticket Created")
-    return render(request, 'ticket.html')
+
+    show = Ticket.objects.filter(Q(owner=c_user))
+    context = {'show': show}
+    return render(request, 'ticket.html', context)
 
 
 @login_required(login_url='login')
@@ -323,7 +326,7 @@ def resolution(request):
         t_save = Resolution(ticket_id=ticket_id, subject=subject, category=category, content=content)
         t_save.save()
         # messages.info(request, "Reply Successful!!")
-        return redirect('dispute')
+        return redirect('ticket')
     return render(request, 'reply.html')
 
 
@@ -338,8 +341,15 @@ def bank(request):
         s_bank = Bank(username=c_user, account_name=acct_name, account_no=acct_no, bank_name=bank_name)
         s_bank.save()
         messages.info(request, "Added Successful!!")
-        return redirect('settings')
-    return render(request, 'settings.html')
+        return redirect('bank')
+    show = Bank.objects.filter(Q(username=c_user))
+    context = {'show': show}
+    return render(request, 'add_bank_acc.html', context)
+
+
+def delete(request, id):
+    Bank.objects.filter(id=id).delete()
+    return redirect('bank')
 
 
 @login_required(login_url='login')
@@ -415,3 +425,136 @@ def payment(request):
     trans = Transactions(sender='Card Payment', receiver=username, amount=am, ref_no=ref_no, )
     trans.save()
     return render(request, 'deposit.html')
+
+
+def invoice_verify(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        if Account.objects.filter(username=username).exists():
+            check = Account.objects.all().get(username=username)
+            cont = {'check': check}
+            return render(request, 'invoice.html', cont)
+        else:
+            messages.info(request, 'Mobile Number Not Found')
+            return redirect('invoice')
+
+
+def invoice(request):
+    c_user = request.user.username
+    if request.method == 'POST':
+        s_username = request.POST['s_username']
+        r_username = request.POST['r_username']
+        amount = request.POST['amount']
+        content = request.POST['content']
+        if c_user == r_username:
+            messages.info(request, "Please You Can't Send Invoice to Yourself")
+            return redirect('invoice')
+        else:
+            s_invoice = Invoice(sender=s_username, receiver=r_username, amount=amount, content=content,
+                                status='pending', action='Pay Now')
+            s_invoice.save()
+        messages.info(request, 'Invoice Created')
+    show = Invoice.objects.filter(Q(sender=c_user))
+    context = {'show': show}
+    return render(request, 'invoice.html', context)
+
+
+def pay_invoice(request):
+    c_user = request.user.username
+    show = Invoice.objects.filter(Q(receiver=c_user))
+    context = {'show': show}
+    return render(request, 'pay_invoice.html', context)
+
+
+def success(request, id):
+    now = datetime.datetime.now()
+    ref_no = uuid.uuid4().hex[:10].upper()
+    r_username = Invoice.objects.values('receiver').get(id=id)['receiver']
+    s_username = Invoice.objects.values('sender').get(id=id)['sender']
+    r_acct = Account.objects.values('bal').get(username=r_username)['bal']
+    s_acct = Account.objects.values('bal').get(username=s_username)['bal']
+    amount = Invoice.objects.values('amount').get(id=id)['amount']
+    s_act = (float(s_acct))
+    r_act = (float(r_acct))
+    am = (float(amount))
+
+    if Invoice.objects.values('status').get(id=id)['status'] == 'paid':
+        messages.info(request, 'Invoice Paid Already')
+        return redirect('pay-invoice')
+    elif Invoice.objects.values('status').get(id=id)['status'] == 'reject':
+        messages.info(request, 'Invoice Already Rejected')
+        return redirect('pay-invoice')
+    else:
+        new1 = s_act - am
+        Account.objects.filter(username=r_username).update(bal=new1)
+
+        new2 = r_act + am
+        Account.objects.filter(username=s_username).update(bal=new2)
+
+        Invoice.objects.filter(id=id).update(status='paid', date_paid=now, action='Paid')
+
+        s_invoice = Transactions(sender=r_username, receiver=s_username, amount=amount, ref_no=ref_no)
+        s_invoice.save()
+        messages.info(request, "You Have Successfully Paid The Invoice")
+        return redirect('pay-invoice')
+
+
+def reject(request, id):
+    now = datetime.datetime.now()
+    if Invoice.objects.values('status').get(id=id)['status'] == 'reject':
+        messages.info(request, 'Invoice Already Rejected')
+        return redirect('pay-invoice')
+    elif Invoice.objects.values('status').get(id=id)['status'] == 'paid':
+        messages.info(request, 'Invoice Already Paid')
+        return redirect('pay-invoice')
+    else:
+        Invoice.objects.filter(id=id).update(status='reject', date_paid=now)
+        messages.info(request, 'Invoice Rejected')
+        return redirect('pay-invoice')
+
+
+def paid_invoice(request):
+    c_user = request.user.username
+    show = Invoice.objects.filter(Q(sender=c_user))
+    context = {'show': show}
+    return render(request, 'paid_invoice.html', context)
+
+
+def load(request):
+    return render(request, 'load.html')
+
+
+def deposit(request):
+    ref_no = uuid.uuid4().hex[:10].upper()
+    if request.method == 'POST':
+        username = request.POST['username']
+        email = request.POST['email']
+        amount = request.POST['amount']
+        show = Account.objects.values('phone_no').get(username=username)['phone_no']
+        request.session['username'] = username
+        request.session['amount'] = amount
+        request.session['ref_no'] = ref_no
+        context = {'username': username, 'email': email, 'amount': amount, 'ref_no': ref_no, 'show': show}
+        return render(request, 'confirm.html', context)
+    else:
+        return render(request, 'deposit.html')
+
+
+def payment(request):
+    amount = request.session['amount']
+    username = request.session['username']
+    ref_no = request.session['ref_no']
+    balance = Account.objects.values('bal').get(username=username)['bal']
+    acct_bal = (float(balance))
+    amt = (float(amount))
+    new = acct_bal + amt
+    Account.objects.filter(username=username).update(bal=new)
+    t_reg = Transactions(sender='Card Deposit', receiver=username, amount=amount, ref_no=ref_no)
+    t_reg.save()
+    messages.info(request, 'Transaction Successful')
+    return redirect('deposit')
+
+
+def fail(request):
+    messages.info(request, 'Transaction Fail')
+    return redirect('deposit')

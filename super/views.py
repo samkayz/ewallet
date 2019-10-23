@@ -81,7 +81,7 @@ def dispute(request):
 
 
 def solve(request, ticket_id):
-    show = Ticket.objects.all().get(ticket_id=ticket_id)
+    show = Resolution.objects.filter(Q(ticket_id=ticket_id))
     context = {'show': show}
     return render(request, 'admin/solve.html', context)
 
