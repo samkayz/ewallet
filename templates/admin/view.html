@@ -1,0 +1,588 @@
+{% load static %}
+{% block main %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Drift - A fully responsive, HTML5 based admin template">
+<meta name="keywords" content="Responsive, HTML5, admin theme, business, professional, jQuery, web design, CSS3, sass">
+<!-- /meta tags -->
+<title>DanfoPay</title>
+
+<!-- Site favicon -->
+<link rel="shortcut icon" href="{% static 'assets/images/favicon.ico'%}" type="image/x-icon">
+<!-- /site favicon -->
+
+<!-- Font Icon Styles -->
+<link rel="stylesheet" href="{% static 'node_modules/flag-icon-css/css/flag-icon.min.css'%}">
+<link rel="stylesheet" href="{% static 'vendors/gaxon-icon/styles.css'%}">
+<!-- /font icon Styles -->
+
+<!-- Perfect Scrollbar stylesheet -->
+<link rel="stylesheet" href="{% static 'node_modules/perfect-scrollbar/css/perfect-scrollbar.css'%}">
+<!-- /perfect scrollbar stylesheet -->
+
+<!-- Load Styles -->    <link rel="stylesheet" href="{% static 'assets/css/semidark-style-1.min.css'%}">
+    <!-- /load styles -->
+
+</head>
+<body class="dt-sidebar--fixed dt-header--fixed">
+
+<!-- Loader -->
+<div class="dt-loader-container">
+  <div class="dt-loader">
+    <svg class="circular" viewBox="25 25 50 50">
+      <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></circle>
+    </svg>
+  </div>
+</div>
+<!-- /loader -->
+<!-- Root -->
+<div class="dt-root">
+    <div class="dt-root__inner">
+        <!-- Header -->
+<header class="dt-header">
+
+  <!-- Header container -->
+  <div class="dt-header__container">
+
+    <!-- Brand -->
+    <div class="dt-brand">
+
+      <!-- Brand tool -->
+      <div class="dt-brand__tool" data-toggle="main-sidebar">
+        <div class="hamburger-inner"></div>
+      </div>
+      <!-- /brand tool -->
+
+      <!-- Brand logo -->
+      <span class="dt-brand__logo">
+        <a class="dt-brand__logo-link" href="index.html">
+          <img class="dt-brand__logo-img d-none d-sm-inline-block" src="{% static 'assets/images/logo.png'%}" alt="Drift">
+          <img class="dt-brand__logo-symbol d-sm-none" src="{% static 'assets/images/logo-symbol.png'%}" alt="Drift">
+        </a>
+      </span>
+      <!-- /brand logo -->
+
+    </div>
+    <!-- /brand -->
+
+    <!-- Header toolbar-->
+    <div class="dt-header__toolbar">
+      <!-- Header Menu Wrapper -->
+      <div class="dt-nav-wrapper">
+        <ul class="dt-nav">
+          <li class="dt-nav__item dropdown">
+
+            <!-- Dropdown Link -->
+            <a href="#" class="dt-nav__link dropdown-toggle no-arrow dt-avatar-wrapper"
+               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <img class="dt-avatar size-30" src="{% static 'assets/images/user-avatar/domnic-harris.jpg'%}" alt="Domnic Harris">
+              <span class="dt-avatar-info d-none d-sm-block">
+                <span class="dt-avatar-name">Welcome {{ user.first_name }}</span>
+              </span> </a>
+            <!-- /dropdown link -->
+
+            <!-- Dropdown Option -->
+            <div class="dropdown-menu dropdown-menu-right">
+                <div class="dt-avatar-wrapper flex-nowrap p-6 mt-n2 bg-gradient-purple text-white rounded-top">
+                <img class="dt-avatar" src="{% static 'assets/images/user-avatar/domnic-harris.jpg'%}" alt="Domnic Harris">
+                <span class="dt-avatar-info">
+                  <span class="dt-avatar-name">Username</span>
+                  <span class="f-12">{{ user.username }}</span>
+                </span>
+              </div>
+              <a class="dropdown-item" href="load"> <i class="icon icon-user icon-fw mr-2 mr-sm-1"></i>Account
+              </a> <a class="dropdown-item" href="settings">
+                <i class="icon icon-settings icon-fw mr-2 mr-sm-1"></i>Setting </a>
+              <a class="dropdown-item" href="logout"> <i class="icon icon-editors icon-fw mr-2 mr-sm-1"></i>Logout
+              </a>
+            </div>
+            <!-- /dropdown option -->
+
+          </li>
+        </ul>
+        <!-- /header menu -->
+      </div>
+    </div>
+  </div>
+</header>
+<!-- /header -->
+        <!-- Site Main -->
+        <main class="dt-main">
+            <!-- Sidebar -->
+<aside id="main-sidebar" class="dt-sidebar">
+    <div class="dt-sidebar__container">
+
+        <!-- Sidebar Navigation -->
+        <ul class="dt-side-nav">
+
+            <!-- Menu Header -->
+            <li class="dt-side-nav__item dt-side-nav__header">
+                <span class="dt-side-nav__text">main</span>
+            </li>
+            <!-- /menu header -->
+
+            <!-- Menu Item -->
+            <li class="dt-side-nav__item open">
+                <a href="/super/home" class="dt-side-nav__link" title="Dashboard">
+                    <i class="icon icon-dashboard icon-fw icon-lg"></i>
+                    <span class="dt-side-nav__text">Dashboard</span>
+                </a>
+            </li>
+            <li class="dt-side-nav__item open">
+                <a href="/super/user" class="dt-side-nav__link" title="Al Users">
+                    <i class="icon icon-users icon-fw icon-lg"></i>
+                    <span class="dt-side-nav__text">Users</span>
+                </a>
+            </li>
+            <li class="dt-side-nav__item open">
+                <a href="/super/send" class="dt-side-nav__link" title="Credit User">
+                    <i class="icon icon-card-group icon-fw icon-lg"></i>
+                    <span class="dt-side-nav__text">Credit User</span>
+                </a>
+            </li>
+            <li class="dt-side-nav__item open">
+                <a href="/super/solve_voucher" class="dt-side-nav__link" title="Resolve Voucher Issues">
+                    <i class="icon icon-card icon-fw icon-lg"></i>
+                    <span class="dt-side-nav__text">Resolve Voucher</span>
+                </a>
+            </li>
+             <li class="dt-side-nav__item open">
+                <a href="/super/activity" class="dt-side-nav__link" title="All Activity">
+                    <i class="icon icon-archive icon-fw icon-lg"></i>
+                    <span class="dt-side-nav__text">Activities</span>
+                </a>
+            </li>
+            <li class="dt-side-nav__item open">
+                <a href="/super/voucher" class="dt-side-nav__link" title="All Voucher">
+                    <i class="icon icon-task-manager icon-fw icon-lg"></i>
+                    <span class="dt-side-nav__text">Voucher</span>
+                </a>
+            </li>
+            <li class="dt-side-nav__item open">
+                <a href="/super/withdraw" class="dt-side-nav__link" title="Withdraw">
+                    <i class="icon icon-dollar-circle icon-fw icon-lg"></i>
+                    <span class="dt-side-nav__text">Withdraw</span>
+                </a>
+            </li>
+            <li class="dt-side-nav__item open">
+                <a href="/super/dispute" class="dt-side-nav__link" title="All Dispute">
+                    <i class="icon icon-message icon-fw icon-lg"></i>
+                    <span class="dt-side-nav__text">All Dispute</span>
+                </a>
+            </li>
+            <li class="dt-side-nav__item">
+                <a href="javascript:void(0)" class="dt-side-nav__link dt-side-nav__arrow" title="Editors">
+                    <i class="icon icon-settings icon-fw icon-lg"></i>
+                    <span class="dt-side-nav__text">Settings</span>
+                </a>
+
+                <!-- Sub-menu -->
+                <ul class="dt-side-nav__sub-menu">
+                    <li class="dt-side-nav__item">
+                        <a href="/super/page" class="dt-side-nav__link" title="Home Page">
+                            <i class="icon icon-editor-wysiwyg icon-fw icon-lg"></i>
+                            <span class="dt-side-nav__text">Home Page</span>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="dt-side-nav__sub-menu">
+                    <li class="dt-side-nav__item">
+                        <a href="/super/contact" class="dt-side-nav__link" title="Contact">
+                            <i class="icon icon-contacts icon-fw icon-lg"></i>
+                            <span class="dt-side-nav__text">Contact</span>
+                        </a>
+                    </li>
+                </ul>
+                <!-- /sub-menu -->
+            </li>
+            <li class="dt-side-nav__item open">
+                <a href="/super/lock" class="dt-side-nav__link" title="Lock Screen">
+                    <i class="icon icon-lockscreen icon-fw icon-lg"></i>
+                    <span class="dt-side-nav__text">Lock Screen</span>
+                </a>
+            </li>
+        </ul>
+        <!-- /sidebar navigation -->
+
+    </div>
+</aside>
+<!-- /sidebar -->
+            <!-- Site Content Wrapper -->
+            <div class="dt-content-wrapper">
+
+                <!-- Site Content -->
+                <div class="dt-content">
+
+                    <!-- Profile -->
+                    <div class="profile">
+
+                        <!-- Profile Banner -->
+                        <div class="profile__banner">
+
+                            <!-- Profile Banner Top -->
+                            <div class="profile__banner-detail">
+                                <!-- Avatar Wrapper -->
+                                <div class="dt-avatar-wrapper">
+                                    <!-- Avatar -->
+                                    <img class="dt-avatar dt-avatar__shadow size-90 mr-sm-4"
+                                         src="{% static 'assets/images/user-avatar/amay.jpg'%}" alt="Reece Jacklin">
+                                    <!-- /avatar -->
+
+                                    <!-- Info -->
+                                    <div class="dt-avatar-info">
+                                        <span class="dt-avatar-name display-4 mb-2 font-weight-light">{{ user.first_name }} {{ user.last_name }}</span>
+                                        <span class="f-16">Customer ID: {{ show.customer_id }}</span>
+                                    </div>
+                                    <!-- /info -->
+                                </div>
+                                <!-- /avatar wrapper -->
+                            </div>
+                            <!-- /profile banner top -->
+
+                            <!-- Profile Banner Bottom -->
+                            <div class="profile__banner-navigation">
+                                <!-- Dropdown -->
+                                <div class="dropdown pl-3 mt-2 ml-auto">
+
+                                    <!-- Dropdown Button -->
+                                    <a href="#" class="dropdown-toggle no-arrow text-white" data-toggle="dropdown"
+                                       aria-haspopup="true" aria-expanded="false">
+                                        <i class="icon icon-settings icon-xl mr-2"></i><span
+                                                class="d-none d-sm-inline-block">Settings</span>
+                                    </a>
+                                    <!-- /dropdown button -->
+                                </div>
+                            </div>
+                            <!-- /profile banner bottom -->
+
+                        </div>
+                        <!-- /profile banner -->
+
+                        <!-- Profile Content -->
+                        <div class="profile-content">
+
+                            <!-- Grid -->
+                            <div class="row">
+
+                                <!-- Grid Item -->
+                                <div class="col-xl-4 order-xl-2">
+
+
+                                    <!-- Grid -->
+                                    <div class="row">
+
+                                        <!-- Grid Item -->
+                                        <!-- /grid item -->
+
+                                        <!-- Grid Item -->
+                                        <div class="col-xl-12 col-md-6 col-12 order-xl-1">
+
+                                            <!-- Card -->
+                                            <div class="dt-card dt-card__full-height">
+
+                                                <!-- Card Header -->
+                                                <div class="dt-card__header pt-6">
+
+                                                    <!-- Card Heading -->
+                                                    <div class="dt-card__heading">
+                                                        <h3 class="dt-card__title">Contact</h3>
+                                                    </div>
+                                                    <!-- /card heading -->
+
+                                                </div>
+                                                <!-- /card header -->
+
+                                                <!-- Card Body -->
+                                                <div class="dt-card__body">
+                                                    <!-- Media -->
+                                                    <div class="media mb-5">
+
+                                                        <i class="icon icon-mail icon-xl mr-5"></i>
+
+                                                        <!-- Media Body -->
+                                                        <div class="media-body">
+                                                            <span class="d-block text-light-gray f-12 mb-1">Mail</span>
+                                                            <a href="javascript:void(0)">{{ user.email }}</a>
+                                                        </div>
+                                                        <!-- /media body -->
+
+                                                    </div>
+                                                    <!-- /media -->
+
+                                                    <!-- Media -->
+                                                    <div class="media mb-5">
+
+                                                        <i class="icon icon-link icon-xl mr-5"></i>
+
+                                                        <!-- Media Body -->
+                                                        <div class="media-body">
+                                                            <span class="d-block text-light-gray f-12 mb-1">Web Page</span>
+                                                            <a href="javascript:void(0)">{{ merchant.bus_website }}</a>
+                                                        </div>
+                                                        <!-- /media body -->
+
+                                                    </div>
+                                                    <!-- /media -->
+
+                                                    <!-- Media -->
+                                                    <div class="media">
+
+                                                        <i class="icon icon-phone-o icon-xl mr-5"></i>
+
+                                                        <!-- Media Body -->
+                                                        <div class="media-body">
+                                                            <span class="d-block text-light-gray f-12 mb-1">Phone</span>
+                                                            <span class="h5">{{ show.phone_no }}</span>
+                                                        </div>
+                                                        <!-- /media body -->
+
+                                                    </div>
+                                                    <!-- /media -->
+                                                </div>
+                                           <div class="dt-card__body">
+                                                <form method="post" action="api">
+                                                    {% csrf_token %}
+                                                     <div class="form-group">
+                                                        <label for="email-1">Live API</label>
+                                                         <input type="hidden" name="user" value="{{ user.username }}" class="form-control" readonly>
+                                                        <input type="text" class="form-control" value="{{ merchant.api_live_key }}" id="email-1" aria-describedby="emailHelp1" readonly>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="password-1">Test API</label>
+                                                        <input type="text" class="form-control" value="{{ merchant.api_test_key }}" id="password-1" readonly>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /grid -->
+
+                                </div>
+                                <!-- /grid item -->
+
+                                <!-- Grid Item -->
+                                <div class="col-xl-8 order-xl-1">
+
+                                    <!-- Card -->
+                                    <div class="card">
+
+                                        <!-- Card Header -->
+                                        <div class="card-header card-nav bg-transparent border-bottom d-sm-flex justify-content-sm-between">
+                                            <h3 class="mb-2 mb-sm-n5">About</h3>
+                                            {% for message in messages %}
+                                                <div class="alert alert-success" role="alert">
+                                                {{ message }}
+                                                </div>
+                                            {% endfor %}
+                                            <ul class="card-header-links nav nav-underline" role="tablist">
+                                                <li class="nav-item">
+                                                    <a class="nav-link active" data-toggle="tab" href="#tab-pane1"
+                                                       role="tab"
+                                                       aria-controls="tab-pane1"
+                                                       aria-selected="true">Overview</a>
+                                                </li>
+                                            </ul>
+
+                                        </div>
+                                        <!-- /card header -->
+
+                                        <!-- Card Body -->
+                                        <div class="card-body pb-2">
+
+                                            <!-- Tab Content-->
+                                            <div class="tab-content mt-5">
+
+                                                <!-- Tab panel -->
+                                                <div id="tab-pane1" class="tab-pane active">
+
+                                                    <!-- List -->
+                                                    <ul class="dt-list dt-list-col-4">
+                                                        <!-- List Item -->
+                                                        <li class="dt-list__item">
+                                                            <!-- Media -->
+                                                            <div class="media">
+
+                                                                <i class="icon icon-company icon-4x mr-5 align-self-center text-yellow"></i>
+
+                                                                <!-- Media Body -->
+                                                                <div class="media-body">
+                                                                    <span class="d-block text-light-gray f-12 mb-1">Works at</span>
+                                                                    <p class="h5 mb-0">{{ merchant.bus_name }}</p>
+                                                                </div>
+                                                                <!-- /media body -->
+
+                                                            </div>
+                                                            <!-- /media -->
+                                                        </li>
+                                                        <!-- /list item -->
+
+                                                        <!-- List Item -->
+                                                        <li class="dt-list__item">
+                                                            <!-- Media -->
+                                                            <div class="media">
+
+                                                                <i class="icon icon-company icon-4x mr-5 align-self-center text-yellow"></i>
+
+                                                                <!-- Media Body -->
+                                                                <div class="media-body">
+                                                                    <span class="d-block text-light-gray f-12 mb-1">Business Email</span>
+                                                                    <p class="h5 mb-0">{{ merchant.bus_email }}</p>
+                                                                </div>
+                                                                <!-- /media body -->
+
+                                                            </div>
+                                                            <!-- /media -->
+                                                        </li>
+                                                        <!-- /list item -->
+                                                        <!-- List Item -->
+                                                    </ul>
+                                                    <!-- /list -->
+
+                                                </div>
+                                                <!-- /tab panel -->
+
+                                                <!-- Tab panel -->
+                                                <div id="tab-pane2" class="tab-pane">
+
+                                                    <!-- List -->
+                                                    <ul class="dt-list dt-list-col-4">
+                                                        <!-- List Item -->
+                                                        <li class="dt-list__item">
+                                                            <!-- Media -->
+                                                            <div class="media">
+
+                                                                <i class="icon icon-company icon-4x mr-5 align-self-center text-yellow"></i>
+
+                                                                <!-- Media Body -->
+                                                                <div class="media-body">
+                                                                    <span class="d-block text-light-gray f-12 mb-1">Works at</span>
+                                                                    <p class="h5 mb-0">{{ merchant.bus_name }}</p>
+                                                                </div>
+                                                                <!-- /media body -->
+
+                                                            </div>
+                                                            <!-- /media -->
+                                                        </li>
+                                                    </ul>
+                                                    <!-- /list -->
+
+                                                </div>
+                                            </div>
+                                            <!-- /tab content-->
+
+                                        </div>
+                                        <!-- /card body -->
+
+                                    </div>
+                                    <!-- /card -->
+
+                                    <!-- Card -->
+                                    <div class="card">
+                                        <img src="{{ merchant.bus_logo.url }}" width="150px"/>
+                                        <!-- Card Body -->
+                                        <div class="dt-card__body">
+
+                                    <!-- Form -->
+                                    <form action="merchant" method="post">
+                                        {% csrf_token %}
+                                        <div class="form-group form-row">
+                                            <label for="normal-input-3" class="col-md-2 col-sm-3 col-form-label col-form-label-lg text-sm-right">Business Name</label>
+                                            <div class="col-md-10 col-sm-9">
+                                                <input type="text" value="{{ merchant.bus_name }}" name="b_name" class="form-control form-control-lg" id="normal-input-3" placeholder="placeholder" readonly>
+                                            </div>
+                                        </div>
+                                        <!-- Form Group -->
+                                        <div class="form-group form-row">
+                                            <label for="normal-input-4" class="col-md-2 col-sm-3 col-form-label text-sm-right">Business Address</label>
+                                            <div class="col-md-10 col-sm-9">
+                                                <input type="text" value="{{ merchant.bus_address }}" name="b_address" class="form-control" id="normal-input-4" placeholder="placeholder" readonly>
+                                            </div>
+                                        </div>
+                                        <!-- /form group -->
+
+                                        <!-- Form Group -->
+                                        <div class="form-group form-row">
+                                            <label for="normal-input-5"
+                                                   class="col-md-2 col-sm-3 col-form-label col-form-label-sm text-sm-right">Business Email</label>
+                                            <div class="col-md-10 col-sm-9">
+                                                <input type="email" value="{{ merchant.bus_email }}" name="b_email" class="form-control form-control-sm" id="normal-input-5" placeholder=" Please fill in the email" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="form-group form-row">
+                                            <label for="normal-input-5"
+                                                   class="col-md-2 col-sm-3 col-form-label col-form-label-sm text-sm-right">Business Website</label>
+                                            <div class="col-md-10 col-sm-9">
+                                                <input type="url" name="b_url" value="{{ merchant.bus_website }}" class="form-control form-control-sm" id="normal-input-5" placeholder="http://www.abc.com" readonly>
+                                            </div>
+                                        </div>
+                                        <!-- /form group -->
+
+                                        <!-- Form Row -->
+                                        <div class="form-row">
+                                            <label class="col-md-2 col-sm-3 col-form-label text-sm-right">Phone Number</label>
+                                            <div class="col-md-6 col-sm-3 mb-2">
+                                                <input type="tel" name="b_tel" class="form-control" value="{{ merchant.bus_no }}" class="form-control" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-0">
+                                            <button type="submit" class="btn btn-primary text-uppercase">Become Merchant</button>
+                                        </div>
+                                        <!-- /form row -->
+                                    </form>
+                                    <!-- /form -->
+
+                                </div>
+                                        <!-- /card body -->
+
+                                    </div>
+                                    <!-- /card -->
+
+                                </div>
+                                <!-- /grid item -->
+
+                            </div>
+                            <!-- /grid -->
+
+                        </div>
+                        <!-- /profile content -->
+
+                    </div>
+                    <!-- /profile -->
+
+                </div>
+                <!-- /site content -->
+
+                <!-- Footer -->
+<footer class="dt-footer">
+  Copyright DanfoPay &copy; {% now "Y" %}
+</footer>
+<!-- /footer -->
+            </div>
+        </main>
+    </div>
+</div>
+<!-- /root -->
+
+<!-- Optional JavaScript -->
+<script src="{% static 'node_modules/jquery/dist/jquery.min.js'%}"></script>
+<script src="{% static 'node_modules/moment/moment.js'%}"></script>
+<script src="{% static 'node_modules/bootstrap/dist/js/bootstrap.bundle.min.js'%}"></script>
+<!-- Perfect Scrollbar jQuery -->
+<script src="{% static 'node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js'%}"></script>
+<!-- /perfect scrollbar jQuery -->
+
+<!-- masonry script -->
+<script src="{% static 'node_modules/masonry-layout/dist/masonry.pkgd.min.js'%}"></script>
+<script src="{% static 'node_modules/sweetalert2/dist/sweetalert2.js'%}"></script>
+<script src="{% static 'assets/js/functions.js'%}"></script>
+<script src="{% static 'assets/js/customizer.js'%}"></script><!-- Custom JavaScript -->
+<script src="{% static 'assets/js/script.js'%}"></script>
+
+</body>
+</html>
+{% endblock %}

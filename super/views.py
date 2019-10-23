@@ -5,6 +5,7 @@ from django.contrib.auth.models import User, auth
 from account.models import Transactions, Account, Voucher, Ticket, Merchant, Withdraw
 from .models import Resolution, Settings, Details
 from django.db.models import Sum
+import uuid
 
 
 def index(request):
@@ -17,14 +18,14 @@ def index(request):
 
             if users is not None:
                 auth.login(request, users)
-                return redirect('admin_dashboard')
+                return redirect('home')
             else:
                 messages.info(request, 'Access Denied!!')
                 return redirect('index')
         else:
             return redirect('index')
     else:
-        return render(request, 'index.html')
+        return render(request, 'admin/index.html')
 
 
 def logout(request):
@@ -32,52 +33,57 @@ def logout(request):
     return redirect('index')
 
 
-def dashboard(request):
+def home(request):
     show = Transactions.objects.aggregate(Sum('amount'))['amount__sum']
     merchant = Merchant.objects.all().count()
     users = User.objects.all().count()
+    ticket = Ticket.objects.filter()
+    vendor = Merchant.objects.filter()
     t_v = Voucher.objects.aggregate(Sum('v_amount'))['v_amount__sum']
-    context = {'show': show, 'merchant': merchant, 'users': users, 't_v': t_v}
-    return render(request, 'admin_dashboard.html', context)
+    context = {'show': show, 'merchant': merchant, 'users': users, 't_v': t_v, 'ticket': ticket, 'vendor': vendor}
+    return render(request, 'admin/home.html', context)
 
 
 def activity(request):
     show = Transactions.objects.filter()
     context = {'show': show}
-    return render(request, 'admin_activity.html', context)
+    return render(request, 'admin/activity.html', context)
 
 
 def user(request):
     show = Account.objects.filter()
     context = {'show': show}
-    return render(request, 'user.html', context)
+    return render(request, 'admin/user.html', context)
 
 
 def view(request, id):
     show = Account.objects.all().get(id=id)
     username = Account.objects.values('username').get(id=id)['username']
-    merchant = Merchant.objects.all().get(bus_owner_username=username)
-    # print(merchant)
-    context = {'show': show, 'merchant': merchant}
-    return render(request, 'view.html', context)
+    if Merchant.objects.filter(bus_owner_username=username).exists():
+        merchant = Merchant.objects.all().get(bus_owner_username=username)
+        context = {'show': show, 'merchant': merchant}
+        return render(request, 'admin/view.html', context)
+    else:
+        context = {'show': show}
+        return render(request, 'admin/view.html', context)
 
 
 def voucher(request):
     show = Voucher.objects.filter()
     context = {'show': show}
-    return render(request, 'admin_voucher.html', context)
+    return render(request, 'admin/voucher.html', context)
 
 
 def dispute(request):
     show = Ticket.objects.filter()
     context = {'show': show}
-    return render(request, 'admin_dispute.html', context)
+    return render(request, 'admin/dispute.html', context)
 
 
 def solve(request, ticket_id):
     show = Ticket.objects.all().get(ticket_id=ticket_id)
     context = {'show': show}
-    return render(request, 'solve.html', context)
+    return render(request, 'admin/solve.html', context)
 
 
 def resolution(request):
@@ -92,11 +98,47 @@ def resolution(request):
         t_save = Resolution(ticket_id=ticket_id, subject=subject, category=category, content=content)
         t_save.save()
         messages.info(request, "Successful!!")
-    return render(request, 'solve.html')
+    return render(request, 'admin/solve.html')
 
 
 def page(request):
-    return render(request, 'page.html')
+    return render(request, 'admin/page.html')
+
+
+def verify(request):
+    if request.method == 'POST':
+        r_number = request.POST['number']
+        if Account.objects.filter(phone_no=r_number).exists():
+            check = Account.objects.all().get(phone_no=r_number)
+            cont = {'check': check}
+            return render(request, 'admin/send.html', cont)
+        else:
+            messages.info(request, 'Mobile Number Not Found')
+            return redirect('send')
+
+    return render(request, 'admin/send.html')
+
+
+def send(request):
+    ref_no = uuid.uuid4().hex[:10].upper()
+    if request.method == 'POST':
+        r_number = request.POST['r_number']
+        amount = request.POST['amount']
+        bal = Account.objects.values('bal').get(phone_no=r_number)['bal']
+        show = Account.objects.values().get(phone_no=r_number)['username']
+        # print("Hello: ", show)
+        rb = (float(bal))
+        am = (float(amount))
+        if am <= 0:
+            messages.info(request, 'Invalid Transaction')
+            return redirect('send')
+        else:
+            new = rb + am
+            Account.objects.filter(phone_no=r_number).update(bal=new)
+            trans = Transactions(sender='System', receiver=show, amount=amount, ref_no=ref_no, )
+            trans.save()
+            messages.info(request, "Transaction Successful!!")
+    return render(request, 'admin/send.html')
 
 
 def about(request):
@@ -106,13 +148,13 @@ def about(request):
         s_about = Settings(about_us=abouts)
         s_about.save()
         messages.info(request, "Successful!!")
-    return render(request, 'page.html')
+    return render(request, 'admin/page.html')
 
 
 def withdraw(request):
     show = Withdraw.objects.filter()
     context = {'show': show}
-    return render(request, 'admin_withdraw.html', context)
+    return render(request, 'admin/withdraw.html', context)
 
 
 def approve(request, id):
@@ -145,3 +187,80 @@ def details(request):
     show = Details.objects.all().get(id=1)
     context = {'show': show}
     return render(request, 'details.html', context)
+
+
+def contact(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+        phone_no = request.POST['phone_no']
+        address = request.POST['address']
+        if Settings.objects.filter(id=1).exists():
+            Settings.objects.filter(id=1).update(address=address, phone_no=phone_no, email=email)
+            messages.info(request, 'Successful')
+            return redirect('contact')
+        else:
+            s_save = Settings(address=address, phone_no=phone_no, email=email,)
+            s_save.save()
+            messages.info(request, 'Successful')
+            return redirect('contact')
+    show = Settings.objects.all().get(id=1)
+    context = {'show': show}
+    return render(request, 'admin/contact.html', context)
+
+
+def v_verify(request):
+    if request.method == 'POST':
+        r_number = request.POST['number']
+        if Account.objects.filter(phone_no=r_number).exists():
+            check = Account.objects.all().get(phone_no=r_number)
+            cont = {'check': check}
+            return render(request, 'admin/solve_voucher.html', cont)
+        else:
+            messages.info(request, 'Mobile Number Not Found')
+            return redirect('v_verify')
+
+    return render(request, 'admin/solve_voucher.html')
+
+
+def voucher_issue(request):
+    ref_no = uuid.uuid4().hex[:10].upper()
+    if request.method == 'POST':
+        r_number = request.POST['r_number']
+        v_code = request.POST['v_code']
+        status = Voucher.objects.values('v_status').get(v_code=v_code)['v_status']
+        if Voucher.objects.filter(v_code=v_code).exists():
+            if status == 'open':
+                amount = Voucher.objects.values('v_amount').get(v_code=v_code)['v_amount']
+                bal = Account.objects.values('bal').get(phone_no=r_number)['bal']
+                am = (float(amount))
+                r_bal = (float(bal))
+                new = am + r_bal
+                Account.objects.filter(phone_no=r_number).update(bal=new)
+                Voucher.objects.filter(v_code=v_code).update(v_status='close')
+                trans = Transactions(sender='System', receiver=r_number, amount=amount, ref_no=ref_no, )
+                trans.save()
+                messages.info(request, "Transaction Successful!!")
+                return render(request, 'admin/solve_voucher.html')
+            else:
+                messages.info(request, "Voucher Used")
+                return redirect('solve-voucher')
+        else:
+            messages.info(request, "Voucher Not Found")
+            return redirect('solve-voucher')
+
+    return render(request, 'admin/solve_voucher.html')
+
+
+def lock(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+
+        users = auth.authenticate(username=username, password=password)
+        if users is not None:
+            auth.login(request, users)
+            return redirect('home')
+        else:
+            messages.info(request, 'Access Denied!!')
+            return redirect('lock')
+    return render(request, 'admin/lock.html')

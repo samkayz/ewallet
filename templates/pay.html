@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>A-Wallet</title>
+<title>DanfoPay</title>
 <!-- custom-theme -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -20,7 +20,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href="{% static '/pay/css/font-awesome.css'%}" rel="stylesheet">
 <link rel="icon" type="image/png" href="{% static 'pay/assets/img/favicon.ico'%}">
 <!-- //font-awesome-icons -->
-<link href="//fonts.googleapis.com/css?family=Mirza:400,500,600,700&amp;subset=arabic,latin-ext" rel="stylesheet">
 </head>
 <body>
 	<div class="main">
@@ -28,6 +27,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="w3_agile_main_grids">
 			<div class="w3layouts_main_grid_left">
 				<div class="agileinfo_main_grid_left_grid">
+                    <img src="{{ logo.bus_logo.url }}" width="150px"/>
 					<h3>Payment Summary</h3>
                     <ul>
                         <li>{{ show_merchant }}</li>
@@ -35,10 +35,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</ul>
 					<ul>
 						<li>{{ desc }}</li>
-                        <li></li>
-					</ul>
-                    <ul>
-						<li>{{ success_url }}</li>
                         <li></li>
 					</ul>
 				</div>
@@ -49,6 +45,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 			<div class="agileits_main_grid_right">
 				<div class="wthree_payment_grid">
+                    {% for message in messages %}
+                        <div class="alert alert-success" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
 					<h2>Payment Method</h2>
 					<div id="horizontalTab">
 						<ul class="resp-tabs-list">

@@ -1,0 +1,326 @@
+{% load static %}
+{% block main %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta tags -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Drift - A fully responsive, HTML5 based admin template">
+<meta name="keywords" content="Responsive, HTML5, admin theme, business, professional, jQuery, web design, CSS3, sass">
+<!-- /meta tags -->
+<title>DanfoPay</title>
+
+<!-- Site favicon -->
+<link rel="shortcut icon" href="{% static 'assets/images/favicon.ico'%}" type="image/x-icon">
+<!-- /site favicon -->
+
+<!-- Font Icon Styles -->
+<link rel="stylesheet" href="{% static 'node_modules/flag-icon-css/css/flag-icon.min.css'%}">
+<link rel="stylesheet" href="{% static 'vendors/gaxon-icon/styles.css'%}">
+<!-- /font icon Styles -->
+
+<!-- Perfect Scrollbar stylesheet -->
+<link rel="stylesheet" href="{% static 'node_modules/perfect-scrollbar/css/perfect-scrollbar.css'%}">
+<!-- /perfect scrollbar stylesheet -->
+
+<!-- Load Styles -->    <link rel="stylesheet" href="{% static 'assets/css/semidark-style-1.min.css'%}">
+    <!-- /load styles -->
+
+</head>
+<body class="dt-sidebar--fixed dt-header--fixed">
+
+<!-- Loader -->
+<div class="dt-loader-container">
+  <div class="dt-loader">
+    <svg class="circular" viewBox="25 25 50 50">
+      <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></circle>
+    </svg>
+  </div>
+</div>
+<!-- /loader -->
+<!-- Root -->
+<div class="dt-root">
+    <div class="dt-root__inner">
+        <!-- Header -->
+<header class="dt-header">
+
+  <!-- Header container -->
+  <div class="dt-header__container">
+
+    <!-- Brand -->
+    <div class="dt-brand">
+
+      <!-- Brand tool -->
+      <div class="dt-brand__tool" data-toggle="main-sidebar">
+        <div class="hamburger-inner"></div>
+      </div>
+      <!-- /brand tool -->
+
+      <!-- Brand logo -->
+      <span class="dt-brand__logo">
+        <a class="dt-brand__logo-link" href="home">
+          <img src="{% static 'assets/images/logo-symbol.png'%}" height="40" width="40">
+        </a>
+      </span>
+      <!-- /brand logo -->
+
+    </div>
+    <!-- /brand -->
+
+    <!-- Header toolbar-->
+    <div class="dt-header__toolbar">
+
+      <!-- Search box -->
+      <!-- /search box -->
+
+      <!-- Header Menu Wrapper -->
+      <div class="dt-nav-wrapper">
+        <ul class="dt-nav">
+          <li class="dt-nav__item dropdown">
+
+            <!-- Dropdown Link -->
+            <a href="#" class="dt-nav__link dropdown-toggle no-arrow dt-avatar-wrapper"
+               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <img class="dt-avatar size-30" src="{% static 'assets/images/user-avatar/domnic-harris.jpg'%}" alt="Domnic Harris">
+              <span class="dt-avatar-info d-none d-sm-block">
+                <span class="dt-avatar-name">Welcome {{ user.first_name }}</span>
+              </span> </a>
+            <!-- /dropdown link -->
+
+            <!-- Dropdown Option -->
+            <div class="dropdown-menu dropdown-menu-right">
+                <div class="dt-avatar-wrapper flex-nowrap p-6 mt-n2 bg-gradient-purple text-white rounded-top">
+                <img class="dt-avatar" src="{% static 'assets/images/user-avatar/domnic-harris.jpg'%}" alt="Domnic Harris">
+                <span class="dt-avatar-info">
+                  <span class="dt-avatar-name">Username</span>
+                  <span class="f-12">{{ user.username }}</span>
+                </span>
+              </div>
+              <a class="dropdown-item" href="load"> <i class="icon icon-user icon-fw mr-2 mr-sm-1"></i>Account
+              </a> <a class="dropdown-item" href="settings">
+                <i class="icon icon-settings icon-fw mr-2 mr-sm-1"></i>Setting </a>
+              <a class="dropdown-item" href="logout"> <i class="icon icon-editors icon-fw mr-2 mr-sm-1"></i>Logout
+              </a>
+            </div>
+            <!-- /dropdown option -->
+
+          </li>
+        </ul>
+        <!-- /header menu -->
+      </div>
+      <!-- Header Menu Wrapper -->
+
+    </div>
+    <!-- /header toolbar -->
+
+  </div>
+  <!-- /header container -->
+
+</header>
+<!-- /header -->
+        <!-- Site Main -->
+        <main class="dt-main">
+            <!-- Sidebar -->
+<aside id="main-sidebar" class="dt-sidebar">
+    <div class="dt-sidebar__container">
+
+        <!-- Sidebar Navigation -->
+        <ul class="dt-side-nav">
+
+            <!-- Menu Header -->
+            <li class="dt-side-nav__item dt-side-nav__header">
+                <span class="dt-side-nav__text">main</span>
+            </li>
+            <!-- /menu header -->
+
+            <!-- Menu Item -->
+            <li class="dt-side-nav__item open">
+                <a href="home" class="dt-side-nav__link" title="Dashboard">
+                    <i class="icon icon-dashboard icon-fw icon-lg"></i>
+                    <span class="dt-side-nav__text">Dashboard</span>
+                </a>
+            </li>
+            <li class="dt-side-nav__item open">
+                <a href="user" class="dt-side-nav__link" title="Al Users">
+                    <i class="icon icon-users icon-fw icon-lg"></i>
+                    <span class="dt-side-nav__text">Users</span>
+                </a>
+            </li>
+            <li class="dt-side-nav__item open">
+                <a href="send" class="dt-side-nav__link" title="Credit User">
+                    <i class="icon icon-card-group icon-fw icon-lg"></i>
+                    <span class="dt-side-nav__text">Credit User</span>
+                </a>
+            </li>
+            <li class="dt-side-nav__item open">
+                <a href="solve_voucher" class="dt-side-nav__link" title="Resolve Voucher Issues">
+                    <i class="icon icon-card icon-fw icon-lg"></i>
+                    <span class="dt-side-nav__text">Resolve Voucher</span>
+                </a>
+            </li>
+             <li class="dt-side-nav__item open">
+                <a href="activity" class="dt-side-nav__link" title="All Activity">
+                    <i class="icon icon-archive icon-fw icon-lg"></i>
+                    <span class="dt-side-nav__text">Activities</span>
+                </a>
+            </li>
+            <li class="dt-side-nav__item open">
+                <a href="voucher" class="dt-side-nav__link" title="All Voucher">
+                    <i class="icon icon-task-manager icon-fw icon-lg"></i>
+                    <span class="dt-side-nav__text">Voucher</span>
+                </a>
+            </li>
+            <li class="dt-side-nav__item open">
+                <a href="withdraw" class="dt-side-nav__link" title="Withdraw">
+                    <i class="icon icon-dollar-circle icon-fw icon-lg"></i>
+                    <span class="dt-side-nav__text">Withdraw</span>
+                </a>
+            </li>
+            <li class="dt-side-nav__item open">
+                <a href="dispute" class="dt-side-nav__link" title="All Dispute">
+                    <i class="icon icon-message icon-fw icon-lg"></i>
+                    <span class="dt-side-nav__text">All Dispute</span>
+                </a>
+            </li>
+            <li class="dt-side-nav__item">
+                <a href="javascript:void(0)" class="dt-side-nav__link dt-side-nav__arrow" title="Editors">
+                    <i class="icon icon-settings icon-fw icon-lg"></i>
+                    <span class="dt-side-nav__text">Settings</span>
+                </a>
+
+                <!-- Sub-menu -->
+                <ul class="dt-side-nav__sub-menu">
+                    <li class="dt-side-nav__item">
+                        <a href="page" class="dt-side-nav__link" title="Home Page">
+                            <i class="icon icon-editor-wysiwyg icon-fw icon-lg"></i>
+                            <span class="dt-side-nav__text">Home Page</span>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="dt-side-nav__sub-menu">
+                    <li class="dt-side-nav__item">
+                        <a href="contact" class="dt-side-nav__link" title="Contact">
+                            <i class="icon icon-contacts icon-fw icon-lg"></i>
+                            <span class="dt-side-nav__text">Contact</span>
+                        </a>
+                    </li>
+                </ul>
+                <!-- /sub-menu -->
+            </li>
+            <li class="dt-side-nav__item open">
+                <a href="lock" class="dt-side-nav__link" title="Lock Screen">
+                    <i class="icon icon-lockscreen icon-fw icon-lg"></i>
+                    <span class="dt-side-nav__text">Lock Screen</span>
+                </a>
+            </li>
+        </ul>
+        <!-- /sidebar navigation -->
+
+    </div>
+</aside>
+<!-- /sidebar -->
+            <!-- Site Content Wrapper -->
+            <div class="dt-content-wrapper">
+
+                <!-- Site Content -->
+                <div class="dt-content">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="dt-card">
+                                <div class="dt-card__header">
+                                    <div class="dt-card__heading">
+                                        <h3 class="dt-card__title">Credit Users</h3>
+                                    </div>
+                                </div>
+                                <div class="dt-card__body">
+                                    <!-- Form -->
+                                    {% for message in messages %}
+                                        <div class="alert alert-success" role="alert">
+                                        {{ message }}
+                                    </div>
+                                    {% endfor %}
+                                     <form class="form-inline" method="post" action="verify">
+                                         {% csrf_token %}
+                                        <div class="form-group mr-2">
+                                            <input type="text" name="number" value="{{ check.phone_no }}" class="form-control" id="email-3" placeholder="Enter Phone Number">
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary">Verify</button>
+                                        </div>
+                                    </form>
+                                        <div class="form-row">
+                                            <div class="col-sm-6 mb-3">
+                                                <label for="validationDefault03"></label>
+                                                <input type="text" value="{{ check.first_name }} {{ check.last_name }}" class="form-control" id="validationDefault03" readonly>
+                                            </div>
+                                        </div>
+                                    <form action="send" method="post">
+                                        {% csrf_token %}
+                                        <div class="form-row">
+                                            <div class="col-sm-6 mb-3">
+                                                <label for="validationDefault03"></label>
+                                                <input type="hidden" name="r_number" class="form-control" value="{{ check.phone_no }}">
+                                                <!-- Input Group -->
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">₦</span>
+                                                    </div>
+                                                    <input id="addon-3" type="number" name="amount" placeholder="Enter Amount" class="form-control" aria-label="Amount (to the nearest dollar)">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">.00</span>
+                                                    </div>
+                                                </div>
+                                                <!-- /input group -->
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-primary" type="submit">Send</button>
+                                    </form>
+                                    <!-- /form -->
+
+                                </div>
+                                <!-- /card body -->
+
+                            </div>
+                            <!-- /card -->
+
+                        </div>
+                        <!-- /grid item -->
+
+                    </div>
+                    <!-- /grid -->
+
+                </div>
+                <!-- /site content -->
+
+                <!-- Footer -->
+<footer class="dt-footer">
+  Copyright DanfoPay &copy; {% now "Y" %}
+</footer>
+<!-- /footer -->
+            </div>
+            <!-- /site content wrapper -->
+        </main>
+    </div>
+</div>
+<!-- /root -->
+
+<!-- Optional JavaScript -->
+<script src="{% static 'node_modules/jquery/dist/jquery.min.js'%}"></script>
+<script src="{% static 'node_modules/moment/moment.js'%}"></script>
+<script src="{% static 'node_modules/bootstrap/dist/js/bootstrap.bundle.min.js'%}"></script>
+<!-- Perfect Scrollbar jQuery -->
+<script src="{% static 'node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js'%}"></script>
+<!-- /perfect scrollbar jQuery -->
+
+<!-- masonry script -->
+<script src="{% static 'node_modules/masonry-layout/dist/masonry.pkgd.min.js'%}"></script>
+<script src="{% static 'node_modules/sweetalert2/dist/sweetalert2.js'%}"></script>
+<script src="{% static 'assets/js/functions.js'%}"></script>
+<script src="{% static 'assets/js/customizer.js'%}"></script><!-- Custom JavaScript -->
+<script src="{% static 'assets/js/script.js'%}"></script>
+
+</body>
+</html>
+{% endblock %}

@@ -3,314 +3,397 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>A-Wallet - Voucher</title>
-  <!-- General CSS Files -->
-  <link rel="stylesheet" href="{% static 'assets/css/app.min.css'%}">
-  <link rel="stylesheet" href="{% static 'assets/bundles/bootstrap-daterangepicker/daterangepicker.css'%}">
-  <link rel="stylesheet" href="{% static 'assets/bundles/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css'%}">
-  <link rel="stylesheet" href="{% static 'assets/bundles/select2/dist/css/select2.min.css'%}">
-  <link rel="stylesheet" href="{% static 'assets/bundles/jquery-selectric/selectric.css'%}">
-  <link rel="stylesheet" href="{% static 'assets/bundles/bootstrap-timepicker/css/bootstrap-timepicker.min.css'%}">
-  <link rel="stylesheet" href="{% static 'assets/bundles/bootstrap-tagsinput/dist/bootstrap-tagsinput.css'%}">
-  <link rel="stylesheet" href="{% static 'assets/bundles/datatables/datatables.min.css'%}">
-  <link rel="stylesheet" href="{% static 'assets/bundles/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css'%}">
-  <!-- Template CSS -->
-  <link rel="stylesheet" href="{% static 'assets/css/style.css'%}">
-  <link rel="stylesheet" href="{% static 'assets/css/components.css'%}">
-  <!-- Custom style CSS -->
-  <link rel="stylesheet" href="assets/css/custom.css'%}">
-  <link rel='shortcut icon' type='image/x-icon' href="{% static 'assets/img/favicon.ico'%}" />
-</head>
+    <!-- Meta tags -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Drift - A fully responsive, HTML5 based admin template">
+<meta name="keywords" content="Responsive, HTML5, admin theme, business, professional, jQuery, web design, CSS3, sass">
+<!-- /meta tags -->
+<title>DanfoPay</title>
 
-<body>
-  <div class="loader"></div>
-  <div id="app">
-    <div class="main-wrapper main-wrapper-1">
-      <div class="navbar-bg"></div>
-      <nav class="navbar navbar-expand-lg main-navbar">
-        <div class="form-inline mr-auto">
-          <ul class="navbar-nav mr-3">
-            <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg
-									collapse-btn"> <i data-feather="align-justify"></i></a></li>
-            <li><a href="#" class="nav-link nav-link-lg fullscreen-btn">
-                <i data-feather="maximize"></i>
-              </a></li>
-            <li>
-              <form class="form-inline mr-auto">
-                <div class="search-element">
-                  <input class="form-control" type="search" placeholder="Search" aria-label="Search" data-width="200">
-                  <button class="btn" type="submit">
-                    <i class="fas fa-search"></i>
-                  </button>
-                </div>
-              </form>
-            </li>
-          </ul>
-        </div>
-        <ul class="navbar-nav navbar-right">
-          <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
-              class="nav-link nav-link-lg message-toggle"><i data-feather="mail"></i>
-              <span class="badge headerBadge1">
-                6 </span> </a>
-            <div class="dropdown-menu dropdown-list dropdown-menu-right pullDown">
-              <div class="dropdown-header">
-                Messages
-                <div class="float-right">
-                  <a href="#">Mark All As Read</a>
-                </div>
+<link rel="shortcut icon" href="{% static 'assets/images/favicon.ico'%}" type="image/x-icon">
+<!-- /site favicon -->
+
+<!-- Font Icon Styles -->
+<link rel="stylesheet" href="{% static 'node_modules/flag-icon-css/css/flag-icon.min.css'%}">
+<link rel="stylesheet" href="{% static 'vendors/gaxon-icon/styles.css'%}">
+<!-- /font icon Styles -->
+
+<!-- Perfect Scrollbar stylesheet -->
+<link rel="stylesheet" href="{% static 'node_modules/perfect-scrollbar/css/perfect-scrollbar.css'%}">
+<!-- /perfect scrollbar stylesheet -->
+
+<!-- Load Styles -->    <link rel="stylesheet" href="{% static 'assets/css/semidark-style-1.min.css'%}">
+    <!-- /load styles -->
+
+</head>
+<body class="dt-sidebar--fixed dt-header--fixed">
+
+<!-- Loader -->
+<div class="dt-loader-container">
+  <div class="dt-loader">
+    <svg class="circular" viewBox="25 25 50 50">
+      <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></circle>
+    </svg>
+  </div>
+</div>
+<!-- /loader -->
+<!-- Root -->
+<div class="dt-root">
+    <div class="dt-root__inner">
+        <!-- Header -->
+<header class="dt-header">
+
+  <!-- Header container -->
+  <div class="dt-header__container">
+
+    <!-- Brand -->
+    <div class="dt-brand">
+
+      <!-- Brand tool -->
+      <div class="dt-brand__tool" data-toggle="main-sidebar">
+        <div class="hamburger-inner"></div>
+      </div>
+      <!-- /brand tool -->
+
+      <!-- Brand logo -->
+      <span class="dt-brand__logo">
+        <a class="dt-brand__logo-link" href="index.html">
+          <img class="dt-brand__logo-img d-none d-sm-inline-block" src="{% static 'assets/images/logo.png'%}" alt="Drift">
+          <img class="dt-brand__logo-symbol d-sm-none" src="{% static 'assets/images/logo-symbol.png'%}" alt="Drift">
+        </a>
+      </span>
+      <!-- /brand logo -->
+
+    </div>
+    <!-- /brand -->
+
+    <!-- Header toolbar-->
+    <div class="dt-header__toolbar">
+
+      <!-- Search box -->
+      <!-- /search box -->
+
+      <!-- Header Menu Wrapper -->
+      <div class="dt-nav-wrapper">
+        <ul class="dt-nav">
+          <li class="dt-nav__item dropdown">
+
+            <!-- Dropdown Link -->
+             <a href="#" class="dt-nav__link dropdown-toggle no-arrow dt-avatar-wrapper"
+               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <img class="dt-avatar size-30" src="{% static 'assets/images/user-avatar/domnic-harris.jpg'%}" alt="Domnic Harris">
+              <span class="dt-avatar-info d-none d-sm-block">
+                <span class="dt-avatar-name">Welcome {{ user.first_name }}</span>
+              </span> </a>
+            <!-- /dropdown link -->
+            <!-- Dropdown Option -->
+            <div class="dropdown-menu dropdown-menu-right">
+                <div class="dt-avatar-wrapper flex-nowrap p-6 mt-n2 bg-gradient-purple text-white rounded-top">
+                <img class="dt-avatar" src="{% static 'assets/images/user-avatar/domnic-harris.jpg'%}" alt="Domnic Harris">
+                <span class="dt-avatar-info">
+                  <span class="dt-avatar-name">Username</span>
+                  <span class="f-12">{{ user.username }}</span>
+                </span>
               </div>
-              <div class="dropdown-list-content dropdown-list-message">
-                <a href="#" class="dropdown-item"> <span class="dropdown-item-avatar text-white">
-                    <img alt="image" src="{% static 'assets/img/users/user-5.png'%}" class="rounded-circle">
-                  </span> <span class="dropdown-item-desc"> <span class="message-user">Jacob
-                      Ryan</span> <span class="time messege-text">Your payment invoice is
-                      generated.</span> <span class="time">12 Min Ago</span>
-                  </span>
-                </a>
-              </div>
-              <div class="dropdown-footer text-center">
-                <a href="#">View All <i class="fas fa-chevron-right"></i></a>
-              </div>
-            </div>
-          </li>
-          <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
-              class="nav-link notification-toggle nav-link-lg"><i data-feather="bell"></i>
-              <span class="badge headerBadge2">
-                3 </span> </a>
-            <div class="dropdown-menu dropdown-list dropdown-menu-right pullDown">
-              <div class="dropdown-header">
-                Notifications
-                <div class="float-right">
-                  <a href="#">Mark All As Read</a>
-                </div>
-              </div>
-              <div class="dropdown-list-content dropdown-list-icons">
-               <a href="#" class="dropdown-item"> <span class="dropdown-item-icon bg-info text-white"> <i class="fas
-												fa-bell"></i>
-                  </span> <span class="dropdown-item-desc"> Welcome to Aegis
-                    template! <span class="time">Yesterday</span>
-                  </span>
-                </a>
-              </div>
-              <div class="dropdown-footer text-center">
-                <a href="#">View All <i class="fas fa-chevron-right"></i></a>
-              </div>
-            </div>
-          </li>
-          <li class="dropdown"><a href="#" data-toggle="dropdown"
-              class="nav-link dropdown-toggle nav-link-lg nav-link-user"> <img alt="image" src="{% static 'assets/img/user.png'%}"
-                class="user-img-radious-style"> <span class="d-sm-none d-lg-inline-block"></span></a>
-            <div class="dropdown-menu dropdown-menu-right pullDown">
-              <div class="dropdown-title">Hello {{ user.first_name }}</div>
-              <a href="activity" class="dropdown-item has-icon"> <i class="fas fa-bolt"></i>
-                Activities
-              </a> <a href="settings" class="dropdown-item has-icon"> <i class="fas fa-cog"></i>
-                Settings
+              <a class="dropdown-item" href="load"> <i class="icon icon-user icon-fw mr-2 mr-sm-1"></i>Account
+              </a> <a class="dropdown-item" href="settings">
+                <i class="icon icon-settings icon-fw mr-2 mr-sm-1"></i>Setting </a>
+              <a class="dropdown-item" href="logout"> <i class="icon icon-editors icon-fw mr-2 mr-sm-1"></i>Logout
               </a>
-              <div class="dropdown-divider"></div>
-              <a href="logout" class="dropdown-item has-icon text-danger"> <i class="fas fa-sign-out-alt"></i>
-                Logout
-              </a>
             </div>
+            <!-- /dropdown option -->
+
           </li>
         </ul>
-      </nav>
-      <div class="main-sidebar sidebar-style-2">
-        <aside id="sidebar-wrapper">
-          <div class="sidebar-brand">
-            <a href="dashboard"> <img alt="image" src="{% static 'assets/img/logo.png'%}" class="header-logo" /> <span
-                class="logo-name">Wallet</span>
-            </a>
-          </div>
-          <div class="sidebar-user">
-            <div class="sidebar-user-picture">
-              <img alt="image" src="{% static 'assets/img/userbig.png'%}">
-            </div>
-            <div class="sidebar-user-details">
-              <div class="user-name">{{ user.first_name }} {{ user.last_name }}</div>
-              <div class="user-role">{{ user.email }}</div>
-            </div>
-          </div>
-           <ul class="sidebar-menu">
-            <li class="menu-header">Main</li>
-            <li class="dropdown">
-              <a href="dashboard"><i data-feather="monitor"></i><span>Dashboard</span></a>
-            </li>
-            <li class="dropdown">
-              <a href="transfer"><i data-feather="send"></i><span>Transfer</span></a>
-            </li>
-            <li class="dropdown">
-              <a href="deposit"><i data-feather="arrow-up-circle"></i><span>Load Wallet</span></a>
-            </li>
-            <li class="dropdown">
-              <a href="withdraw"><i data-feather="menu"></i><span>Withdraw</span></a>
-            </li>
-            <li class="dropdown">
-              <a href="activity"><i data-feather="activity"></i><span>Activity</span></a>
-            </li>
-            <li class="dropdown active">
-              <a href="voucher"><i data-feather="share"></i><span>Voucher</span></a>
-            </li>
-             <li class="dropdown">
-              <a href="ticket"><i data-feather="copy"></i><span>Create Ticket</span></a>
-            </li>
-            <li class="dropdown">
-              <a href="dispute"><i data-feather="shopping-bag"></i><span>Dispute</span></a>
-            </li>
-             <li class="dropdown">
-              <a href="settings"><i data-feather="settings"></i><span>Settings</span></a>
-            </li>
-          </ul>
-        </aside>
+        <!-- /header menu -->
       </div>
-      <!-- Main Content -->
-      <div class="main-content">
-        <section class="section">
-          <div class="section-body">
-            <div class="row">
-              <div class="col-12 col-md-6 col-lg-6">
-                  {% for message in messages %}
-                <div class="alert alert-success alert-dismissible show fade">
-                      <div class="alert-body">
-                        <button class="close" data-dismiss="alert">
-                          <span>&times;</span>
-                        </button>
-                        {{ message }}
-                      </div>
-                    </div>
-                {% endfor %}
-                <div class="card">
-                  <div class="card-header">
-                    <h4>Create Voucher</h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <td><a href="load_voucher" class="btn btn-primary">Redeem Voucher</a></td>
-                  </div>
-                    <section>
-                  <div class="card-body">
-                    <div class="form-group">
+      <!-- Header Menu Wrapper -->
 
-                      <div class="input-group">
-                          <div class="input-group-append">
-                        </div>
-                      </div>
-                    </div>
-                      <div class="form-group">
-                      <label>Enter Amount</label>
-                    </div>
-                      <form method="post" action="voucher">
-                          {% csrf_token %}
-                    <div class="form-group">
-                      <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">₦</span>
-                        </div>
-                        <input type="text" name="amount" class="form-control" aria-label="Amount (to the nearest dollar)">
-                        <div class="input-group-append">
-                          <span class="input-group-text">.00</span>
-                        </div>
-                      </div>
-                        <div class="card-footer">
-                    <input type="submit" name="submit" value="Create" class="btn btn-primary">
-                  </div>
-                    </div>
-                      </form>
-                  </div>
-        </section>
     </div>
-              </div>
-              <div class="col-12 col-md-6 col-lg-6">
-                <div class="card">
-                  <div class="card-header">
-                    <h4>Vouchers</h4>
-                  </div>
-                  <div class="card-body">
-                    <div class="table-responsive">
-                      <table class="table table-striped" id="table-2">
-                        <thead>
-                          <tr>
-                            <th class="text-center pt-3">
-                              <div class="custom-checkbox custom-checkbox-table custom-control">
-                                <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
-                                  class="custom-control-input" id="checkbox-all">
-                                <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
-                              </div>
-                            </th>
-                            <th>Vouchers</th>
-                            <th>Ref No</th>
-                            <th>Amount</th>
-                            <th>Loader</th>
-                            <th>Create Date</th>
-                            <th>Status</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                        {% for shows in show %}
-                          <tr>
-                            <td class="text-center pt-2">
-                              <div class="custom-checkbox custom-control">
-                                <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
-                                  id="checkbox-1">
-                                <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
-                              </div>
-                            </td>
-                            <td>{{ shows.v_code }}</td>
-                            <td class="align-middle">
-                              {{ shows.ref_no }}
-                            </td>
-                            <td>
-                              <div class="badge badge-success badge-shadow">₦ {{ shows.v_amount }}</div>
-                            </td>
-                            <td>{{ shows.v_loader }}</td>
-                            <td>{{ shows.v_date }}</td>
-                            <td>
-                              <div class="badge badge-success badge-shadow">{{ shows.v_status }}</div>
-                            </td>
-                          </tr>
-                        {% endfor %}
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-    <footer class="main-footer">
-        <div class="footer-left">
-          Copyright  &copy; {% now "Y" %} Pulse <div class="bullet"></div> Design By <a href="#">Savitech Nigeria</a>
-        </div>
-        <div class="footer-right">
-        </div>
-      </footer>
-    </div>
+    <!-- /header toolbar -->
+
   </div>
-  <!-- General JS Scripts -->
-  <script src="{% static 'assets/js/app.min.js'%}"></script>
-  <!-- JS Libraies -->
-  <script src="{% static 'assets/bundles/cleave-js/dist/cleave.min.js'%}"></script>
-  <script src="{% static 'assets/bundles/cleave-js/dist/addons/cleave-phone.us.js'%}"></script>
-  <script src="{% static 'assets/bundles/jquery-pwstrength/jquery.pwstrength.min.js'%}"></script>
-  <script src="{% static 'assets/bundles/bootstrap-daterangepicker/daterangepicker.js'%}"></script>
-  <script src="{% static 'assets/bundles/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js'%}"></script>
-  <script src="{% static 'assets/bundles/bootstrap-timepicker/js/bootstrap-timepicker.min.js'%}"></script>
-  <script src="{% static 'assets/bundles/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js'%}"></script>
-  <script src="{% static 'assets/bundles/select2/dist/js/select2.full.min.js'%}"></script>
-  <script src="{% static 'assets/bundles/jquery-selectric/jquery.selectric.min.js'%}"></script>
-  <script src="{% static 'assets/bundles/datatables/datatables.min.js'%}"></script>
-  <script src="{% static 'assets/bundles/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js'%}"></script>
-  <script src="{% static 'assets/bundles/jquery-ui/jquery-ui.min.js'%}"></script>
-  <script src="{% static 'assets/js/page/datatables.js'%}"></script>
-  <!-- Page Specific JS File -->
-  <script src="{% static 'assets/js/page/forms-advanced-forms.js'%}"></script>
-  <!-- Template JS File -->
-  <script src="{% static 'assets/js/scripts.js'%}"></script>
-  <!-- Custom JS File -->
-  <script src="{% static 'assets/js/custom.js'%}"></script>
+  <!-- /header container -->
+
+</header>
+<!-- /header -->
+        <!-- Site Main -->
+        <main class="dt-main">
+            <!-- Sidebar -->
+<aside id="main-sidebar" class="dt-sidebar">
+    <div class="dt-sidebar__container">
+
+        <!-- Sidebar Navigation -->
+        <ul class="dt-side-nav">
+
+            <!-- Menu Header -->
+            <li class="dt-side-nav__item dt-side-nav__header">
+                <span class="dt-side-nav__text">main</span>
+            </li>
+            <!-- /menu header -->
+
+            <!-- Menu Item -->
+            <li class="dt-side-nav__item open">
+                <a href="dashboard" class="dt-side-nav__link" title="Dashboard">
+                    <i class="icon icon-dashboard icon-fw icon-lg"></i>
+                    <span class="dt-side-nav__text">Dashboard</span>
+                </a>
+            </li>
+            <li class="dt-side-nav__item">
+                <a href="transfer" class="dt-side-nav__link" title="Transfer">
+                    <i class="icon icon-dollar icon-fw icon-lg"></i>
+                    <span class="dt-side-nav__text">Transfer</span>
+                </a>
+            </li>
+            <li class="dt-side-nav__item">
+                <a href="javascript:void(0)" class="dt-side-nav__link dt-side-nav__arrow" title="Invoice">
+                    <i class="icon icon-invoice icon-fw icon-lg"></i>
+                    <span class="dt-side-nav__text">Invoice</span>
+                </a>
+
+                <!-- Sub-menu -->
+                <ul class="dt-side-nav__sub-menu">
+                    <li class="dt-side-nav__item">
+                        <a href="invoice" class="dt-side-nav__link" title="Home Page">
+                            <i class="icon icon-invoice-new icon-fw icon-lg"></i>
+                            <span class="dt-side-nav__text">Create Invoice</span>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="dt-side-nav__sub-menu">
+                    <li class="dt-side-nav__item">
+                        <a href="pay_invoice" class="dt-side-nav__link" title="Pay Invoices">
+                            <i class="icon icon-invoice icon-fw icon-lg"></i>
+                            <span class="dt-side-nav__text">Pay Invoices</span>
+                        </a>
+                    </li>
+                </ul>
+                 <ul class="dt-side-nav__sub-menu">
+                    <li class="dt-side-nav__item">
+                        <a href="paid_invoice" class="dt-side-nav__link" title="Paid Invoice">
+                            <i class="icon icon-invoice icon-fw icon-lg"></i>
+                            <span class="dt-side-nav__text">Paid Invoices</span>
+                        </a>
+                    </li>
+                </ul>
+                <!-- /sub-menu -->
+            </li>
+            <li class="dt-side-nav__item">
+                <a href="withdraw" class="dt-side-nav__link" title="Withdraw">
+                    <i class="icon icon-card icon-fw icon-lg"></i>
+                    <span class="dt-side-nav__text">Withdraw</span>
+                </a>
+            </li>
+            <li class="dt-side-nav__item">
+                <a href="activity" class="dt-side-nav__link" title="Activity">
+                    <i class="icon icon-archive icon-fw icon-lg"></i>
+                    <span class="dt-side-nav__text">Activity</span>
+                </a>
+            </li>
+            <li class="dt-side-nav__item">
+                <a href="voucher" class="dt-side-nav__link" title="Voucher">
+                    <i class="icon icon-task-manager icon-fw icon-lg"></i>
+                    <span class="dt-side-nav__text">Voucher</span>
+                </a>
+            </li>
+            <li class="dt-side-nav__item">
+                <a href="load" class="dt-side-nav__link" title="Load Wallet">
+                    <i class="icon icon-card-group icon-fw icon-lg"></i>
+                    <span class="dt-side-nav__text">Load Wallet</span>
+                </a>
+            </li>
+            <li class="dt-side-nav__item">
+                <a href="bank" class="dt-side-nav__link" title="Add Bank Account">
+                    <i class="icon icon-user-account icon-fw icon-lg"></i>
+                    <span class="dt-side-nav__text">Add Bank</span>
+                </a>
+            </li>
+            <li class="dt-side-nav__item">
+                <a href="ticket" class="dt-side-nav__link" title="Create Ticket">
+                    <i class="icon icon-message icon-fw icon-lg"></i>
+                    <span class="dt-side-nav__text">Ticket</span>
+                </a>
+            </li>
+             <li class="dt-side-nav__item">
+                <a href="settings" class="dt-side-nav__link" title="Settings">
+                    <i class="icon icon-settings icon-fw icon-lg"></i>
+                    <span class="dt-side-nav__text">Settings</span>
+                </a>
+            </li>
+        </ul>
+        <!-- /sidebar navigation -->
+
+    </div>
+</aside>
+<!-- /sidebar -->
+            <!-- Site Content Wrapper -->
+            <div class="dt-content-wrapper">
+
+                <!-- Site Content -->
+                <div class="dt-content">
+
+                    <!-- Grid -->
+                    <div class="row">
+                        <!-- Grid Item -->
+                        <div class="col-12">
+
+                            <!-- Card -->
+                            <div class="dt-card">
+
+                                <!-- Card Header -->
+                                <div class="dt-card__header">
+
+                                    <!-- Card Heading -->
+                                    <div class="dt-card__heading">
+                                        <h3 class="dt-card__title">Create Voucher</h3>
+                                    </div>
+                                    <a href="load_voucher" ><button class="btn btn-primary">Load Voucher</button></a>
+                                </div>
+                                <div class="dt-card__body">
+                                     {% for message in messages %}
+                                        <div class="alert alert-success" role="alert">
+                                        {{ message }}
+                                    </div>
+                                    {% endfor %}
+                                    <!-- Form -->
+                                    <form method="post" action="voucher">
+                                        {% csrf_token %}
+                                        <!-- Form Row -->
+                                         <hr class="border-dashed my-8">
+                                        <div class="form-row">
+                                            <div class="col-md-10 col-sm-9">
+                                                <!-- Input Group -->
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">₦</span>
+                                                    </div>
+                                                    <input id="addon-3" type="number" name="amount" placeholder="Enter Amount" class="form-control" aria-label="Amount (to the nearest dollar)">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">.00</span>
+                                                    </div>
+                                                </div>
+                                                <!-- /input group -->
+                                            </div>
+
+                                        </div>
+                                    <hr class="border-dashed my-8">
+                                    <button class="btn btn-primary" type="submit">Create Voucher</button>
+                                    </form>
+                                    <!-- /form -->
+
+                                </div>
+                                <!-- /card body -->
+                                <div class="dt-content">
+
+                    <!-- Grid -->
+                    <div class="row">
+
+                        <!-- Grid Item -->
+                        <div class="col-xl-12">
+
+                            <!-- Entry Header -->
+                            <div class="dt-entry__header">
+
+                                <!-- Entry Heading -->
+                                <div class="dt-entry__heading">
+                                    <h3 class="dt-entry__title">Voucher</h3>
+                                </div>
+                                <!-- /entry heading -->
+
+                            </div>
+                            <!-- /entry header -->
+
+                            <!-- Card -->
+                            <div class="dt-card">
+
+                                <!-- Card Body -->
+                                <div class="dt-card__body">
+
+                                    <!-- Tables -->
+                                    <div class="table-responsive">
+
+                                        <table id="data-table" class="table table-striped table-bordered table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th>Vouchers</th>
+                                                <th>Ref No</th>
+                                                <th>Amount</th>
+                                                <th>Loader</th>
+                                                <th>Create Date</th>
+                                                <th>Status</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for shows in show %}
+                                            <tr class="gradeU">
+                                                <td>{{ shows.v_code }}</td>
+                                                <td>{{ shows.ref_no }}</td>
+                                                <td><div class="badge badge-success badge-shadow">₦ {{ shows.v_amount }}</div></td>
+                                                <td>{{ shows.v_loader }}</td>
+                                                <td>{{ shows.v_date }}</td>
+                                                 <td><div class="badge badge-success badge-shadow">{{ shows.v_status }}</div></td>
+                                            </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                    <!-- /tables -->
+
+                                </div>
+                                <!-- /card body -->
+
+                            </div>
+                            <!-- /card -->
+
+                        </div>
+                        <!-- /grid item -->
+
+                    </div>
+                    <!-- /grid -->
+
+                </div>
+                            </div>
+                            <!-- /card -->
+
+                        </div>
+                        <!-- /grid item -->
+                    </div>
+                    <!-- /grid -->
+
+                </div>
+                <!-- /site content -->
+
+                <!-- Footer -->
+<footer class="dt-footer">
+  Copyright Company Name © 2019
+</footer>
+<!-- /footer -->
+            </div>
+        </main>
+    </div>
+</div>
+<!-- /root -->
+
+<!-- Optional JavaScript -->
+<script src="{% static 'node_modules/jquery/dist/jquery.min.js'%}"></script>
+<script src="{% static 'node_modules/moment/moment.js'%}"></script>
+<script src="{% static 'node_modules/bootstrap/dist/js/bootstrap.bundle.min.js'%}"></script>
+<!-- Perfect Scrollbar jQuery -->
+<script src="{% static 'node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js'%}"></script>
+<!-- /perfect scrollbar jQuery -->
+
+<!-- masonry script -->
+<script src="{% static 'node_modules/masonry-layout/dist/masonry.pkgd.min.js'%}"></script>
+<script src="{% static 'node_modules/sweetalert2/dist/sweetalert2.js'%}"></script>
+<script src="{% static 'assets/js/functions.js'%}"></script>
+<script src="{% static 'assets/js/customizer.js'%}"></script><!-- Custom JavaScript -->
+<script src="{% static 'assets/js/script.js'%}"></script>
+<script src="{% static 'node_modules/datatables.net/js/jquery.dataTables.js'%}"></script>
+<script src="{% static 'node_modules/datatables.net-bs4/js/dataTables.bootstrap4.js'%}"></script>
+<script src="{% static 'assets/js/custom/data-table.js'%}"></script>
 </body>
 </html>
 {% endblock %}

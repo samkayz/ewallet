@@ -14,8 +14,9 @@ class Resolution(models.Model):
 
 class Settings(models.Model):
     about_us = models.CharField(max_length=1000)
-    contact_us = models.CharField(max_length=1000)
-    pricing = models.CharField(max_length=1000)
+    address = models.CharField(max_length=1000)
+    phone_no = models.CharField(max_length=1000)
+    email = models.EmailField(max_length=100)
 
     class Meta:
         db_table = "settings"

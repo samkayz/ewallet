@@ -27,6 +27,17 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+EMAIL_HOST = 'smtp.email-host-provider-domain.com'
+EMAIL_HOST_USER = 'yourusername@youremail.com'
+EMAIL_HOST_PASSWORD = 'your password'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'Your Name <you@email.com>'
+
+ADMINS = (
+    ('You', 'you@email.com'),
+)
+MANAGERS = ADMINS
 
 # Application definition
 
@@ -58,7 +69,7 @@ ROOT_URLCONF = 'wallet.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['C:/Users/samkayz/PycharmProjects/Pulse/templates'],
+        'DIRS': ['C:/Users/samkayz/PycharmProjects/Ewallet/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -131,5 +142,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
-
 STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
