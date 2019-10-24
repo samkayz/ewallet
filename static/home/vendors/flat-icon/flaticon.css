@@ -1,0 +1,55 @@
+	/*
+  	Flaticon icon font: Flaticon
+  	Creation date: 11/06/2018 19:52
+  	*/
+
+@font-face {
+  font-family: "Flaticon";
+  src: url("Flaticon.eot");
+  src: url("Flaticond41d.eot?#iefix") format("embedded-opentype"),
+       url("Flaticon.woff") format("woff"),
+       url("Flaticon.ttf") format("truetype"),
+       url("Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+  font-family: Flaticon;
+        font-size: 20px;
+font-style: normal;
+margin-left: 20px;
+}
+
+.flaticon-telephone:before { content: "\f100"; }
+.flaticon-placeholder:before { content: "\f101"; }
+.flaticon-receipt:before { content: "\f102"; }
+.flaticon-cross-out:before { content: "\f103"; }
+.flaticon-right-quotes-symbol:before { content: "\f104"; }
+.flaticon-left-quotes-sign:before { content: "\f105"; }
+.flaticon-laptop-profits-graphics:before { content: "\f106"; }
+.flaticon-commerce:before { content: "\f107"; }
+.flaticon-phone-call:before { content: "\f108"; }
+.flaticon-tag:before { content: "\f109"; }
+.flaticon-clock:before { content: "\f10a"; }
+.flaticon-mail:before { content: "\f10b"; }
+.flaticon-photo:before { content: "\f10c"; }
+.flaticon-money:before { content: "\f10d"; }
+.flaticon-search:before { content: "\f10e"; }
+.flaticon-unlink:before { content: "\f10f"; }
+.flaticon-people:before { content: "\f110"; }
+.flaticon-tax-1:before { content: "\f111"; }
+.flaticon-tax:before { content: "\f112"; }
+.flaticon-report:before { content: "\f113"; }
+.flaticon-calendar:before { content: "\f114"; }
+.flaticon-paper:before { content: "\f115"; }
+.flaticon-certificate:before { content: "\f116"; }
+.flaticon-play-button:before { content: "\f117"; }
