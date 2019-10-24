@@ -2,6 +2,7 @@ from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.models import User, auth
+from django.contrib.auth.decorators import login_required
 from account.models import Transactions, Account, Voucher, Ticket, Merchant, Withdraw
 from .models import Resolution, Settings, Details
 from django.db.models import Sum
@@ -33,6 +34,7 @@ def logout(request):
     return redirect('index')
 
 
+@login_required(login_url='index')
 def home(request):
     show = Transactions.objects.aggregate(Sum('amount'))['amount__sum']
     merchant = Merchant.objects.all().count()
@@ -44,18 +46,21 @@ def home(request):
     return render(request, 'admin/home.html', context)
 
 
+@login_required(login_url='index')
 def activity(request):
     show = Transactions.objects.filter()
     context = {'show': show}
     return render(request, 'admin/activity.html', context)
 
 
+@login_required(login_url='index')
 def user(request):
     show = Account.objects.filter()
     context = {'show': show}
     return render(request, 'admin/user.html', context)
 
 
+@login_required(login_url='index')
 def view(request, id):
     show = Account.objects.all().get(id=id)
     username = Account.objects.values('username').get(id=id)['username']
@@ -68,24 +73,28 @@ def view(request, id):
         return render(request, 'admin/view.html', context)
 
 
+@login_required(login_url='index')
 def voucher(request):
     show = Voucher.objects.filter()
     context = {'show': show}
     return render(request, 'admin/voucher.html', context)
 
 
+@login_required(login_url='index')
 def dispute(request):
     show = Ticket.objects.filter()
     context = {'show': show}
     return render(request, 'admin/dispute.html', context)
 
 
+@login_required(login_url='index')
 def solve(request, ticket_id):
     show = Resolution.objects.filter(Q(ticket_id=ticket_id))
     context = {'show': show}
     return render(request, 'admin/solve.html', context)
 
 
+@login_required(login_url='index')
 def resolution(request):
     if request.method == 'POST':
         ticket_id = request.POST['ticket_id']
@@ -101,10 +110,12 @@ def resolution(request):
     return render(request, 'admin/solve.html')
 
 
+@login_required(login_url='index')
 def page(request):
     return render(request, 'admin/page.html')
 
 
+@login_required(login_url='index')
 def verify(request):
     if request.method == 'POST':
         r_number = request.POST['number']
@@ -119,6 +130,7 @@ def verify(request):
     return render(request, 'admin/send.html')
 
 
+@login_required(login_url='index')
 def send(request):
     ref_no = uuid.uuid4().hex[:10].upper()
     if request.method == 'POST':
@@ -141,6 +153,7 @@ def send(request):
     return render(request, 'admin/send.html')
 
 
+@login_required(login_url='index')
 def about(request):
     if request.method == 'POST':
         abouts = request.POST['about']
@@ -151,12 +164,14 @@ def about(request):
     return render(request, 'admin/page.html')
 
 
+@login_required(login_url='index')
 def withdraw(request):
     show = Withdraw.objects.filter()
     context = {'show': show}
     return render(request, 'admin/withdraw.html', context)
 
 
+@login_required(login_url='index')
 def approve(request, id):
     status = Withdraw.objects.values('status').get(id=id)['status']
     if status == 'Processed':
@@ -168,6 +183,7 @@ def approve(request, id):
         return redirect('/super/withdraw')
 
 
+@login_required(login_url='index')
 def details(request):
     if request.method == 'POST':
         address = request.POST['address']
@@ -189,6 +205,7 @@ def details(request):
     return render(request, 'details.html', context)
 
 
+@login_required(login_url='index')
 def contact(request):
     if request.method == 'POST':
         email = request.POST['email']
@@ -208,6 +225,7 @@ def contact(request):
     return render(request, 'admin/contact.html', context)
 
 
+@login_required(login_url='index')
 def v_verify(request):
     if request.method == 'POST':
         r_number = request.POST['number']
@@ -222,6 +240,7 @@ def v_verify(request):
     return render(request, 'admin/solve_voucher.html')
 
 
+@login_required(login_url='index')
 def voucher_issue(request):
     ref_no = uuid.uuid4().hex[:10].upper()
     if request.method == 'POST':
@@ -251,6 +270,7 @@ def voucher_issue(request):
     return render(request, 'admin/solve_voucher.html')
 
 
+@login_required(login_url='index')
 def lock(request):
     if request.method == 'POST':
         username = request.POST['username']

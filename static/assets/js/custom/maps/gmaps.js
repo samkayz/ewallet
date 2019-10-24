@@ -140,7 +140,7 @@ var googleMaps = {
 
             overPolylineMap.drawPolyline({
                 path: path, // pre-defined polygon shape
-                strokeColor: '#512DA8',
+                strokeColor: '#353eb0',
                 strokeOpacity: 0.6,
                 strokeWeight: 6
             });
@@ -159,10 +159,10 @@ var googleMaps = {
 
             overPolygonsMap.drawPolygon({
                 paths: path, // pre-defined polygon shape
-                strokeColor: '#512DA8',
+                strokeColor: '#353eb0',
                 strokeOpacity: 0.4,
                 strokeWeight: 2,
-                fillColor: '#512DA8',
+                fillColor: '#353eb0',
                 fillOpacity: 0.4
             });
         }
@@ -221,10 +221,10 @@ var googleMaps = {
             geoPolygonsMap.drawPolygon({
                 paths: paths, // pre-defined polygon shape
                 useGeoJSON: true,
-                strokeColor: '#512DA8',
+                strokeColor: '#353eb0',
                 strokeOpacity: 0.4,
                 strokeWeight: 2,
-                fillColor: '#512DA8',
+                fillColor: '#353eb0',
                 fillOpacity: 0.6
             });
         }
@@ -242,7 +242,7 @@ var googleMaps = {
                 origin: [-12.044012922866312, -77.02470665341184],
                 destination: [-12.090814532191756, -77.02271108990476],
                 travelMode: 'driving',
-                strokeColor: '#512DA8',
+                strokeColor: '#353eb0',
                 strokeOpacity: 0.6,
                 strokeWeight: 5
             });
@@ -269,7 +269,7 @@ var googleMaps = {
                             advRouteMap.setCenter(e.end_location.lat(), e.end_location.lng());
                             advRouteMap.drawPolyline({
                                 path: e.path,
-                                strokeColor: '#512DA8',
+                                strokeColor: '#353eb0',
                                 strokeOpacity: 0.6,
                                 strokeWeight: 6
                             });

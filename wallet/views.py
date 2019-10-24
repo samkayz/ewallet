@@ -10,25 +10,23 @@ import uuid
 def landing(request):
     show = Details.objects.all().get(id=1)
     context = {'show': show}
-    return render(request, 'landing.html', context)
+    return render(request, 'home/landing.html', context)
 
 
 def about(request):
     show = Details.objects.all().get(id=1)
     context = {'show': show}
-    return render(request, 'about.html', context)
+    return render(request, 'home/about.html', context)
 
 
-def pricing(request):
-    show = Details.objects.all().get(id=1)
-    context = {'show': show}
-    return render(request, 'pricing.html', context)
+def service(request):
+    return render(request, 'home/service.html')
 
 
 def contact(request):
     show = Details.objects.all().get(id=1)
     context = {'show': show}
-    return render(request, 'contact.html', context)
+    return render(request, 'home/contact.html', context)
 
 
 def payme(request, username):
@@ -41,7 +39,6 @@ def payme(request, username):
     return render(request, 'amount.html', context)
 
 
-@csrf_exempt
 def initiate(request):
     ref_no = uuid.uuid4().hex[:10].upper()
     if request.method == 'POST':
@@ -75,6 +72,10 @@ def success(request):
     messages.info(request, 'Transaction Successful')
     trans = Transactions(sender=sender, receiver=username, amount=am, ref_no=ref_no, )
     trans.save()
+    del request.session['username']
+    del request.session['amount']
+    del request.session['ref_no']
+    del request.session['sender']
     return render(request, 'amount.html')
 
 

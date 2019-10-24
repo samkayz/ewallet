@@ -561,7 +561,7 @@ $(window).on("load", function () {
           "radius": "90%",
           "innerRadius": "85%"
         }, {
-          "color": "#512DA8",
+          "color": "#353eb0",
           "startValue": 0,
           "endValue": 6,
           "radius": "90%",

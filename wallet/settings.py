@@ -27,12 +27,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-EMAIL_HOST = 'smtp.email-host-provider-domain.com'
-EMAIL_HOST_USER = 'yourusername@youremail.com'
-EMAIL_HOST_PASSWORD = 'your password'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'Your Name <you@email.com>'
+EMAIL_HOST = 'smtp.mailtrap.io'
+EMAIL_HOST_USER = '069b58cd3c8a73'
+EMAIL_HOST_PASSWORD = '3512b7a7d01beb'
+EMAIL_PORT = '2525'
 
 ADMINS = (
     ('You', 'you@email.com'),

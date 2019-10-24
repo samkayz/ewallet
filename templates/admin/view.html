@@ -234,7 +234,7 @@
 
                                     <!-- Info -->
                                     <div class="dt-avatar-info">
-                                        <span class="dt-avatar-name display-4 mb-2 font-weight-light">{{ user.first_name }} {{ user.last_name }}</span>
+                                        <span class="dt-avatar-name display-4 mb-2 font-weight-light">{{ show.first_name }} {{ show.last_name }}</span>
                                         <span class="f-16">Customer ID: {{ show.customer_id }}</span>
                                     </div>
                                     <!-- /info -->
@@ -488,7 +488,7 @@
                                         <div class="dt-card__body">
 
                                     <!-- Form -->
-                                    <form action="merchant" method="post">
+                                    <form>
                                         {% csrf_token %}
                                         <div class="form-group form-row">
                                             <label for="normal-input-3" class="col-md-2 col-sm-3 col-form-label col-form-label-lg text-sm-right">Business Name</label>
@@ -528,9 +528,6 @@
                                             <div class="col-md-6 col-sm-3 mb-2">
                                                 <input type="tel" name="b_tel" class="form-control" value="{{ merchant.bus_no }}" class="form-control" readonly>
                                             </div>
-                                        </div>
-                                        <div class="form-group mb-0">
-                                            <button type="submit" class="btn btn-primary text-uppercase">Become Merchant</button>
                                         </div>
                                         <!-- /form row -->
                                     </form>

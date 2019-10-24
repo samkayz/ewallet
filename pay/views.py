@@ -17,9 +17,12 @@ def pay(request):
         success_url = request.POST['success']
         show_merchant = Merchant.objects.values('bus_name').get(api_test_key=merchant)['bus_name']
         m_username = Merchant.objects.values('bus_owner_username').get(api_test_key=merchant)['bus_owner_username']
+        logo = Merchant.objects.values('bus_logo').get(api_test_key=merchant)['bus_logo']
         context = {'desc': desc, 'amount': amount, 'show_merchant': show_merchant, 'm_username': m_username,
-                   'success_url': success_url}
-    return render(request, 'pay.html', context)
+                   'success_url': success_url, 'logo': logo}
+        return render(request, 'pay.html', context)
+    else:
+        return render(request, 'pay.html')
 
 
 def initiate(request):

@@ -1,6 +1,6 @@
 (function ($) {
     "use strict";
-    let primaryColor = '#512DA8';
+    let primaryColor = '#353eb0';
     let orangeColor = '#ff9800';
     let successColor = '#52c41a';
     let infoColor = '#1890ff';

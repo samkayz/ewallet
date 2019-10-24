@@ -5,6 +5,9 @@ from django.contrib.auth.models import User, auth
 from django.contrib.auth.decorators import login_required
 from .models import Account, Transactions, Voucher, Ticket, Merchant, Bank, Withdraw, Invoice
 from super.models import Resolution
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 import random
 import string
 import uuid
@@ -64,6 +67,14 @@ def register(request):
             users.save()
             user.save()
             messages.info(request, 'Account Created Successfully')
+            subject, from_email, to = 'Account Registration', 'noreply@wallet.com', email
+            html_content = render_to_string('mail/signup.html',
+                                            {'first_name': first_name, 'cus_id': cus_id, 'username': username,
+                                             'password': password1})
+            text_content = strip_tags(html_content)
+            msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+            msg.attach_alternative(html_content, "text/html")
+            msg.send()
             return redirect('register')
         else:
             messages.info(request, 'Password not Matching')
@@ -95,6 +106,11 @@ def transfer(request):
         amount = request.POST['amount']
         bal = Account.objects.values('bal').get(phone_no=r_number)['bal']
         s_bal = Account.objects.values('bal').get(username=s_username)['bal']
+        first_name = Account.objects.values('first_name').get(username=s_username)['first_name']
+        r_first_name = Account.objects.values('first_name').get(phone_no=r_number)['first_name']
+        r_mail = User.objects.values('email').get(username=s_username)['email']
+        r_username = Account.objects.values('username').get(username=s_username)['username']
+        m_email = User.objects.values('email').get(username=r_username)['email']
         show = Account.objects.values().get(phone_no=r_number)['username']
         # print("Hello: ", show)
         sb = (float(s_bal))
@@ -118,6 +134,26 @@ def transfer(request):
                                  ref_no=ref_no,)
             trans.save()
             messages.info(request, "Transaction Successful!!")
+
+            # Sender Email Notification
+            subject, from_email, to = 'Fund Transfer', 'noreply@wallet.com', r_mail
+            html_content = render_to_string('mail/s_mail.html',
+                                            {'first_name': first_name, 'new_2': new_2, 'ref_no': ref_no, 'amount': am,
+                                             'receiver': r_number})
+            text_content = strip_tags(html_content)
+            msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+            msg.attach_alternative(html_content, "text/html")
+            msg.send()
+
+    #         Receiver Email Notification
+            subject, from_email, to = 'Fund Transfer', 'noreply@wallet.com', m_email
+            html_content = render_to_string('mail/r_mail.html',
+                                            {'r_first_name': r_first_name, 'new': new, 'ref_no': ref_no, 'amount': am,
+                                             'sender': first_name})
+            text_content = strip_tags(html_content)
+            msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+            msg.attach_alternative(html_content, "text/html")
+            msg.send()
     return render(request, 'transfer.html')
 
 
@@ -347,6 +383,7 @@ def bank(request):
     return render(request, 'add_bank_acc.html', context)
 
 
+@login_required(login_url='login')
 def delete(request, id):
     Bank.objects.filter(id=id).delete()
     return redirect('bank')
@@ -391,6 +428,7 @@ def withdraw(request):
     return render(request, 'withdraw.html', context)
 
 
+@login_required(login_url='login')
 def deposit(request):
     ref_no = uuid.uuid4().hex[:10].upper()
     if request.method == 'POST':
@@ -408,10 +446,12 @@ def deposit(request):
         return render(request, 'deposit.html')
 
 
+@login_required(login_url='login')
 def confirm(request):
     return render(request, 'confirm.html')
 
 
+@login_required(login_url='login')
 def payment(request):
     username = request.session['username']
     amount = request.session['amount']
@@ -424,9 +464,13 @@ def payment(request):
     messages.info(request, 'Transaction Successful')
     trans = Transactions(sender='Card Payment', receiver=username, amount=am, ref_no=ref_no, )
     trans.save()
+    del request.session['username']
+    del request.session['amount']
+    del request.session['ref_no']
     return render(request, 'deposit.html')
 
 
+@login_required(login_url='login')
 def invoice_verify(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -439,6 +483,7 @@ def invoice_verify(request):
             return redirect('invoice')
 
 
+@login_required(login_url='login')
 def invoice(request):
     c_user = request.user.username
     if request.method == 'POST':
@@ -459,6 +504,7 @@ def invoice(request):
     return render(request, 'invoice.html', context)
 
 
+@login_required(login_url='login')
 def pay_invoice(request):
     c_user = request.user.username
     show = Invoice.objects.filter(Q(receiver=c_user))
@@ -466,6 +512,7 @@ def pay_invoice(request):
     return render(request, 'pay_invoice.html', context)
 
 
+@login_required(login_url='login')
 def success(request, id):
     now = datetime.datetime.now()
     ref_no = uuid.uuid4().hex[:10].upper()
@@ -499,6 +546,7 @@ def success(request, id):
         return redirect('pay-invoice')
 
 
+@login_required(login_url='login')
 def reject(request, id):
     now = datetime.datetime.now()
     if Invoice.objects.values('status').get(id=id)['status'] == 'reject':
@@ -513,6 +561,7 @@ def reject(request, id):
         return redirect('pay-invoice')
 
 
+@login_required(login_url='login')
 def paid_invoice(request):
     c_user = request.user.username
     show = Invoice.objects.filter(Q(sender=c_user))
@@ -520,10 +569,12 @@ def paid_invoice(request):
     return render(request, 'paid_invoice.html', context)
 
 
+@login_required(login_url='login')
 def load(request):
     return render(request, 'load.html')
 
 
+@login_required(login_url='login')
 def deposit(request):
     ref_no = uuid.uuid4().hex[:10].upper()
     if request.method == 'POST':
@@ -540,6 +591,7 @@ def deposit(request):
         return render(request, 'deposit.html')
 
 
+@login_required(login_url='login')
 def payment(request):
     amount = request.session['amount']
     username = request.session['username']
@@ -555,6 +607,7 @@ def payment(request):
     return redirect('deposit')
 
 
+@login_required(login_url='login')
 def fail(request):
     messages.info(request, 'Transaction Fail')
     return redirect('deposit')

@@ -41,51 +41,43 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="resp-tabs-container">
 							<div class="agileits_w3layouts_tab1">
 								<form class="creditly-card-form agileinfo_form">
-                                    <script src="https://api.ravepay.co/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
+                                    <script src="https://js.paystack.co/v1/inline.js"></script>
 									<section class="creditly-wrapper wthree, w3_agileits_wrapper">
 										<div class="credit-card-wrapper">
 											<div class="first-row form-group">
 
 											</div>
-											<button class="submit" type="button" onClick="payWithRave()"><span>Make a payment <i class="fa fa-long-arrow-right" aria-hidden="true"></i></span></button>
+											<button class="submit" type="button" onclick="payWithPaystack()"><span>Make a payment <i class="fa fa-long-arrow-right" aria-hidden="true"></i></span></button>
 										</div>
 									</section>
 								</form>
                                 <script>
-                const API_publicKey = "FLWPUBK_TEST-2ac37119277a38d125792249d252c982-X";
-
-                function payWithRave() {
-                var x = getpaidSetup({
-                PBFPubKey: API_publicKey,
-                customer_email: "{{ email }}",
-                amount: {{ amount }},
-                customer_phone: "{{ phone }}",
-                currency: "NGN",
-                txref: "{{ ref_no }}",
-                meta: [{
-                metaname: "flightID",
-                metavalue: "AP1234"
-                }],
-                onclose: function() {},
-                callback: function(response) {
-                var txref = response.tx.txRef; // collect txRef returned and pass to a 					server page to complete status check.
-                console.log("This is the response returned after a charge", response);
-                if (
-                    response.tx.chargeResponseCode == "00" ||
-                    response.tx.chargeResponseCode == "0"
-                ) {
-                    // redirect to a success page
-                     window.location = "success"
-                } else {
-                    // redirect to a failure page.
-                    window.location = "fail"
-                }
-
-                x.close(); // use this to close the modal immediately after payment.
-            }
-        });
-    }
-</script>
+                                    function payWithPaystack(){
+                                        var handler = PaystackPop.setup({
+                                            key: 'pk_test_fea4f2c1aab20408e00605bca8bf3d2602db4324',
+                                            email: '{{ email }}',
+                                            amount: {{ amount }} * 100,
+                                            currency: "NGN",
+                                            ref: '{{ ref_no }}',
+                                            metadata: {
+                                            custom_fields: [
+                                            {
+                                                display_name: "{{ sender }}",
+                                                variable_name: "mobile_number",
+                                                value: "{{ phone }}"
+                                            }
+                                            ]
+                                            },
+                                            callback: function(){
+                                                    window.location = "success"
+                                                    },
+                                                onClose: function(){
+                                                        alert('window closed');
+                                                }
+                                                });
+                                                handler.openIframe();
+                                                }
+                                </script>
 							</div>
 							<div class="agileits_w3layouts_tab2">
 								<h3>Don't have a A-Wallet Account <a href="/account/register">Register here</a></h3>
@@ -118,7 +110,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				  '.creditly-wrapper .credit-card-number',
 				  '.creditly-wrapper .security-code',
 				  '.creditly-wrapper .card-type');
-
 			  $(".creditly-card-form .submit").click(function(e) {
 				e.preventDefault();
 				var output = creditly.validate();
