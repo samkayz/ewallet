@@ -3,25 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="d3ade1ae-30bc-495c-8e24-c4c4297fa993" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pay/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/pay/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/css/components.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/css/components.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/css/semidark-style-1.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/css/semidark-style-1.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/js/custom/charts/dashboard-default.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/js/custom/charts/dashboard-default.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/js/custom/charts/dashboard-real-estate.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/js/custom/charts/dashboard-real-estate.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/js/custom/charts/widgets-charts.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/js/custom/charts/widgets-charts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/js/custom/color-pickers.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/js/custom/color-pickers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/js/custom/maps/data-maps.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/js/custom/maps/data-maps.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/js/custom/maps/gmaps.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/js/custom/maps/gmaps.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/super/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/super/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/view.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/view.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/confirm.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/confirm.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/payme.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/payme.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wallet/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/wallet/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wallet/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/wallet/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wallet/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/wallet/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -69,11 +50,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/account/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="127">
-              <caret line="61" column="21" selection-start-line="61" selection-start-column="21" selection-end-line="61" selection-end-column="21" />
+            <state relative-caret-position="367">
+              <caret line="73" column="51" lean-forward="true" selection-start-line="73" selection-start-column="51" selection-end-line="73" selection-end-column="51" />
               <folding>
                 <element signature="e#0#30#0" expanded="true" />
               </folding>
@@ -81,10 +62,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/mail/signup.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="109">
+            <state relative-caret-position="784">
               <caret line="154" column="17" selection-start-line="154" selection-start-column="17" selection-end-line="154" selection-end-column="17" />
               <folding>
                 <element signature="n#td#0;n#tr#0;n#table#0;n#td#0;n#tr#3;n#table#0;n#td#0;n#tr#0;n#table#0;n#body#0;n#html#0;n#!!top" />
@@ -338,7 +319,7 @@
       <workItem from="1571085504442" duration="1012000" />
       <workItem from="1571137192378" duration="47776000" />
       <workItem from="1571256265063" duration="134250000" />
-      <workItem from="1571915362284" duration="15201000" />
+      <workItem from="1571915362284" duration="15540000" />
     </task>
     <task id="LOCAL-00001" summary="Validation">
       <created>1570086619623</created>
@@ -445,11 +426,18 @@
       <option name="project" value="LOCAL" />
       <updated>1571846368809</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Mail&#10;paystack">
+      <created>1571931901295</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1571931901295</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="485497000" />
+    <option name="totallyTimeSpent" value="485836000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -520,7 +508,8 @@
     <MESSAGE value="Updated with Admin" />
     <MESSAGE value="Payment" />
     <MESSAGE value="Wednesday" />
-    <option name="LAST_COMMIT_MESSAGE" value="Wednesday" />
+    <MESSAGE value="Mail&#10;paystack" />
+    <option name="LAST_COMMIT_MESSAGE" value="Mail&#10;paystack" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/templates/voucher.html">
@@ -934,22 +923,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/mail/signup.html">
+    <entry file="file://$PROJECT_DIR$/account/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="109">
-          <caret line="154" column="17" selection-start-line="154" selection-start-column="17" selection-end-line="154" selection-end-column="17" />
+        <state relative-caret-position="367">
+          <caret line="73" column="51" lean-forward="true" selection-start-line="73" selection-start-column="51" selection-end-line="73" selection-end-column="51" />
           <folding>
-            <element signature="n#td#0;n#tr#0;n#table#0;n#td#0;n#tr#3;n#table#0;n#td#0;n#tr#0;n#table#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="e#0#30#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/account/views.py">
+    <entry file="file://$PROJECT_DIR$/templates/mail/signup.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="61" column="21" selection-start-line="61" selection-start-column="21" selection-end-line="61" selection-end-column="21" />
+        <state relative-caret-position="784">
+          <caret line="154" column="17" selection-start-line="154" selection-start-column="17" selection-end-line="154" selection-end-column="17" />
           <folding>
-            <element signature="e#0#30#0" expanded="true" />
+            <element signature="n#td#0;n#tr#0;n#table#0;n#td#0;n#tr#3;n#table#0;n#td#0;n#tr#0;n#table#0;n#body#0;n#html#0;n#!!top" />
           </folding>
         </state>
       </provider>
