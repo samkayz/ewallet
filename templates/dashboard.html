@@ -61,7 +61,7 @@
       <!-- Brand logo -->
       <span class="dt-brand__logo">
         <a class="dt-brand__logo-link" href="dashboard">
-          <img src="{% static 'assets/images/logo2.png'%}" width="150" height="60">
+          <img src="{% static 'assets/images/3.png'%}" width="80" height="80">
         </a>
       </span>
       <!-- /brand logo -->
@@ -588,8 +588,7 @@
                                         <h3 class="text-white mb-2">Receive Money With Your Link</h3>
 
                                         <p>With the below link, you can receive money from non user of the wallet</p>
-                                        <a class="btn btn-light btn-block"
-                                           href="http://{{ request.get_host }}/payme/{{ user.username }}" target="_blank">http://{{ request.get_host }}/payme/{{ user.username }}</a>
+                                        <input type="text" value="http://{{ request.get_host }}/payme/{{ user.username }}" class="form-control" id="validationDefault03">
                                     </div>
                                     <!-- /card body -->
 

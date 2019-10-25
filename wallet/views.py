@@ -30,13 +30,20 @@ def contact(request):
 
 
 def payme(request, username):
-    first_name = Account.objects.values('first_name').get(username=username)['first_name']
-    last_name = Account.objects.values('last_name').get(username=username)['last_name']
-    phone = Account.objects.values('phone_no').get(username=username)['phone_no']
-    email = User.objects.values('email').get(username=username)['email']
-    context = {'first_name': first_name, 'last_name': last_name, 'email': email,
-               'username': username, 'phone': phone}
-    return render(request, 'amount.html', context)
+    if Account.objects.filter(username=username).exists():
+        first_name = Account.objects.values('first_name').get(username=username)['first_name']
+        last_name = Account.objects.values('last_name').get(username=username)['last_name']
+        phone = Account.objects.values('phone_no').get(username=username)['phone_no']
+        email = User.objects.values('email').get(username=username)['email']
+        context = {'first_name': first_name, 'last_name': last_name, 'email': email,
+                   'username': username, 'phone': phone}
+        return render(request, 'amount.html', context)
+    else:
+        return redirect('not-found')
+
+
+def error(request):
+    return render(request, 'not_found.html')
 
 
 def initiate(request):

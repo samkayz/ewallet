@@ -109,7 +109,7 @@ def transfer(request):
         first_name = Account.objects.values('first_name').get(username=s_username)['first_name']
         r_first_name = Account.objects.values('first_name').get(phone_no=r_number)['first_name']
         r_mail = User.objects.values('email').get(username=s_username)['email']
-        r_username = Account.objects.values('username').get(username=s_username)['username']
+        r_username = Account.objects.values('username').get(phone_no=r_number)['username']
         m_email = User.objects.values('email').get(username=r_username)['email']
         show = Account.objects.values().get(phone_no=r_number)['username']
         # print("Hello: ", show)
@@ -333,10 +333,13 @@ def api(request):
     api_live = uuid.uuid4().hex[:50].lower()
     if request.method == 'POST':
         user = request.POST['user']
-
-        Merchant.objects.filter(bus_owner_username=user).update(api_test_key=api_test, api_live_key=api_live)
-        messages.info(request, "Please Find Your API key on API Tab")
-        return redirect('settings')
+        if Merchant.objects.filter(bus_owner_username=c_user).exists():
+            Merchant.objects.filter(bus_owner_username=user).update(api_test_key=api_test, api_live_key=api_live)
+            messages.info(request, "Please Find Your API key on API Tab")
+            return redirect('settings')
+        else:
+            messages.info(request, "You have to be a Merchant before you can use our API")
+            return redirect('settings')
     show = Account.objects.values('phone_no').get(username=c_user)['phone_no']
     cus_id = Account.objects.values('customer_id').get(username=c_user)['customer_id']
     context = {'show': show, 'cus_id': cus_id}

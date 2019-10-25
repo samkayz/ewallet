@@ -31,7 +31,7 @@ urlpatterns = [
     path('payme/<username>', views.payme, name='payme'),
     path('initiate', views.initiate, name='initiate'),
     path('success', views.success, name='success'),
-    path('fail', views.fail, name='failed')
+    path('error', views.error, name='not-found')
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
