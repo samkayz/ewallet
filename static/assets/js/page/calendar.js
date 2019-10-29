@@ -86,8 +86,8 @@ var calendar = $('#myEvent').fullCalendar({
     {
       title: "John's Birthday",
       start: '2018-01-14',
-      backgroundColor: "#007bff",
-      borderColor: "#007bff",
+      backgroundColor: "#f90426",
+      borderColor: "#f90426",
       textColor: '#fff'
     },
     {
@@ -100,8 +100,8 @@ var calendar = $('#myEvent').fullCalendar({
     {
       title: 'Starting New Project',
       start: '2018-01-11',
-      backgroundColor: "#ffc107",
-      borderColor: "#ffc107",
+      backgroundColor: "#f90426",
+      borderColor: "#f90426",
       textColor: '#fff'
     },
     {

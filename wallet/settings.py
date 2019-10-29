@@ -37,6 +37,8 @@ ADMINS = (
 )
 MANAGERS = ADMINS
 
+PAYSTACK = 'pk_test_fea4f2c1aab20408e00605bca8bf3d2602db4324'
+
 # Application definition
 
 INSTALLED_APPS = [

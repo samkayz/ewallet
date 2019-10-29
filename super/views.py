@@ -225,6 +225,23 @@ def contact(request):
     return render(request, 'admin/contact.html', context)
 
 
+def payment_api(request):
+    if request.method == 'POST':
+        paystack = request.POST['paystack']
+        if Settings.objects.filter(Q(id=1)).exists():
+            Settings.objects.filter(Q(id=1)).update(paystack_api=paystack)
+            messages.info(request, 'Added Successfully')
+            return redirect('payment-api')
+        else:
+            s_pay = Settings(paystack_api=paystack)
+            s_pay.save()
+            messages.info(request, 'Added Successfully')
+            return redirect('payment-api')
+    show = Settings.objects.all().get(id=1)
+    context = {'show': show}
+    return render(request, 'admin/payment_api.html', context)
+
+
 @login_required(login_url='index')
 def v_verify(request):
     if request.method == 'POST':
@@ -284,3 +301,13 @@ def lock(request):
             messages.info(request, 'Access Denied!!')
             return redirect('lock')
     return render(request, 'admin/lock.html')
+
+
+def hold(request, id):
+    Account.objects.filter(id=id).update(status="hold")
+    return redirect('user')
+
+
+def un_hold(request, id):
+    Account.objects.filter(id=id).update(status="unhold")
+    return redirect('user')

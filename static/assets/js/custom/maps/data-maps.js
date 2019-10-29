@@ -7,7 +7,7 @@
             defaultFill: "#c5c5c5"
         },
         geographyConfig: {
-            highlightFillColor: '#353eb0',
+            highlightFillColor: '#f90426',
             highlightBorderWidth: 0,
         },
     });
@@ -17,7 +17,7 @@
         projection: 'mercator',
         fills: {
             defaultFill: "#c5c5c5",
-            authorHasTraveledTo: "#353eb0"
+            authorHasTraveledTo: "#f90426"
         },
         data: {
             USA: {fillKey: "authorHasTraveledTo"},
@@ -48,7 +48,7 @@
         scope: 'usa',
         fills: {
             defaultFill: "#c5c5c5",
-            active: "#353eb0"
+            active: "#f90426"
         },
         geographyConfig: {
             highlightFillColor: '#3e2280',
@@ -69,8 +69,8 @@
         element: document.getElementById("data-map-4"),
         fills: {
             defaultFill: "#c5c5c5",
-            arival: "#ffc107",
-            IND: "#353eb0"
+            arival: "#f90426",
+            IND: "#f90426"
         },
         geographyConfig: {
             highlightFillColor: '#3e2280',
@@ -98,6 +98,6 @@
             {origin: 'IND', destination: 'AUS'},
             {origin: 'IND', destination: 'BRA'}
         ],
-        {strokeColor: '#353eb0', strokeWidth: 2}
+        {strokeColor: '#f90426', strokeWidth: 2}
     );
 })(jQuery);

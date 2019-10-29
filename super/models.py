@@ -17,6 +17,7 @@ class Settings(models.Model):
     address = models.CharField(max_length=1000)
     phone_no = models.CharField(max_length=1000)
     email = models.EmailField(max_length=100)
+    paystack_api = models.CharField(max_length=200)
 
     class Meta:
         db_table = "settings"

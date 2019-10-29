@@ -234,10 +234,10 @@ $(window).on("load", function () {
           {
             data: [45, 35, 75, 15],
             backgroundColor: [
-              '#353eb0',
+              '#f90426',
               '#fa8c16',
               '#52c41a',
-              '#353eb0'
+              '#f90426'
             ]
           }
         ]

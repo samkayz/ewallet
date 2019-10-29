@@ -1,639 +1,456 @@
 {% load static %}
 {% block main %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <!-- Meta tags -->
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="Drift - A fully responsive, HTML5 based admin template">
-<meta name="keywords" content="Responsive, HTML5, admin theme, business, professional, jQuery, web design, CSS3, sass">
-<!-- /meta tags -->
-<title>DanfoPay</title>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <!-- Meta tags -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="Drift - A fully responsive, HTML5 based admin template">
+        <meta name="keywords" content="Responsive, HTML5, admin theme, business, professional, jQuery, web design, CSS3, sass">
+        <!-- /meta tags -->
+        <title>DanfoPay</title>
 
-<!-- Site favicon -->
-<link rel="shortcut icon" href="{% static 'assets/images/favicon.ico'%}" type="image/x-icon">
-<!-- /site favicon -->
+        <!-- Site favicon -->
+        <link rel="shortcut icon" href="{% static 'assets/images/favicon.ico'%}" type="image/x-icon">
+        <!-- /site favicon -->
 
-<!-- Font Icon Styles -->
-<link rel="stylesheet" href="{% static 'node_modules/flag-icon-css/css/flag-icon.min.css'%}">
-<link rel="stylesheet" href="{% static 'vendors/gaxon-icon/styles.css'%}">
-<!-- /font icon Styles -->
+        <!-- Font Icon Styles -->
+        <link rel="stylesheet" href="{% static 'node_modules/flag-icon-css/css/flag-icon.min.css'%}">
+        <link rel="stylesheet" href="{% static 'vendors/gaxon-icon/styles.css'%}">
+        <!-- /font icon Styles -->
 
-<!-- Perfect Scrollbar stylesheet -->
-<link rel="stylesheet" href="{% static 'node_modules/perfect-scrollbar/css/perfect-scrollbar.css'%}">
-<!-- /perfect scrollbar stylesheet -->
+        <!-- Perfect Scrollbar stylesheet -->
+        <link rel="stylesheet" href="{% static 'node_modules/perfect-scrollbar/css/perfect-scrollbar.css'%}">
+        <!-- /perfect scrollbar stylesheet -->
 
-<!-- Load Styles -->    <link rel="stylesheet" href="{% static 'node_modules/chartist/dist/chartist.min.css'%}">
-    <link rel="stylesheet" href="{% static 'assets/css/semidark-style-1.min.css'%}">
-    <!-- /load styles -->
-</head>
-<body class="dt-sidebar--fixed dt-header--fixed">
+        <!-- Load Styles -->    <link rel="stylesheet" href="{% static 'node_modules/chartist/dist/chartist.min.css'%}">
+        <link rel="stylesheet" href="{% static 'assets/css/semidark-style-1.min.css'%}">
+        <!-- /load styles -->
+    </head>
+    <body class="dt-sidebar--fixed dt-header--fixed">
 
-<!-- Loader -->
-<div class="dt-loader-container">
-  <div class="dt-loader">
-    <svg class="circular" viewBox="25 25 50 50">
-      <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></circle>
-    </svg>
-  </div>
-</div>
-<!-- /loader -->
-<!-- Root -->
-<div class="dt-root">
-    <div class="dt-root__inner">
-        <!-- Header -->
-<header class="dt-header">
-
-  <!-- Header container -->
-  <div class="dt-header__container">
-
-    <!-- Brand -->
-    <div class="dt-brand">
-
-      <!-- Brand tool -->
-      <div class="dt-brand__tool" data-toggle="main-sidebar">
-        <div class="hamburger-inner"></div>
-      </div>
-      <!-- /brand tool -->
-
-      <!-- Brand logo -->
-      <span class="dt-brand__logo">
-        <a class="dt-brand__logo-link" href="dashboard">
-          <img src="{% static 'assets/images/3.png'%}" width="80" height="80">
-        </a>
-      </span>
-      <!-- /brand logo -->
-
+    <!-- Loader -->
+    <div class="dt-loader-container">
+        <div class="dt-loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></circle>
+            </svg>
+        </div>
     </div>
-    <!-- /brand -->
+    <!-- /loader -->
+    <!-- Root -->
+    <div class="dt-root">
+        <div class="dt-root__inner">
+            <!-- Header -->
+            {% include 'header.html' %}
+            <!-- /header -->
+            <!-- Site Main -->
+            <main class="dt-main">
+                <!-- Sidebar -->
+                {% include 'sidebar.html' %}
+                <!-- /sidebar -->
+                <!-- Site Content Wrapper -->
+                <div class="dt-content-wrapper">
 
-    <!-- Header toolbar-->
-    <div class="dt-header__toolbar">
-      <!-- Header Menu Wrapper -->
-      <div class="dt-nav-wrapper">
-        <!-- Header Menu -->
-        <ul class="dt-nav">
-          <li class="dt-nav__item dropdown">
+                    <!-- Site Content -->
+                    <div class="dt-content">
 
-            <!-- Dropdown Link -->
-            <a href="#" class="dt-nav__link dropdown-toggle no-arrow dt-avatar-wrapper"
-               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <img class="dt-avatar size-30" src="{% static 'assets/images/user-avatar/domnic-harris.jpg'%}" alt="Domnic Harris">
-              <span class="dt-avatar-info d-none d-sm-block">
-                <span class="dt-avatar-name">Welcome {{ user.first_name }}</span>
-              </span> </a>
-            <!-- /dropdown link -->
+                        <!-- Page Header -->
+                        <div class="dt-page__header">
+                            <h1 class="dt-page__title">Welcome {{ user.last_name }}</h1>
+                        </div>
+                        <!-- /page header -->
 
-            <!-- Dropdown Option -->
-            <div class="dropdown-menu dropdown-menu-right">
-                <div class="dt-avatar-wrapper flex-nowrap p-6 mt-n2 bg-gradient-purple text-white rounded-top">
-                <img class="dt-avatar" src="{% static 'assets/images/user-avatar/domnic-harris.jpg'%}" alt="Domnic Harris">
-                <span class="dt-avatar-info">
-                  <span class="dt-avatar-name">Username</span>
-                  <span class="f-12">{{ user.username }}</span>
-                </span>
-              </div>
-              <a class="dropdown-item" href="load"> <i class="icon icon-user icon-fw mr-2 mr-sm-1"></i>Account
-              </a> <a class="dropdown-item" href="settings">
-                <i class="icon icon-settings icon-fw mr-2 mr-sm-1"></i>Setting </a>
-              <a class="dropdown-item" href="logout"> <i class="icon icon-editors icon-fw mr-2 mr-sm-1"></i>Logout
-              </a>
-            </div>
-            <!-- /dropdown option -->
-          </li>
-        </ul>
-        <!-- /header menu -->
-      </div>
-      <!-- Header Menu Wrapper -->
-    </div>
-    <!-- /header toolbar -->
-  </div>
-  <!-- /header container -->
-</header>
-<!-- /header -->
-        <!-- Site Main -->
-        <main class="dt-main">
-            <!-- Sidebar -->
-<aside id="main-sidebar" class="dt-sidebar">
-    <div class="dt-sidebar__container">
+                        <!-- Grid -->
+                        <div class="row">
+                            <div class="col-xl-6">
 
-        <!-- Sidebar Navigation -->
-        <ul class="dt-side-nav">
+                                <!-- Card -->
+                                <div class="dt-card dt-card__full-height">
 
-            <!-- Menu Header -->
-            <li class="dt-side-nav__item dt-side-nav__header">
-                <span class="dt-side-nav__text">main</span>
-            </li>
-            <!-- /menu header -->
+                                    <!-- Card Header -->
+                                    <div class="dt-card__header mb-4">
 
-            <!-- Menu Item -->
-            <li class="dt-side-nav__item open">
-                <a href="dashboard" class="dt-side-nav__link" title="Dashboard">
-                    <i class="icon icon-dashboard icon-fw icon-lg"></i>
-                    <span class="dt-side-nav__text">Dashboard</span>
-                </a>
-            </li>
-            <li class="dt-side-nav__item">
-                <a href="transfer" class="dt-side-nav__link" title="Transfer">
-                    <i class="icon icon-dollar icon-fw icon-lg"></i>
-                    <span class="dt-side-nav__text">Transfer</span>
-                </a>
-            </li>
-            <li class="dt-side-nav__item">
-                <a href="javascript:void(0)" class="dt-side-nav__link dt-side-nav__arrow" title="Invoice">
-                    <i class="icon icon-invoice icon-fw icon-lg"></i>
-                    <span class="dt-side-nav__text">Invoice</span>
-                </a>
-
-                <!-- Sub-menu -->
-                <ul class="dt-side-nav__sub-menu">
-                    <li class="dt-side-nav__item">
-                        <a href="invoice" class="dt-side-nav__link" title="Home Page">
-                            <i class="icon icon-invoice-new icon-fw icon-lg"></i>
-                            <span class="dt-side-nav__text">Create Invoice</span>
-                        </a>
-                    </li>
-                </ul>
-                <ul class="dt-side-nav__sub-menu">
-                    <li class="dt-side-nav__item">
-                        <a href="pay_invoice" class="dt-side-nav__link" title="Pay Invoices">
-                            <i class="icon icon-invoice icon-fw icon-lg"></i>
-                            <span class="dt-side-nav__text">Pay Invoices</span>
-                        </a>
-                    </li>
-                </ul>
-                 <ul class="dt-side-nav__sub-menu">
-                    <li class="dt-side-nav__item">
-                        <a href="paid_invoice" class="dt-side-nav__link" title="Paid Invoice">
-                            <i class="icon icon-invoice icon-fw icon-lg"></i>
-                            <span class="dt-side-nav__text">Paid Invoices</span>
-                        </a>
-                    </li>
-                </ul>
-                <!-- /sub-menu -->
-            </li>
-            <li class="dt-side-nav__item">
-                <a href="withdraw" class="dt-side-nav__link" title="Withdraw">
-                    <i class="icon icon-card icon-fw icon-lg"></i>
-                    <span class="dt-side-nav__text">Withdraw</span>
-                </a>
-            </li>
-            <li class="dt-side-nav__item">
-                <a href="activity" class="dt-side-nav__link" title="Activity">
-                    <i class="icon icon-archive icon-fw icon-lg"></i>
-                    <span class="dt-side-nav__text">Activity</span>
-                </a>
-            </li>
-            <li class="dt-side-nav__item">
-                <a href="voucher" class="dt-side-nav__link" title="Voucher">
-                    <i class="icon icon-task-manager icon-fw icon-lg"></i>
-                    <span class="dt-side-nav__text">Voucher</span>
-                </a>
-            </li>
-            <li class="dt-side-nav__item">
-                <a href="load" class="dt-side-nav__link" title="Load Wallet">
-                    <i class="icon icon-card-group icon-fw icon-lg"></i>
-                    <span class="dt-side-nav__text">Load Wallet</span>
-                </a>
-            </li>
-            <li class="dt-side-nav__item">
-                <a href="bank" class="dt-side-nav__link" title="Add Bank Account">
-                    <i class="icon icon-user-account icon-fw icon-lg"></i>
-                    <span class="dt-side-nav__text">Add Bank</span>
-                </a>
-            </li>
-            <li class="dt-side-nav__item">
-                <a href="ticket" class="dt-side-nav__link" title="Create Ticket">
-                    <i class="icon icon-message icon-fw icon-lg"></i>
-                    <span class="dt-side-nav__text">Ticket</span>
-                </a>
-            </li>
-             <li class="dt-side-nav__item">
-                <a href="settings" class="dt-side-nav__link" title="Settings">
-                    <i class="icon icon-settings icon-fw icon-lg"></i>
-                    <span class="dt-side-nav__text">Settings</span>
-                </a>
-            </li>
-        </ul>
-        <!-- /sidebar navigation -->
-
-    </div>
-</aside>
-<!-- /sidebar -->
-            <!-- Site Content Wrapper -->
-            <div class="dt-content-wrapper">
-
-                <!-- Site Content -->
-                <div class="dt-content">
-
-                    <!-- Page Header -->
-                    <div class="dt-page__header">
-                        <h1 class="dt-page__title">Welcome {{ user.last_name }}</h1>
-                    </div>
-                    <!-- /page header -->
-
-                    <!-- Grid -->
-                    <div class="row">
-                        <div class="col-xl-6">
-
-                            <!-- Card -->
-                            <div class="dt-card dt-card__full-height">
-
-                                <!-- Card Header -->
-                                <div class="dt-card__header mb-4">
-
-                                    <!-- Card Heading -->
-                                    <div class="dt-card__heading">
-                                        <h3 class="dt-card__title">
-                                            <i class="icon icon-revenue mr-3 icon-xl"></i><span
+                                        <!-- Card Heading -->
+                                        <div class="dt-card__heading">
+                                            <h3 class="dt-card__title">
+                                                <i class="icon icon-revenue mr-3 icon-xl"></i><span
                                                     class="align-bottom">Account Balance</span>
-                                        </h3>
-                                    </div>
-                                    <!-- /card heading -->
-                                </div>
-                                <!-- /card header -->
-
-                                <!-- Card Body -->
-                                <div class="dt-card__body pb-4">
-                                    <!-- Grid -->
-                                    <div class="row no-gutters">
-                                        <!-- Grid Item -->
-                                        <div class="col-sm-7 mb-8 mb-sm-0">
-                                            <div class="d-flex align-items-baseline mb-1">
-                                                <span class="display-2 font-weight-500 text-dark mr-2">₦ {{ show.bal }}</span>
-                                            </div>
+                                            </h3>
                                         </div>
-                                        <!-- /grid item -->
-                                        <!-- Grid Item -->
-                                        <div class="col-sm-5">
-                                            <div class="mb-3">
-                                                <a href="load"><button type="button" class="btn btn-secondary btn-sm mr-2">Load Wallet</button></a>
-                                                <a href="withdraw"><button type="button" class="btn btn-light btn-sm">Withdraw</button></a>
-                                            </div>
-                                            <p class="mb-0">Customer ID: {{ show.customer_id }}</p>
-                                        </div>
-                                        <!-- /grid item -->
+                                        <!-- /card heading -->
                                     </div>
-                                    <!-- /grid -->
+                                    <!-- /card header -->
 
-                                    <!-- Separator -->
-                                    <hr class="my-5">
-                                    <!-- /separator -->
-
-                                    <div class="position-relative">
-                                        <h5>Portfolio Distribution</h5>
+                                    <!-- Card Body -->
+                                    <div class="dt-card__body pb-4">
                                         <!-- Grid -->
                                         <div class="row no-gutters">
                                             <!-- Grid Item -->
-                                            <div class="col-sm-4 col-12 mb-2 mb-sm-0">
-                                                <!-- Media -->
-                                                <div class="media">
-                                                    <!-- Circle Progress bar -->
-                                                    <div id="circle-progressbar-1" class="mr-3"></div>
-                                                    <!-- /circle progress bar -->
-
-                                                    <!-- Media Body -->
-                                                    <div class="media-body">
-                                                        <h5 class="mb-0">Bitcoin</h5>
-                                                        <div class="d-flex align-items-baseline">
-                                                            <span class="display-5 font-weight-500 text-primary mr-2">8.74</span>
-                                                            <div class="trending-section">
-                                                                <span class="value f-12">78%</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- /media body -->
+                                            <div class="col-sm-7 mb-8 mb-sm-0">
+                                                <div class="d-flex align-items-baseline mb-1">
+                                                    <span class="display-2 font-weight-500 text-dark mr-2">₦ {{ show.bal }}</span>
                                                 </div>
-                                                <!-- /media -->
                                             </div>
                                             <!-- /grid item -->
                                             <!-- Grid Item -->
-                                            <div class="col-sm-4 col-12 mb-2 mb-sm-0">
-                                                <!-- Media -->
-                                                <div class="media">
-                                                    <!-- Circle Progress bar -->
-                                                    <div id="circle-progressbar-2" class="mr-3"></div>
-                                                    <!-- /circle progress bar -->
-
-                                                    <!-- Media Body -->
-                                                    <div class="media-body">
-                                                        <h5 class="mb-0">Etherium</h5>
-                                                        <div class="d-flex align-items-baseline">
-                                                            <span class="display-5 font-weight-500 text-primary mr-2">3.68</span>
-                                                            <div class="trending-section">
-                                                                <span class="value f-12">38%</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- /media body -->
+                                            <div class="col-sm-5">
+                                                <div class="mb-3">
+                                                    <a href="load"><button type="button" class="btn btn-secondary btn-sm mr-2">Load Wallet</button></a>
+                                                    <a href="withdraw"><button type="button" class="btn btn-light btn-sm">Withdraw</button></a>
                                                 </div>
-                                                <!-- /media -->
-                                            </div>
-                                            <!-- /grid item -->
-                                            <!-- Grid Item -->
-                                            <div class="col-sm-4 col-12">
-                                                <!-- Media -->
-                                                <div class="media">
-                                                    <!-- Circle Progress bar -->
-                                                    <div id="circle-progressbar-3" class="mr-3"></div>
-                                                    <!-- /circle progress bar -->
-
-                                                    <!-- Media Body -->
-                                                    <div class="media-body">
-                                                        <h5 class="mb-0">Ripple</h5>
-                                                        <div class="d-flex align-items-baseline">
-                                                            <span class="display-5 font-weight-500 text-primary mr-2">1.25</span>
-                                                            <div class="trending-section">
-                                                                <span class="value f-12">15%</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- /media body -->
-                                                </div>
-                                                <!-- /media -->
+                                                <p class="mb-0">Customer ID: {{ show.customer_id }}</p>
                                             </div>
                                             <!-- /grid item -->
                                         </div>
                                         <!-- /grid -->
-                                    </div>
-                                </div>
-                                <!-- /card body -->
 
-                            </div>
-                            <!-- /card -->
+                                        <!-- Separator -->
+                                        <hr class="my-5">
+                                        <!-- /separator -->
 
-                        </div>
-                        <!-- /grid item -->
+                                        <div class="position-relative">
+                                            <!-- Grid -->
+                                            <div class="row no-gutters">
+                                                <!-- Grid Item -->
+                                                <div class="col-sm-4 col-12 mb-2 mb-sm-0">
+                                                    <!-- Media -->
+                                                    <div class="media">
+                                                        <!-- Circle Progress bar -->
+                                                        <div id="circle-progressbar-1" class="mr-3"></div>
+                                                        <!-- /circle progress bar -->
 
-                        <!-- Grid Item -->
-                        <div class="col-xl-6">
-
-                            <!-- Card -->
-                            <div class="dt-card">
-
-                                <!-- Card Header -->
-                                <div class="dt-card__header">
-
-                                    <!-- Card Heading -->
-                                    <div class="dt-card__heading">
-                                        <h3 class="dt-card__title">Balance History</h3>
-                                    </div>
-                                    <!-- /card heading -->
-
-                                    <!-- Card Tools -->
-                                    <div class="dt-card__tools">
-
-                                        <!-- Dropdown -->
-                                        <div class="dropdown d-inline-block">
-                                            <a class="dropdown-toggle d-inline-block f-12 py-1 px-2 border rounded text-light-gray"
-                                               href="#"
-                                               data-toggle="dropdown"
-                                               aria-haspopup="true" aria-expanded="false">
-                                                Last 30 days
-                                            </a>
-
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a class="dropdown-item" href="javascript:void(0)">Last week</a>
-                                                <a class="dropdown-item" href="javascript:void(0)">Last 6 month</a>
-                                                <a class="dropdown-item" href="javascript:void(0)">Last 1 year</a>
-                                            </div>
-                                        </div>
-                                        <!-- /dropdown -->
-
-                                    </div>
-                                    <!-- /card tools -->
-
-                                </div>
-                                <!-- /card header -->
-
-                                <!-- Chart Body -->
-                                <div class="dt-chart__body">
-                                    <div id="ct-area-chart"
-                                         class="chart-area-balance height-200 stroke-w-2 fill-opacity-1"></div>
-                                </div>
-                                <!-- /chart body -->
-
-                            </div>
-                            <!-- /card -->
-
-                        </div>
-                        <!-- /grid item -->
-
-                        <!-- Grid Item -->
-                        <div class="col-xl-5 col-md-12">
-
-                            <!-- Card -->
-                            <div class="dt-card dt-card__full-height pb-4">
-
-                                <!-- Card Header -->
-                                <div class="dt-card__header mb-5">
-
-                                    <!-- Card Heading -->
-                                    <div class="dt-card__heading">
-                                        <h3 class="dt-card__title">Money Request</h3>
-                                    </div>
-                                    <!-- /card heading -->
-
-                                    <!-- Card Tools -->
-                                    <div class="dt-card__tools">
-                                        <a href="javascript:void(0)" class="dt-card__more">
-                                            <i class="icon icon-circle-add-o mr-2"></i>View All
-                                        </a>
-                                    </div>
-                                    <!-- /card tools -->
-
-                                </div>
-                                <!-- /card header -->
-
-                                <!-- Card Body -->
-                                <div class="dt-card__body p-0">
-                                    <!-- Widget -->
-                                    <div class="dt-widget dt-widget-sm dt-widget-hover">
-                                        <div class="dt-widget__item">
-
-                                            <!-- Widget Image -->
-                                            <div class="dt-widget__img align-self-center">
-                                                <!-- Avatar -->
-                                                <i class="icon icon-ripple2 icon-fw icon-3x text-primary"></i>
-                                                <!-- /avatar -->
-                                            </div>
-                                            <!-- /widget image -->
-
-                                            <!-- Widget Info -->
-                                            <div class="dt-widget__info text-truncate">
-                                                <div class="dt-widget__title d-flex">
-                                                    <span class="f-16 font-weight-500">Ripple</span>
-                                                    <div class="trending-section text-success ml-2">
-                                                        <span class="value">2.3%</span>
-                                                        <i class="icon icon-pointer-up f-10"></i>
+                                                        <!-- Media Body -->
+                                                        <div class="media-body">
+                                                            <h5 class="mb-0">Store Sales</h5>
+                                                            <div class="d-flex align-items-baseline">
+                                                                <span class="display-5 font-weight-500 text-primary mr-2">₦ 0.0</span>
+                                                            </div>
+                                                        </div>
+                                                        <!-- /media body -->
                                                     </div>
+                                                    <!-- /media -->
                                                 </div>
-                                                <p class="mb-0 text-truncate text-light-gray">
-                                                    High: $129.00 Low: $129.00
-                                                </p>
-                                            </div>
-                                            <!-- /widget info -->
+                                                <!-- /grid item -->
+                                                <!-- Grid Item -->
+                                                <div class="col-sm-4 col-12 mb-2 mb-sm-0">
+                                                    <!-- Media -->
+                                                    <div class="media">
+                                                        <!-- Circle Progress bar -->
+                                                        <div id="circle-progressbar-2" class="mr-3"></div>
+                                                        <!-- /circle progress bar -->
 
-                                            <!-- Widget Extra -->
-                                            <div class="dt-widget__extra text-right">
-                                                <!-- Hide Content -->
-                                                <div class="hide-content">
-                                                    <!-- Action Button Group -->
-                                                    <div class="action-btn-group">
-                                                        <button class="btn btn-primary btn-sm">Buy</button>
-                                                        <button class="btn btn-secondary btn-sm">Sell</button>
+                                                        <!-- Media Body -->
+                                                        <div class="media-body">
+                                                            <h5 class="mb-0">Pay Me</h5>
+                                                            <div class="d-flex align-items-baseline">
+                                                                <span class="display-5 font-weight-500 text-primary mr-2">₦ 0.0</span>
+                                                            </div>
+                                                        </div>
+                                                        <!-- /media body -->
                                                     </div>
-                                                    <!-- /action button group -->
+                                                    <!-- /media -->
                                                 </div>
-                                                <!-- /hide content -->
+                                                <!-- /grid item -->
+                                                <!-- Grid Item -->
+                                                <div class="col-sm-4 col-12">
+                                                    <!-- Media -->
+                                                    <div class="media">
+                                                        <!-- Circle Progress bar -->
+                                                        <div id="circle-progressbar-3" class="mr-3"></div>
+                                                        <!-- /circle progress bar -->
+
+                                                        <!-- Media Body -->
+                                                        <div class="media-body">
+                                                            <h5 class="mb-0">Paid Invoice</h5>
+                                                            <div class="d-flex align-items-baseline">
+                                                                <span class="display-5 font-weight-500 text-primary mr-2">₦ 0.0</span>
+                                                            </div>
+                                                        </div>
+                                                        <!-- /media body -->
+                                                    </div>
+                                                    <!-- /media -->
+                                                </div>
+                                                <!-- /grid item -->
                                             </div>
-                                            <!-- /widget extra -->
-
+                                            <!-- /grid -->
                                         </div>
-                                    </div>
-                                    <!-- /widget -->
-                                </div>
-                                <!-- /card body -->
-
-                            </div>
-                            <!-- /card -->
-
-                        </div>
-                        <!-- /grid item -->
-
-                        <!-- Grid Item -->
-                        <div class="col-xl-4 col-md-6">
-
-                            <!-- Card -->
-                            <div class="dt-card dt-card__full-height">
-
-                                <!-- Card Header -->
-                                <div class="dt-card__header mb-6">
-
-                                    <!-- Card Heading -->
-                                    <div class="dt-card__heading">
-                                        <h3 class="dt-card__title">Currency Calculator</h3>
-                                    </div>
-                                    <!-- /card heading -->
-
-                                </div>
-                                <!-- /card header -->
-
-                                <!-- Card Body -->
-                                <div class="dt-card__body">
-
-                                    <!-- Form -->
-                                    <form>
-                                        <div class="form-row mb-7">
-                                            <div class="col-sm-4 col-6">
-                                                <label for="currency-type-1">From</label>
-                                                <select class="custom-select custom-select-sm" id="currency-type-1">
-                                                    <option selected>BTC</option>
-                                                    <option value="1">RPL</option>
-                                                    <option value="2">LTE</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-sm-4 col-6">
-                                                <label for="currency-type">From</label>
-                                                <select class="custom-select custom-select-sm" id="currency-type">
-                                                    <option selected>USD</option>
-                                                    <option value="1">Yen</option>
-                                                    <option value="2">Dinar</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-sm-4 col-12 mt-5 mt-sm-0">
-                                                <label for="amount">Amount(BTC)</label>
-                                                <input type="text" class="form-control form-control-sm" id="amount"
-                                                       placeholder="Amount">
-                                            </div>
-                                        </div>
-
-                                        <div class="mb-6">
-                                            <span class="d-block f-12 mb-1">1 Euro = 1.23 USD</span>
-                                            <h2 class="mb-1 display-4 font-weight-500 text-primary">11466.78 USD</h2>
-                                            <span class="d-block">@ 1 BTC = 6718.72 USD</span>
-                                        </div>
-
-                                        <div>
-                                            <button class="btn btn-primary btn-sm f-14 mr-1" type="submit">Buy Now
-                                            </button>
-                                            <button class="btn btn-light btn-sm f-14" type="reset">Reset</button>
-                                        </div>
-                                    </form>
-                                    <!-- /form -->
-
-                                </div>
-                                <!-- /card body -->
-
-                            </div>
-                            <!-- /card -->
-
-                        </div>
-                        <!-- /grid item -->
-
-                        <!-- Grid Item -->
-                        <div class="col-xl-3 col-md-6">
-
-                            <!-- Card -->
-                            <div class="dt-card dt-card__full-height bg-image-v6 bg-overlay overlay-opacity-0_8 bg-gradient-blue--after text-white">
-
-                                <!-- Overlay Content -->
-                                <div class="bg-overlay__inner mt-auto">
-
-                                    <!-- Card Body -->
-                                    <div class="dt-card__body text-center">
-
-                                        <h3 class="text-white mb-2">Receive Money With Your Link</h3>
-
-                                        <p>With the below link, you can receive money from non user of the wallet</p>
-                                        <input type="text" value="http://{{ request.get_host }}/payme/{{ user.username }}" class="form-control" id="validationDefault03">
                                     </div>
                                     <!-- /card body -->
 
                                 </div>
-                                <!-- /overlay content -->
+                                <!-- /card -->
 
                             </div>
-                            <!-- /card -->
+                            <!-- /grid item -->
+
+                            <!-- Grid Item -->
+                            <div class="col-xl-6">
+
+                                <!-- Card -->
+                                <div class="dt-card">
+
+                                    <!-- Card Header -->
+                                    <div class="dt-card__header">
+
+                                        <!-- Card Heading -->
+                                        <div class="dt-card__heading">
+                                            <h3 class="dt-card__title">Balance History</h3>
+                                        </div>
+                                        <!-- /card heading -->
+
+                                        <!-- Card Tools -->
+                                        <div class="dt-card__tools">
+
+                                            <!-- Dropdown -->
+                                            <div class="dropdown d-inline-block">
+                                                <a class="dropdown-toggle d-inline-block f-12 py-1 px-2 border rounded text-light-gray"
+                                                   href="#"
+                                                   data-toggle="dropdown"
+                                                   aria-haspopup="true" aria-expanded="false">
+                                                    Last 30 days
+                                                </a>
+
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <a class="dropdown-item" href="javascript:void(0)">Last week</a>
+                                                    <a class="dropdown-item" href="javascript:void(0)">Last 6 month</a>
+                                                    <a class="dropdown-item" href="javascript:void(0)">Last 1 year</a>
+                                                </div>
+                                            </div>
+                                            <!-- /dropdown -->
+
+                                        </div>
+                                        <!-- /card tools -->
+
+                                    </div>
+                                    <!-- /card header -->
+
+                                    <!-- Chart Body -->
+                                    <div class="dt-chart__body">
+                                        <div id="ct-area-chart"
+                                             class="chart-area-balance height-200 stroke-w-2 fill-opacity-1"></div>
+                                    </div>
+                                    <!-- /chart body -->
+
+                                </div>
+                                <!-- /card -->
+
+                            </div>
+                            <!-- /grid item -->
+
+                            <!-- Grid Item -->
+                            <div class="col-xl-5 col-md-12">
+
+                                <!-- Card -->
+                                <div class="dt-card dt-card__full-height pb-4">
+
+                                    <!-- Card Header -->
+                                    <div class="dt-card__header mb-5">
+
+                                        <!-- Card Heading -->
+                                        <div class="dt-card__heading">
+                                            <h3 class="dt-card__title">Money Request</h3>
+                                        </div>
+                                        <!-- /card heading -->
+
+                                        <!-- Card Tools -->
+                                        <div class="dt-card__tools">
+                                            <a href="javascript:void(0)" class="dt-card__more">
+                                                <i class="icon icon-circle-add-o mr-2"></i>View All
+                                            </a>
+                                        </div>
+                                        <!-- /card tools -->
+
+                                    </div>
+                                    <!-- /card header -->
+
+                                    <!-- Card Body -->
+                                    <div class="dt-card__body p-0">
+                                        <!-- Widget -->
+                                        <div class="dt-widget dt-widget-sm dt-widget-hover">
+                                            <div class="dt-widget__item">
+
+                                                <!-- Widget Image -->
+                                                <div class="dt-widget__img align-self-center">
+                                                    <!-- Avatar -->
+                                                    <i class="icon icon-ripple2 icon-fw icon-3x text-primary"></i>
+                                                    <!-- /avatar -->
+                                                </div>
+                                                <!-- /widget image -->
+
+                                                <!-- Widget Info -->
+                                                <div class="dt-widget__info text-truncate">
+                                                    <div class="dt-widget__title d-flex">
+                                                        <span class="f-16 font-weight-500">Ripple</span>
+                                                        <div class="trending-section text-success ml-2">
+                                                            <span class="value">2.3%</span>
+                                                            <i class="icon icon-pointer-up f-10"></i>
+                                                        </div>
+                                                    </div>
+                                                    <p class="mb-0 text-truncate text-light-gray">
+                                                        High: $129.00 Low: $129.00
+                                                    </p>
+                                                </div>
+                                                <!-- /widget info -->
+
+                                                <!-- Widget Extra -->
+                                                <div class="dt-widget__extra text-right">
+                                                    <!-- Hide Content -->
+                                                    <div class="hide-content">
+                                                        <!-- Action Button Group -->
+                                                        <div class="action-btn-group">
+                                                            <button class="btn btn-primary btn-sm">Buy</button>
+                                                            <button class="btn btn-secondary btn-sm">Sell</button>
+                                                        </div>
+                                                        <!-- /action button group -->
+                                                    </div>
+                                                    <!-- /hide content -->
+                                                </div>
+                                                <!-- /widget extra -->
+
+                                            </div>
+                                        </div>
+                                        <!-- /widget -->
+                                    </div>
+                                    <!-- /card body -->
+
+                                </div>
+                                <!-- /card -->
+
+                            </div>
+                            <!-- /grid item -->
+
+                            <!-- Grid Item -->
+                            <div class="col-xl-4 col-md-6">
+
+                                <!-- Card -->
+                                <div class="dt-card dt-card__full-height">
+
+                                    <!-- Card Header -->
+                                    <div class="dt-card__header mb-6">
+
+                                        <!-- Card Heading -->
+                                        <div class="dt-card__heading">
+                                            <h3 class="dt-card__title">Currency Calculator</h3>
+                                        </div>
+                                        <!-- /card heading -->
+
+                                    </div>
+                                    <!-- /card header -->
+
+                                    <!-- Card Body -->
+                                    <div class="dt-card__body">
+
+                                        <!-- Form -->
+                                        <form>
+                                            <div class="form-row mb-7">
+                                                <div class="col-sm-4 col-6">
+                                                    <label for="currency-type-1">From</label>
+                                                    <select class="custom-select custom-select-sm" id="currency-type-1">
+                                                        <option selected>BTC</option>
+                                                        <option value="1">RPL</option>
+                                                        <option value="2">LTE</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-4 col-6">
+                                                    <label for="currency-type">From</label>
+                                                    <select class="custom-select custom-select-sm" id="currency-type">
+                                                        <option selected>USD</option>
+                                                        <option value="1">Yen</option>
+                                                        <option value="2">Dinar</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-4 col-12 mt-5 mt-sm-0">
+                                                    <label for="amount">Amount(BTC)</label>
+                                                    <input type="text" class="form-control form-control-sm" id="amount"
+                                                           placeholder="Amount">
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-6">
+                                                <span class="d-block f-12 mb-1">1 Euro = 1.23 USD</span>
+                                                <h2 class="mb-1 display-4 font-weight-500 text-primary">11466.78 USD</h2>
+                                                <span class="d-block">@ 1 BTC = 6718.72 USD</span>
+                                            </div>
+
+                                            <div>
+                                                <button class="btn btn-primary btn-sm f-14 mr-1" type="submit">Buy Now
+                                                </button>
+                                                <button class="btn btn-light btn-sm f-14" type="reset">Reset</button>
+                                            </div>
+                                        </form>
+                                        <!-- /form -->
+
+                                    </div>
+                                    <!-- /card body -->
+
+                                </div>
+                                <!-- /card -->
+
+                            </div>
+                            <!-- /grid item -->
+
+                            <!-- Grid Item -->
+                            <div class="col-xl-3 col-md-6">
+
+                                <!-- Card -->
+                                <div class="dt-card dt-card__full-height bg-image-v6 bg-overlay overlay-opacity-0_8 bg-gradient-blue--after text-white">
+
+                                    <!-- Overlay Content -->
+                                    <div class="bg-overlay__inner mt-auto">
+
+                                        <!-- Card Body -->
+                                        <div class="dt-card__body text-center">
+
+                                            <h3 class="text-white mb-2">Receive Money With Your Link</h3>
+
+                                            <p>With the below link, you can receive money from non user of the wallet</p>
+                                            <input type="text" value="http://{{ request.get_host }}/payme/{{ user.username }}" class="form-control" id="validationDefault03">
+                                        </div>
+                                        <!-- /card body -->
+
+                                    </div>
+                                    <!-- /overlay content -->
+
+                                </div>
+                                <!-- /card -->
+
+                            </div>
+                            <!-- /grid item -->
 
                         </div>
-                        <!-- /grid item -->
-
                     </div>
+                    <!-- /site content -->
+
+                    <!-- Footer -->
+                    {% include 'footer.html' %}
+                    <!-- /footer -->
                 </div>
-                <!-- /site content -->
-
-                <!-- Footer -->
-<footer class="dt-footer">
-  Copyright Company Name © 2019
-</footer>
-<!-- /footer -->
-            </div>
-        </main>
+            </main>
+        </div>
     </div>
-</div>
-<!-- /root -->
+    <!-- /root -->
 
-<!-- Optional JavaScript -->
-<script src="{% static 'node_modules/jquery/dist/jquery.min.js'%}"></script>
-<script src="{% static 'node_modules/moment/moment.js'%}"></script>
-<script src="{% static 'node_modules/bootstrap/dist/js/bootstrap.bundle.min.js'%}"></script>
-<!-- Perfect Scrollbar jQuery -->
-<script src="{% static 'node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js'%}"></script>
-<!-- /perfect scrollbar jQuery -->
+    <!-- Optional JavaScript -->
+    <script src="{% static 'node_modules/jquery/dist/jquery.min.js'%}"></script>
+    <script src="{% static 'node_modules/moment/moment.js'%}"></script>
+    <script src="{% static 'node_modules/bootstrap/dist/js/bootstrap.bundle.min.js'%}"></script>
+    <!-- Perfect Scrollbar jQuery -->
+    <script src="{% static 'node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js'%}"></script>
+    <!-- /perfect scrollbar jQuery -->
 
-<!-- masonry script -->
-<script src="{% static 'node_modules/masonry-layout/dist/masonry.pkgd.min.js'%}"></script>
-<script src="{% static 'node_modules/sweetalert2/dist/sweetalert2.js'%}"></script>
-<script src="{% static 'assets/js/functions.js'%}"></script>
-<script src="{% static 'assets/js/customizer.js'%}"></script>
-<script src="{% static 'node_modules/chart.js/dist/Chart.min.js'%}"></script>
-<script src="{% static 'node_modules/chartist/dist/chartist.min.js'%}"></script>
-<script src="{% static 'node_modules/jquery-circle-progress/dist/circle-progress.min.html'%}"></script>
-<script src="{% static 'assets/js/script.js'%}"></script>
-<script src="{% static 'assets/js/custom/charts/dashboard-crypto.js'%}"></script>
-</body>
-</html>
+    <!-- masonry script -->
+    <script src="{% static 'node_modules/masonry-layout/dist/masonry.pkgd.min.js'%}"></script>
+    <script src="{% static 'node_modules/sweetalert2/dist/sweetalert2.js'%}"></script>
+    <script src="{% static 'assets/js/functions.js'%}"></script>
+    <script src="{% static 'assets/js/customizer.js'%}"></script>
+    <script src="{% static 'node_modules/chart.js/dist/Chart.min.js'%}"></script>
+    <script src="{% static 'node_modules/chartist/dist/chartist.min.js'%}"></script>
+    <script src="{% static 'node_modules/jquery-circle-progress/dist/circle-progress.min.html'%}"></script>
+    <script src="{% static 'assets/js/script.js'%}"></script>
+    <script src="{% static 'assets/js/custom/charts/dashboard-crypto.js'%}"></script>
+    </body>
+    </html>
 {% endblock %}

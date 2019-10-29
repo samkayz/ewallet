@@ -25,4 +25,7 @@ urlpatterns = [
     path('contact', views.contact, name='contact'),
     path('solve_voucher', views.voucher_issue, name='solve-voucher'),
     path('lock', views.lock, name='lock'),
+    path('payment-api', views.payment_api, name='payment-api'),
+    path('hold/<id>', views.hold, name='hold'),
+    path('un_hold/<id>', views.un_hold, name='unhold'),
 ]

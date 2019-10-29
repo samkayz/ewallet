@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth.models import auth
+from django.contrib.auth.models import auth, User
 from django.contrib import messages
 from django.urls import reverse
+from django.http import JsonResponse
 from django.http import HttpResponseRedirect
 from account.models import Merchant, Account, Transactions
 import uuid
@@ -32,11 +33,11 @@ def initiate(request):
         merchant = request.POST['merchant']
         username = request.POST['username']
         password = request.POST['password']
-        success_url = request.POST['success_url']
         user = auth.authenticate(username=username, password=password)
         if user is not None:
             auth.login(request, user)
             # you = Merchant.objects.values('bus_owner_username').get(bus_owner_username=username)['bus_owner_username']
+            payee_email = User.objects.values('email').get(username=username)['email']
             payee = Account.objects.values('bal').get(username=username)['bal']
             payer = Account.objects.values('bal').get(username=merchant)['bal']
             sb = (float(payee))
@@ -57,11 +58,19 @@ def initiate(request):
 
                 trans = Transactions(sender=username,
                                      receiver=merchant,
+                                     description='Merchant',
                                      amount=amount,
                                      ref_no=ref_no, )
                 trans.save()
                 auth.logout(request)
-                return HttpResponseRedirect("http://" + success_url)
+                responseData = {
+                    'amount': amount,
+                    'ref_no': ref_no,
+                    'username': username,
+                    'email': payee_email,
+                    'status': 'success'
+                }
+                return JsonResponse(responseData)
         else:
             messages.info(request, 'Invalid Credentials')
             return redirect('error')

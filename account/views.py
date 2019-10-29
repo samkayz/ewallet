@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User, auth
 from django.contrib.auth.decorators import login_required
 from .models import Account, Transactions, Voucher, Ticket, Merchant, Bank, Withdraw, Invoice
-from super.models import Resolution
+from super.models import Resolution, Settings
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
@@ -14,6 +14,7 @@ import uuid
 import datetime
 
 
+# Login view function that handle all the login
 def login(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -31,6 +32,7 @@ def login(request):
         return render(request, 'login.html')
 
 
+# Registration View Function that handle all the Registration
 def register(request):
     N = 5
     res = ''.join(random.choices(string.digits, k=N))
@@ -84,6 +86,7 @@ def register(request):
         return render(request, 'register.html')
 
 
+# Dashboard view function
 @login_required(login_url='login')
 def dashboard(request):
     c_user = request.user.username
@@ -92,11 +95,13 @@ def dashboard(request):
     return render(request, 'dashboard.html', context)
 
 
+# Logout function the terminate all the login session
 def logout(request):
     auth.logout(request)
     return redirect('login')
 
 
+# Transfer function that handle the transfer of money within the system
 @login_required(login_url='login')
 def transfer(request):
     ref_no = uuid.uuid4().hex[:10].upper()
@@ -112,12 +117,17 @@ def transfer(request):
         r_username = Account.objects.values('username').get(phone_no=r_number)['username']
         m_email = User.objects.values('email').get(username=r_username)['email']
         show = Account.objects.values().get(phone_no=r_number)['username']
+        status = Account.objects.values('status').get(username=s_username)['status']
+        r_status = Account.objects.values('status').get(phone_no=r_number)['status']
         # print("Hello: ", show)
         sb = (float(s_bal))
         rb = (float(bal))
         am = (float(amount))
-
-        if am > sb:
+        if status == 'hold':
+            messages.info(request, 'Your Account is on Hold, Please contact our agent')
+        elif r_status == 'hold':
+            messages.info(request, "This Customer Can't receive Money at the Moment")
+        elif am > sb:
             messages.info(request, 'Insufficient Balance')
         elif s_username == show:
             messages.info(request, "You Can't Send Money to Yourself!!")
@@ -131,6 +141,7 @@ def transfer(request):
             trans = Transactions(sender=s_username,
                                  receiver=show,
                                  amount=amount,
+                                 description='FT',
                                  ref_no=ref_no,)
             trans.save()
             messages.info(request, "Transaction Successful!!")
@@ -145,7 +156,7 @@ def transfer(request):
             msg.attach_alternative(html_content, "text/html")
             msg.send()
 
-    #         Receiver Email Notification
+            #         Receiver Email Notification
             subject, from_email, to = 'Fund Transfer', 'noreply@wallet.com', m_email
             html_content = render_to_string('mail/r_mail.html',
                                             {'r_first_name': r_first_name, 'new': new, 'ref_no': ref_no, 'amount': am,
@@ -157,6 +168,7 @@ def transfer(request):
     return render(request, 'transfer.html')
 
 
+# Verify function the verify the user of the wallet
 @login_required(login_url='login')
 def verify(request):
     if request.method == 'POST':
@@ -172,6 +184,7 @@ def verify(request):
     return render(request, 'transfer.html')
 
 
+# Setting view function
 @login_required(login_url='login')
 def settings(request):
     c_user = request.user.username
@@ -185,6 +198,7 @@ def settings(request):
         return redirect('api')
 
 
+# The view that handle all the transaction activity
 @login_required(login_url='login')
 def activity(request):
     c_user = request.user.username
@@ -194,6 +208,7 @@ def activity(request):
     return render(request, 'activity.html', context)
 
 
+# Voucher View function that handle the voucher generation
 @login_required(login_url='login')
 def voucher(request):
     N = 10
@@ -204,9 +219,13 @@ def voucher(request):
         # v_username = request.POST['v_username']
         amount = request.POST['amount']
         s_bal = Account.objects.values('bal').get(username=c_user)['bal']
+        status = Account.objects.values('status').get(username=c_user)['status']
         sb = (float(s_bal))
         am = (float(amount))
-        if am > sb:
+
+        if status == "hold":
+            messages.info(request, 'Your Account is Currently on Hold ')
+        elif am > sb:
             messages.info(request, 'Insufficient Balance')
         else:
             new_2 = sb - am
@@ -220,6 +239,7 @@ def voucher(request):
             trans = Transactions(sender=c_user,
                                  receiver='voucher',
                                  amount=amount,
+                                 description='Voucher',
                                  ref_no=ref_no, )
             trans.save()
             v_save.save()
@@ -229,6 +249,7 @@ def voucher(request):
     return render(request, 'voucher.html', context)
 
 
+# View function that handle voucher redeeming
 @login_required(login_url='login')
 def load_voucher(request):
     ref_no = uuid.uuid4().hex[:10].upper()
@@ -242,9 +263,13 @@ def load_voucher(request):
             status = Voucher.objects.values('v_status').get(v_code=v_code)['v_status']
             loader = Voucher.objects.values('v_creator').get(v_code=v_code)['v_creator']
             bal = Account.objects.values('bal').get(username=c_user)['bal']
+            a_status = Account.objects.values('status').get(username=c_user)['status']
             sb = (float(bal))
             am = (float(v_am))
 
+            if a_status == "hold":
+                messages.info(request, "Your Account is Currently on Hold")
+                return redirect('load_voucher')
             if status == 'close':
                 messages.info(request, "Voucher Used")
                 return redirect('load_voucher')
@@ -257,7 +282,8 @@ def load_voucher(request):
                 Voucher.objects.filter(v_code=v_code).update(v_status='close', v_loader=c_user, v_date_load=now)
                 messages.info(request, "Transaction Successful!!")
 
-                trans = Transactions(sender='Voucher', receiver=l_username, amount=am, ref_no=ref_no,)
+                trans = Transactions(sender='Voucher', receiver=l_username, amount=am,
+                                     description='Voucher', ref_no=ref_no,)
                 trans.save()
                 return redirect('load_voucher')
         else:
@@ -311,14 +337,17 @@ def merchant(request):
         b_email = request.POST['b_email']
         b_tel = request.POST['b_tel']
         b_url = request.POST['b_url']
+        bus_logo = request.FILES['bus_logo']
 
-        if Merchant.objects.filter(bus_owner_username=c_user).exists():
+        if Account.objects.values('status').get(username=c_user)['status'] == "hold":
+            messages.info(request, "You Account is Currently o Hold")
+            return redirect('settings')
+        elif Merchant.objects.filter(bus_owner_username=c_user).exists():
             messages.info(request, "You are a Merchant Already")
             return redirect('settings')
-
         else:
             b_save = Merchant(bus_owner_username=c_user, bus_name=b_name, bus_address=b_address, bus_email=b_email,
-                              bus_no=b_tel, bus_website=b_url,)
+                              bus_no=b_tel, bus_website=b_url, bus_logo=bus_logo)
             b_save.save()
             messages.info(request, "Merchant Registration Successful")
     show = Account.objects.values('phone_no').get(username=c_user)['phone_no']
@@ -333,7 +362,10 @@ def api(request):
     api_live = uuid.uuid4().hex[:50].lower()
     if request.method == 'POST':
         user = request.POST['user']
-        if Merchant.objects.filter(bus_owner_username=c_user).exists():
+        if Account.objects.values('status').get(username=c_user)['status'] == "hold":
+            messages.info(request, "You Account is Currently o Hold")
+            return redirect('settings')
+        elif Merchant.objects.filter(bus_owner_username=c_user).exists():
             Merchant.objects.filter(bus_owner_username=user).update(api_test_key=api_test, api_live_key=api_live)
             messages.info(request, "Please Find Your API key on API Tab")
             return redirect('settings')
@@ -376,11 +408,15 @@ def bank(request):
         acct_name = request.POST['acct_name']
         acct_no = request.POST['acct_no']
         bank_name = request.POST['bank_name']
-
-        s_bank = Bank(username=c_user, account_name=acct_name, account_no=acct_no, bank_name=bank_name)
-        s_bank.save()
-        messages.info(request, "Added Successful!!")
-        return redirect('bank')
+        status = Account.objects.values('status').get(username=c_user)['status']
+        if status == "hold":
+            messages.info(request, "You Account is Currently o Hold")
+            return redirect('bank')
+        else:
+            s_bank = Bank(username=c_user, account_name=acct_name, account_no=acct_no, bank_name=bank_name)
+            s_bank.save()
+            messages.info(request, "Added Successful!!")
+            return redirect('bank')
     show = Bank.objects.filter(Q(username=c_user))
     context = {'show': show}
     return render(request, 'add_bank_acc.html', context)
@@ -402,9 +438,14 @@ def withdraw(request):
         acct_name = Bank.objects.values('account_name').get(account_no=acct_no)['account_name']
         bank_name = Bank.objects.values('bank_name').get(account_no=acct_no)['bank_name']
         bal = Account.objects.values('bal').get(username=c_user)['bal']
+        status = Account.objects.values('status').get(username=c_user)['status']
         sb = (float(bal))
         am = (float(amount))
-        if am <= 0:
+
+        if status == "hold":
+            messages.info(request, 'Sorry, You Account is on Hold')
+            return redirect('withdraw')
+        elif am <= 0:
             messages.info(request, 'Invalid Transaction')
             return redirect('withdraw')
         elif sb < am:
@@ -421,6 +462,7 @@ def withdraw(request):
             trans = Transactions(sender=c_user,
                                  receiver='Withdrawal',
                                  amount=amount,
+                                 description='Debit',
                                  ref_no=ref_no, )
             trans.save()
             s_withdraw.save()
@@ -434,6 +476,7 @@ def withdraw(request):
 @login_required(login_url='login')
 def deposit(request):
     ref_no = uuid.uuid4().hex[:10].upper()
+    api_pk = Settings.objects.all()
     if request.method == 'POST':
         username = request.POST['username']
         email = request.POST['email']
@@ -454,23 +497,23 @@ def confirm(request):
     return render(request, 'confirm.html')
 
 
-@login_required(login_url='login')
-def payment(request):
-    username = request.session['username']
-    amount = request.session['amount']
-    ref_no = request.session['ref_no']
-    bal = Account.objects.values('bal').get(username=username)['bal']
-    sb = (float(bal))
-    am = (float(amount))
-    new = sb + am
-    Account.objects.filter(username=username).update(bal=new)
-    messages.info(request, 'Transaction Successful')
-    trans = Transactions(sender='Card Payment', receiver=username, amount=am, ref_no=ref_no, )
-    trans.save()
-    del request.session['username']
-    del request.session['amount']
-    del request.session['ref_no']
-    return render(request, 'deposit.html')
+# @login_required(login_url='login')
+# def payment(request):
+#     username = request.session['username']
+#     amount = request.session['amount']
+#     ref_no = request.session['ref_no']
+#     bal = Account.objects.values('bal').get(username=username)['bal']
+#     sb = (float(bal))
+#     am = (float(amount))
+#     new = sb + am
+#     Account.objects.filter(username=username).update(bal=new)
+#     messages.info(request, 'Transaction Successful')
+#     trans = Transactions(sender='Card Payment', receiver=username, amount=am, description='Deposit', ref_no=ref_no, )
+#     trans.save()
+#     del request.session['username']
+#     del request.session['amount']
+#     del request.session['ref_no']
+#     return render(request, 'deposit.html')
 
 
 @login_required(login_url='login')
@@ -494,7 +537,16 @@ def invoice(request):
         r_username = request.POST['r_username']
         amount = request.POST['amount']
         content = request.POST['content']
-        if c_user == r_username:
+        status = Account.objects.values('status').get(username=c_user)['status']
+        r_status = Account.objects.values('status').get(username=r_username)['status']
+
+        if status == "hold":
+            messages.info(request, 'Your Account is on hold. Kindly contact our Agent')
+            return redirect('invoice')
+        elif r_status == "hold":
+            messages.info(request, "This Customer Can't receive Money at the Moment")
+            return redirect('invoice')
+        elif c_user == r_username:
             messages.info(request, "Please You Can't Send Invoice to Yourself")
             return redirect('invoice')
         else:
@@ -524,26 +576,34 @@ def success(request, id):
     r_acct = Account.objects.values('bal').get(username=r_username)['bal']
     s_acct = Account.objects.values('bal').get(username=s_username)['bal']
     amount = Invoice.objects.values('amount').get(id=id)['amount']
+    status = Account.objects.values('status').get(username=r_username)['status']
     s_act = (float(s_acct))
     r_act = (float(r_acct))
     am = (float(amount))
 
-    if Invoice.objects.values('status').get(id=id)['status'] == 'paid':
+    if status == "hold":
+        messages.info(request, 'Your Account is on hold. Kindly contact our Agent')
+        return redirect('pay-invoice')
+    elif Invoice.objects.values('status').get(id=id)['status'] == 'paid':
         messages.info(request, 'Invoice Paid Already')
         return redirect('pay-invoice')
     elif Invoice.objects.values('status').get(id=id)['status'] == 'reject':
         messages.info(request, 'Invoice Already Rejected')
         return redirect('pay-invoice')
     else:
-        new1 = s_act - am
+        new1 = r_act - am
         Account.objects.filter(username=r_username).update(bal=new1)
 
-        new2 = r_act + am
+        new2 = s_act + am
         Account.objects.filter(username=s_username).update(bal=new2)
 
         Invoice.objects.filter(id=id).update(status='paid', date_paid=now, action='Paid')
 
-        s_invoice = Transactions(sender=r_username, receiver=s_username, amount=amount, ref_no=ref_no)
+        s_invoice = Transactions(sender=r_username,
+                                 receiver=s_username,
+                                 amount=amount,
+                                 description="Invoice",
+                                 ref_no=ref_no)
         s_invoice.save()
         messages.info(request, "You Have Successfully Paid The Invoice")
         return redirect('pay-invoice')
@@ -551,8 +611,12 @@ def success(request, id):
 
 @login_required(login_url='login')
 def reject(request, id):
+    c_user = request.user.username
     now = datetime.datetime.now()
-    if Invoice.objects.values('status').get(id=id)['status'] == 'reject':
+    if Account.objects.values('status').get(username=c_user)['status'] == "hold":
+        messages.info(request, 'Your Account is on hold')
+        return redirect('pay-invoice')
+    elif Invoice.objects.values('status').get(id=id)['status'] == 'reject':
         messages.info(request, 'Invoice Already Rejected')
         return redirect('pay-invoice')
     elif Invoice.objects.values('status').get(id=id)['status'] == 'paid':
@@ -585,11 +649,16 @@ def deposit(request):
         email = request.POST['email']
         amount = request.POST['amount']
         show = Account.objects.values('phone_no').get(username=username)['phone_no']
-        request.session['username'] = username
-        request.session['amount'] = amount
-        request.session['ref_no'] = ref_no
-        context = {'username': username, 'email': email, 'amount': amount, 'ref_no': ref_no, 'show': show}
-        return render(request, 'confirm.html', context)
+        status = Account.objects.values('status').get(username=username)['status']
+        if status == "hold":
+            messages.info(request, "You Account is Currently o Hold")
+            return redirect('deposit')
+        else:
+            request.session['username'] = username
+            request.session['amount'] = amount
+            request.session['ref_no'] = ref_no
+            context = {'username': username, 'email': email, 'amount': amount, 'ref_no': ref_no, 'show': show}
+            return render(request, 'confirm.html', context)
     else:
         return render(request, 'deposit.html')
 
@@ -604,7 +673,7 @@ def payment(request):
     amt = (float(amount))
     new = acct_bal + amt
     Account.objects.filter(username=username).update(bal=new)
-    t_reg = Transactions(sender='Card Deposit', receiver=username, amount=amount, ref_no=ref_no)
+    t_reg = Transactions(sender='Card Deposit', receiver=username, amount=amount, description='Deposit', ref_no=ref_no)
     t_reg.save()
     messages.info(request, 'Transaction Successful')
     return redirect('deposit')
@@ -614,3 +683,9 @@ def payment(request):
 def fail(request):
     messages.info(request, 'Transaction Fail')
     return redirect('deposit')
+
+
+def reset_password(request):
+    return render(request, 'reset/password_reset_form.html')
+
+

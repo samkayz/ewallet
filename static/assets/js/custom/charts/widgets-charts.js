@@ -341,16 +341,16 @@
                 {
                     data: [45, 35, 75, 15],
                     backgroundColor: [
-                        '#353eb0',
+                        '#f90426',
                         '#fa8c16',
                         '#52c41a',
-                        '#353eb0'
+                        '#f90426'
                     ],
                     hoverBackgroundColor: [
-                        '#353eb0',
+                        '#f90426',
                         '#fa8c16',
                         '#52c41a',
-                        '#353eb0'
+                        '#f90426'
                     ]
                 }
             ]
@@ -534,7 +534,7 @@
                             "radius": "90%",
                             "innerRadius": "85%"
                         }, {
-                            "color": "#353eb0",
+                            "color": "#f90426",
                             "startValue": 0,
                             "endValue": 6,
                             "radius": "90%",

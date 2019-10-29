@@ -8,6 +8,7 @@ class Account(models.Model):
     phone_no = models.CharField(max_length=20)
     customer_id = models.CharField(max_length=10)
     bal = models.CharField(max_length=200)
+    status = models.CharField(max_length=100)
 
     class Meta:
         db_table = "account"
@@ -16,6 +17,7 @@ class Account(models.Model):
 class Transactions(models.Model):
     sender = models.CharField(max_length=50)
     receiver = models.CharField(max_length=50)
+    description = models.CharField(max_length=100)
     amount = models.CharField(max_length=200)
     ref_no = models.CharField(max_length=40)
     date = models.DateField(auto_now=True)

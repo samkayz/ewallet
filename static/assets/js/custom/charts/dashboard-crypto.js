@@ -441,6 +441,6 @@
         thickness: 6,
         lineCap: "round",
         startAngle: -Math.PI / 4 * 2,
-        fill: {color: '#ff4081'}
+        fill: {color: '#f90426'}
     });
 })(jQuery);
