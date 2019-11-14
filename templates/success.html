@@ -1,0 +1,30 @@
+{% load static %}
+{% block main %}
+<!doctype html>
+<html lang="en">
+{% include 'head.html' %}
+
+<body>
+    <!-- Preloader -->
+    {% include 'preloader.html' %}
+    <!-- Preloader -->
+
+    <!-- Error Page Area -->
+    <div class="error-page-area">
+        <!-- Error Content -->
+        <div class="error-content text-center">
+            <!-- Error Thumb -->
+            <div class="error-thumb">
+                <img src="{% static 'img/bg-img/1.png'%}" alt="">
+            </div>
+            {% for message in messages %}
+            <h2>{{ message }}</h2>
+            {% endfor %}
+            <p>Howdy <b>{{ sender }}!</b> You Payment of <b>₦ {{ amount }}</b> to <b>{{ username }}</b> was successful and the receiver will get a notification
+                of the mail shortly.<br> Best Regards. </p>
+        </div>
+    </div>
+    {% include 'foot.html' %}
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,119 @@
+{% load static %}
+{% block main %}
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8" />
+        <title>DanfoPay - Payment Gateways</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css'%}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'font-awesome/css/font-awesome.min.css'%}" />
+
+        <script type="text/javascript" src="{% static 'js/jquery-1.10.2.min.js'%}"></script>
+        <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js'%}"></script>
+    </head>
+    <body>
+
+    <div class="container">
+
+        <div class="page-header">
+
+        </div>
+
+        <!-- Credit Card Payment Form - START -->
+
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-4 col-md-offset-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <h3 class="text-center">Payment Details</h3>
+                                <h3 class="text-center">₦ {{ amount }}</h3>
+                                <img class="img-responsive cc-img" src="http://www.prepbootstrap.com/Content/images/shared/misc/creditcardicons.png">
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <form role="form">
+                                <script src="https://js.paystack.co/v1/inline.js"></script>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="form-group">
+                                            <label>RECEIVER'S NAME</label>
+                                            <div class="input-group">
+                                                <input type="tel" class="form-control" value="{{ f_name }}" readonly />
+                                                <span class="input-group-addon"><span class="fa fa-envelope-open"></span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="form-group">
+                                            <label>RECEIVER'S MOBILE NO</label>
+                                            <div class="input-group">
+                                                <input type="tel" class="form-control" value="{{ phone }}" readonly />
+                                                <span class="input-group-addon"><span class="fa fa-mobile-phone"></span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="form-group">
+                                            <label>SENDER</label>
+                                            <input type="text" class="form-control" VALUE="{{ sender }}" readonly />
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="panel-footer">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <button class="btn btn-warning btn-lg btn-block" onclick="payWithPaystack()">Process payment</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            .cc-img {
+                margin: 0 auto;
+            }
+        </style>
+    </div>
+    <script>
+        function payWithPaystack(){
+            var handler = PaystackPop.setup({
+                key: 'pk_test_fea4f2c1aab20408e00605bca8bf3d2602db4324',
+                email: '{{ email }}',
+                amount: {{ amount }} * 100,
+                currency: "NGN",
+                ref: '{{ ref_no }}',
+                metadata: {
+                    custom_fields: [
+                        {
+                            display_name: "{{ sender }}",
+                            variable_name: "mobile_number",
+                            value: "{{ phone }}"
+                        }
+                    ]
+                },
+                callback: function(){
+                    window.location = "success"
+                },
+                onClose: function(){
+                    alert('window closed');
+                }
+            });
+            handler.openIframe();
+        }
+    </script>
+    </body>
+    </html>
+{% endblock %}

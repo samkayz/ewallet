@@ -1,0 +1,59 @@
+{% load static %}
+{% block main %}
+<header class="top-header-area d-flex align-items-center justify-content-between">
+    <div class="left-side-content-area d-flex align-items-center">
+        <!-- Mobile Logo -->
+        <div class="mobile-logo mr-3 mr-sm-4">
+            <a href="/account/dashboard">
+                <img src="{% static 'img/core-img/small-logo.png'%}" alt="Mobile Logo"></a>
+        </div>
+
+        <!-- Triggers -->
+        <div class="ecaps-triggers mr-1 mr-sm-3">
+            <div class="menu-collasped" id="menuCollasped">
+                <i class="zmdi zmdi-menu"></i>
+            </div>
+            <div class="mobile-menu-open" id="mobileMenuOpen">
+                <i class="zmdi zmdi-menu"></i>
+            </div>
+        </div>
+        <!-- Left Side Nav -->
+    </div>
+
+    <div class="right-side-navbar d-flex align-items-center justify-content-end">
+        <!-- Mobile Trigger -->
+        <div class="right-side-trigger" id="rightSideTrigger">
+            <i class="ti-align-left"></i>
+        </div>
+
+        <!-- Top Bar Nav -->
+        <ul class="right-side-content d-flex align-items-center">
+            <!-- Full Screen Mode -->
+
+            <li class="nav-item dropdown">
+                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="zmdi zmdi-account profile-icon bg-primary" aria-hidden="true"></i></button>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <!-- User Profile Area -->
+                    <div class="user-profile-area">
+                        <div class="user-profile-heading">
+                            <!-- Thumb -->
+                            <div class="profile-img">
+                                <i class="zmdi zmdi-account profile-icon bg-primary" aria-hidden="true"></i>
+                            </div>
+                            <!-- Profile Text -->
+                            <div class="profile-text">
+                                <h6>{{ user.last_name }} {{ user.first_name }}</h6>
+                                <span>Username: {{ user.username }}</span>
+                            </div>
+                        </div>
+                        <a href="/account/settings" class="dropdown-item"><i class="zmdi zmdi-brightness-7 profile-icon bg-info" aria-hidden="true"></i> Account settings</a>
+                        <a href="/account/ticket" class="dropdown-item"><i class="zmdi zmdi-wifi-alt profile-icon bg-purple" aria-hidden="true"></i> Support</a>
+                        <a href="/account/logout" class="dropdown-item"><i class="ti-unlink profile-icon bg-warning" aria-hidden="true"></i> Sign-out</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</header>
+{% endblock %}

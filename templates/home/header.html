@@ -1,0 +1,101 @@
+{% load static %}
+<header id="main-header" class="header-one">
+    <!-- menu start -->
+    <nav id="menu-1" class="mega-menu" data-color="">
+        <!-- menu list items container -->
+        <div class="menu-list-items">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <!-- menu logo -->
+                        <ul class="menu-logo">
+                            <li>
+                                <a href="index"><img src="{% static 'home/images/logo.png'%}" alt="logo" class="img-fluid"></a>
+                            </li>
+                        </ul>
+                        <!-- menu search bar -->
+                        <ul class="menu-search-bar">
+                            <li>
+                                <form method="post" action="#">
+                                    <label>
+                                        <input name="menu_search_bar" placeholder="Search" type="search">
+                                        <i class="fas fa-search"></i>
+                                    </label>
+                                </form>
+                            </li>
+                            <li class="menu-contact iq-fw-5"><a href="tel:0123456789" ><i class="fas fa-phone pr-1 "></i> +234(80)223-014-77</a></li>
+                        </ul>
+                        <!-- menu links -->
+                        <ul class="menu-links">
+                            <!-- active class -->
+                            <li >
+                                <a href="index">Home</a>
+                                <!-- drop down multilevel  -->
+                            </li>
+                            <li>
+                                <a href="service">Service</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)">Pages</a>
+                                <!-- drop down third level -->
+                                <ul class="drop-down-multilevel">
+                                    <li>
+                                        <a href="javascript:void(0)">About Us<i class="fas fa-angle-right "></i></a>
+                                        <!-- drop down third level -->
+                                        <ul class="drop-down-multilevel">
+                                            <li><a href="about">About J-Wallet</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0)"> Developer <i class="fas fa-angle-right "></i></a>
+                                        <!-- drop down third level -->
+                                        <ul class="drop-down-multilevel">
+                                            <li><a href="#">PHP Integration</a></li>
+                                            <li><a href="#">Python Integration</a></li>
+                                            <li><a href="#">Other Language</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a href="contact">Contact us</a></li>
+                            {% if user.is_authenticated %}
+                                {% if request.user.is_superuser %}
+                                    <li>
+                                        <a href="javascript:void(0)">My Account</a>
+                                        <!-- drop down third level -->
+                                        <ul class="drop-down-multilevel">
+                                            <li><a href="#">Howdy {{ user.first_name }} !</a></li>
+                                            <li><a href="/account/dashboard">Account</a></li>
+                                            <li><a href="/super/home" target="_blank">Admin</a></li>
+                                            <li><a href="/super/logout">Logout</a></li>
+                                        </ul>
+                                    </li>
+                                    {% else %}
+                                    <li>
+                                    <a href="javascript:void(0)">My Account</a>
+                                    <!-- drop down third level -->
+                                    <ul class="drop-down-multilevel">
+                                        <li><a href="#">Howdy {{ user.first_name }} !</a></li>
+                                        <li><a href="/account/dashboard">Dashboard</a></li>
+                                        <li><a href="/account/logout">Logout</a></li>
+                                    </ul>
+                                </li>
+                                {% endif %}
+                            {% elif not user.is_authenticated %}
+                                <li>
+                                    <a href="javascript:void(0)">Account</a>
+                                    <!-- drop down third level -->
+                                    <ul class="drop-down-multilevel">
+                                        <li><a href="/account/login">Login</a></li>
+                                        <li><a href="/account/register">Register</a></li>
+                                    </ul>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- menu end -->
+</header>

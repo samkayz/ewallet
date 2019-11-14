@@ -1,0 +1,49 @@
+{% load static %}
+{% block main %}
+    <div class="ecaps-sidemenu-area">
+        <!-- Desktop Logo -->
+        <div class="ecaps-logo">
+            <a href="/super/home">
+                <img class="desktop-logo" src="{% static 'img/core-img/logo.png'%}" alt="Desktop Logo">
+                <img class="small-logo" src="{% static 'img/core-img/small-logo.png'%}" alt="Mobile Logo"></a>
+        </div>
+
+        <!-- Side Nav -->
+        <div class="ecaps-sidenav" id="ecapsSideNav">
+            <!-- Side Menu Area -->
+            <div class="side-menu-area">
+                <!-- Sidebar Menu -->
+                <nav>
+                    <ul class="sidebar-menu" data-widget="tree">
+                        <li class=""><a href="/super/home">
+                            <i class="zmdi zmdi-view-dashboard"></i><span>Dashboard</span></a></li>
+                        <li class="">
+                            <a href="/super/user"><i class="zmdi zmdi-apps">
+                            </i> <span>All Users</span></a>
+                        </li>
+                        <li class="">
+                            <a href="/super/send"><i class="zmdi zmdi-check-circle-u"></i> <span>Credit User</span></a>
+                        </li>
+                        <li><a href="/super/solve_voucher"><i class="zmdi zmdi-widgets"></i><span>Resolve Vouchers</span></a></li>
+                        <li><a href="/super/activity"><i class="zmdi zmdi-collection-image-o"></i><span>Activity</span></a></li>
+                        <li class="">
+                            <a href="/super/voucher"><i class="zmdi zmdi-codepen"></i><span>All Vouchers</span></a>
+                        </li>
+                        <li class="">
+                            <a href="/super/withdraw"><i class="zmdi zmdi-texture"></i><span>All Withdrawal</span></a>
+                        </li>
+                        <li class="">
+                            <a href="/super/dispute"><i class="zmdi zmdi-shopping-basket"></i> <span>All Dispute</span></a>
+                        </li>
+                        <li class="">
+                            <a href="/account/ticket"><i class="zmdi zmdi-chart"></i><span>Support</span></a>
+                        </li>
+                        <li class="">
+                            <a href="/super/lock"><i class="zmdi zmdi-chart"></i><span>Lock Screen</span></a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+{% endblock %}
