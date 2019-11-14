@@ -1,155 +1,92 @@
-{% load static %}
-{% block main %}
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <!-- Meta tags -->
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="Drift - A fully responsive, HTML5 based admin template">
-        <meta name="keywords" content="Responsive, HTML5, admin theme, business, professional, jQuery, web design, CSS3, sass">
-        <!-- /meta tags -->
-        <title>DanfoPay</title>
+<!doctype html>
+<html lang="en">
+{% include 'head.html' %}
 
-        <!-- Site favicon -->
-        <link rel="shortcut icon" href="{% static 'assets/images/favicon.ico'%}" type="image/x-icon">
-        <!-- /site favicon -->
+<body>
+<!-- Preloader -->
+{% include 'preloader.html' %}
+<!-- Preloader -->
+<!-- ======================================
+******* Page Wrapper Area Start **********
+======================================= -->
+<div class="ecaps-page-wrapper">
+    <!-- Sidemenu Area -->
+    {% include 'sidebar.html' %}
 
-        <!-- Font Icon Styles -->
-        <link rel="stylesheet" href="{% static 'node_modules/flag-icon-css/css/flag-icon.min.css'%}">
-        <link rel="stylesheet" href="{% static 'vendors/gaxon-icon/styles.css'%}">
-        <!-- /font icon Styles -->
-
-        <!-- Perfect Scrollbar stylesheet -->
-        <link rel="stylesheet" href="{% static 'node_modules/perfect-scrollbar/css/perfect-scrollbar.css'%}">
-        <!-- /perfect scrollbar stylesheet -->
-
-        <!-- Load Styles -->    <link rel="stylesheet" href="{% static 'assets/css/semidark-style-1.min.css'%}">
-        <!-- /load styles -->
-
-    </head>
-    <body class="dt-sidebar--fixed dt-header--fixed">
-
-    <!-- Loader -->
-    <div class="dt-loader-container">
-        <div class="dt-loader">
-            <svg class="circular" viewBox="25 25 50 50">
-                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></circle>
-            </svg>
-        </div>
-    </div>
-    <!-- /loader -->
-    <!-- Root -->
-    <div class="dt-root">
-        <div class="dt-root__inner">
-            <!-- Header -->
-            {% include 'header.html' %}
-            <!-- /header -->
-            <!-- Site Main -->
-            <main class="dt-main">
-                <!-- Sidebar -->
-                {% include 'sidebar.html' %}
-                <!-- /sidebar -->
-                <!-- Site Content Wrapper -->
-                <div class="dt-content-wrapper">
-
-                    <!-- Site Content -->
-                    <div class="dt-content">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="dt-card">
-                                    <div class="dt-card__header">
-                                        <div class="dt-card__heading">
-                                            <h3 class="dt-card__title">Transfer Money</h3>
-                                        </div>
-                                    </div>
-                                    <div class="dt-card__body">
-                                        <!-- Form -->
+    <!-- Page Content -->
+    <div class="ecaps-page-content">
+        <!-- Top Header Area -->
+        {% include 'header.html' %}
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <div class="container-fluid">
+                <!-- Form Validation area Start -->
+                <div class="row">
+                    <div class="col-12 box-margin height-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Transfer Fund</h4>
                                         {% for message in messages %}
                                             <div class="alert alert-success" role="alert">
                                                 {{ message }}
                                             </div>
                                         {% endfor %}
-                                        <form class="form-inline" method="post" action="verify">
-                                            {% csrf_token %}
-                                            <div class="form-group mr-2">
-                                                <input type="text" name="number" value="{{ check.phone_no }}" class="form-control" id="email-3" placeholder="Enter Phone Number">
-                                            </div>
-                                            <div class="form-group">
-                                                <button type="submit" class="btn btn-primary">Verify</button>
-                                            </div>
-                                        </form>
-                                        <div class="form-row">
-                                            <div class="col-sm-6 mb-3">
-                                                <label for="validationDefault03"></label>
-                                                <input type="text" value="{{ check.first_name }} {{ check.last_name }}" class="form-control" id="validationDefault03" readonly>
-                                            </div>
-                                        </div>
-                                        <form action="transfer" method="post">
-                                            {% csrf_token %}
-                                            <div class="form-row">
-                                                <div class="col-sm-6 mb-3">
-                                                    <label for="validationDefault03"></label>
-                                                    <input type="hidden" name="s_username" class="form-control" value="{{ user.username }}">
-                                                    <input type="hidden" name="r_number" class="form-control" value="{{ check.phone_no }}">
-                                                    <!-- Input Group -->
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">₦</span>
-                                                        </div>
-                                                        <input id="addon-3" type="number" name="amount" placeholder="Enter Amount" class="form-control" aria-label="Amount (to the nearest dollar)">
-                                                        <div class="input-group-append">
-                                                            <span class="input-group-text">.00</span>
-                                                        </div>
-                                                    </div>
-                                                    <!-- /input group -->
+                                <form class="cmxform" id="commentForm" method="post" action="verify">
+                                    {% csrf_token %}
+                                    <fieldset>
+                                        <div class="form-group mb-3">
+                                            <label>Enter Receiver's Number</label>
+                                            <div class="input-group m-b-20">
+                                                <div class="input-group-prepend">
+                                                    <span class="form-control">NG (+234)</span>
+                                                </div>
+                                                <input class="form-control" id="single-input" type="number" name="number" value="{{ check.phone_no }}" placeholder="Enter Mobile Number e.g (080)">
+                                                <div class="input-group-append">
+                                                    <button type="submits" class="btn waves-effect waves-light btn-primary">Verify </button>
                                                 </div>
                                             </div>
-                                            <button class="btn btn-primary" type="submit">Transfer</button>
+                                        </div>
                                         </form>
-                                        <!-- /form -->
-
-                                    </div>
-                                    <!-- /card body -->
-
-                                </div>
-                                <!-- /card -->
-
+                                 {% if num %}
+                                        <div class="form-group">
+                                            <label for="curl">Receiver's Info</label>
+                                            <input id="curl" class="form-control" type="text" value="{{ check.first_name }} {{ check.last_name }}" readonly>
+                                        </div>
+                                        <form action="transfer" method="post">
+                                        {% csrf_token %}
+                                           <input type="hidden" name="s_username" class="form-control" value="{{ user.username }}">
+                                           <input type="hidden" name="r_number" class="form-control" value="{{ check.phone_no }}">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">₦</span>
+                                            </div>
+                                            <input type="number" class="form-control" name="amount" step=any placeholder="Enter Amount" aria-label="Amount (to the nearest dollar)">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">.00</span>
+                                            </div>
+                                        </div>
+                                        <input class="btn btn-primary" type="submit" value="Transfer">
+                                    </fieldset>
+                                </form>
+                                {% endif %}
                             </div>
-                            <!-- /grid item -->
-
                         </div>
-                        <!-- /grid -->
-
                     </div>
-                    <!-- /site content -->
-
-                    <!-- Footer -->
-                    {% include 'footer.html' %}
-                    <!-- /footer -->
                 </div>
-                <!-- /site content wrapper -->
-            </main>
+            </div>
         </div>
     </div>
-    <!-- /root -->
+</div>
 
-    <!-- Optional JavaScript -->
-    <script src="{% static 'node_modules/jquery/dist/jquery.min.js'%}"></script>
-    <script src="{% static 'node_modules/moment/moment.js'%}"></script>
-    <script src="{% static 'node_modules/bootstrap/dist/js/bootstrap.bundle.min.js'%}"></script>
-    <!-- Perfect Scrollbar jQuery -->
-    <script src="{% static 'node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js'%}"></script>
-    <!-- /perfect scrollbar jQuery -->
+<!-- ======================================
+********* Page Wrapper Area End ***********
+======================================= -->
 
-    <!-- masonry script -->
-    <script src="{% static 'node_modules/masonry-layout/dist/masonry.pkgd.min.js'%}"></script>
-    <script src="{% static 'node_modules/sweetalert2/dist/sweetalert2.js'%}"></script>
-    <script src="{% static 'assets/js/functions.js'%}"></script>
-    <script src="{% static 'assets/js/customizer.js'%}"></script><!-- Custom JavaScript -->
-    <script src="{% static 'assets/js/script.js'%}"></script>
+<!-- Must needed plugins to the run this Template -->
+{% include 'foot.html' %}
 
-    </body>
-    </html>
-{% endblock %}
+</body>
+
+
+<!-- Mirrored from demo.riktheme.com/motrila-2/side-menu/form-validation.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 05 Nov 2019 11:42:08 GMT -->
+</html>

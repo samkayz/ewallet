@@ -33,3 +33,13 @@ class Details(models.Model):
         db_table = "details"
 
 
+class Emails(models.Model):
+    user = models.CharField(max_length=500)
+    subject = models.CharField(max_length=300)
+    message = models.CharField(max_length=2000)
+    date = models.DateField(auto_now=True)
+
+    class Meta:
+        db_table = "emails"
+
+

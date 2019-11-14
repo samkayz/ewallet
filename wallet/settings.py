@@ -28,8 +28,8 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 EMAIL_HOST = 'smtp.mailtrap.io'
-EMAIL_HOST_USER = '069b58cd3c8a73'
-EMAIL_HOST_PASSWORD = '3512b7a7d01beb'
+EMAIL_HOST_USER = '38c207b30aaed1'
+EMAIL_HOST_PASSWORD = '268069f96f1e35'
 EMAIL_PORT = '2525'
 
 ADMINS = (
@@ -69,7 +69,7 @@ ROOT_URLCONF = 'wallet.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['C:/Users/samkayz/PycharmProjects/Ewallet/templates'],
+        'DIRS': ['C:/Users/user/PycharmProjects/Ewallet/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

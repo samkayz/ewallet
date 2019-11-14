@@ -1,144 +1,100 @@
 {% load static %}
 {% block main %}
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <!-- Meta tags -->
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="Drift - A fully responsive, HTML5 based admin template">
-        <meta name="keywords" content="Responsive, HTML5, admin theme, business, professional, jQuery, web design, CSS3, sass">
-        <!-- /meta tags -->
-        <title>DanfoPay</title>
+<!doctype html>
+<html lang="en">
+{% include 'head.html' %}
+<body>
+    <!-- Preloader -->
+    {% include 'preloader.html' %}
+    <!-- Preloader -->
 
-        <!-- Site favicon -->
-        <link rel="shortcut icon" href="{% static 'assets/images/favicon.ico'%}" type="image/x-icon">
-        <!-- /site favicon -->
 
-        <!-- Font Icon Styles -->
-        <link rel="stylesheet" href="{% static 'node_modules/flag-icon-css/css/flag-icon.min.css'%}">
-        <link rel="stylesheet" href="{% static 'vendors/gaxon-icon/styles.css'%}">
-        <!-- /font icon Styles -->
+    <!-- Setting Panel -->
 
-        <!-- Perfect Scrollbar stylesheet -->
-        <link rel="stylesheet" href="{% static 'node_modules/perfect-scrollbar/css/perfect-scrollbar.css'%}">
-        <!-- /perfect scrollbar stylesheet -->
-
-        <!-- Load Styles -->    <link rel="stylesheet" href="{% static 'assets/css/semidark-style-1.min.css'%}">
-        <!-- /load styles -->
-
-    </head>
-    <body class="dt-sidebar--fixed dt-header--fixed">
-
-    <!-- Loader -->
-    <div class="dt-loader-container">
-        <div class="dt-loader">
-            <svg class="circular" viewBox="25 25 50 50">
-                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></circle>
-            </svg>
-        </div>
-    </div>
-    <!-- /loader -->
-    <!-- Root -->
-    <div class="dt-root">
-        <div class="dt-root__inner">
-            <!-- Header -->
+    <!-- ======================================
+    ******* Page Wrapper Area Start **********
+    ======================================= -->
+    <div class="ecaps-page-wrapper">
+        <!-- Sidemenu Area -->
+        {% include 'sidebar.html' %}
+        <!-- Page Content -->
+        <div class="ecaps-page-content">
+            <!-- Top Header Area -->
             {% include 'header.html' %}
-            <!-- /header -->
-            <!-- Site Main -->
-            <main class="dt-main">
-                <!-- Sidebar -->
-                {% include 'sidebar.html' %}
-                <!-- /sidebar -->
-                <!-- Site Content Wrapper -->
-                <div class="dt-content-wrapper">
+            <!-- Main Content Area -->
+            <div class="main-content">
+                <div class="dashboard-area">
+                    <div class="container-fluid">
 
-                    <!-- Site Content -->
-                    <div class="dt-content">
-
-                        <!-- Page Header -->
-                        <div class="dt-page__header">
-                            <h1 class="dt-page__title">Payment Option</h1>
-                        </div>
                         <div class="row">
-                            <div class="col-md-6 col-12">
-                                <div class="dt-card dt-showcase-card">
-                                    <div class="dt-card__header">
-                                        <div class="dt-card__heading">
-                                            <h3 class="dt-card__title">Pay With Card</h3>
-                                        </div>
-                                    </div>
-                                    <!-- /card header -->
-
-                                    <!-- Card Body -->
-                                    <div class="dt-card__body">
-                                        <div class="layout-container">
-                                            <a href="deposit" class="d-block">
-                                                <img class="img-fluid" src="{% static 'assets/images/demo-images/paystack.jpg'%}"
-                                                     alt="Layout"> </a>
-                                        </div>
-                                    </div>
+                            <!-- Time Date Area -->
+                            <div class="col-12 box-margin">
+                                <div class="card bg-boxshadow">
                                 </div>
                             </div>
-                            <div class="col-md-6 col-12">
+                        </div>
 
-                                <!-- Card -->
-                                <div class="dt-card dt-showcase-card">
+                        <div class="row">
+                            <!-- Earning Area -->
+                            <div class="col-md-6 box-margin height-card">
+                                <div class="card bg-primary earning-date">
+                                    <a href="deposit"><div class="card-body">
+                                        <div class="dashboard-tab-area">
+                                            <h5 class="text-white card-title"></h5>
+                                            <div class="bd-example bd-example-tabs">
+                                                <div class="tab-content" id="tabContent-pills">
+                                                    <div class="tab-pane fade active show" id="earnings-sun" role="tabpanel" aria-labelledby="pills-earnings-sun">
+                                                        <div class="d-flex align-items-center justify-content-between">
+                                                            <div>
+                                                                <h2 class="text-white font-36 font-weight-bold">Paystack</h2>
+                                                                <span class="text-white mb-3 d-block"></span>
+                                                            </div>
+                                                            <div class="dashboard-tab-thumb">
+                                                                <img src="{% static 'img/bg-img/6.svg'%}" alt="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                                    <!-- Card Header -->
-                                    <div class="dt-card__header">
-
-                                        <!-- Card Heading -->
-                                        <div class="dt-card__heading">
-                                            <h3 class="dt-card__title">Recharge Card</h3>
                                         </div>
-                                    </div>
-                                    <div class="dt-card__body">
-
-                                        <!-- Layouts -->
-                                        <div class="layout-container">
-                                            <a href="#" class="d-block">
-                                                <img class="img-fluid" src="{% static 'assets/images/demo-images/airtime.jpg'%}"
-                                                     alt="Layout"> </a>
-                                        </div>
-                                        <!-- /layouts -->
-
-                                    </div>
-                                    <!-- /card body -->
-
+                                    </div></a>
                                 </div>
-                                <!-- /card -->
-
                             </div>
+
+                            <!-- Best seller Area -->
+                            <div class="col-md-6 height-card box-margin">
+                                <div class="card">
+                                    <a href="#"><div class="card-body">
+                                        <h5 class="font-20 mb-1"></h5>
+                                        <p class="mb-20"></p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="dashboard-content-right">
+                                                <h2 class="text-success font-36 font-weight-bold">Airtime</h2>
+                                                <p class="font-15 font-weight-bold">Load You wallet with Airtime</p>
+                                            </div>
+                                            <div class="dashboard-content-left wow shake" data-wow-delay="0.6s">
+                                                <img src="{% static 'img/bg-img/5.jpg'%}" class="img-fluid" alt="Dashboard" width="180" height="180">
+                                            </div>
+                                        </div>
+                                    </div></a>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
-                    <!-- /site content -->
-
-                    <!-- Footer -->
-                    {% include 'footer.html' %}
-                    <!-- /footer -->
                 </div>
-            </main>
+            </div>
         </div>
     </div>
-    <!-- /root -->
 
-    <!-- Optional JavaScript -->
-    <script src="{% static 'node_modules/jquery/dist/jquery.min.js'%}"></script>
-    <script src="{% static 'node_modules/moment/moment.js'%}"></script>
-    <script src="{% static 'node_modules/bootstrap/dist/js/bootstrap.bundle.min.js'%}"></script>
-    <!-- Perfect Scrollbar jQuery -->
-    <script src="{% static 'node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js'%}"></script>
-    <!-- /perfect scrollbar jQuery -->
+    <!-- ======================================
+    ********* Page Wrapper Area End ***********
+    ======================================= -->
 
-    <!-- masonry script -->
-    <script src="{% static 'node_modules/masonry-layout/dist/masonry.pkgd.min.js'%}"></script>
-    <script src="{% static 'node_modules/sweetalert2/dist/sweetalert2.js'%}"></script>
-    <script src="{% static 'assets/js/functions.js'%}"></script>
-    <script src="{% static 'assets/js/customizer.js'%}"></script><!-- Custom JavaScript -->
-    <script src="{% static 'assets/js/script.js'%}"></script>
+    <!-- Must needed plugins to the run this Template -->
+    {% include 'foot.html' %}
 
-    </body>
-    </html>
+</body>
+</html>
 {% endblock %}

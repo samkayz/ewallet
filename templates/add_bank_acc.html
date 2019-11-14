@@ -1,238 +1,142 @@
 {% load static %}
 {% block main %}
-    <!DOCTYPE html>
+    <!doctype html>
     <html lang="en">
-    <head>
-        <!-- Meta tags -->
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="Drift - A fully responsive, HTML5 based admin template">
-        <meta name="keywords" content="Responsive, HTML5, admin theme, business, professional, jQuery, web design, CSS3, sass">
-        <!-- /meta tags -->
-        <title>DanfoPay</title>
+    {% include 'head.html' %}
 
-        <link rel="shortcut icon" href="{% static 'assets/images/favicon.ico'%}" type="image/x-icon">
-        <!-- /site favicon -->
+    <body>
+    <!-- Preloader -->
+    {% include 'preloader.html' %}
+    <!-- Preloader -->
+    <!-- ======================================
+    ******* Page Wrapper Area Start **********
+    ======================================= -->
+    <div class="ecaps-page-wrapper">
+        <!-- Sidemenu Area -->
+        {% include 'sidebar.html' %}
 
-        <!-- Font Icon Styles -->
-        <link rel="stylesheet" href="{% static 'node_modules/flag-icon-css/css/flag-icon.min.css'%}">
-        <link rel="stylesheet" href="{% static 'vendors/gaxon-icon/styles.css'%}">
-        <!-- /font icon Styles -->
-
-        <!-- Perfect Scrollbar stylesheet -->
-        <link rel="stylesheet" href="{% static 'node_modules/perfect-scrollbar/css/perfect-scrollbar.css'%}">
-        <!-- /perfect scrollbar stylesheet -->
-
-        <!-- Load Styles -->    <link rel="stylesheet" href="{% static 'assets/css/semidark-style-1.min.css'%}">
-        <!-- /load styles -->
-
-    </head>
-    <body class="dt-sidebar--fixed dt-header--fixed">
-
-    <!-- Loader -->
-    <div class="dt-loader-container">
-        <div class="dt-loader">
-            <svg class="circular" viewBox="25 25 50 50">
-                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></circle>
-            </svg>
-        </div>
-    </div>
-    <!-- /loader -->
-    <!-- Root -->
-    <div class="dt-root">
-        <div class="dt-root__inner">
-            <!-- Header -->
+        <!-- Page Content -->
+        <div class="ecaps-page-content">
+            <!-- Top Header Area -->
             {% include 'header.html' %}
-            <!-- /header -->
-            <!-- Site Main -->
-            <main class="dt-main">
-                <!-- Sidebar -->
-                {% include 'sidebar.html' %}
-                <!-- /sidebar -->
-                <!-- Site Content Wrapper -->
-                <div class="dt-content-wrapper">
-
-                    <!-- Site Content -->
-                    <div class="dt-content">
-
-                        <!-- Grid -->
-                        <div class="row">
-                            <!-- Grid Item -->
-                            <div class="col-12">
-
-                                <!-- Card -->
-                                <div class="dt-card">
-
-                                    <!-- Card Header -->
-                                    <div class="dt-card__header">
-
-                                        <!-- Card Heading -->
-                                        <div class="dt-card__heading">
-                                            <h3 class="dt-card__title">Add Bank Account</h3>
+            <!-- Main Content Area -->
+            <div class="main-content">
+                <div class="container-fluid">
+                    <!-- Form Validation area Start -->
+                    <div class="row">
+                        <div class="col-12 box-margin height-card">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Create Invoice</h4>
+                                    {% for message in messages %}
+                                        <div class="alert alert-success" role="alert">
+                                            {{ message }}
                                         </div>
-                                    </div>
-                                    <div class="dt-card__body">
-                                        {% for message in messages %}
-                                            <div class="alert alert-success" role="alert">
-                                                {{ message }}
-                                            </div>
-                                        {% endfor %}
-                                        <!-- Form -->
-                                        <form method="post" action="bank">
-                                            {% csrf_token %}
-                                            <hr class="border-dashed my-8">
-                                            <!-- /separator -->
-
-                                            <!-- Form Row -->
-                                            <div class="form-row">
-                                                <div class="col-md-10 col-sm-9">
-                                                    <!-- Input Group -->
-                                                    <div class="form-row">
-                                                        <div class="col-md-10 col-sm-9">
-                                                            <input id="addon-3" type="text" name="acct_name" placeholder="Enter Account Name" class="form-control" aria-label="Amount (to the nearest dollar)" required>
-                                                        </div>
+                                    {% endfor %}
+                                    <form class="cmxform" id="commentForm" method="post" action="bank">
+                                        {% csrf_token %}
+                                        <fieldset>
+                                            <div class="form-group mb-3">
+                                                <label>Enter Account Name</label>
+                                                <div class="input-group m-b-20">
+                                                    <div class="input-group-prepend">
+                                                        <span class="form-control">Account Name</span>
                                                     </div>
-                                                    <!-- /input group -->
+                                                    <input class="form-control" id="single-input" type="text" name="acct_name" value="" placeholder="Enter Account Name">
                                                 </div>
-
                                             </div>
-                                            <hr class="border-dashed my-8">
-                                            <div class="form-row">
-                                                <div class="col-md-10 col-sm-9">
-                                                    <!-- Input Group -->
-                                                    <div class="form-row">
-                                                        <div class="col-md-10 col-sm-9">
-                                                            <input id="addon-3" type="number" name="acct_no" placeholder="Enter Account Number" class="form-control" aria-label="Amount (to the nearest dollar)" required>
-                                                        </div>
+                                            <div class="form-group mb-3">
+                                                <label>Enter Account Number</label>
+                                                <div class="input-group m-b-20">
+                                                    <div class="input-group-prepend">
+                                                        <span class="form-control">Account No</span>
                                                     </div>
-                                                    <!-- /input group -->
+                                                    <input class="form-control" id="single-input" type="number" name="acct_no" value="" placeholder="Enter Account Number">
                                                 </div>
-
                                             </div>
-                                            <hr class="border-dashed my-8">
-                                            <div class="form-row">
-                                                <div class="col-md-10 col-sm-9">
-                                                    <!-- Input Group -->
-                                                    <div class="form-row">
-                                                        <div class="col-md-10 col-sm-9">
-                                                            <input id="addon-3" type="text" name="bank_name" placeholder="Enter Bank Name" class="form-control" aria-label="Amount (to the nearest dollar)" required>
-                                                        </div>
+                                            <div class="form-group mb-3">
+                                                <label>Enter Bank Name</label>
+                                                <div class="input-group m-b-20">
+                                                    <div class="input-group-prepend">
+                                                        <span class="form-control">Bank Name</span>
                                                     </div>
-                                                    <!-- /input group -->
+                                                    <input class="form-control" id="single-input" type="text" name="bank_name" value="" placeholder="Enter Bank Name">
                                                 </div>
-
                                             </div>
-                                            <hr class="border-dashed my-8">
-                                            <button class="btn btn-primary" type="submit">Add Account</button>
-                                        </form>
-                                        <!-- /form -->
-
-                                    </div>
-                                    <!-- /card body -->
-                                    <div class="dt-content">
-
-                                        <!-- Grid -->
-                                        <div class="row">
-
-                                            <!-- Grid Item -->
-                                            <div class="col-xl-12">
-
-                                                <!-- Entry Header -->
-                                                <div class="dt-entry__header">
-
-                                                    <!-- Entry Heading -->
-                                                    <div class="dt-entry__heading">
-                                                        <h3 class="dt-entry__title">Added Banks</h3>
-                                                    </div>
-                                                    <!-- /entry heading -->
-
-                                                </div>
-                                                <!-- /entry header -->
-
-                                                <!-- Card -->
-                                                <div class="dt-card">
-
-                                                    <!-- Card Body -->
-                                                    <div class="dt-card__body">
-
-                                                        <!-- Tables -->
-                                                        <div class="table-responsive">
-
-                                                            <table id="data-table" class="table table-striped table-bordered table-hover">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th>Account Name</th>
-                                                                    <th>Account Number</th>
-                                                                    <th>Bank Name</th>
-                                                                    <th>Action</th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                {% for shows in show %}
-                                                                    <tr class="gradeU">
-                                                                        <td>{{ shows.account_name }}</td>
-                                                                        <td>{{ shows.account_no }}</td>
-                                                                        <td>{{ shows.bank_name }}</td>
-                                                                        <td><a href="delete/{{ shows.id }}"><button class="btn btn-primary">Delete</button></a></td>
-                                                                    </tr>
-                                                                {% endfor %}
-                                                                </tbody>
-                                                            </table>
-
-                                                        </div>
-                                                        <!-- /tables -->
-
-                                                    </div>
-                                                    <!-- /card body -->
-
-                                                </div>
-                                                <!-- /card -->
-
-                                            </div>
-                                            <!-- /grid item -->
-
-                                        </div>
-                                        <!-- /grid -->
-
-                                    </div>
+                                            <input class="btn btn-primary" type="submit" value="Add Bank">
+                                        </fieldset>
+                                    </form>
                                 </div>
-                                <!-- /card -->
-
                             </div>
-                            <!-- /grid item -->
                         </div>
-                        <!-- /grid -->
 
                     </div>
-                    <!-- /site content -->
+                    <div class="row">
+                        <div class="col-12 box-margin">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title mb-2">Added Bank</h4>
+                                    <table id="basic-datatable" class="table dt-responsive nowrap w-100">
+                                        <thead>
+                                        <tr>
+                                            <th>Account Name</th>
+                                            <th>Account Number</th>
+                                            <th>Bank Name</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
 
-                    <!-- Footer -->
-                    {% include 'footer.html' %}
-                    <!-- /footer -->
+
+                                        <tbody>
+                                        {% for shows in show %}
+                                            <tr>
+                                                <td>{{ shows.account_name }}</td>
+                                                <td>{{ shows.account_no }}</td>
+                                                <td>{{ shows.bank_name }}</td>
+                                                <td><a href="delete/{{ shows.id }}"><button class="btn btn-primary">Delete</button></a></td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+
+                                </div> <!-- end card body-->
+                            </div> <!-- end card -->
+                        </div><!-- end col-->
+                    </div>
                 </div>
-            </main>
+            </div>
         </div>
     </div>
-    <!-- /root -->
 
-    <!-- Optional JavaScript -->
-    <script src="{% static 'node_modules/jquery/dist/jquery.min.js'%}"></script>
-    <script src="{% static 'node_modules/moment/moment.js'%}"></script>
-    <script src="{% static 'node_modules/bootstrap/dist/js/bootstrap.bundle.min.js'%}"></script>
-    <!-- Perfect Scrollbar jQuery -->
-    <script src="{% static 'node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js'%}"></script>
-    <!-- /perfect scrollbar jQuery -->
+    <!-- ======================================
+    ********* Page Wrapper Area End ***********
+    ======================================= -->
+    <script src="{% static 'js/jquery.min.js'%}"></script>
+    <script src="{% static 'js/popper.min.js'%}"></script>
+    <script src="{% static 'js/bootstrap.min.js'%}"></script>
+    <script src="{% static 'js/bundle.js'%}"></script>
+    <script src="{% static 'js/default-assets/date-time.js'%}"></script>
+    <script src="{% static 'js/default-assets/setting.js'%}"></script>
+    <script src="{% static 'js/default-assets/fullscreen.js'%}"></script>
+    <script src="{% static 'js/default-assets/bootstrap-growl.js'%}"></script>
+    <script src="{% static 'js/default-assets/notification-active.js'%}"></script>
+    <script src="{% static 'js/default-assets/active.js'%}"></script>
 
-    <!-- masonry script -->
-    <script src="{% static 'node_modules/masonry-layout/dist/masonry.pkgd.min.js'%}"></script>
-    <script src="{% static 'node_modules/sweetalert2/dist/sweetalert2.js'%}"></script>
-    <script src="{% static 'assets/js/functions.js'%}"></script>
-    <script src="{% static 'assets/js/customizer.js'%}"></script><!-- Custom JavaScript -->
-    <script src="{% static 'assets/js/script.js'%}"></script>
-    <script src="{% static 'node_modules/datatables.net/js/jquery.dataTables.js'%}"></script>
-    <script src="{% static 'node_modules/datatables.net-bs4/js/dataTables.bootstrap4.js'%}"></script>
-    <script src="{% static 'assets/js/custom/data-table.js'%}"></script>
+    <!-- Must needed plugins to the run this Template -->
+    <script src="{% static 'js/default-assets/jquery.datatables.min.js'%}"></script>
+    <script src="{% static 'js/default-assets/datatables.bootstrap4.js'%}"></script>
+    <script src="{% static 'js/default-assets/datatable-responsive.min.js'%}"></script>
+    <script src="{% static 'js/default-assets/responsive.bootstrap4.min.js'%}"></script>
+    <script src="{% static 'js/default-assets/datatable-button.min.js'%}"></script>
+    <script src="{% static 'js/default-assets/button.bootstrap4.min.js'%}"></script>
+    <script src="{% static 'js/default-assets/button.html5.min.js'%}"></script>
+    <script src="{% static 'js/default-assets/button.flash.min.js'%}"></script>
+    <script src="{% static 'js/default-assets/button.print.min.js'%}"></script>
+    <script src="{% static 'js/default-assets/datatables.keytable.min.js'%}"></script>
+    <script src="{% static 'js/default-assets/datatables.select.min.js'%}"></script>
+    <script src="{% static 'js/default-assets/demo.datatable-init.js'%}"></script>
+    <script src="{% static 'js/default-assets/bootstrap-growl.js'%}"></script>
+
     </body>
     </html>
 {% endblock %}

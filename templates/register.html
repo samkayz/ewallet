@@ -1,162 +1,97 @@
 {% load static %}
-{% block main %}
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <!-- Meta tags -->
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="Drift - A fully responsive, HTML5 based admin template">
-<meta name="keywords" content="Responsive, HTML5, admin theme, business, professional, jQuery, web design, CSS3, sass">
-<!-- /meta tags -->
-<title>DanfoPay</title>
-
-<!-- Site favicon -->
-<link rel="shortcut icon" href="{% static 'assets/images/favicon.ico'%}" type="image/x-icon">
-<!-- /site favicon -->
-
-<!-- Font Icon Styles -->
-<link rel="stylesheet" href="{% static 'node_modules/flag-icon-css/css/flag-icon.min.css'%}">
-<link rel="stylesheet" href="{% static 'vendors/gaxon-icon/styles.css'%}">
-<!-- /font icon Styles -->
-
-<!-- Perfect Scrollbar stylesheet -->
-<link rel="stylesheet" href="{% static 'node_modules/perfect-scrollbar/css/perfect-scrollbar.css'%}">
-<!-- /perfect scrollbar stylesheet -->
-
-<!-- Load Styles -->    <link rel="stylesheet" href="{% static 'assets/css/semidark-style-1.min.css'%}">
-    <!-- /load styles -->
-
-</head>
-<body class="dt-sidebar--fixed dt-header--fixed">
-
-<!-- Loader -->
-<div class="dt-loader-container">
-  <div class="dt-loader">
-    <svg class="circular" viewBox="25 25 50 50">
-      <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></circle>
-    </svg>
-  </div>
-</div>
-<!-- /loader -->
-<!-- Root -->
-<div class="dt-root">
-    <div class="dt-root__inner">
-
-        <!-- Login Container -->
-        <div class="dt-login--container">
-
-            <!-- Login Content -->
-            <div class="dt-login__content-wrapper">
-
-                <!-- Login Background Section -->
-                <div class="dt-login__bg-section">
-
-                    <div class="dt-login__bg-content">
-                        <!-- Login Title -->
-                        <h1 class="dt-login__title">Sign Up</h1>
-                        <!-- /login title -->
-
-                        <p class="f-16">Sign in and explore in-built apps of Drift.</p>
-                    </div>
-
-
-                    <!-- Brand logo -->
-                    <div class="dt-login__logo">
-                        <img class="dt-brand__logo-img" src="{% static 'assets/images/logo-white.png'%}" alt="Drift">
-                    </div>
-                    <!-- /brand logo -->
-
-                </div>
-                <!-- /login background section -->
-
-                <!-- Login Content Section -->
-                <div class="dt-login__content">
-                    <div class="dt-login__content-inner">
-                         {% for message in messages %}
-                             <div class="alert alert-success" role="alert">
-                                 {{ message }}
-                             </div>
-                         {% endfor %}
-                        <!-- Form -->
-                        <form action="register" method="post">
-                            {% csrf_token %}
-                            <!-- Form Group -->
-                            <div class="form-group">
-                                <label class="sr-only" for="user-name">First Name</label>
-                                <input type="text" name="first_name" class="form-control" id="user-name" aria-describedby="user-name" placeholder="First Name" required>
-                            </div>
-                            <div class="form-group">
-                                <label class="sr-only" for="user-name">Last Name</label>
-                                <input type="text" name="last_name" class="form-control" id="user-name" aria-describedby="user-name" placeholder="Last Name" required>
-                            </div>
-                            <div class="form-group">
-                                <label class="sr-only" for="user-name">Username</label>
-                                <input type="text" name="username" class="form-control" id="user-name" aria-describedby="user-name" placeholder="User Name" required>
-                            </div>
-                            <div class="form-group">
-                                <label class="sr-only" for="email-1">Email address</label>
-                                <input type="email" name="email" class="form-control" id="email-1" aria-describedby="email-1" placeholder="Enter email" required>
-                            </div>
-                            <div class="form-group">
-                                <label class="sr-only" for="user-name">Mobile No</label>
-                                <input type="text" name="phone_no" class="form-control" id="user-name" aria-describedby="user-name" placeholder="Mobile Number" required>
-                            </div>
-                            <div class="form-group">
-                                <label class="sr-only" for="password-1">Password</label>
-                                <input type="password" name="password1" class="form-control" id="password-1" placeholder="Password" required>
-                            </div>
-                            <div class="form-group">
-                                <label class="sr-only" for="password-1">Confirm Password</label>
-                                <input type="password" name="password2" class="form-control" id="password-1" placeholder="Confirm Password" required>
-                            </div>
-                            <div class="dt-checkbox d-block mb-6">
-                                <input type="checkbox" id="checkbox-1">
-                                <label class="dt-checkbox-content" for="checkbox-1"> by signing up, I accept
-                                    <a href="javascript:void(0)">Term &amp; Condition</a>
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary text-uppercase">Sign up</button>
-                                <span class="d-inline-block ml-4">Or
-                                <a class="d-inline-block font-weight-500 ml-3" href="login">Login</a></span>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="dt-login__content-footer">
-                        <a href="#">Can’t access your account?</a>
-                    </div>
-                    <!-- /login content footer -->
-
-                </div>
-                <!-- /login content section -->
-
-            </div>
-            <!-- /login content -->
-
-        </div>
-        <!-- /login container -->
-
+{% include 'home/head.html' %}
+<body>
+<!-- loading -->
+<div id="loading">
+    <div id="loading-center">
+        <img src="{% static 'home/images/loader.gif'%}" alt="loder">
     </div>
 </div>
-<!-- /root -->
+<!-- loading End -->
 
-<!-- Optional JavaScript -->
-<script src="{% static 'node_modules/jquery/dist/jquery.min.js'%}"></script>
-<script src="{% static 'node_modules/moment/moment.js'%}"></script>
-<script src="{% static 'node_modules/bootstrap/dist/js/bootstrap.bundle.min.js'%}"></script>
-<!-- Perfect Scrollbar jQuery -->
-<script src="{% static 'node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js'%}"></script>
-<!-- /perfect scrollbar jQuery -->
+<div class="login-from header-navbar register-form light-gray-bg position-relative">
+    <div class="row no-gutters">
+        <div class="col-lg-6 align-items-stretch position-relative white-bg">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="privacy-policy.html">Privacy</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="javascript:void(0)">Terms</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="login-info">
+                <h2 class="iq-fw-8 mb-3">Register</h2>
+                <form action="/account/register" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" name="first_name" class="form-control"   placeholder="First Name">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="last_name" class="form-control"   placeholder="Last Name">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="username" class="form-control"   placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" class="form-control"   placeholder="Email Address">
+                    </div>
+                    <div class="form-group">
+                        <input type="number" name="phone_no" class="form-control"   placeholder="Mobile Number">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password1" class="form-control"  placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password2" class="form-control"  placeholder="Confirm Password">
+                    </div>
+                    <button type="submit" name="submit" class="slide-button button mr-3" >
+                        <a class="slide-button">
+                            <div class="first">Register</div>
+                            <div class="second">Register</div>
+                        </a>
+                    </button>
+                    <a class="slide-button button bt-border" href="/account/login">
+                        <div class="first">Login</div>
+                        <div class="second">Login</div>
+                    </a>
+                </form>
+            </div>
+            <ul class="social-list">
+                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
+            </ul>
+        </div>
+        <div class="col-lg-6 align-self-center position-relative">
+            <div class="login-right-bar h-100 text-center">
+                <img src="{% static 'home/images/login/register.png'%}" class="img-fluid" alt="">
+            </div>
 
-<!-- masonry script -->
-<script src="{% static 'node_modules/masonry-layout/dist/masonry.pkgd.min.js'%}"></script>
-<script src="{% static 'node_modules/sweetalert2/dist/sweetalert2.js'%}"></script>
-<script src="{% static 'assets/js/functions.js'%}"></script>
-<script src="{% static 'assets/js/customizer.js'%}"></script><!-- Custom JavaScript -->
-<script src="{% static 'assets/js/script.js'%}"></script>
+        </div>
+    </div>
+    <img  src="{% static 'home/images/login/2.png'%}" class="img-fluid login-footer-one" alt="">
+    <img  src="{% static 'home/images/login/3.png'%}" class="img-fluid login-footer-two" alt="">
+    <img  src="{% static 'home/images/login/1.png'%}" class="img-fluid login-footer-three" alt="">
+    <!-- back-to-top -->
+    <div id="back-to-top">
+        <a class="top" id="top" href="#top"><i class="ion-ios-arrow-thin-up"></i></a>
+    </div>
+    <!-- back-to-top End -->
+</div>
 
+
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+{% include 'home/script.html' %}
 </body>
 </html>
-{% endblock %}

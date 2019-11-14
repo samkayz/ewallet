@@ -1,332 +1,190 @@
-{% load static %}
-{% block main %}
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <!-- Meta tags -->
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="Drift - A fully responsive, HTML5 based admin template">
-        <meta name="keywords" content="Responsive, HTML5, admin theme, business, professional, jQuery, web design, CSS3, sass">
-        <!-- /meta tags -->
-        <title>DanfoPay</title>
+<!doctype html>
+<html lang="en">
+{% include 'head.html' %}
 
-        <!-- Site favicon -->
-        <link rel="shortcut icon" href="{% static 'assets/images/favicon.ico'%}" type="image/x-icon">
-        <!-- /site favicon -->
+<body>
+<!-- Preloader -->
+{% include 'preloader.html' %}
+<!-- Preloader -->
 
-        <!-- Font Icon Styles -->
-        <link rel="stylesheet" href="{% static 'node_modules/flag-icon-css/css/flag-icon.min.css'%}">
-        <link rel="stylesheet" href="{% static 'vendors/gaxon-icon/styles.css'%}">
-        <!-- /font icon Styles -->
 
-        <!-- Perfect Scrollbar stylesheet -->
-        <link rel="stylesheet" href="{% static 'node_modules/perfect-scrollbar/css/perfect-scrollbar.css'%}">
-        <!-- /perfect scrollbar stylesheet -->
+<!-- Setting Panel -->
+<!-- ======================================
+******* Page Wrapper Area Start **********
+======================================= -->
+<div class="ecaps-page-wrapper">
+    <!-- Sidemenu Area -->
+    {% include 'sidebar2.html' %}
 
-        <!-- Load Styles -->    <link rel="stylesheet" href="{% static 'assets/css/semidark-style-1.min.css'%}">
-        <!-- /load styles -->
+    <!-- Page Content -->
+    <div class="ecaps-page-content">
+        <!-- Top Header Area -->
+        {% include 'header2.html' %}
 
-    </head>
-    <body class="dt-sidebar--fixed dt-header--fixed">
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-5 col-xl-4 height-card box-margin">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="chat-area">
+                                    <!--end chat-search-->
 
-    <!-- Loader -->
-    <div class="dt-loader-container">
-        <div class="dt-loader">
-            <svg class="circular" viewBox="25 25 50 50">
-                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></circle>
-            </svg>
-        </div>
-    </div>
-    <!-- /loader -->
-    <!-- Root -->
-    <div class="dt-root">
-        <div class="dt-root__inner">
-            <!-- Header -->
-            {% include 'header.html' %}
-            <!-- /header -->
-            <!-- Site Main -->
-            <main class="dt-main">
-                <!-- Sidebar -->
-                {% include 'sidebar.html' %}
-                <!-- /sidebar -->
-                <!-- Site Content Wrapper -->
-                <div class="dt-content-wrapper">
-
-                    <!-- Site Content -->
-                    <div class="dt-content">
-
-                        <!-- Grid -->
-                        <div class="row">
-
-                            <!-- Grid Item -->
-                            <div class="col-xl-12">
-                                {% for message in messages %}
-                                    <div class="alert alert-success" role="alert">
-                                        {{ message }}
-                                    </div>
-                                {% endfor %}
-                                <!-- Module -->
-                                <div class="dt-module">
-
-                                    <!-- Module Sidebar -->
-                                    <div class="dt-module__sidebar">
-
-                                        <!-- Sidebar Header -->
-                                        <div class="dt-module__sidebar-header border-bottom">
-                                            <div class="d-none d-md-flex align-items-center">
-                                                <i class="icon icon-open-mail icon-1x mr-3 text-dark"></i>
-                                                <span class="h3 mb-0">Dispute</span>
-                                            </div>
-
-                                            <!-- App Quick Menu -->
-                                            <div class="quick-menu-list d-md-none">
-
-                                                <a href="javascript:void(0)" class="quick-menu d-none d-md-block"
-                                                   data-toggle="mdrawer" data-target="#drawer-search-bar"><i
-                                                        class="icon icon-search"></i></a>
-                                                <a href="javascript:void(0)" class="quick-menu" data-open="compose"><i
-                                                        class="icon icon-editors"></i></a>
-                                                <a href="javascript:void(0)" class="quick-menu" data-toggle="mdrawer"
-                                                   data-target="#drawer-notifications"><i
-                                                        class="icon icon-notification2"></i></a>
-                                                <a href="javascript:void(0)" class="quick-menu d-md-none"
-                                                   data-toggle="msidebar-content"><i class="icon icon-menu"></i></a>
-                                            </div>
-                                            <!-- /app quick menu -->
-                                        </div>
-                                        <!-- /sidebar header -->
-
-                                        <!-- Sidebar Menu -->
-                                        <div class="dt-module__sidebar-content ps-custom-scrollbar">
-
-                                            <!-- Button -->
-                                            <div class="action-area mt-5 mb-7 d-none d-md-block">
-                                                <a href="javascript:void(0)"
-                                                   class="btn btn-shadow btn-default compose-btn btn-rounded"
-                                                   data-open="compose">
-                                                    <i class="icon icon-editors icon-fw mr-2"></i>Compose</a>
-                                            </div>
-                                            <!-- /button -->
-
-                                            <!-- Sidebar Navigation -->
-                                            <ul class="dt-module-side-nav">
-
-                                                <!-- Menu Header -->
-                                                <li class="dt-module-side-nav__header">
-                                                    <span class="dt-module-side-nav__text">main</span>
-                                                </li>
-                                                <!-- /menu header -->
-
-                                                <!-- Menu Item -->
-                                                <li class="dt-module-side-nav__item active">
-                                                    <a href="javascript:void(0)" class="dt-module-side-nav__link">
-                                                        <i class="icon icon-inbox icon-fw icon-lg"></i>
-                                                        <span class="dt-module-side-nav__text">Inbox</span> </a>
-                                                </li>
-
-                                            </ul>
-                                            <!-- /sidebar navigation -->
-                                        </div>
-                                        <!-- /sidebar Menu -->
-
-                                    </div>
-                                    <!-- /module sidebar -->
-
-                                    <!-- Module Container -->
-                                    <div class="dt-module__container">
-                                        <div class="dt-module__content ps-custom-scrollbar">
-
-                                            <!-- Module Content Inner -->
-                                            <div class="dt-module__content-inner">
-
-                                                <div class="px-1 pb-4 border-bottom border-w-2 mb-1 mt-n1">
-                                                </div>
-
-                                                <!-- Module List -->
-                                                <div class="dt-module__list">
-                                                    <!-- Module Item -->
-                                                    {% for data in show %}
-                                                        <div class="dt-module__list-item">
-
-                                                            <!-- Checkbox -->
-                                                            <div class="dt-checkbox dt-checkbox-icon dt-checkbox-only mr-5">
-                                                                <input id="icon-checkbox-11" type="checkbox">
-                                                                <label class="font-weight-light dt-checkbox-content" for="icon-checkbox-11">
-                                                                    <span class="unchecked"><i class="icon icon-box-o icon-fw icon-xl"></i></span>
-                                                                    <span class="checked"><i class="icon icon-box-check-o icon-fw icon-xl text-primary"></i></span>
-                                                                </label>
-                                                            </div>
-                                                            <!-- /checkbox -->
-
-                                                            <!-- Checkbox -->
-                                                            <div class="dt-checkbox dt-checkbox-icon dt-checkbox-only mr-5">
-                                                                <input id="icon-checkbox-12" type="checkbox">
-                                                                <label class="font-weight-light dt-checkbox-content" for="icon-checkbox-12">
-                                                                    <span class="unchecked"><i class="icon icon-star-o icon-fw icon-xl"></i></span>
-                                                                    <span class="checked"><i class="icon icon-star-fill icon-fw icon-xl text-warning"></i></span>
-                                                                </label>
-                                                            </div>
-                                                            <!-- /checkbox -->
-                                                            {{ data.subject }}&nbsp;&nbsp;&nbsp;
-                                                            <!-- Module Content -->
-                                                            <div class="dt-module__list-item-content"
-                                                                 data-location="reply/{{ data.ticket_id }}">
-                                                                <div class="user-detail">
-                                                                    <span class="user-name">Ticket ID: {{ data.ticket_id }}</span>
-                                                                    <span class="dt-separator-v">&nbsp;</span>
-                                                                    <span class="designation">Category: {{ data.subject }}</span>
+                                    <div class="slimScrollDiv">
+                                        <div class="tab-content chat-list slimscroll" id="pills-tabContent">
+                                            <div class="tab-pane fade show active" id="general_chat">
+                                                <div id="plist" class="people-list">
+                                                    <div class="schedule-tab">
+                                                        <!-- Nav Nav-tabs -->
+                                                        <ul class="nav nav-pills navtab-bg nav-justified" id="conferScheduleTab" role="tablist">
+                                                            <li class="nav-item">
+                                                                <a class="nav-link active" id="monday-tab" data-toggle="tab" href="#step-one" role="tab" aria-controls="step-one" aria-expanded="true"><i class="zmdi zmdi-comment-more mr-1"></i> Ticket</a>
+                                                            </li>
+                                                            <!-- Nav Item -->
+                                                            <li class="nav-item">
+                                                                <a class="nav-link" id="tuesday-tab" data-toggle="tab" href="#step-two" role="tab" aria-controls="step-two" aria-expanded="true">Create Ticket</a>
+                                                            </li>
+                                                            <!-- Nav Item -->
+                                                        </ul>
+                                                    </div>
+                                                    <!-- Tab Content -->
+                                                    <div class="tab-content" id="conferScheduleTabContent">
+                                                        <div class="tab-pane fade show active" id="step-one" role="tabpanel" aria-labelledby="monday-tab">
+                                                            <div class="tab-content pt-0">
+                                                                <div id="chat_user_2">
+                                                                    <ul class="chat-list list-unstyled">
+                                                                        {% for data in show %}
+                                                                            <a href="/account/reply/{{ data.ticket_id }}">
+                                                                                <li class="clearfix active">
+                                                                                    <div class="about">
+                                                                                        <div class="name">{{ data.ticket_id }}</div>
+                                                                                        <div class="status">{{ data.subject }}</div>
+                                                                                    </div>
+                                                                                    <div class="chart-time text-right">
+                                                                                        <div class="time font-weight-bold font-12">{{ data.priority }}</div>
+                                                                                    </div>
+                                                                                </li>
+                                                                            </a>
+                                                                        {% endfor %}
+                                                                    </ul>
                                                                 </div>
-                                                                <p class="mb-0 text-light-gray text-truncate">{{ data.content }}</p>
                                                             </div>
-                                                            <!-- /module content -->
-
-                                                            <!-- Module Info -->
-                                                            <div class="dt-module__list-item-info">
-                                                                <div class="badge-group">
-                                                                    <span class="badge bg-dark-blue text-white">{{ data.priority }}</span>
-                                                                </div>
-                                                                <div class="badge-group">
-                                                                    <span class="badge bg-dark-blue text-white">{{ data.status }}</span>
-                                                                </div>
-                                                                <span>{{ data.date_created }}</span>
-                                                            </div>
-                                                            <!-- /module info -->
                                                         </div>
-                                                    {% endfor %}
+
+                                                        <div class="tab-pane fade" id="step-two" role="tabpanel" aria-labelledby="tuesday-tab">
+                                                            <div class="tab-content pt-0">
+                                                                <div class="contact-form-area">
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <h4 class="card-title">New Ticket</h4>
+                                                                            <div class="container">
+                                                                                <form action="ticket" method="post">
+                                                                                    {% csrf_token %}
+                                                                                    <label for="fname2">Subject</label>
+                                                                                    <input type="text" id="fname2" name="subject" placeholder="Subject..">
+
+                                                                                    <label for="lname2">Category</label>
+                                                                                    <select id="lname2" name="category">
+                                                                                        <option>Select Category</option>
+                                                                                        <option value="Tech">Tech</option>
+                                                                                        <option value="News">News</option>
+                                                                                        <option value="Political">Political</option>
+                                                                                    </select>
+                                                                                    <label for="country">Priority</label>
+                                                                                    <select id="country2" name="priority">
+                                                                                        <option>Select Priority</option>
+                                                                                        <option value="High">High</option>
+                                                                                        <option value="Medium">Medium</option>
+                                                                                        <option value="Low">Low</option>
+                                                                                    </select>
+
+                                                                                    <label for="subject">Message</label>
+                                                                                    <textarea id="subject" name="content" placeholder="Write something.." style="height:100px"></textarea>
+
+                                                                                    <input class="btn btn-primary btn-block mt-15" type="submit" value="Create Ticket">
+
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <!-- /module list -->
-
                                             </div>
-                                            <!-- /module content inner -->
-
                                         </div>
-                                        <!-- /module content -->
-
                                     </div>
-                                    <!-- /module container -->
-
-                                    <!-- Module Drawer -->
-                                    <div class="dt-module__drawer dt-drawer position-left">
-
-                                        <!-- Module Drawer Inner -->
-                                        <div class="dt-module__drawer-inner">
-                                        </div>
-                                        <!-- /module drawer inner -->
-
-                                    </div>
-                                    <!-- /module drawer -->
 
                                 </div>
-                                <!-- /module -->
-
-                            </div>
-                            <!-- /grid item -->
-
-                        </div>
-                        <!-- /grid -->
-
-                    </div>
-                    <!-- /site content -->
-
-                    <!-- Footer -->
-                    {% include 'footer.html' %}
-                    <!-- /footer -->
-                </div>
-            </main>
-
-            <!-- Compose Mail Box -->
-            <div class="compose-mail-box">
-
-                <!-- Compose Mail Header -->
-                <div class="compose-mail-box__header" data-toggle="minimize">
-                    <div class="title">
-                        <i class="icon icon-editors icon-fw icon-xl mr-2"></i>Create New Ticket
-                    </div>
-
-                    <div class="action-area ml-auto">
-                        <a class="text-white mr-3" href="javascript:void(0)"> <i class="icon icon-chevrolet-down icon-xl"></i> </a>
-                        <a class="text-white" href="javascript:void(0)" data-dismiss="compose"> <i
-                                class="icon icon-remove icon-xl"></i>
-                        </a>
-                    </div>
-                </div>
-                <!-- /compose mail header -->
-
-                <!-- Compose Mail Body -->
-                <div class="compose-mail-box__body">
-                    <!-- Form -->
-                    <form action="ticket" method="post">
-                        {% csrf_token %}
-                        <!-- Form Group -->
-                        <div class="form-group mb-1">
-                            <select class="form-control" name="category">
-                                <option>Select Category</option>
-                                <option value="Tech">Tech</option>
-                                <option value="News">News</option>
-                                <option value="Political">Political</option>
-                            </select>
-                        </div>
-                        <div class="form-group mb-1">
-                            <select class="form-control" name="priority">
-                                <option>Select Priority</option>
-                                <option value="High">High</option>
-                                <option value="Medium">Medium</option>
-                                <option value="Low">Low</option>
-                            </select>
-                        </div>
-                        <!-- /form group -->
-
-                        <!-- Form Group -->
-                        <div class="form-group">
-                            <input type="text" name="subject" class="form-control" id="subject" placeholder="Subject">
-                        </div>
-                        <!-- /form group -->
-
-                        <!-- Form Group -->
-                        <div class="form-group">
-                            <textarea class="form-control" name="content" id="textarea"></textarea>
-                        </div>
-                        <!-- /form group -->
-
-                        <!-- Form Group -->
-                        <div class="d-flex align-items-center">
-                            <button type="submit" class="btn btn-primary btn-sm">Create Ticket</button>
-
-                            <div class="action-area ml-auto">
-                                <a class="text-dark" href="javascript:void(0)" data-dismiss="compose">
-                                    <i class="icon icon-trash-filled mr-1"></i> <span class="f-12 text-uppercase align-middle">discard</span>
-                                </a>
                             </div>
                         </div>
-                        <!-- /form group -->
-                    </form>
-                    <!-- /form -->
+                    </div>
+                    {% if r_show %}
+                        <div class="col-lg-7 col-xl-8 height-card box-margin">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="chat">
+                                        <div class="d-flex justify-content-between border-bottom align-items-center p-3">
+                                            <div class="chat-header-text d-flex">
+                                                <div class="chat-about">
+                                                    <div class="chat-with font-18">{{ show.ticket_id }}</div>
+                                                    <div class="chat-num-messages font-14">{{ show.status }}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="chat-history" id="chat-conversation">
+                                            <ul>
+                                                {% for data in r_show %}
+                                                    <li>
+                                                        <div class="message-data">
+                                                            <span class="message-data-name">{{ data.ticket_id }} </span>
+                                                            <span class="message-data-time">{{ data.date }}</span>
+                                                        </div>
+                                                        <div class="message my-message">{{ data.content }}</div>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                        {% if get_content %}
+                                            <form method="post" action="/account/resolution">
+                                                {% csrf_token %}
+                                                <div class="chat-message clearfix">
+                                                    <div class="form-group">
+                                                        <input type="hidden" name="ticket_id" value="{{ get_content.ticket_id }}" class="form-control" readonly>
+                                                        <input type="hidden" name="subject" class="form-control" value="{{ get_content.subject }}" id="emails" readonly>
+                                                        <input type="hidden" class="form-control" name="category" value="{{ get_content.category }}" id="subject" readonly>
+                                                        <div class="form-line">
+                                                            <textarea class="form-control" name="content" placeholder="Write something.." style="height:100px"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="chat-upload">
+                                                        <input class="btn btn-primary" type="submit" value="Reply">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    {% endif %}
                 </div>
-                <!-- /compose mail body -->
 
             </div>
-            <!-- /compose mail box -->
         </div>
     </div>
-    <!-- /root -->
-    <!-- Optional JavaScript -->
-    <script src="{% static 'node_modules/jquery/dist/jquery.min.js'%}"></script>
-    <script src="{% static 'node_modules/moment/moment.js'%}"></script>
-    <script src="{% static 'node_modules/bootstrap/dist/js/bootstrap.bundle.min.js'%}"></script>
-    <!-- Perfect Scrollbar jQuery -->
-    <script src="{% static 'node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js'%}"></script>
-    <!-- /perfect scrollbar jQuery -->
+</div>
 
-    <!-- masonry script -->
-    <script src="{% static 'node_modules/masonry-layout/dist/masonry.pkgd.min.js'%}"></script>
-    <script src="{% static 'node_modules/sweetalert2/dist/sweetalert2.js'%}"></script>
-    <script src="{% static 'assets/js/functions.js'%}"></script>
-    <script src="{% static 'assets/js/customizer.js'%}"></script><!-- Custom JavaScript -->
-    <script src="{% static 'assets/js/script.js'%}"></script>
-    <script src="{% static 'assets/js/custom/apps/app.js'%}"></script>
-    <script src="{% static 'assets/js/custom/apps/mail-app.js'%}"></script>
-    </body>
-    </html>
-{% endblock %}
+<!-- ======================================
+********* Page Wrapper Area End ***********
+======================================= -->
+
+<!-- Must needed plugins to the run this Template -->
+{% include 'foot.html' %}
+</body>
+</html>

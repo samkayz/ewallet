@@ -98,7 +98,7 @@ def dashboard(request):
 # Logout function the terminate all the login session
 def logout(request):
     auth.logout(request)
-    return redirect('login')
+    return redirect('/index')
 
 
 # Transfer function that handle the transfer of money within the system
@@ -173,9 +173,10 @@ def transfer(request):
 def verify(request):
     if request.method == 'POST':
         r_number = request.POST['number']
-        if Account.objects.filter(phone_no=r_number).exists():
+        num = Account.objects.filter(phone_no=r_number).exists()
+        if num:
             check = Account.objects.all().get(phone_no=r_number)
-            cont = {'check': check}
+            cont = {'check': check, 'num': num}
             return render(request, 'transfer.html', cont)
         else:
             messages.info(request, 'Mobile Number Not Found')
@@ -202,7 +203,7 @@ def settings(request):
 @login_required(login_url='login')
 def activity(request):
     c_user = request.user.username
-    show = Transactions.objects.filter(Q(sender=c_user) | Q(receiver=c_user))
+    show = Transactions.objects.filter(Q(sender=c_user) | Q(receiver=c_user)).order_by('date')[::-1]
     # print("Hello:", show)
     context = {'show': show}
     return render(request, 'activity.html', context)
@@ -244,7 +245,7 @@ def voucher(request):
             trans.save()
             v_save.save()
             messages.info(request, "Transaction Successful!!")
-    show = Voucher.objects.filter(Q(v_creator=c_user))
+    show = Voucher.objects.filter(Q(v_creator=c_user)).order_by('-v_date').reverse()
     context = {'show': show}
     return render(request, 'voucher.html', context)
 
@@ -320,6 +321,10 @@ def ticket(request):
     return render(request, 'ticket.html', context)
 
 
+def compose(request):
+    return render(request, 'compose.html')
+
+
 @login_required(login_url='login')
 def dispute(request):
     c_user = request.user.username
@@ -380,10 +385,11 @@ def api(request):
 
 @login_required(login_url='login')
 def reply(request, ticket_id):
-    show = Ticket.objects.all().get(ticket_id=ticket_id)
+    show = Ticket.objects.filter(Q(ticket_id=ticket_id))
     r_show = Resolution.objects.filter(Q(ticket_id=ticket_id))
-    context = {'show': show, 'r_show': r_show}
-    return render(request, 'reply.html', context)
+    get_content = Ticket.objects.all().get(ticket_id=ticket_id)
+    context = {'show': show, 'r_show': r_show, 'get_content': get_content}
+    return render(request, 'ticket.html', context)
 
 
 @login_required(login_url='login')
@@ -398,7 +404,7 @@ def resolution(request):
         t_save.save()
         # messages.info(request, "Reply Successful!!")
         return redirect('ticket')
-    return render(request, 'reply.html')
+    return render(request, 'ticket.html')
 
 
 @login_required(login_url='login')
@@ -425,6 +431,7 @@ def bank(request):
 @login_required(login_url='login')
 def delete(request, id):
     Bank.objects.filter(id=id).delete()
+    messages.info(request, 'Account Deleted')
     return redirect('bank')
 
 
@@ -439,6 +446,8 @@ def withdraw(request):
         bank_name = Bank.objects.values('bank_name').get(account_no=acct_no)['bank_name']
         bal = Account.objects.values('bal').get(username=c_user)['bal']
         status = Account.objects.values('status').get(username=c_user)['status']
+        first_name = User.objects.values('first_name').get(username=c_user)['first_name']
+        email = User.objects.values('email').get(username=c_user)['email']
         sb = (float(bal))
         am = (float(amount))
 
@@ -467,6 +476,15 @@ def withdraw(request):
             trans.save()
             s_withdraw.save()
             messages.info(request, "Successful!!")
+            subject, from_email, to = 'Fund Withdrawal', 'noreply@wallet.com', email
+            html_content = render_to_string('mail/withdraw.html',
+                                            {'bank_name': bank_name, 'amount': amount,
+                                             'new': new, 'ref_no': ref_no,
+                                             'first_name': first_name, 'acct_name': acct_name, 'acct_no': acct_no})
+            text_content = strip_tags(html_content)
+            msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+            msg.attach_alternative(html_content, "text/html")
+            msg.send()
     show = Bank.objects.filter(Q(username=c_user))
     u_withdraw = Withdraw.objects.filter(Q(username=c_user))
     context = {'show': show, 'u_withdraw': u_withdraw}
@@ -520,9 +538,10 @@ def confirm(request):
 def invoice_verify(request):
     if request.method == 'POST':
         username = request.POST['username']
-        if Account.objects.filter(username=username).exists():
+        check_user = Account.objects.filter(username=username).exists()
+        if check_user:
             check = Account.objects.all().get(username=username)
-            cont = {'check': check}
+            cont = {'check': check, 'check_user': check_user}
             return render(request, 'invoice.html', cont)
         else:
             messages.info(request, 'Mobile Number Not Found')
@@ -539,6 +558,8 @@ def invoice(request):
         content = request.POST['content']
         status = Account.objects.values('status').get(username=c_user)['status']
         r_status = Account.objects.values('status').get(username=r_username)['status']
+        r_email = User.objects.values('email').get(username=r_username)['email']
+        s_email = User.objects.values('email').get(username=s_username)['email']
 
         if status == "hold":
             messages.info(request, 'Your Account is on hold. Kindly contact our Agent')
@@ -554,6 +575,24 @@ def invoice(request):
                                 status='pending', action='Pay Now')
             s_invoice.save()
         messages.info(request, 'Invoice Created')
+        # Sender
+        subject, from_email, to = 'Invoice', 'noreply@wallet.com', s_email
+        html_content = render_to_string('mail/s_invoice.html',
+                                        {'r_username': r_username, 's_username': s_username,
+                                         'amount': amount})
+        text_content = strip_tags(html_content)
+        msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()
+    #     Receiver
+        subject, from_email, to = 'Invoice', 'noreply@wallet.com', r_email
+        html_content = render_to_string('mail/r_invoice.html',
+                                        {'r_username': r_username, 's_username': s_username,
+                                         'amount': amount, 'content': content})
+        text_content = strip_tags(html_content)
+        msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()
     show = Invoice.objects.filter(Q(sender=c_user))
     context = {'show': show}
     return render(request, 'invoice.html', context)
@@ -577,6 +616,7 @@ def success(request, id):
     s_acct = Account.objects.values('bal').get(username=s_username)['bal']
     amount = Invoice.objects.values('amount').get(id=id)['amount']
     status = Account.objects.values('status').get(username=r_username)['status']
+    s_email = User.objects.values('email').get(username=s_username)['email']
     s_act = (float(s_acct))
     r_act = (float(r_acct))
     am = (float(amount))
@@ -606,6 +646,14 @@ def success(request, id):
                                  ref_no=ref_no)
         s_invoice.save()
         messages.info(request, "You Have Successfully Paid The Invoice")
+        subject, from_email, to = 'Invoice', 'noreply@wallet.com', s_email
+        html_content = render_to_string('mail/s_mail_invoice.html',
+                                        {'r_username': r_username, 's_username': s_username,
+                                         'amount': amount, 'ref_no': ref_no, 'new2': new2})
+        text_content = strip_tags(html_content)
+        msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()
         return redirect('pay-invoice')
 
 
@@ -673,9 +721,19 @@ def payment(request):
     amt = (float(amount))
     new = acct_bal + amt
     Account.objects.filter(username=username).update(bal=new)
+    email = User.objects.values('email').get(username=username)['email']
+    first_name = User.objects.values('first_name').get(username=username)['first_name']
     t_reg = Transactions(sender='Card Deposit', receiver=username, amount=amount, description='Deposit', ref_no=ref_no)
     t_reg.save()
     messages.info(request, 'Transaction Successful')
+    subject, from_email, to = 'Fund Deposit', 'noreply@wallet.com', email
+    html_content = render_to_string('mail/deposit.html',
+                                    {'username': username, 'amount': amount,
+                                     'new': new, 'ref_no': ref_no, 'first_name': first_name})
+    text_content = strip_tags(html_content)
+    msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+    msg.attach_alternative(html_content, "text/html")
+    msg.send()
     return redirect('deposit')
 
 
@@ -684,8 +742,5 @@ def fail(request):
     messages.info(request, 'Transaction Fail')
     return redirect('deposit')
 
-
-def reset_password(request):
-    return render(request, 'reset/password_reset_form.html')
 
 

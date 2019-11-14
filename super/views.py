@@ -4,9 +4,13 @@ from django.contrib import messages
 from django.contrib.auth.models import User, auth
 from django.contrib.auth.decorators import login_required
 from account.models import Transactions, Account, Voucher, Ticket, Merchant, Withdraw
-from .models import Resolution, Settings, Details
+from .models import Resolution, Settings, Details, Emails
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 from django.db.models import Sum
 import uuid
+import re
 
 
 def index(request):
@@ -31,7 +35,7 @@ def index(request):
 
 def logout(request):
     auth.logout(request)
-    return redirect('index')
+    return redirect('/index')
 
 
 @login_required(login_url='index')
@@ -90,8 +94,10 @@ def dispute(request):
 @login_required(login_url='index')
 def solve(request, ticket_id):
     show = Resolution.objects.filter(Q(ticket_id=ticket_id))
-    context = {'show': show}
-    return render(request, 'admin/solve.html', context)
+    r_show = Resolution.objects.filter(Q(ticket_id=ticket_id))
+    get_content = Ticket.objects.all().get(ticket_id=ticket_id)
+    context = {'show': show, 'r_show': r_show, 'get_content': get_content}
+    return render(request, 'admin/dispute.html', context)
 
 
 @login_required(login_url='index')
@@ -107,7 +113,7 @@ def resolution(request):
         t_save = Resolution(ticket_id=ticket_id, subject=subject, category=category, content=content)
         t_save.save()
         messages.info(request, "Successful!!")
-    return render(request, 'admin/solve.html')
+        return redirect('/super/dispute')
 
 
 @login_required(login_url='index')
@@ -138,6 +144,9 @@ def send(request):
         amount = request.POST['amount']
         bal = Account.objects.values('bal').get(phone_no=r_number)['bal']
         show = Account.objects.values().get(phone_no=r_number)['username']
+        username = Account.objects.values('username').get(phone_no=r_number)['username']
+        email = User.objects.values('email').get(username=username)['email']
+        first_name = User.objects.values('first_name').get(username=username)['first_name']
         # print("Hello: ", show)
         rb = (float(bal))
         am = (float(amount))
@@ -150,6 +159,13 @@ def send(request):
             trans = Transactions(sender='System', receiver=show, amount=amount, ref_no=ref_no, )
             trans.save()
             messages.info(request, "Transaction Successful!!")
+            subject, from_email, to = 'Fund Received', 'noreply@wallet.com', email
+            html_content = render_to_string('mail/credit_user.html',
+                                            {'first_name': first_name, 'amount': amount, 'new': new, 'ref_no': ref_no})
+            text_content = strip_tags(html_content)
+            msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+            msg.attach_alternative(html_content, "text/html")
+            msg.send()
     return render(request, 'admin/send.html')
 
 
@@ -174,12 +190,24 @@ def withdraw(request):
 @login_required(login_url='index')
 def approve(request, id):
     status = Withdraw.objects.values('status').get(id=id)['status']
+    amount = Withdraw.objects.values('amount').get(id=id)['amount']
+    username = Withdraw.objects.values('username').get(id=id)['username']
+    email = User.objects.values('email').get(username=username)['email']
+    first_name = User.objects.values('first_name').get(username=username)['first_name']
     if status == 'Processed':
         messages.info(request, "Payment Already Approved")
         return redirect('/super/withdraw')
     else:
         Withdraw.objects.filter(id=id).update(status='Processed')
         messages.info(request, "Payment Approved Successfully!")
+        subject, from_email, to = 'Withdrawal Confirmation', 'noreply@wallet.com', email
+        html_content = render_to_string('mail/confirm-withdrawal.html',
+                                        {'amount': amount,
+                                         'first_name': first_name})
+        text_content = strip_tags(html_content)
+        msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()
         return redirect('/super/withdraw')
 
 
@@ -305,9 +333,61 @@ def lock(request):
 
 def hold(request, id):
     Account.objects.filter(id=id).update(status="hold")
+    username = Account.objects.values('username').get(id=id)['username']
+    email = User.objects.values('email').get(username=username)['email']
+    first_name = User.objects.values('first_name').get(username=username)['first_name']
+    subject, from_email, to = 'Account Suspension', 'noreply@wallet.com', email
+    html_content = render_to_string('mail/acct_suspend.html',
+                                    {'first_name': first_name})
+    text_content = strip_tags(html_content)
+    msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+    msg.attach_alternative(html_content, "text/html")
+    msg.send()
     return redirect('user')
 
 
 def un_hold(request, id):
     Account.objects.filter(id=id).update(status="unhold")
+    username = Account.objects.values('username').get(id=id)['username']
+    email = User.objects.values('email').get(username=username)['email']
+    first_name = User.objects.values('first_name').get(username=username)['first_name']
+    subject, from_email, to = 'Account Re-Activation', 'noreply@wallet.com', email
+    html_content = render_to_string('mail/acct_active.html',
+                                    {'first_name': first_name})
+    text_content = strip_tags(html_content)
+    msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+    msg.attach_alternative(html_content, "text/html")
+    msg.send()
     return redirect('user')
+
+
+def mail(request):
+    if request.method == "POST":
+        users = request.POST['user']
+        subject = request.POST['subject']
+        message = request.POST['message']
+        e_save = Emails(user=users, subject=subject, message=message)
+        e_save.save()
+        if users == 'all':
+            for user in User.objects.all():
+                subject, from_email, to = subject, 'noreply@wallet.com', user.email
+                html_content = render_to_string('mail/general_message.html',
+                                                {'first_name': user.first_name, 'message': message, 'subject': subject})
+                text_content = strip_tags(html_content)
+                msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+                msg.attach_alternative(html_content, "text/html")
+                msg.send()
+                messages.info(request, 'Email Sent to All user ')
+        else:
+            first_name = User.objects.values('first_name').get(email=users)['first_name']
+            subject, from_email, to = subject, 'noreply@wallet.com', users
+            html_content = render_to_string('mail/general_message.html',
+                                            {'first_name': first_name, 'message': message, 'subject': subject})
+            text_content = strip_tags(html_content)
+            msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+            msg.attach_alternative(html_content, "text/html")
+            msg.send()
+            messages.info(request, 'Email Send to ' + first_name)
+    all_user = User.objects.filter()
+    context = {'all_user': all_user}
+    return render(request, 'admin/mail.html', context)

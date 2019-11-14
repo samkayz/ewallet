@@ -1,165 +1,96 @@
 {% load static %}
 {% block main %}
-<!DOCTYPE html>
-<html>
-<head>
-<title>DanfoPay</title>
-<!-- custom-theme -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="Tabs Payment Form Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-		function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!-- //custom-theme -->
-<link href="{% static '/pay/css/style.css'%}" rel="stylesheet" type="text/css" media="all" />
-<link rel="stylesheet" href="{% static '/pay/css/creditly.css'%}" type="text/css" media="all" />
-<link rel="stylesheet" href="{% static '/pay/css/easy-responsive-tabs.css'%}">
-<script src="{% static '/pay/js/jquery.min.js'%}"></script>
-<!-- font-awesome-icons -->
-<link href="{% static '/pay/css/font-awesome.css'%}" rel="stylesheet">
-<link rel="icon" type="image/png" href="{% static 'pay/assets/img/favicon.ico'%}">
-<!-- //font-awesome-icons -->
-</head>
-<body>
-	<div class="main">
-		<h1></h1>
-		<div class="w3_agile_main_grids">
-			<div class="w3layouts_main_grid_left">
-				<div class="agileinfo_main_grid_left_grid">
-                    <img src="{{ logo.bus_logo.url }}" width="150px"/>
-					<h3>Payment Summary</h3>
-                    <ul>
-                        <li>{{ show_merchant }}</li>
-                        <li></li>
-					</ul>
-					<ul>
-						<li>{{ desc }}</li>
-                        <li></li>
-					</ul>
-				</div>
-				<div class="agile_amount">
-					<h3>Total Price</h3>
-					<h4>₦ {{ amount }} </h4>
-				</div>
-			</div>
-			<div class="agileits_main_grid_right">
-				<div class="wthree_payment_grid">
-                    {% for message in messages %}
-                        <div class="alert alert-success" role="alert">
-                            {{ message }}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <title>DanfoPay</title>
+        <!-- Meta-Tags -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="utf-8">
+        <meta name="keywords" content="Business Login Form a Responsive Web Template, Bootstrap Web Templates, Flat Web Templates, Android Compatible Web Template, Smartphone Compatible Web Template, Free Webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola Web Design">
+        <script>
+            addEventListener("load", function () {
+                setTimeout(hideURLbar, 0);
+            }, false);
+
+            function hideURLbar() {
+                window.scrollTo(0, 1);
+            }
+        </script>
+        <!-- //Meta-Tags -->
+
+        <!-- css files -->
+        <link href="{% static 'new/css/font-awesome.min.css'%}" rel="stylesheet" type="text/css" media="all">
+        <link href="{% static 'new/css/style.css'%}" rel="stylesheet" type="text/css" media="all"/>
+        <link rel="stylesheet" href="{% static 'style.css'%}">
+        <!-- //css files -->
+
+        <!-- google fonts -->
+        <link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+        <!-- //google fonts -->
+
+    </head>
+    <body>
+
+    <div class="signupform">
+        <div class="container">
+            <!-- main content -->
+            <div class="agile_info">
+                <div class="w3l_form">
+                    <div class="left_grid_info">
+                        <h1>{{ show_merchant }}</h1>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Amount</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>{{ desc }}</td>
+                                    <td>₦ {{ amount }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
-                    {% endfor %}
-					<h2>Payment Method</h2>
-					<div id="horizontalTab">
-						<ul class="resp-tabs-list">
-							<li><img src="{% static '/pay/images/1.jpg'%}" alt=" " /></li>
-							<li><img src="{% static '/pay/images/2.png'%}" alt=" " /></li>
-						</ul>
-						<div class="resp-tabs-container">
-							<div class="agileits_w3layouts_tab1">
-								<form action="#" method="post" class="creditly-card-form agileinfo_form">
-									<section class="creditly-wrapper wthree, w3_agileits_wrapper">
-										<div class="credit-card-wrapper">
-											<div class="first-row form-group">
-												<div class="controls">
-													<label class="control-label">Name on Card</label>
-													<input class="billing-address-name form-control" type="text" name="name" placeholder="John Smith">
-												</div>
-												<div class="w3_agileits_card_number_grids">
-													<div class="w3_agileits_card_number_grid_left">
-														<div class="controls">
-															<label class="control-label">Card Number</label>
-															<input class="number credit-card-number form-control" type="text" name="number"
-																		  inputmode="numeric" autocomplete="cc-number" autocompletetype="cc-number" x-autocompletetype="cc-number"
-																		  placeholder="&#149;&#149;&#149;&#149; &#149;&#149;&#149;&#149; &#149;&#149;&#149;&#149; &#149;&#149;&#149;&#149;">
-														</div>
-													</div>
-													<div class="w3_agileits_card_number_grid_right">
-														<div class="controls">
-															<label class="control-label">CVV</label>
-															<input class="security-code form-control"Â·
-																		  inputmode="numeric"
-																		  type="text" name="security-code"
-																		  placeholder="&#149;&#149;&#149;">
-														</div>
-													</div>
-													<div class="clear"> </div>
-												</div>
-												<div class="controls">
-													<label class="control-label">Expiration Date</label>
-													<input class="expiration-month-and-year form-control" type="text" name="expiration-month-and-year" placeholder="MM / YY">
-												</div>
-											</div>
-											<button class="submit"><span>Make a payment <i class="fa fa-long-arrow-right" aria-hidden="true"></i></span></button>
-										</div>
-									</section>
-								</form>
-							</div>
-							<div class="agileits_w3layouts_tab2">
-								<h3>Don't have a A-Wallet Account <a href="/account/register">Register here</a></h3>
-								<form action="initiate" method="post">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="amount" value="{{ amount }}">
-                                    <input type="hidden" name="merchant" value="{{ m_username }}">
-                                    <input type="hidden" name="success_url" value="{{ success_url }}">
-									<input type="text" name="username" placeholder="Username" required="">
-									<input type="password" name="password" placeholder="Password" required="">
-									<input type="submit" name="submit" value="Pay Now">
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="clear"> </div>
-		</div>
-		<div class="agileits_copyright">
-			<p>Copyright  &copy; {% now "Y" %} Pulse | Design By <a href="#">Savitech Nigeria</a></p>
-		</div>
-	</div>
-	<!-- credit-card -->
-		<script type="text/javascript" src="{% static '/pay/js/creditly.js'%}"></script>
-		<script type="text/javascript">
-			$(function() {
-			  var creditly = Creditly.initialize(
-				  '.creditly-wrapper .expiration-month-and-year',
-				  '.creditly-wrapper .credit-card-number',
-				  '.creditly-wrapper .security-code',
-				  '.creditly-wrapper .card-type');
+                        <p>Integrate DanfoPay to your website and receive money from your customer with ease and get your money to your account within minutes.</p>
+                        <img src="{% static 'new/images/ab.jpg'%}" alt="" />
+                    </div>
+                </div>
+                <div class="w3_info">
+                    <h2>{{ first_name }} {{ last_name }}</h2>
+                    <form action="initiate" method="post">
+                        {% csrf_token %}
+                        <label>Username</label>
+                        <div class="input-group">
+                            <span class="fa fa-user" aria-hidden="true"></span>
+                            <input type="hidden" name="amount" value="{{ amount }}">
+                            <input type="hidden" name="merchant" value="{{ m_username }}">
+                            <input type="hidden" name="success_url" value="{{ success_url }}">
+                            <input type="text" name="username" placeholder="DanfoPay Username" required="">
+                        </div>
+                        <label>Password</label>
+                        <div class="input-group">
+                            <span class="fa fa-user-secret" aria-hidden="true"></span>
+                            <input type="password" name="password"  placeholder="DanfoPay Password" required="">
+                        </div>
+                        <input class="btn btn-primary" type="submit" value="Pay Now">
+                    </form>
+                    <p class="account">By clicking Confirm, you agree to our <a href="#">Terms & Conditions!</a></p>
+                    <p class="account1">Dont have an account? <a href="/account/register">Register here</a></p>
+                </div>
+            </div>
+            <!-- //main content -->
+        </div>
+        <!-- footer -->
+        <div class="footer">
+            <p>Copyright DanfoPay &copy; {% now "Y" %}</p>
+        </div>
+        <!-- footer -->
+    </div>
 
-			  $(".creditly-card-form .submit").click(function(e) {
-				e.preventDefault();
-				var output = creditly.validate();
-				if (output) {
-				  // Your validated credit card output
-				  console.log(output);
-				}
-			  });
-			});
-		</script>
-	<!-- //credit-card -->
-	<!-- tabs -->
-	<script src="{% static '/pay/js/easy-responsive-tabs.js'%}"></script>
-	<script>
-		$(document).ready(function () {
-			$('#horizontalTab').easyResponsiveTabs({
-				type: 'default', //Types: default, vertical, accordion
-				width: 'auto', //auto or any width like 600px
-				fit: true,   // 100% fit in a container
-				closed: 'accordion', // Start closed if in accordion view
-				activate: function(event) { // Callback function if tab is switched
-				var $tab = $(this);
-				var $info = $('#tabInfo');
-				var $name = $('span', $info);
-				$name.text($tab.text());
-				$info.show();
-				}
-			});
-		});
-	</script>
-	<!-- //tabs -->
-
-</body>
-</html>
+    </body>
+    </html>
 {% endblock %}

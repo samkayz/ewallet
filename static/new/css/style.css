@@ -121,6 +121,35 @@ input[type="text"] {
     background: transparent;
 	font-family: 'Raleway', sans-serif;
 }
+
+input[type="email"] {
+	font-size: 15px;
+	color: #333;
+    text-align: left;
+    letter-spacing: 1px;
+    padding: 14px 10px;
+	width:93%;
+	display:inline-block;
+    box-sizing: border-box;
+   	border: none;
+    outline: none;
+    background: transparent;
+	font-family: 'Raleway', sans-serif;
+}
+input[type="password"] {
+	font-size: 15px;
+	color: #333;
+    text-align: left;
+    letter-spacing: 1px;
+    padding: 14px 10px;
+	width:93%;
+	display:inline-block;
+    box-sizing: border-box;
+   	border: none;
+    outline: none;
+    background: transparent;
+	font-family: 'Raleway', sans-serif;
+}
 input[type="number"] {
 	font-size: 15px;
 	color: #333;
@@ -391,7 +420,7 @@ h5 {
 	.container {
 		width: 95%;
 	}
-	input[type="text"],input[type="number"],input[type="text"] {
+	input[type="text"],input[type="number"],input[type="text"],input[type="password"],input[type="email"]{
 		font-size: 14px;
 	}
 	.input-group span.fa {
@@ -539,7 +568,7 @@ h5 {
 		padding: 13px 12px;
 		font-size: 13px;
 	}
-	input[type="text"], input[type="text"], input[type="number"] {
+	input[type="text"], input[type="text"], input[type="number"], input[type="password"], input[type="email"] {
 		font-size: 13px;
 	}
 	.footer p {

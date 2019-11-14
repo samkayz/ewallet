@@ -1,136 +1,103 @@
 {% load static %}
 {% block main %}
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <!-- Meta tags -->
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="Drift - A fully responsive, HTML5 based admin template">
-<meta name="keywords" content="Responsive, HTML5, admin theme, business, professional, jQuery, web design, CSS3, sass">
-<!-- /meta tags -->
-<title>DanfoPay</title>
-<!-- Site favicon -->
-<link rel="shortcut icon" href="{% static 'assets/images/favicon.ico'%}" type="image/x-icon">
-<!-- /site favicon -->
-<!-- Font Icon Styles -->
-<link rel="stylesheet" href="{% static 'node_modules/flag-icon-css/css/flag-icon.min.css'%}">
-<link rel="stylesheet" href="{% static 'vendors/gaxon-icon/styles.css'%}">
-<!-- /font icon Styles -->
-<!-- Perfect Scrollbar stylesheet -->
-<link rel="stylesheet" href="{% static 'node_modules/perfect-scrollbar/css/perfect-scrollbar.css'%}">
-<!-- /perfect scrollbar stylesheet -->
-<!-- Load Styles -->
-<link rel="stylesheet" href="{% static 'assets/css/semidark-style-1.min.css'%}">
-<!-- /load styles -->
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Title -->
+    <title>DanfoPay</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'img/core-img/favicon.png'%}">
+
+    <!-- Master Stylesheet [If you remove this CSS file, your file will be broken undoubtedly.] -->
+    <link rel="stylesheet" href="{% static 'style.css'%}">
 
 </head>
-<body class="dt-sidebar--fixed dt-header--fixed">
 
-<!-- Loader -->
-<div class="dt-loader-container">
-  <div class="dt-loader">
-    <svg class="circular" viewBox="25 25 50 50">
-      <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></circle>
-    </svg>
-  </div>
-</div>
-<!-- /loader -->
-<!-- Root -->
-<div class="dt-root">
-    <div class="dt-root__inner">
-        <!-- Login Container -->
-        <div class="dt-login--container">
-            <!-- Login Content -->
-            <div class="dt-login__content-wrapper">
-                <!-- Login Background Section -->
-                <div class="dt-login__bg-section">
-                    <div class="dt-login__bg-content">
-                        <!-- Login Title -->
-                        <h1 class="dt-login__title">Admin Login</h1>
-                        <!-- /login title -->
-                        <p class="f-16">Sign in and explore.</p>
+<body class="login-area">
+
+    <!-- Preloader -->
+    {% include 'preloader.html' %}
+    <!-- Preloader -->
+
+
+    <!-- ======================================
+    ******* Page Wrapper Area Start **********
+    ======================================= -->
+    <div class="main-content- h-100vh">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center justify-content-center">
+                <div class="col-12">
+                    <!-- Middle Box -->
+                    <div class="middle-box">
+                        <div class="card">
+                            <div class="card-body p-4">
+                                <div class="row align-items-center">
+                                    <div class="col-md-6">
+                                        <div class="xs-d-none mb-50-xs break-320-576-none">
+                                            <img src="{% static 'img/bg-img/1.png'%}" alt="">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <!-- Logo -->
+                                        <h4 class="font-18 mb-30">Administrator Login</h4>
+
+                                        <form action="index" method="post">
+                                            {% csrf_token %}
+                                            <div class="form-group">
+                                                <label class="float-left" for="emailaddress">Username</label>
+                                                <input class="form-control" name="username" type="text" id="emailaddress" required="" placeholder="Enter your Username">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <a href="forget-password.html" class="text-dark float-right"></a>
+                                                <label class="float-left" for="password">Password</label>
+                                                <input class="form-control" type="password" name="password" required="" id="password" placeholder="Enter your password">
+                                            </div>
+
+                                            <div class="form-group d-flex justify-content-between align-items-center mb-3">
+                                                <div class="checkbox d-inline mb-0">
+                                                    <input type="checkbox" name="checkbox-1" id="checkbox-8">
+                                                    <label for="checkbox-8" class="cr mb-0">Remember me</label>
+                                                </div>
+                                                <span class="font-13 text-primary"><a href="forget-password.html">Forgot your password?</a></span>
+                                            </div>
+
+                                            <div class="form-group mb-0">
+                                                <button class="btn btn-primary btn-block" type="submit"> Log In </button>
+                                            </div>
+
+                                            <div class="text-center mt-15"><span class="mr-2 font-13 font-weight-bold">Don't have an account?</span><a class="font-13 font-weight-bold" href="register.html">Sign up</a></div>
+
+                                        </form>
+                                    </div> <!-- end card-body -->
+                                </div>
+                                <!-- end card -->
+                            </div>
+                        </div>
                     </div>
-                    <!-- Brand logo -->
-                    <div class="dt-login__logo">
-                        <a class="dt-brand__logo-link" href="index.html">
-                            <img class="dt-brand__logo-img" src="{% static 'assets/images/logo-white.png'%}" alt="Drift">
-                        </a>
-                    </div>
-                    <!-- /brand logo -->
                 </div>
-                <!-- /login background section -->
-                <!-- Login Content Section -->
-                <div class="dt-login__content">
-                    <!-- Login Content Inner -->
-                    <div class="dt-login__content-inner">
-                        {% for message in messages %}
-                             <div class="alert alert-success" role="alert">
-                                 {{ message }}
-                             </div>
-                         {% endfor %}
-                        <!-- Form -->
-                        <form action="index" method="post">
-                            {% csrf_token %}
-                            <!-- Form Group -->
-                            <div class="form-group">
-                                <label class="sr-only" for="email-1">Username</label>
-                                <input type="text" name="username" class="form-control" id="email-1" aria-describedby="email-1" placeholder="Enter Username">
-                            </div>
-                            <!-- /form group -->
-                            <!-- Form Group -->
-                            <div class="form-group">
-                                <label class="sr-only" for="password-1">Password</label>
-                                <input type="password" name="password" class="form-control" id="password-1" placeholder="Password">
-                            </div>
-                            <!-- /form group -->
-                            <!-- Form Group -->
-                            <div class="dt-checkbox d-block mb-6">
-                                <input type="checkbox" id="checkbox-1">
-                                <label class="dt-checkbox-content" for="checkbox-1">
-                                    Keep me login on this device
-                                </label>
-                            </div>
-                            <!-- /form group -->
-                            <!-- Form Group -->
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary text-uppercase">Login</button>
-                                <span class="d-inline-block ml-4">Or<a class="d-inline-block font-weight-500 ml-3" href="register">Create New Account</a></span>
-                            </div>
-                        </form>
-                        <!-- /form -->
-                    </div>
-                    <!-- /login content inner -->
-                    <!-- Login Content Footer -->
-                    <div class="dt-login__content-footer">
-                        <a href="#">Can’t access your account?</a>
-                    </div>
-                    <!-- /login content footer -->
-                </div>
-                <!-- /login content section -->
             </div>
-            <!-- /login content -->
         </div>
-        <!-- /login container -->
     </div>
-</div>
-<!-- /root -->
 
-<!-- Optional JavaScript -->
-<script src="{% static 'node_modules/jquery/dist/jquery.min.js'%}"></script>
-<script src="{% static 'node_modules/moment/moment.js'%}"></script>
-<script src="{% static 'node_modules/bootstrap/dist/js/bootstrap.bundle.min.js'%}"></script>
-<!-- Perfect Scrollbar jQuery -->
-<script src="{% static 'node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js'%}"></script>
-<!-- /perfect scrollbar jQuery -->
+    <!-- ======================================
+    ********* Page Wrapper Area End ***********
+    ======================================= -->
 
-<!-- masonry script -->
-<script src="{% static 'node_modules/masonry-layout/dist/masonry.pkgd.min.js'%}"></script>
-<script src="{% static 'node_modules/sweetalert2/dist/sweetalert2.js'%}"></script>
-<script src="{% static 'assets/js/functions.js'%}"></script>
-<script src="{% static 'assets/js/customizer.js'%}"></script><!-- Custom JavaScript -->
-<script src="{% static 'assets/js/script.js'%}"></script>
+    <!-- Must needed plugins to the run this Template -->
+    <script src="{% static 'js/jquery.min.js'%}"></script>
+    <script src="{% static 'js/popper.min.js'%}"></script>
+    <script src="{% static 'js/bootstrap.min.js'%}"></script>
+    <script src="{% static 'js/bundle.js'%}"></script>
+
+    <!-- Active JS -->
+    <script src="{% static 'js/default-assets/active.js'%}"></script>
 
 </body>
 </html>

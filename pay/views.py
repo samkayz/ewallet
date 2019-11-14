@@ -33,6 +33,7 @@ def initiate(request):
         merchant = request.POST['merchant']
         username = request.POST['username']
         password = request.POST['password']
+        success_url = request.POST['success_url']
         user = auth.authenticate(username=username, password=password)
         if user is not None:
             auth.login(request, user)

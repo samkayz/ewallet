@@ -53,12 +53,18 @@
                             <input  value="{{ email }}" type="hidden" name="email">
                             <input  value="{{ username }}" type="hidden" name="username">
                             <input  value="{{ phone }}" type="hidden" name="phone">
+                            <input  value="{{ first_name }} {{ last_name }}" type="hidden" name="f_name">
                             <input type="text" name="sender" placeholder="Enter Name" required="">
+                        </div>
+                        <label>Email</label>
+                        <div class="input-group">
+                            <span class="fa fa-envelope" aria-hidden="true"></span>
+                            <input type="email" name="s_email" placeholder="Enter Your Email" required="">
                         </div>
                         <label>Amount</label>
                         <div class="input-group">
                             <span class="fa fa-money" aria-hidden="true"></span>
-                            <input type="number" name="amount" placeholder="Enter Amount" required="">
+                            <input type="number" name="amount" step=any  placeholder="Enter Amount" required="">
                         </div>
                         <button class="btn btn-bitbucket btn-block" type="submit">Confirm</button >
                     </form>

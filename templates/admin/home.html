@@ -1,525 +1,240 @@
 {% load static %}
 {% block main %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <!-- Meta tags -->
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="Drift - A fully responsive, HTML5 based admin template">
-<meta name="keywords" content="Responsive, HTML5, admin theme, business, professional, jQuery, web design, CSS3, sass">
-<!-- /meta tags -->
-<title>DanfoPay</title>
+    <!doctype html>
+    <html lang="en">
+    {% include 'head.html' %}
+    <body>
+    <!-- Preloader -->
+    {% include 'preloader.html' %}
+    <!-- Preloader -->
 
-<!-- Site favicon -->
-<link rel="shortcut icon" href="{% static 'assets/images/favicon.ico'%}" type="image/x-icon">
-<!-- /site favicon -->
 
-<!-- Font Icon Styles -->
-<link rel="stylesheet" href="{% static 'node_modules/flag-icon-css/css/flag-icon.min.css'%}">
-<link rel="stylesheet" href="{% static 'vendors/gaxon-icon/styles.css'%}">
-<!-- /font icon Styles -->
+    <!-- Setting Panel -->
 
-<!-- Perfect Scrollbar stylesheet -->
-<link rel="stylesheet" href="{% static 'node_modules/perfect-scrollbar/css/perfect-scrollbar.css'%}">
-<!-- /perfect scrollbar stylesheet -->
-
-<!-- Load Styles -->
-<link rel="stylesheet" href="{% static 'assets/css/semidark-style-1.min.css'%}">
-  <!-- /load styles -->
-
-</head>
-<body class="dt-sidebar--fixed dt-header--fixed">
-
-<!-- Loader -->
-<div class="dt-loader-container">
-  <div class="dt-loader">
-    <svg class="circular" viewBox="25 25 50 50">
-      <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></circle>
-    </svg>
-  </div>
-</div>
-<!-- /loader -->
-<!-- Root -->
-<div class="dt-root">
-  <div class="dt-root__inner">
-    <!-- Header -->
-<header class="dt-header">
-
-  <!-- Header container -->
-  <div class="dt-header__container">
-
-    <!-- Brand -->
-    <div class="dt-brand">
-
-      <!-- Brand tool -->
-      <div class="dt-brand__tool" data-toggle="main-sidebar">
-        <div class="hamburger-inner"></div>
-      </div>
-      <!-- /brand tool -->
-
-      <!-- Brand logo -->
-      <span class="dt-brand__logo">
-        <a class="dt-brand__logo-link" href="home">
-          <img src="{% static 'assets/images/logo.jpg'%}" height="40" width="40">
-        </a>
-      </span>
-      <!-- /brand logo -->
-
-    </div>
-    <!-- /brand -->
-
-    <!-- Header toolbar-->
-    <div class="dt-header__toolbar">
-
-      <!-- Header Menu Wrapper -->
-      <div class="dt-nav-wrapper">
-
-        <!-- Header Menu -->
-        <ul class="dt-nav">
-          <li class="dt-nav__item dropdown">
-
-             <!-- Dropdown Link -->
-             <a href="#" class="dt-nav__link dropdown-toggle no-arrow dt-avatar-wrapper"
-               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <img class="dt-avatar size-30" src="{% static 'assets/images/user-avatar/domnic-harris.jpg'%}" alt="Domnic Harris">
-              <span class="dt-avatar-info d-none d-sm-block">
-                <span class="dt-avatar-name">Welcome {{ user.first_name }}</span>
-              </span> </a>
-            <!-- /dropdown link -->
-            <!-- Dropdown Option -->
-            <div class="dropdown-menu dropdown-menu-right">
-                <div class="dt-avatar-wrapper flex-nowrap p-6 mt-n2 bg-gradient-purple text-white rounded-top">
-                <img class="dt-avatar" src="{% static 'assets/images/user-avatar/domnic-harris.jpg'%}" alt="Domnic Harris">
-                <span class="dt-avatar-info">
-                  <span class="dt-avatar-name">Username</span>
-                  <span class="f-12">{{ user.username }}</span>
-                </span>
-              </div>
-              <a class="dropdown-item" href="javascript:void(0)"> <i class="icon icon-user icon-fw mr-2 mr-sm-1"></i>Account
-              </a> <a class="dropdown-item" href="javascript:void(0)">
-                <i class="icon icon-settings icon-fw mr-2 mr-sm-1"></i>Setting </a>
-              <a class="dropdown-item" href="logout"> <i class="icon icon-editors icon-fw mr-2 mr-sm-1"></i>Logout
-              </a>
-            </div>
-            <!-- /dropdown option -->
-
-          </li>
-        </ul>
-        <!-- /header menu -->
-      </div>
-      <!-- Header Menu Wrapper -->
-
-    </div>
-    <!-- /header toolbar -->
-
-  </div>
-  <!-- /header container -->
-
-</header>
-<!-- /header -->
-    <!-- Site Main -->
-    <main class="dt-main">
-      <!-- Sidebar -->
-<aside id="main-sidebar" class="dt-sidebar">
-    <div class="dt-sidebar__container">
-
-        <!-- Sidebar Navigation -->
-        <ul class="dt-side-nav">
-
-            <!-- Menu Header -->
-            <li class="dt-side-nav__item dt-side-nav__header">
-                <span class="dt-side-nav__text">main</span>
-            </li>
-            <!-- /menu header -->
-
-            <!-- Menu Item -->
-            <li class="dt-side-nav__item open">
-                <a href="home" class="dt-side-nav__link" title="Dashboard">
-                    <i class="icon icon-dashboard icon-fw icon-lg"></i>
-                    <span class="dt-side-nav__text">Dashboard</span>
-                </a>
-            </li>
-            <li class="dt-side-nav__item open">
-                <a href="user" class="dt-side-nav__link" title="Al Users">
-                    <i class="icon icon-users icon-fw icon-lg"></i>
-                    <span class="dt-side-nav__text">Users</span>
-                </a>
-            </li>
-            <li class="dt-side-nav__item open">
-                <a href="send" class="dt-side-nav__link" title="Credit User">
-                    <i class="icon icon-card-group icon-fw icon-lg"></i>
-                    <span class="dt-side-nav__text">Credit User</span>
-                </a>
-            </li>
-            <li class="dt-side-nav__item open">
-                <a href="solve_voucher" class="dt-side-nav__link" title="Resolve Voucher Issues">
-                    <i class="icon icon-card icon-fw icon-lg"></i>
-                    <span class="dt-side-nav__text">Resolve Voucher</span>
-                </a>
-            </li>
-             <li class="dt-side-nav__item open">
-                <a href="activity" class="dt-side-nav__link" title="All Activity">
-                    <i class="icon icon-archive icon-fw icon-lg"></i>
-                    <span class="dt-side-nav__text">Activities</span>
-                </a>
-            </li>
-            <li class="dt-side-nav__item open">
-                <a href="voucher" class="dt-side-nav__link" title="All Voucher">
-                    <i class="icon icon-task-manager icon-fw icon-lg"></i>
-                    <span class="dt-side-nav__text">Voucher</span>
-                </a>
-            </li>
-            <li class="dt-side-nav__item open">
-                <a href="withdraw" class="dt-side-nav__link" title="Withdraw">
-                    <i class="icon icon-dollar-circle icon-fw icon-lg"></i>
-                    <span class="dt-side-nav__text">Withdraw</span>
-                </a>
-            </li>
-            <li class="dt-side-nav__item open">
-                <a href="dispute" class="dt-side-nav__link" title="All Dispute">
-                    <i class="icon icon-message icon-fw icon-lg"></i>
-                    <span class="dt-side-nav__text">All Dispute</span>
-                </a>
-            </li>
-            <li class="dt-side-nav__item">
-                <a href="javascript:void(0)" class="dt-side-nav__link dt-side-nav__arrow" title="Settings">
-                    <i class="icon icon-settings icon-fw icon-lg"></i>
-                    <span class="dt-side-nav__text">Settings</span>
-                </a>
-
-                <!-- Sub-menu -->
-                <ul class="dt-side-nav__sub-menu">
-                    <li class="dt-side-nav__item">
-                        <a href="page" class="dt-side-nav__link" title="Home Page">
-                            <i class="icon icon-editor-wysiwyg icon-fw icon-lg"></i>
-                            <span class="dt-side-nav__text">Home Page</span>
-                        </a>
-                    </li>
-                </ul>
-                <ul class="dt-side-nav__sub-menu">
-                    <li class="dt-side-nav__item">
-                        <a href="contact" class="dt-side-nav__link" title="Contact">
-                            <i class="icon icon-contacts icon-fw icon-lg"></i>
-                            <span class="dt-side-nav__text">Contact</span>
-                        </a>
-                    </li>
-                </ul>
-                 <ul class="dt-side-nav__sub-menu">
-                    <li class="dt-side-nav__item">
-                        <a href="payment-api" class="dt-side-nav__link" title="Payment API">
-                            <i class="icon icon-contacts icon-fw icon-lg"></i>
-                            <span class="dt-side-nav__text">Payment API</span>
-                        </a>
-                    </li>
-                </ul>
-                <!-- /sub-menu -->
-            </li>
-            <li class="dt-side-nav__item open">
-                <a href="lock" class="dt-side-nav__link" title="Lock Screen">
-                    <i class="icon icon-lockscreen icon-fw icon-lg"></i>
-                    <span class="dt-side-nav__text">Lock Screen</span>
-                </a>
-            </li>
-        </ul>
-        <!-- /sidebar navigation -->
-
-    </div>
-</aside>
-<!-- /sidebar -->
-      <!-- Site Content Wrapper -->
-      <div class="dt-content-wrapper">
-
-        <!-- Site Content -->
-        <div class="dt-content">
-
-          <!-- Page Header -->
-          <div class="dt-page__header">
-            <h1 class="dt-page__title">Welcome Administrator {{ user.last_name }}</h1>
-          </div>
-          <!-- /page header -->
-
-          <!-- Grid -->
-          <div class="row">
-
-            <!-- Grid Item -->
-            <div class="col-xl-3 col-sm-6">
-              <!-- Card -->
-              <div class="dt-card">
-
-                <!-- Card Body -->
-                <div class="dt-card__body d-flex flex-sm-column">
-                  <div class="mb-sm-7 mr-7 mr-sm-0">
-                    <i class="icon icon-company dt-icon-bg bg-primary text-primary"></i>
-                  </div>
-                  <div class="flex-1">
-                    <div class="d-flex align-items-center mb-2">
-                        <span class="h2 mb-0 font-weight-500 mr-2">{{ merchant }}</span>
-                    </div>
-                    <div class="h5 mb-2">Total Merchant</div>
-                  </div>
-                </div>
-                <!-- /card body -->
-
-              </div>
-              <!-- /card -->
-            </div>
-            <!-- /grid item -->
-
-            <!-- Grid Item -->
-            <div class="col-xl-3 col-sm-6">
-              <!-- Card -->
-              <div class="dt-card">
-
-                <!-- Card Body -->
-                <div class="dt-card__body d-flex flex-sm-column">
-                  <div class="mb-sm-7 mr-7 mr-sm-0">
-                    <i class="icon icon-users dt-icon-bg bg-success text-success"></i>
-                  </div>
-                  <div class="flex-1">
-                    <div class="d-flex align-items-center mb-2">
-                        <span class="h2 mb-0 font-weight-500 mr-2">{{ users }}</span>
-                    </div>
-                    <div class="h5 mb-2">Total User</div>
-                  </div>
-                </div>
-                <!-- /card body -->
-
-              </div>
-              <!-- /card -->
-            </div>
-            <!-- /grid item -->
-
-            <!-- Grid Item -->
-            <div class="col-xl-3 col-sm-6">
-              <!-- Card -->
-              <div class="dt-card">
-
-                <!-- Card Body -->
-                <div class="dt-card__body d-flex flex-sm-column">
-                  <div class="mb-sm-7 mr-7 mr-sm-0">
-                    <i class="icon icon-revenue-new dt-icon-bg bg-secondary text-secondary"></i>
-                  </div>
-                  <div class="flex-1">
-                    <div class="d-flex align-items-center mb-2">
-                        <span class="h2 mb-0 font-weight-500 mr-2">₦ {{ show }}</span>
-                    </div>
-                    <div class="h5 mb-2">Total Transaction</div>
-                  </div>
-                </div>
-                <!-- /card body -->
-
-              </div>
-              <!-- /card -->
-            </div>
-            <!-- /grid item -->
-
-            <!-- Grid Item -->
-            <div class="col-xl-3 col-sm-6">
-              <!-- Card -->
-              <div class="dt-card">
-
-                <!-- Card Body -->
-                <div class="dt-card__body d-flex flex-sm-column">
-                  <div class="mb-sm-7 mr-7 mr-sm-0">
-                    <i class="icon icon-revenue-new dt-icon-bg bg-orange text-orange"></i>
-                  </div>
-                  <div class="flex-1">
-                    <div class="d-flex align-items-center mb-2">
-                        <span class="h2 mb-0 font-weight-500 mr-2">₦ {{ t_v }}</span>
-                    </div>
-                    <div class="h5 mb-2">Total Voucher</div>
-                  </div>
-                </div>
-                <!-- /card body -->
-
-              </div>
-              <!-- /card -->
-            </div>
-          </div>
-          <div class="row">
-
-            <div class="col-xl-6 col-md-6 order-xl-1">
-
-              <!-- Card -->
-              <div class="dt-card dt-card__full-height pb-4">
-
-                <!-- Card Header -->
-                <div class="dt-card__header mb-3">
-
-                  <!-- Card Heading -->
-                  <div class="dt-card__heading">
-                    <h3 class="dt-card__title">Support Tickets</h3>
-                  </div>
-                  <!-- /card heading -->
-
-                  <!-- Card Tools -->
-                  <div class="dt-card__tools">
-
-                    <!-- Dropdown -->
-                    <!-- /dropdown -->
-
-                  </div>
-                  <!-- /card tools -->
-
-                </div>
-                <!-- /card header -->
-
-                <!-- Card Body -->
-                <div class="dt-card__body p-0 max-h-400 ps-custom-scrollbar">
-                  <!-- Widget -->
-                  <div class="dt-widget dt-widget-hover">
-                    {% for data in ticket %}
-                    <div class="dt-widget__item">
-                      <!-- Widget Info -->
-                      <div class="dt-widget__info text-truncate">
-                        <a href="javascript:void(0)" class="dt-widget__title text-truncate">{{ data.subject }}</a>
-                        <p class="dt-widget__subtitle text-truncate text-light-gray">
-                          <a class="text-dark" href="javascript:void(0)">{{ data.owner }}</a>
-                          created ticket {{ data.date_created }}
-                        </p>
-                      </div>
-                      <!-- /widget info -->
-
-                      <!-- Widget Extra -->
-                      <div class="dt-extra animate-slide align-self-center">
-                      <span
-                          class="badge badge-danger badge-circle-animate badge-pill badge-sm align-text-top">{{ data.priority }}</span>
-                        <div class="slide-content">
-                          <a href="javascript:void(0)"><i
-                                class="icon icon-arrow-right icon-fw icon-xl"></i></a>
+    <!-- ======================================
+    ******* Page Wrapper Area Start **********
+    ======================================= -->
+    <div class="ecaps-page-wrapper">
+        <!-- Sidemenu Area -->
+        {% include 'admin/sidebar.html' %}
+        <!-- Page Content -->
+        <div class="ecaps-page-content">
+            <!-- Top Header Area -->
+            {% include 'header.html' %}
+            <!-- Main Content Area -->
+            <div class="main-content">
+                <div class="dashboard-area">
+                    <div class="container-fluid">
+                        <div class="row align-items-center">
+                            <div class="col-6">
+                                <div class="dashboard-header-title mb-3">
+                                    <h5 class="mb-0 font-weight-bold">Dashboard</h5>
+                                    <p class="mb-0 font-weight-bold">Welcome Administrator! {{ user.last_name }}</p>
+                                </div>
+                            </div>
+                            <!-- Dashboard Info Area -->
+                            <div class="col-6">
+                                <div class="dashboard-infor-mation d-flex flex-wrap align-items-center mb-3">
+                                    <div class="dashboard-clock">
+                                        <div id="dashboardDate">Monday, 21 October</div>
+                                        <ul class="d-flex align-items-center justify-content-end">
+                                            <li id="hours">12</li>
+                                            <li>:</li>
+                                            <li id="min">10</li>
+                                            <li>:</li>
+                                            <li id="sec">14</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                      </div>
+
+                        <div class="row">
+                            <!-- Time Date Area -->
+                            <div class="col-12 box-margin">
+                                <div class="card bg-boxshadow">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <!-- Earning Area -->
+                            <div class="col-md-5 col-lg-4 box-margin">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">TOTAL TRANSACTION</h5>
+                                        <h5>₦ {{ show }}</h5>
+                                        <span class="d-block pt-1 pb-3"></span>
+                                        <div id="chart-percent1" class="chart-percent1" style="height:200px;"></div>
+                                        <div class="client-name">
+                                            <div class="row">
+                                                <div class="col-sm-12 pt-2 pb-2">
+                                                    <span class="mr-3"><i class="feather icon-circle text-c-green  mr-2"></i>Total Voucher</span>
+                                                    <span class="float-right text-muted">₦ {{ t_v }}</span>
+                                                </div>
+                                                <div class="col-sm-12 pt-2 pb-2">
+                                                    <span class="mr-3"><i class="feather icon-circle text-c-blue  mr-2"></i>Total User</span>
+                                                    <span class="float-right text-muted">{{ users }}</span>
+                                                </div>
+                                                <div class="col-sm-12 pt-2">
+                                                    <span class="mr-3"><i class="feather icon-circle text-c-purple  mr-2"></i>Total Merchant</span>
+                                                    <span class="float-right text-muted">{{ merchant }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Best seller Area -->
+                            <div class="col-md-7 col-lg-8 box-margin">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Yearly Summary</h5>
+                                        <div class="row pb-3">
+                                            <div class="col-md-4 col-6 text-center">
+                                                <h5 class="f-w-300">₦ 0.00</h5>
+                                                <span>Total Invoice</span>
+                                            </div>
+                                            <div class="col-md-4 col-6 text-center">
+                                                <h5 class="f-w-300">₦ {{ t_v }}</h5>
+                                                <span>Total Vouchers</span>
+                                            </div>
+                                            <div class="col-md-4 col-12 text-center">
+                                                <h5 class="f-w-300">₦ 0.00</h5>
+                                                <span>Vendor Sales</span>
+                                            </div>
+                                        </div>
+                                        <div id="bar-chart3" class="bar-chart3" style="height:300px;"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-8 box-margin">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Our Vendors</h5>
+                                        <div class="product-table-area">
+                                            <div class="table-responsive" id="dashboardTable">
+                                                <table class="table table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Company Name</th>
+                                                            <th>Address</th>
+                                                            <th>Email</th>
+                                                            <th>Phone No</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {% for data in vendor %}
+                                                        <tr>
+                                                            <td>
+                                                                <div class="media align-items-center">
+                                                                    <div class="chat-img mr-2">
+                                                                        <img src="{{ data.bus_logo.url }}" alt="">
+                                                                    </div>
+                                                                    <div>
+                                                                        <span>{{ data.bus_name }}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td>{{ data.bus_address }}</td>
+                                                            <td>{{ data.bus_email }}</td>
+                                                            <td>{{ data.bus_no }}</td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-body pb-0">
+                                        <h6 class="card-title">Wallet Status</h6>
+                                        <div class="row mb-3">
+                                            <div class="col-9">
+                                                <div class="progress-wrapper">
+                                                    <span class="progress-label text-dark font-weight-bold">Vouchers</span>
+                                                    <div class="progress mt-2 mb-2" style="height: 5px;">
+                                                        <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-3 align-self-end text-right">
+                                                <span class="text-dark mb-0">80%</span>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-9">
+                                                <div class="progress-wrapper">
+                                                    <span class="progress-label text-dark font-weight-bold">Vendor Sales</span>
+                                                    <div class="progress mt-2 mb-2" style="height: 5px;">
+                                                        <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100" style="width: 72%;"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-3 align-self-end text-right">
+                                                <span class="text-dark mb-0">72%</span>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-9">
+                                                <div class="progress-wrapper">
+                                                    <span class="progress-label text-dark font-weight-bold">Invoice</span>
+                                                    <div class="progress mt-2 mb-2" style="height: 5px;">
+                                                        <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100" style="width: 89%;"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-3 align-self-end text-right">
+                                                <span class="text-dark mb-0">89%</span>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-9">
+                                                <div class="progress-wrapper">
+                                                    <span class="progress-label text-dark font-weight-bold">Fund Transfer</span>
+                                                    <div class="progress mt-2 mb-2" style="height: 5px;">
+                                                        <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 570%;"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-3 align-self-end text-right">
+                                                <span class="text-dark mb-0">70%</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <div class="col-9">
+                                                <div class="progress-wrapper">
+                                                    <span class="progress-label text-dark font-weight-bold">Withdrawal</span>
+                                                    <div class="progress mt-2 mb-2" style="height: 5px;">
+                                                        <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100" style="width: 55%;"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-3 align-self-end text-right">
+                                                <span class="text-dark mb-0">55%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                        </div>
                     </div>
-                    {% endfor %}
-                  </div>
-                  <!-- /widget -->
                 </div>
-                <!-- /card body -->
-
-              </div>
-              <!-- /card -->
-
             </div>
-            <div class="col-xl-6 order-xl-2">
-
-              <!-- Card -->
-              <div class="dt-card dt-card__full-height pb-4">
-
-                <!-- Card Header -->
-                <div class="dt-card__header mb-3">
-
-                  <!-- Card Heading -->
-                  <div class="dt-card__heading">
-                    <h3 class="dt-card__title">Vendor</h3>
-                  </div>
-                  <!-- /card heading -->
-
-                </div>
-                <!-- /card header -->
-
-                <!-- Card Body -->
-                <div class="dt-card__body p-0 max-h-400 ps-custom-scrollbar">
-                  <!-- Widget -->
-                  <div class="dt-widget dt-widget-hover-bg text-light-gray">
-                      {% for data in vendor %}
-                        <div class="dt-widget__item">
-
-                      <!-- Widget Image -->
-{#                      <div class="dt-widget__img">#}
-{#                        <img class="img-fluid max-w-105" src="assets/images/logo/4.jpg"#}
-{#                             alt="Logo">#}
-{#                      </div>#}
-                      <!-- /widget image -->
-
-                      <!-- Widget Info -->
-                      <div class="dt-widget__info text-truncate">
-                        <div class="dt-widget__title text-truncate">
-                          <a href="#">{{ data.bus_name }}</a>
-                          <span class="badge badge-sm badge-pill badge-success d-none d-sm-inline-block">{{ data.bus_no }}</span>
-                        </div>
-                        <p class="dt-widget__subtitle text-truncate">
-                         {{ data.bus_email }}</p>
-                      </div>
-                      <!-- /widget info -->
-
-                      <!-- Widget Extra -->
-                      <div class="dt-widget__extra">
-                        <!-- Show Content -->
-                        <div class="show-content">
-                          <span class="d-block">Today</span>
-                        </div>
-                        <!-- /show content -->
-                        <!-- Hide Content -->
-                        <div class="hide-content">
-                          <!-- Action Button Group -->
-                          <div class="action-btn-group">
-                              <button class="btn btn-default text-success dt-fab-btn">
-                              <i class="icon icon-task-manager icon-1x"></i>
-                            </button>
-                              <button class="btn btn-default text-danger dt-fab-btn">
-                              <i class="icon icon-circle-remove-o icon-1x"></i>
-                            </button>
-                          </div>
-                          <!-- /action button group -->
-                        </div>
-                        <!-- /hide content -->
-                      </div>
-                      <!-- /widget extra -->
-                    </div>
-                      {% endfor %}
-                  </div>
-                  <!-- /widget -->
-                </div>
-                <!-- /card body -->
-
-              </div>
-              <!-- /card -->
-
-            </div>
-          </div>
         </div>
-        <!-- /site content -->
+    </div>
 
-        <!-- Footer -->
-<footer class="dt-footer">
-  Copyright DanfoPay &copy; {% now "Y" %}
-</footer>
-<!-- /footer -->
-      </div>
-    </main>
-  </div>
-</div>
-<!-- /root -->
+    <!-- ======================================
+    ********* Page Wrapper Area End ***********
+    ======================================= -->
 
-<!-- Optional JavaScript -->
-<script src="{% static 'node_modules/jquery/dist/jquery.min.js'%}"></script>
-<script src="{% static 'node_modules/moment/moment.js'%}"></script>
-<script src="{% static 'node_modules/bootstrap/dist/js/bootstrap.bundle.min.js'%}"></script>
-<!-- Perfect Scrollbar jQuery -->
-<script src="{% static 'node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js'%}"></script>
-<!-- /perfect scrollbar jQuery -->
+    <!-- Must needed plugins to the run this Template -->
+    {% include 'foot.html' %}
 
-<!-- masonry script -->
-<script src="{% static 'node_modules/masonry-layout/dist/masonry.pkgd.min.js'%}"></script>
-<script src="{% static 'node_modules/sweetalert2/dist/sweetalert2.js'%}"></script>
-<script src="{% static 'assets/js/functions.js'%}"></script>
-<script src="{% static 'assets/js/customizer.js'%}"></script>
-<script src="{% static 'node_modules/chart.js/dist/Chart.min.js'%}"></script>
-
-<!-- Resources -->
-<script src="{% static 'node_modules/ammap3/ammap/ammap.js'%}"></script>
-<script src="{% static 'node_modules/ammap3/ammap/maps/js/continentsLow.js'%}"></script>
-<script src="{% static 'node_modules/ammap3/ammap/themes/light.js'%}"></script>
-
-<script src="{% static 'node_modules/amcharts3/amcharts/amcharts.js'%}"></script>
-<script src="{% static 'node_modules/amcharts3/amcharts/gauge.js'%}"></script>
-
-<script src="{% static 'assets/js/custom/charts/widgets-charts.js'%}"></script>
-<!-- Custom JavaScript -->
-<script src="{% static 'assets/js/script.js'%}"></script>
-
-</body>
-</html>
+    </body>
+    </html>
 {% endblock %}

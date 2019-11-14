@@ -13,6 +13,7 @@ urlpatterns = [
     path('voucher', views.voucher, name='voucher'),
     path('load_voucher', views.load_voucher, name='load_voucher'),
     path('ticket', views.ticket, name='ticket'),
+    path('compose', views.compose, name='create-ticket'),
     path('dispute', views.dispute, name='dispute'),
     path('merchant', views.merchant, name='merchant'),
     path('api', views.api, name='api'),

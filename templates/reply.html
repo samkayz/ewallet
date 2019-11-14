@@ -1,485 +1,147 @@
-{% load static %}
-{% block main %}
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <!-- Meta tags -->
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="Drift - A fully responsive, HTML5 based admin template">
-        <meta name="keywords" content="Responsive, HTML5, admin theme, business, professional, jQuery, web design, CSS3, sass">
-        <!-- /meta tags -->
-        <title>DanfoPay</title>
+<!doctype html>
+<html lang="en">
+{% include 'head.html' %}
 
-        <!-- Site favicon -->
-        <link rel="shortcut icon" href="{% static 'assets/images/favicon.ico'%}" type="image/x-icon">
-        <!-- /site favicon -->
+<body>
+<!-- Preloader -->
+{% include 'preloader.html' %}
+<!-- Preloader -->
 
-        <!-- Font Icon Styles -->
-        <link rel="stylesheet" href="{% static 'node_modules/flag-icon-css/css/flag-icon.min.css'%}">
-        <link rel="stylesheet" href="{% static 'vendors/gaxon-icon/styles.css'%}">
-        <!-- /font icon Styles -->
 
-        <!-- Perfect Scrollbar stylesheet -->
-        <link rel="stylesheet" href="{% static 'node_modules/perfect-scrollbar/css/perfect-scrollbar.css'%}">
-        <!-- /perfect scrollbar stylesheet -->
+<!-- Setting Panel -->
+<!-- ======================================
+******* Page Wrapper Area Start **********
+======================================= -->
+<div class="ecaps-page-wrapper">
+    <!-- Sidemenu Area -->
+    {% include 'sidebar.html' %}
 
-        <!-- Load Styles -->    <link rel="stylesheet" href="{% static 'assets/css/semidark-style-1.min.css'%}">
-        <!-- /load styles -->
+    <!-- Page Content -->
+    <div class="ecaps-page-content">
+        <!-- Top Header Area -->
+        {% include 'header.html' %}
 
-    </head>
-    <body class="dt-sidebar--fixed dt-header--fixed">
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-5 col-xl-4 height-card box-margin">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="chat-area">
+                                    <!--end chat-search-->
 
-    <!-- Loader -->
-    <div class="dt-loader-container">
-        <div class="dt-loader">
-            <svg class="circular" viewBox="25 25 50 50">
-                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></circle>
-            </svg>
-        </div>
-    </div>
-    <!-- /loader -->
-    <!-- Root -->
-    <div class="dt-root">
-        <div class="dt-root__inner">
-            <!-- Header -->
-            <header class="dt-header">
-
-                <!-- Header container -->
-                <div class="dt-header__container">
-
-                    <!-- Brand -->
-                    <div class="dt-brand">
-
-                        <!-- Brand tool -->
-                        <div class="dt-brand__tool" data-toggle="main-sidebar">
-                            <div class="hamburger-inner"></div>
-                        </div>
-                        <!-- /brand tool -->
-
-                        <!-- Brand logo -->
-                        <span class="dt-brand__logo">
-        <a class="dt-brand__logo-link" href="dashboard">
-          <img src="{% static 'assets/images/3.png'%}" width="80" height="80">
-        </a>
-      </span>
-                        <!-- /brand logo -->
-
-                    </div>
-                    <!-- /brand -->
-
-                    <!-- Header toolbar-->
-                    <div class="dt-header__toolbar">
-
-                        <!-- Search box -->
-                        <!-- /search box -->
-
-                        <!-- Header Menu Wrapper -->
-                        <div class="dt-nav-wrapper">
-                            <!-- Header Menu -->
-                            <!-- /header menu -->
-                            <!-- Header Menu -->
-                            <ul class="dt-nav">
-                                <li class="dt-nav__item dropdown">
-
-                                    <!-- Dropdown Link -->
-                                    <a href="#" class="dt-nav__link dropdown-toggle no-arrow dt-avatar-wrapper"
-                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <img class="dt-avatar size-30" src="{% static 'assets/images/user-avatar/domnic-harris.jpg'%}" alt="Domnic Harris">
-                                        <span class="dt-avatar-info d-none d-sm-block">
-                <span class="dt-avatar-name">Welcome {{ user.first_name }}</span>
-              </span> </a>
-                                    <!-- /dropdown link -->
-
-                                    <!-- Dropdown Option -->
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <div class="dt-avatar-wrapper flex-nowrap p-6 mt-n2 bg-gradient-purple text-white rounded-top">
-                                            <img class="dt-avatar" src="{% static 'assets/images/user-avatar/domnic-harris.jpg'%}" alt="Domnic Harris">
-                                            <span class="dt-avatar-info">
-                  <span class="dt-avatar-name">Username</span>
-                  <span class="f-12">{{ user.username }}</span>
-                </span>
-                                        </div>
-                                        <a class="dropdown-item" href="/account/load"> <i class="icon icon-user icon-fw mr-2 mr-sm-1"></i>Account
-                                        </a> <a class="dropdown-item" href="/account/settings">
-                                        <i class="icon icon-settings icon-fw mr-2 mr-sm-1"></i>Setting </a>
-                                        <a class="dropdown-item" href="/account/logout"> <i class="icon icon-editors icon-fw mr-2 mr-sm-1"></i>Logout
-                                        </a>
-                                    </div>
-                                    <!-- /dropdown option -->
-
-                                </li>
-                            </ul>
-                            <!-- /header menu -->
-                        </div>
-                        <!-- Header Menu Wrapper -->
-
-                    </div>
-                    <!-- /header toolbar -->
-
-                </div>
-                <!-- /header container -->
-
-            </header>
-            <!-- /header -->
-            <!-- Site Main -->
-            <main class="dt-main">
-                <!-- Sidebar -->
-                {% include 'sidebar2.html' %}
-                <!-- /sidebar -->
-                <!-- Site Content Wrapper -->
-                <div class="dt-content-wrapper">
-
-                    <!-- Site Content -->
-                    <div class="dt-content">
-
-                        <!-- Grid -->
-                        <div class="row">
-
-                            <!-- Grid Item -->
-                            <div class="col-xl-12">
-
-                                <!-- Module -->
-                                <div class="dt-module">
-
-                                    <!-- Module Sidebar -->
-                                    <div class="dt-module__sidebar">
-
-                                        <!-- Sidebar Header -->
-                                        <div class="dt-module__sidebar-header border-bottom">
-                                            <div class="d-none d-md-flex align-items-center">
-                                                <i class="icon icon-open-mail icon-1x mr-3 text-dark"></i>
-                                                <span class="h3 mb-0">Dispute</span>
-                                            </div>
-
-                                            <!-- App Quick Menu -->
-                                            <div class="quick-menu-list d-md-none">
-
-                                                <a href="javascript:void(0)" class="quick-menu d-none d-md-block"
-                                                   data-toggle="mdrawer" data-target="#drawer-search-bar"><i
-                                                        class="icon icon-search"></i></a>
-                                                <a href="javascript:void(0)" class="quick-menu" data-open="compose"><i
-                                                        class="icon icon-editors"></i></a>
-                                                <a href="javascript:void(0)" class="quick-menu" data-toggle="mdrawer"
-                                                   data-target="#drawer-notifications"><i
-                                                        class="icon icon-notification2"></i></a>
-                                                <a href="javascript:void(0)" class="quick-menu d-md-none"
-                                                   data-toggle="msidebar-content"><i class="icon icon-menu"></i></a>
-                                            </div>
-                                            <!-- /app quick menu -->
-                                        </div>
-                                        <!-- /sidebar header -->
-
-                                        <!-- Sidebar Menu -->
-                                        <div class="dt-module__sidebar-content ps-custom-scrollbar">
-
-                                            <!-- Button -->
-                                            <div class="action-area mt-5 mb-7 d-none d-md-block">
-                                                <a href="javascript:void(0)"
-                                                   class="btn btn-shadow btn-default compose-btn btn-rounded"
-                                                   data-open="compose">
-                                                    <i class="icon icon-editors icon-fw mr-2"></i>Reply</a>
-                                            </div>
-                                            <!-- /button -->
-
-                                            <!-- Sidebar Navigation -->
-                                            <ul class="dt-module-side-nav">
-
-                                                <!-- Menu Header -->
-                                                <li class="dt-module-side-nav__header">
-                                                    <span class="dt-module-side-nav__text">main</span>
-                                                </li>
-
-                                                <!-- Menu Item -->
-                                                <li class="dt-module-side-nav__item active">
-                                                    <a href="javascript:void(0)" class="dt-module-side-nav__link">
-                                                        <i class="icon icon-inbox icon-fw icon-lg"></i>
-                                                        <span class="dt-module-side-nav__text">Inbox</span> </a>
-                                                </li>
-                                                <!-- /menu item -->
-
-                                                <!-- Menu Item -->
-                                                <!-- /menu item -->
-
-                                            </ul>
-                                            <!-- /sidebar navigation -->
-
-                                            <!-- Contacts -->
-                                            <!-- contacts -->
-
-                                        </div>
-                                        <!-- /sidebar Menu -->
-
-                                    </div>
-                                    <!-- /module sidebar -->
-
-                                    <!-- Module Container -->
-                                    <div class="dt-module__container">
-                                        <div class="dt-module__content ps-custom-scrollbar">
-
-                                            <!-- Module Content Inner -->
-                                            <div class="dt-module__content-inner">
-
-                                                <div class="px-1 pb-4 border-bottom border-w-2">
-
-                                                    <!-- Action Bar -->
-                                                    <div class="d-flex flex-wrap mb-5">
-                                                        <!-- Back Button -->
-                                                        <a href="/account/ticket" class="btn btn-outline-dark btn-sm mr-auto mb-1">
-                                                            <i class="icon icon-arrow-left icon-fw icon-lg"></i> </a>
-                                                        <!-- /back button -->
-
-                                                        <!-- Button Group -->
-                                                        <div class="btn-group btn-group-sm mr-3 mr-lg-7 mb-1" role="group">
-                                                            <button type="button" class="btn btn-outline-dark">
-                                                                <i class="icon icon-archive icon-fw icon-lg"></i>
-                                                            </button>
-                                                            <button type="button" class="btn btn-outline-dark">
-                                                                <i class="icon icon-spam icon-fw icon-lg"></i>
-                                                            </button>
-                                                            <button type="button" class="btn btn-outline-dark">
-                                                                <i class="icon icon-trash-filled icon-fw icon-lg"></i>
-                                                            </button>
-                                                        </div>
-                                                        <!-- /button group -->
-
-                                                        <!-- Button Group -->
-                                                        <div class="btn-group btn-group-sm mr-3 mr-lg-7 mb-1" role="group">
-                                                            <button type="button" class="btn btn-outline-dark">
-                                                                <i class="icon icon-folder icon-fw icon-lg"></i>
-                                                            </button>
-                                                            <button type="button" class="btn btn-outline-dark">
-                                                                <i class="icon icon-tag icon-fw icon-lg"></i>
-                                                            </button>
-                                                        </div>
-                                                        <!-- /button group -->
-
-                                                        <!-- Dropdown -->
-                                                        <div class="dropdown">
-
-                                                            <!-- Dropdown Button -->
-                                                            <a href="#" class="dropdown-toggle btn btn-outline-dark btn-sm"
-                                                               data-toggle="dropdown"
-                                                               aria-haspopup="true" aria-expanded="false"> More </a>
-                                                            <!-- /dropdown button -->
-
-                                                            <!-- Dropdown Menu -->
-                                                            <div class="dropdown-menu">
-                                                                <a class="dropdown-item" href="javascript:void(0)">All</a>
-                                                                <a class="dropdown-item" href="javascript:void(0)">Read</a>
-                                                                <a class="dropdown-item"
-                                                                   href="javascript:void(0)">Unread</a>
-                                                                <a class="dropdown-item"
-                                                                   href="javascript:void(0)">Starred</a>
-                                                            </div>
-                                                            <!-- /dropdown menu -->
-
-                                                        </div>
-                                                        <!-- /dropdown -->
+                                    <div class="slimScrollDiv">
+                                        <div class="tab-content chat-list slimscroll" id="pills-tabContent">
+                                            <div class="tab-pane fade show active" id="general_chat">
+                                                <div id="plist" class="people-list">
+                                                    <div class="schedule-tab">
+                                                        <!-- Nav Nav-tabs -->
+                                                        <ul class="nav nav-pills navtab-bg nav-justified" id="conferScheduleTab" role="tablist">
+                                                            <li class="nav-item">
+                                                                <a class="nav-link active" id="monday-tab" href="/account/ticket" aria-expanded="true"><i class="zmdi zmdi-comment-more mr-1"></i> Ticket</a>
+                                                            </li>
+                                                            <!-- Nav Item -->
+                                                        </ul>
                                                     </div>
-                                                    <!-- /action bar -->
-
-                                                    <div class="d-flex flex-wrap">
-                                                        <h3 class="mb-0 text-truncate flex-1">Ticket ID: {{ show.ticket_id }}</h3>
-
-                                                        <!-- Module Info -->
-                                                        <div class="ml-auto dt-module__list-item-info">
-                                                            <div class="badge-group">
-                                                                <span class="badge bg-dark-blue text-white">{{ show.status }}</span>
-                                                                <span class="badge badge-danger">{{ show.priority }}</span>
-                                                            </div>
-                                                        </div>
-                                                        <!-- /module info -->
-                                                    </div>
-
-                                                </div>
-
-                                                <!-- Module List -->
-                                                <div class="dt-module__list mail-detail-list">
-
-                                                    <!-- Module Item -->
-                                                    <!-- /module item -->
-                                                    <div class="dt-module__list-item">
-                                                        <img class="dt-avatar mr-4" src="{% static 'assets/images/user-avatar/amay.jpg'%}"
-                                                             alt="Reece Jacklin">
-                                                        <!-- Module Content -->
-                                                        <div class="dt-module__list-item-content" data-toggle="mail">
-                                                            <h4 class="d-inline-block mb-1">{{ show.owner }}</h4>
-                                                            <p class="mb-0 text-light-gray text-truncate">{{ show.content }}</p>
-                                                        </div>
-                                                        <!-- /module content -->
-
-                                                        <!-- Module Info -->
-                                                        <div class="dt-module__list-item-info">
-                                                            <span class="mt-1">{{ show.date_created }}</span>
-                                                            <!-- Checkbox -->
-                                                            <div class="dt-checkbox dt-checkbox-icon dt-checkbox-only ml-sm-3">
-                                                                <input id="icon-checkbox-3" type="checkbox">
-                                                                <label class="font-weight-light dt-checkbox-content"
-                                                                       for="icon-checkbox-3">
-                                                                <span class="unchecked"><i
-                                                                        class="icon icon-star-o icon-fw icon-xl"></i></span>
-                                                                    <span class="checked"><i
-                                                                            class="icon icon-star-fill icon-fw icon-xl text-warning"></i></span>
-                                                                </label>
-                                                            </div>
-                                                            <!-- /checkbox -->
-                                                        </div>
-                                                        <!-- /module info -->
-                                                    </div>
-                                                    <!-- Module Item -->
-                                                    {% for data in r_show %}
-                                                        <div class="dt-module__list-item open">
-
-                                                            <!-- Avatar -->
-                                                            <img class="dt-avatar mr-4" src="{% static 'assets/images/user-avatar/amay.jpg'%}"
-                                                                 alt="Reece Jacklin">
-                                                            <!-- /avatar -->
-
-                                                            <!-- Module Content -->
-                                                            <div class="dt-module__list-item-content" data-toggle="mail">
-                                                                <h4 class="d-inline-block mb-1">Ticket ID: {{ data.ticket_id }}</h4>
-                                                                <p class="mb-0 text-light-gray">{{ data.content }}</p>
-                                                            </div>
-                                                            <!-- /module content -->
-
-                                                            <!-- Module Info -->
-                                                            <div class="dt-module__list-item-info">
-                                                                <span class="mt-1">{{ data.date }}</span>
-                                                                <!-- Checkbox -->
-                                                                <div class="dt-checkbox dt-checkbox-icon dt-checkbox-only ml-sm-3">
-                                                                    <input id="icon-checkbox-2" type="checkbox">
-                                                                    <label class="font-weight-light dt-checkbox-content"
-                                                                           for="icon-checkbox-2">
-                                                                        <span class="unchecked"><i class="icon icon-star-o icon-fw icon-xl"></i></span>
-                                                                        <span class="checked"><i class="icon icon-star-fill icon-fw icon-xl text-warning"></i></span>
-                                                                    </label>
+                                                    <!-- Tab Content -->
+                                                    <div class="tab-content" id="conferScheduleTabContent">
+                                                        <div class="tab-pane fade show active" id="step-one" role="tabpanel" aria-labelledby="monday-tab">
+                                                            <div class="tab-content pt-0">
+                                                                <div id="chat_user_2">
+                                                                    <ul class="chat-list list-unstyled">
+                                                                        {% for data in show %}
+                                                                            <a href="/account/reply/{{ data.ticket_id }}">
+                                                                                <li class="clearfix active">
+                                                                                    <div class="about">
+                                                                                        <div class="name">{{ data.ticket_id }}</div>
+                                                                                        <div class="status">{{ data.subject }}</div>
+                                                                                    </div>
+                                                                                    <div class="chart-time text-right">
+                                                                                        <div class="time font-weight-bold font-12">{{ data.priority }}</div>
+                                                                                    </div>
+                                                                                </li>
+                                                                            </a>
+                                                                        {% endfor %}
+                                                                    </ul>
                                                                 </div>
-                                                                <!-- /checkbox -->
                                                             </div>
-                                                            <!-- /module info -->
                                                         </div>
-                                                    {% endfor %}
-                                                    <!-- /module item -->
-
-                                                    <!-- Module Item -->
-                                                    <!-- /module item -->
-
+                                                    </div>
                                                 </div>
-                                                <!-- /module list -->
-
                                             </div>
-                                            <!-- /module content inner -->
-
                                         </div>
-                                        <!-- /module content -->
-
                                     </div>
-                                    <!-- /module container -->
-
-                                    <!-- Module Drawer -->
-                                    <div class="dt-module__drawer dt-drawer position-left">
-
-                                        <!-- Module Drawer Inner -->
-                                        <div class="dt-module__drawer-inner">
-
-                                        </div>
-                                        <!-- /module drawer inner -->
-
-                                    </div>
-                                    <!-- /module drawer -->
 
                                 </div>
-                                <!-- /module -->
-
-                            </div>
-                            <!-- /grid item -->
-
-                        </div>
-                        <!-- /grid -->
-
-                    </div>
-                    <!-- /site content -->
-
-                    <!-- Footer -->
-                    {% include 'footer.html' %}
-                    <!-- /footer -->
-                </div>
-            </main>
-
-            <!-- Compose Mail Box -->
-            <div class="compose-mail-box">
-
-                <!-- Compose Mail Header -->
-                <div class="compose-mail-box__header" data-toggle="minimize">
-                    <div class="title">
-                        <i class="icon icon-editors icon-fw icon-xl mr-2"></i>Reply Message
-                    </div>
-
-                    <div class="action-area ml-auto">
-                        <a class="text-white mr-3" href="javascript:void(0)"> <i class="icon icon-chevrolet-down icon-xl"></i> </a>
-                        <a class="text-white" href="javascript:void(0)" data-dismiss="compose"> <i class="icon icon-remove icon-xl"></i>
-                        </a>
-                    </div>
-                </div>
-                <!-- /compose mail header -->
-
-                <!-- Compose Mail Body -->
-                <div class="compose-mail-box__body">
-                    <!-- Form -->
-                    <form method="post" action="/account/resolution">
-                        {% csrf_token %}
-                        <div class="form-group mb-1">
-                            <input type="hidden" name="ticket_id" value="{{ show.ticket_id }}" class="form-control" readonly>
-                            <input type="text" name="subject" class="form-control" value="{{ show.subject }}" id="emails" readonly>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="category" value="{{ show.category }}" id="subject" readonly>
-                        </div>
-                        <div class="form-group">
-                            <textarea class="form-control" name="content" id="textarea"></textarea>
-                        </div>
-                        <!-- /form group -->
-
-                        <!-- Form Group -->
-                        <div class="d-flex align-items-center">
-                            <button type="submit" class="btn btn-primary btn-sm">Reply</button>
-
-                            <div class="action-area ml-auto">
-                                <a class="text-dark" href="javascript:void(0)" data-dismiss="compose">
-                                    <i class="icon icon-trash-filled mr-1"></i> <span class="f-12 text-uppercase align-middle">discard</span>
-                                </a>
                             </div>
                         </div>
-                        <!-- /form group -->
-                    </form>
-                    <!-- /form -->
+                    </div>
+
+                    <div class="col-lg-7 col-xl-8 height-card box-margin">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="chat">
+                                    <div class="d-flex justify-content-between border-bottom align-items-center p-3">
+                                        <div class="chat-header-text d-flex">
+                                            <div class="chat-about">
+                                                <div class="chat-with font-18">{{ show.ticket_id }}</div>
+                                                <div class="chat-num-messages font-14">{{ show.status }}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="chat-history" id="chat-conversation">
+                                        <ul>
+                                            {% for data in r_show %}
+                                            <li>
+                                                <div class="message-data">
+                                                    <span class="message-data-name">{{ data.ticket_id }} </span>
+                                                    <span class="message-data-time">{{ data.date }}</span>
+                                                </div>
+                                                <div class="message my-message">{{ data.content }}</div>
+                                            </li>
+                                            {% endfor %}
+                                            <li class="clearfix">
+                                                <div class="message-data text-right">
+                                                        <span class="message-data-time">11:11 AM, Today
+                                                        </span>
+
+                                                    <span class="message-data-name pl-2">Zara</span>
+                                                </div>
+                                                <div class="message other-message float-right">I am good, We think for next weekend.</div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="chat-message clearfix">
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <input type="text" class="form-control" placeholder="Enter text here.." />
+                                            </div>
+                                        </div>
+                                        <div class="chat-upload">
+                                            <a href="#"> <i class="zmdi zmdi-camera font-22 text-primary"></i></a>
+                                            <a href="#"> <i class="zmdi zmdi-link font-22 text-primary"></i></a>
+                                            <a href="#"> <i class="zmdi zmdi-mic font-22 text-primary"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
-                <!-- /compose mail body -->
 
             </div>
-            <!-- /compose mail box -->
         </div>
     </div>
-    <!-- /root -->
+</div>
 
-    <!-- Optional JavaScript -->
-    <script src="{% static 'node_modules/jquery/dist/jquery.min.js'%}"></script>
-    <script src="{% static 'node_modules/moment/moment.js'%}"></script>
-    <script src="{% static 'node_modules/bootstrap/dist/js/bootstrap.bundle.min.js'%}"></script>
-    <!-- Perfect Scrollbar jQuery -->
-    <script src="{% static 'node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js'%}"></script>
-    <!-- /perfect scrollbar jQuery -->
+<!-- ======================================
+********* Page Wrapper Area End ***********
+======================================= -->
 
-    <!-- masonry script -->
-    <script src="{% static 'node_modules/masonry-layout/dist/masonry.pkgd.min.js'%}"></script>
-    <script src="{% static 'node_modules/sweetalert2/dist/sweetalert2.js'%}"></script>
-    <script src="{% static 'assets/js/functions.js'%}"></script>
-    <script src="{% static 'assets/js/customizer.js'%}"></script><!-- Custom JavaScript -->
-    <script src="{% static 'assets/js/script.js'%}"></script>
-    <script src="{% static 'assets/js/custom/apps/app.js'%}"></script>
-    <script src="{% static 'assets/js/custom/apps/mail-app.js'%}"></script>
-    </body>
-    </html>
-{% endblock %}
+<!-- Must needed plugins to the run this Template -->
+{% include 'foot.html' %}
+</body>
+</html>
