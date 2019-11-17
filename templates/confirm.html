@@ -77,13 +77,13 @@
                                         <tr>
                                             <td colspan="3" class="text-right py-3">
                                                 Subtotal:<br>
-                                                Tax(0%):<br>
+                                                Charge({{ charge }}%):<br>
                                                 <span class="d-block text-big mt-2">Total:</span>
                                             </td>
                                             <td class="py-3">
                                                 <strong>₦ {{ amount }}</strong><br>
-                                                <strong>₦ 0.00</strong><br>
-                                                <strong class="d-block text-big mt-2">₦ {{ amount }}</strong>
+                                                <strong>₦ {{ c_amt }}</strong><br>
+                                                <strong class="d-block text-big mt-2">₦ {{ t_amt }}</strong>
                                             </td>
                                         </tr>
                                         </tbody>
@@ -106,7 +106,7 @@
                                     var handler = PaystackPop.setup({
                                         key: 'pk_test_fea4f2c1aab20408e00605bca8bf3d2602db4324',
                                         email: '{{ email }}',
-                                        amount: {{ amount }} * 100,
+                                        amount: {{ t_amt }} * 100,
                                         currency: "NGN",
                                         ref: '{{ ref_no }}',
                                         metadata: {

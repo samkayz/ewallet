@@ -4,7 +4,7 @@
     <html>
     <head>
         <meta charset="utf-8" />
-        <title>DanfoPay - Payment Gateways</title>
+        <title>jCollect - Payment Gateways</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css'%}" />
@@ -30,7 +30,7 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <h3 class="text-center">Payment Details</h3>
-                                <h3 class="text-center">₦ {{ amount }}</h3>
+                                <h3 class="text-center">₦ {{ t_amt }}</h3>
                                 <img class="img-responsive cc-img" src="http://www.prepbootstrap.com/Content/images/shared/misc/creditcardicons.png">
                             </div>
                         </div>
@@ -91,8 +91,8 @@
         function payWithPaystack(){
             var handler = PaystackPop.setup({
                 key: 'pk_test_fea4f2c1aab20408e00605bca8bf3d2602db4324',
-                email: '{{ email }}',
-                amount: {{ amount }} * 100,
+                email: '{{ s_email }}',
+                amount: (({{ amount }} + {{ c_amt }}) * 100),
                 currency: "NGN",
                 ref: '{{ ref_no }}',
                 metadata: {

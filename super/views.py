@@ -3,8 +3,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.models import User, auth
 from django.contrib.auth.decorators import login_required
-from account.models import Transactions, Account, Voucher, Ticket, Merchant, Withdraw
-from .models import Resolution, Settings, Details, Emails
+from account.models import Transactions, Account, Voucher, Ticket, Merchant, Withdraw, Subscription, Invoice
+from .models import Resolution, Settings, Details, Emails, Commission
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
@@ -46,7 +46,10 @@ def home(request):
     ticket = Ticket.objects.filter()
     vendor = Merchant.objects.filter()
     t_v = Voucher.objects.aggregate(Sum('v_amount'))['v_amount__sum']
-    context = {'show': show, 'merchant': merchant, 'users': users, 't_v': t_v, 'ticket': ticket, 'vendor': vendor}
+    t_inv = Invoice.objects.aggregate(Sum('amount'))['amount__sum']
+    s_withdraw = Transactions.objects.filter(receiver='Withdrawal').aggregate(Sum('amount'))['amount__sum']
+    context = {'show': show, 'merchant': merchant, 'users': users, 't_v': t_v, 'ticket': ticket,
+               'vendor': vendor, 't_inv': t_inv, 's_withdraw': s_withdraw}
     return render(request, 'admin/home.html', context)
 
 
@@ -377,7 +380,17 @@ def mail(request):
                 msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
                 msg.attach_alternative(html_content, "text/html")
                 msg.send()
-                messages.info(request, 'Email Sent to All user ')
+            messages.info(request, 'Email Sent to All user ')
+        elif users == 'sub':
+            for data in Subscription.objects.all():
+                subject, from_email, to = subject, 'noreply@wallet.com', data.email
+                html_content = render_to_string('mail/news2.html', {'message': message})
+                text_content = strip_tags(html_content)
+                msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+                msg.attach_alternative(html_content, "text/html")
+                msg.send()
+            messages.info(request, 'Email Sent to All user ')
+
         else:
             first_name = User.objects.values('first_name').get(email=users)['first_name']
             subject, from_email, to = subject, 'noreply@wallet.com', users
@@ -391,3 +404,33 @@ def mail(request):
     all_user = User.objects.filter()
     context = {'all_user': all_user}
     return render(request, 'admin/mail.html', context)
+
+
+def user_trans(request, username):
+    show = Transactions.objects.filter(Q(sender=username) | Q(receiver=username))
+    name = User.objects.values('first_name').get(username=username)['first_name']
+    context = {'show': show, 'name': name}
+    return render(request, 'admin/user_trans.html', context)
+
+
+def charges(request):
+    if request.method == 'POST':
+        payme = request.POST['payme']
+        invoice = request.POST['invoice']
+        transfer = request.POST['transfer']
+        deposit = request.POST['deposit']
+        merchant = request.POST['merchant']
+
+        if Commission.objects.filter(id=1).exists():
+            Commission.objects.filter(id=1).update(pay_me=payme, invoice=invoice, transfer=transfer,
+                                                   deposit=deposit, merchant=merchant)
+            messages.info(request, 'Charges and Commission Update')
+            return redirect('charges')
+        else:
+            c_charge = Commission(pay_me=payme, invoice=invoice, transfer=transfer, deposit=deposit, merchant=merchant)
+            c_charge.save()
+            messages.info(request, 'Charges and Commission Update')
+
+    all_charges = Commission.objects.all().get(id=1)
+    context = {'all': all_charges}
+    return render(request, 'admin/charges.html', context)

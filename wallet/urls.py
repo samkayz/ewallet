@@ -36,6 +36,7 @@ urlpatterns = [
     path('success', views.success, name='success'),
     path('error', views.error, name='not-found'),
     path('policy', views.policy, name='privacy-policy'),
+    path('subscribe', views.subscribe, name='subscribe'),
 
     # Password reset links (ref: https://github.com/django/django/blob/master/django/contrib/auth/views.py)
     path('password_change/done/', auth_views.PasswordChangeDoneView.as_view(

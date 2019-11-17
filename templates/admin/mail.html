@@ -20,7 +20,7 @@
     <!-- Page Content -->
     <div class="ecaps-page-content">
         <!-- Top Header Area -->
-        {% include 'header.html' %}
+        {% include 'admin/header.html' %}
         <!-- Main Content Area -->
         <div class="main-content">
             <div class="container-fluid">
@@ -62,6 +62,7 @@
                                                             <select class="form-control" name="user">
                                                                 <option>Select Users</option>
                                                                 <option value="all">All User</option>
+                                                                <option value="sub">Subscriber</option>
                                                                 {% for user in all_user %}
                                                                     <option value="{{ user.email }}">{{ user.first_name }} {{ user.last_name }}</option>
                                                                 {% endfor %}

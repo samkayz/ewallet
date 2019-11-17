@@ -34,5 +34,7 @@ urlpatterns = [
     path('load', views.load, name='load'),
     path('payment', views.payment, name='payment'),
     path('fail', views.fail, name='fail'),
+    path('int_mode', views.int_mode, name='mode'),
+    path('w_pay', views.w_pay, name='who-pay-charges'),
 
 ]

@@ -98,7 +98,7 @@
                                     <p>You Transaction of <b>₦ {{ amount }}</b> to  <b>{{ username }}</b> was successful
                                         and The recipient will get notification shortly about this transaction</p>
                                     <p>Thanks <br/>
-                                        DanfoPay Inc.<br/>
+                                        jCollect Inc.<br/>
                                         08022301477, 08069475532
                                     </p>
 
@@ -121,6 +121,44 @@
               <tr>
                 <td>
           <![endif]-->
+                        <table class="col380" align="left" border="0" cellpadding="0" cellspacing="0" style="width: 100%; max-width: 380px;">
+                            <tr>
+                                <td>
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td class="bodycopy">
+                                                <p><b><center>Transaction Details</center></b></p>
+                                                <table>
+                                                    <tr>
+                                                        <th>Receiver ------------------------------</th>
+                                                        <td>{{ username }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Amount ------------------------------</th>
+                                                        <td>₦ {{ amount }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Charges ------------------------------</th>
+                                                        <td>₦ {{ c_amt }}</td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 20px 0 0 0;">
+                                                <table class="buttonwrapper" bgcolor="#e05443" border="0" cellspacing="0" cellpadding="0">
+                                                    <tr>
+                                                        <td class="button" height="45">
+                                                            <a href="http://{{ request.get_host }}/account/login">Contact Us</a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
                         <!--[if (gte mso 9)|(IE)]>
                 </td>
               </tr>
@@ -133,7 +171,7 @@
                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
                             <tr>
                                 <td align="center" class="footercopy">
-                                    Copyright DanfoPay &copy; {% now "Y" %}<br/>
+                                    Copyright jCollect &copy; {% now "Y" %}<br/>
                                     <a href="#" class="unsubscribe"><font color="#ffffff">Subscribe</font></a>
                                     <span class="hide">to our Newsletter to receive latest update</span>
                                 </td>

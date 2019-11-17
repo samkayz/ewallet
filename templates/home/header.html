@@ -10,7 +10,7 @@
                         <!-- menu logo -->
                         <ul class="menu-logo">
                             <li>
-                                <a href="index"><img src="{% static 'home/images/logo.png'%}" alt="logo" class="img-fluid"></a>
+                                <a href="index"><img src="{% static 'home/images/2.PNG'%}" style="height: 60px; width: 150px;" alt="logo" class="img-fluid"></a>
                             </li>
                         </ul>
                         <!-- menu search bar -->
@@ -33,17 +33,17 @@
                                 <!-- drop down multilevel  -->
                             </li>
                             <li>
-                                <a href="service">Service</a>
-                            </li>
-                            <li>
                                 <a href="javascript:void(0)">Pages</a>
                                 <!-- drop down third level -->
                                 <ul class="drop-down-multilevel">
                                     <li>
+                                        <a href="service">Service</a>
+                                    </li>
+                                    <li>
                                         <a href="javascript:void(0)">About Us<i class="fas fa-angle-right "></i></a>
                                         <!-- drop down third level -->
                                         <ul class="drop-down-multilevel">
-                                            <li><a href="about">About J-Wallet</a></li>
+                                            <li><a href="about">About jCollect</a></li>
                                         </ul>
                                     </li>
                                     <li>
@@ -70,16 +70,16 @@
                                             <li><a href="/super/logout">Logout</a></li>
                                         </ul>
                                     </li>
-                                    {% else %}
+                                {% else %}
                                     <li>
-                                    <a href="javascript:void(0)">My Account</a>
-                                    <!-- drop down third level -->
-                                    <ul class="drop-down-multilevel">
-                                        <li><a href="#">Howdy {{ user.first_name }} !</a></li>
-                                        <li><a href="/account/dashboard">Dashboard</a></li>
-                                        <li><a href="/account/logout">Logout</a></li>
-                                    </ul>
-                                </li>
+                                        <a href="javascript:void(0)">My Account</a>
+                                        <!-- drop down third level -->
+                                        <ul class="drop-down-multilevel">
+                                            <li><a href="#">Howdy {{ user.first_name }} !</a></li>
+                                            <li><a href="/account/dashboard">Dashboard</a></li>
+                                            <li><a href="/account/logout">Logout</a></li>
+                                        </ul>
+                                    </li>
                                 {% endif %}
                             {% elif not user.is_authenticated %}
                                 <li>

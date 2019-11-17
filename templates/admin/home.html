@@ -20,7 +20,7 @@
         <!-- Page Content -->
         <div class="ecaps-page-content">
             <!-- Top Header Area -->
-            {% include 'header.html' %}
+            {% include 'admin/header.html' %}
             <!-- Main Content Area -->
             <div class="main-content">
                 <div class="dashboard-area">
@@ -93,7 +93,7 @@
                                         <h5 class="card-title">Yearly Summary</h5>
                                         <div class="row pb-3">
                                             <div class="col-md-4 col-6 text-center">
-                                                <h5 class="f-w-300">₦ 0.00</h5>
+                                                <h5 class="f-w-300">₦ {{ t_inv }}</h5>
                                                 <span>Total Invoice</span>
                                             </div>
                                             <div class="col-md-4 col-6 text-center">
@@ -101,8 +101,8 @@
                                                 <span>Total Vouchers</span>
                                             </div>
                                             <div class="col-md-4 col-12 text-center">
-                                                <h5 class="f-w-300">₦ 0.00</h5>
-                                                <span>Vendor Sales</span>
+                                                <h5 class="f-w-300">₦ {{ s_withdraw }}</h5>
+                                                <span>Total Withdrawal</span>
                                             </div>
                                         </div>
                                         <div id="bar-chart3" class="bar-chart3" style="height:300px;"></div>

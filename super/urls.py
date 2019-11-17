@@ -29,4 +29,6 @@ urlpatterns = [
     path('hold/<id>', views.hold, name='hold'),
     path('un_hold/<id>', views.un_hold, name='unhold'),
     path('mail', views.mail, name='send-mail'),
+    path('user_trans/<username>', views.user_trans, name='all-user-transaction'),
+    path('charges', views.charges, name='charges'),
 ]

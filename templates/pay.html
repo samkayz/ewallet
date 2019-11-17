@@ -3,7 +3,7 @@
     <!DOCTYPE html>
     <html lang="en">
     <head>
-        <title>DanfoPay</title>
+        <title>jCollect</title>
         <!-- Meta-Tags -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="utf-8">
@@ -45,17 +45,23 @@
                                 <tr>
                                     <th scope="col">Description</th>
                                     <th scope="col">Amount</th>
+                                    <th scope="col">Charges</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
                                     <td>{{ desc }}</td>
                                     <td>₦ {{ amount }}</td>
+                                    {% if who == 'customer' %}
+                                    <td>({{ charge }}%) ₦ {{ c_amt }}</td>
+                                    {% else %}
+                                    <td>₦ 0.00</td>
+                                    {% endif %}
                                 </tr>
                                 </tbody>
                             </table>
                         </div>
-                        <p>Integrate DanfoPay to your website and receive money from your customer with ease and get your money to your account within minutes.</p>
+                        <p>Integrate jCollect to your website and receive money from your customer with ease and get your money to your account within minutes.</p>
                         <img src="{% static 'new/images/ab.jpg'%}" alt="" />
                     </div>
                 </div>
@@ -69,12 +75,12 @@
                             <input type="hidden" name="amount" value="{{ amount }}">
                             <input type="hidden" name="merchant" value="{{ m_username }}">
                             <input type="hidden" name="success_url" value="{{ success_url }}">
-                            <input type="text" name="username" placeholder="DanfoPay Username" required="">
+                            <input type="text" name="username" placeholder="jCollect Username" required="">
                         </div>
                         <label>Password</label>
                         <div class="input-group">
                             <span class="fa fa-user-secret" aria-hidden="true"></span>
-                            <input type="password" name="password"  placeholder="DanfoPay Password" required="">
+                            <input type="password" name="password"  placeholder="jCollect Password" required="">
                         </div>
                         <input class="btn btn-primary" type="submit" value="Pay Now">
                     </form>
@@ -86,7 +92,7 @@
         </div>
         <!-- footer -->
         <div class="footer">
-            <p>Copyright DanfoPay &copy; {% now "Y" %}</p>
+            <p>Copyright jCollect &copy; {% now "Y" %}</p>
         </div>
         <!-- footer -->
     </div>

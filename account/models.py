@@ -65,6 +65,8 @@ class Merchant(models.Model):
     api_test_key = models.CharField(max_length=200)
     api_live_key = models.CharField(max_length=200)
     bus_logo = models.FileField(upload_to='media')
+    int_mode = models.CharField(max_length=100)
+    w_p_charges = models.CharField(max_length=100)
 
     class Meta:
         db_table = "merchant"
@@ -115,3 +117,11 @@ class Invoice(models.Model):
 
     class Meta:
         db_table = "invoice"
+
+
+class Subscription(models.Model):
+    email = models.CharField(max_length=200)
+    date_reg = models.DateField(auto_now=True)
+
+    class Meta:
+        db_table = "subscription"

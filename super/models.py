@@ -43,3 +43,14 @@ class Emails(models.Model):
         db_table = "emails"
 
 
+class Commission(models.Model):
+    pay_me = models.CharField(max_length=10)
+    invoice = models.CharField(max_length=10)
+    transfer = models.CharField(max_length=10)
+    deposit = models.CharField(max_length=10)
+    merchant = models.CharField(max_length=10)
+
+    class Meta:
+        db_table = "commission"
+
+

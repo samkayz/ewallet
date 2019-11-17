@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User, auth
 from django.contrib.auth.decorators import login_required
 from .models import Account, Transactions, Voucher, Ticket, Merchant, Bank, Withdraw, Invoice
-from super.models import Resolution, Settings
+from super.models import Resolution, Settings, Commission
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
@@ -119,10 +119,14 @@ def transfer(request):
         show = Account.objects.values().get(phone_no=r_number)['username']
         status = Account.objects.values('status').get(username=s_username)['status']
         r_status = Account.objects.values('status').get(phone_no=r_number)['status']
+        charge = Commission.objects.values('transfer').get(id=1)['transfer']
+
         # print("Hello: ", show)
+        f_charge = (float(charge))
         sb = (float(s_bal))
         rb = (float(bal))
         am = (float(amount))
+        c_amt = am * (f_charge / 100)
         if status == 'hold':
             messages.info(request, 'Your Account is on Hold, Please contact our agent')
         elif r_status == 'hold':
@@ -135,7 +139,7 @@ def transfer(request):
             new = rb + am
             Account.objects.filter(phone_no=r_number).update(bal=new)
 
-            new_2 = sb - am
+            new_2 = (sb - (am + c_amt))
             Account.objects.filter(username=s_username).update(bal=new_2)
 
             trans = Transactions(sender=s_username,
@@ -150,7 +154,7 @@ def transfer(request):
             subject, from_email, to = 'Fund Transfer', 'noreply@wallet.com', r_mail
             html_content = render_to_string('mail/s_mail.html',
                                             {'first_name': first_name, 'new_2': new_2, 'ref_no': ref_no, 'amount': am,
-                                             'receiver': r_number})
+                                             'receiver': r_number, 'c_amt': c_amt})
             text_content = strip_tags(html_content)
             msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
             msg.attach_alternative(html_content, "text/html")
@@ -176,7 +180,8 @@ def verify(request):
         num = Account.objects.filter(phone_no=r_number).exists()
         if num:
             check = Account.objects.all().get(phone_no=r_number)
-            cont = {'check': check, 'num': num}
+            charge = Commission.objects.values('transfer').get(id=1)['transfer']
+            cont = {'check': check, 'num': num, 'charge': charge}
             return render(request, 'transfer.html', cont)
         else:
             messages.info(request, 'Mobile Number Not Found')
@@ -192,8 +197,10 @@ def settings(request):
     if Merchant.objects.filter(bus_owner_username=c_user).exists():
         s_show = Merchant.objects.all().get(bus_owner_username=c_user)
         show = Account.objects.values('phone_no').get(username=c_user)['phone_no']
+        i_mode = Merchant.objects.values('int_mode').get(bus_owner_username=c_user)['int_mode']
+        w_p_charges = Merchant.objects.values('w_p_charges').get(bus_owner_username=c_user)['w_p_charges']
         cus_id = Account.objects.values('customer_id').get(username=c_user)['customer_id']
-        context = {'s_show': s_show, 'show': show, 'cus_id': cus_id}
+        context = {'s_show': s_show, 'show': show, 'cus_id': cus_id, 'i_mode': i_mode, 'w_p_charges': w_p_charges}
         return render(request, 'settings.html', context)
     else:
         return redirect('api')
@@ -355,6 +362,7 @@ def merchant(request):
                               bus_no=b_tel, bus_website=b_url, bus_logo=bus_logo)
             b_save.save()
             messages.info(request, "Merchant Registration Successful")
+            return redirect('settings')
     show = Account.objects.values('phone_no').get(username=c_user)['phone_no']
     context = {'show': show}
     return render(request, 'settings.html', context)
@@ -698,6 +706,11 @@ def deposit(request):
         amount = request.POST['amount']
         show = Account.objects.values('phone_no').get(username=username)['phone_no']
         status = Account.objects.values('status').get(username=username)['status']
+        charge = Commission.objects.values('deposit').get(id=1)['deposit']
+        f_charge = (float(charge))
+        am = (float(amount))
+        c_amt = am * (f_charge / 100)
+        t_amt = am + c_amt
         if status == "hold":
             messages.info(request, "You Account is Currently o Hold")
             return redirect('deposit')
@@ -705,7 +718,11 @@ def deposit(request):
             request.session['username'] = username
             request.session['amount'] = amount
             request.session['ref_no'] = ref_no
-            context = {'username': username, 'email': email, 'amount': amount, 'ref_no': ref_no, 'show': show}
+            request.session['t_amt'] = t_amt
+            request.session['c_amt'] = c_amt
+            context = {'username': username, 'email': email, 't_amt': t_amt,
+                       'ref_no': ref_no, 'show': show, 'amount': amount,
+                       'c_amt': c_amt, 'charge': charge}
             return render(request, 'confirm.html', context)
     else:
         return render(request, 'deposit.html')
@@ -716,6 +733,8 @@ def payment(request):
     amount = request.session['amount']
     username = request.session['username']
     ref_no = request.session['ref_no']
+    t_amt = request.session['t_amt']
+    c_amt = request.session['c_amt']
     balance = Account.objects.values('bal').get(username=username)['bal']
     acct_bal = (float(balance))
     amt = (float(amount))
@@ -729,7 +748,8 @@ def payment(request):
     subject, from_email, to = 'Fund Deposit', 'noreply@wallet.com', email
     html_content = render_to_string('mail/deposit.html',
                                     {'username': username, 'amount': amount,
-                                     'new': new, 'ref_no': ref_no, 'first_name': first_name})
+                                     'new': new, 'ref_no': ref_no,
+                                     'first_name': first_name, 't_amt': t_amt, 'c_amt': c_amt})
     text_content = strip_tags(html_content)
     msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
     msg.attach_alternative(html_content, "text/html")
@@ -741,6 +761,24 @@ def payment(request):
 def fail(request):
     messages.info(request, 'Transaction Fail')
     return redirect('deposit')
+
+
+def int_mode(request):
+    if request.method == 'POST':
+        user = request.POST['user']
+        i_mode = request.POST['int_mode']
+        Merchant.objects.filter(bus_owner_username=user).update(int_mode=i_mode)
+        messages.info(request, 'Updated Successfully')
+        return redirect('settings')
+
+
+def w_pay(request):
+    if request.method == 'POST':
+        user = request.POST['user']
+        w_pay_charge = request.POST['w_pay']
+        Merchant.objects.filter(bus_owner_username=user).update(w_p_charges=w_pay_charge)
+        messages.info(request, 'Updated Successfully')
+        return redirect('settings')
 
 
 

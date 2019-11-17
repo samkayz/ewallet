@@ -49,12 +49,12 @@
                                         <div class="store">
                                             <div class="row mb-30-xs">
                                                 <div class="col-4 text-center">
-                                                    <span class="text-primary font-18 font-weight-bold mb-0">0.00</span>
-                                                    <span class="d-block text-dark font-weight-bold">Shop</span>
+                                                    <span class="text-primary font-18 font-weight-bold mb-0">{{ i_mode }}</span>
+                                                    <span class="d-block text-dark font-weight-bold">Merchant</span>
                                                 </div>
                                                 <div class="col-4 text-center">
-                                                    <span class="mb-0 font-18 font-weight-bold text-danger">0.00</span>
-                                                    <span class="d-block text-dark font-weight-bold">Payme</span>
+                                                    <span class="mb-0 font-18 font-weight-bold text-danger">{{ w_p_charges }}</span>
+                                                    <span class="d-block text-dark font-weight-bold">Charges</span>
                                                 </div>
                                                 <div class="col-4 text-center">
                                                     <span class="text-success font-18 font-weight-bold mb-0">0.00</span>
@@ -84,10 +84,25 @@
                                             <h6 class="font-14"><span class="text-muted">Phone :</span> {{ show }}</h6>
                                         </div>
                                     </div>
+                                    <div class="card-body">
+                                        <div class="stacked-form-area">
+                                            <h4 class="card-title">Who Pay for Charges?</h4>
+                                            <form action="w_pay" method="post">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="user" value="{{ user.username }}" class="form-control" readonly>
+                                                <select id="country" name="w_pay">
+                                                    <option>Select Who Pays</option>
+                                                    <option value="merchant">Merchant</option>
+                                                    <option value="customer">Customer</option>
+                                                </select>
+
+                                                <input class="btn btn-primary btn-block mt-15" type="submit" value="Submit">
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
                         <div class="col-md-6 col-xl-4">
                             {% for message in messages %}
                                 <div class="alert alert-success" role="alert">
@@ -143,8 +158,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="stacked-form-area">
-                                        <h4 class="card-title mb-1">Get Your API</h4>
-                                        <p class="mb-30">With Our API, you get paid from your website With ease.</p>
+                                        <h4 class="card-title mb-1">Get Your API Key</h4>
                                         <form action="api" method="post">
                                             {% csrf_token %}
                                             <input type="hidden" name="user" value="{{ user.username }}" class="form-control" readonly>
@@ -161,6 +175,22 @@
                                         </form>
                                     </div>
                                 </div>
+                                <div class="card-body">
+                                        <div class="stacked-form-area">
+                                            <h4 class="card-title">Integration Mode</h4>
+                                            <form action="int_mode" method="post">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="user" value="{{ user.username }}" class="form-control" >
+                                                <select id="country" name="int_mode">
+                                                    <option>Select Mode</option>
+                                                    <option value="test">Test Mode</option>
+                                                    <option value="live">Live Mode</option>
+                                                </select>
+
+                                                <input class="btn btn-primary btn-block mt-15" type="submit" value="Submit">
+                                            </form>
+                                        </div>
+                                    </div>
                             </div>
                         </div>
                     </div>
