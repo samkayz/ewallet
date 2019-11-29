@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+{% include 'head.html' %}
+
+<body>
+<!-- Preloader -->
+{% include 'preloader.html' %}
+<!-- Preloader -->
+<!-- ======================================
+******* Page Wrapper Area Start **********
+======================================= -->
+<div class="ecaps-page-wrapper">
+    <!-- Sidemenu Area -->
+    {% include 'sidebar.html' %}
+
+    <!-- Page Content -->
+    <div class="ecaps-page-content">
+        <!-- Top Header Area -->
+        {% include 'header.html' %}
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <div class="container-fluid">
+                <!-- Form Validation area Start -->
+                <div class="row">
+                    <div class="col-12 box-margin height-card">
+                        <div class="card">
+                            <div class="card-body">
+                            <div>
+                                   <span style="float: right"><a href="transfer" ><button class="btn btn-primary">Transfer</button></a></span>
+                                </div>
+                                <h4 class="card-title">Credit Virtual Card</h4>
+                                        {% for message in messages %}
+                                            <div class="alert alert-success" role="alert">
+                                                {{ message }}
+                                            </div>
+                                        {% endfor %}
+                                <form class="cmxform" id="commentForm" method="post" action="card_check">
+                                    {% csrf_token %}
+                                    <fieldset>
+                                        <div class="form-group mb-3">
+                                            <label>Enter V-Card Number</label>
+                                            <div class="input-group m-b-20">
+                                                <div class="input-group-prepend">
+                                                    <span class="form-control">Card No</span>
+                                                </div>
+                                                <input class="form-control" id="single-input" type="number" name="card_no" value="{{ check.card_no }}" placeholder="Enter 16 digits Card Number">
+                                                <div class="input-group-append">
+                                                    <button type="submits" class="btn waves-effect waves-light btn-primary">Verify </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </form>
+                                 {% if card_check %}
+                                        <div class="form-group">
+                                            <label for="curl">Card Owner Info</label>
+                                            <input id="curl" class="form-control" type="text" value="{{ first }} {{ last }}" readonly>
+                                        </div>
+                                        <form action="virtual_card" method="post">
+                                        {% csrf_token %}
+                                           <input type="hidden" name="s_username" class="form-control" value="{{ user.username }}">
+                                           <input type="hidden" name="card_no" class="form-control" value="{{ check.card_no }}">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">₦</span>
+                                            </div>
+                                            <input type="number" class="form-control" name="amount" step=any placeholder="Enter Amount" aria-label="Amount (to the nearest dollar)">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">+ {{ charge }}% Charges</span>
+                                            </div>
+                                        </div>
+                                        <input class="btn btn-primary" type="submit" value="Transfer">
+                                    </fieldset>
+                                </form>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ======================================
+********* Page Wrapper Area End ***********
+======================================= -->
+
+<!-- Must needed plugins to the run this Template -->
+{% include 'foot.html' %}
+
+</body>
+
+
+<!-- Mirrored from demo.riktheme.com/motrila-2/side-menu/form-validation.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 05 Nov 2019 11:42:08 GMT -->
+</html>

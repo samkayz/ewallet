@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+{% include 'head.html' %}
+
+<body>
+    <!-- Preloader -->
+    {% include 'preloader.html' %}
+    <!-- Preloader -->
+
+
+    <!-- Setting Panel -->
+
+    <!-- ======================================
+    ******* Page Wrapper Area Start **********
+    ======================================= -->
+    <div class="ecaps-page-wrapper">
+        <!-- Sidemenu Area -->
+        {% include 'admin/sidebar.html' %}
+
+        <!-- Page Content -->
+        <div class="ecaps-page-content">
+            <!-- Top Header Area -->
+            {% include 'admin/header.html' %}
+
+            <!-- Main Content Area -->
+            <div class="main-content">
+                <!-- Basic Form area Start -->
+                <div class="container-fluid">
+                    <!-- Form row -->
+                    <div class="row">
+                        <div class="col-12 box-margin">
+                            <div class="contact-form-area">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Set Charges & Commissions</h4>
+                                        <div class="container">
+                                            <form action="charges" method="post">
+                                                {% csrf_token %}
+
+                                                <label for="fname2">Pay-Me Charges (%)</label>
+                                                <input type="text" id="fname2" value="{{ all.pay_me }}" name="payme" placeholder="Enter charges in %">
+
+                                                <label for="lname2">Invoice Charges (%)</label>
+                                                <input type="text" id="lname2" value="{{ all.invoice }}" name="invoice" placeholder="Enter charges in %">
+
+                                                <label for="lname2">Transfer Charges (%)</label>
+                                                <input type="text" id="lname2" value="{{ all.transfer }}" name="transfer" placeholder="Enter charges in %">
+
+                                                <label for="lname2">Deposit Charges (%)</label>
+                                                <input type="text" id="lname2" value="{{ all.deposit }}" name="deposit" placeholder="Enter charges in %">
+
+                                                <label for="lname2">Merchant Charges (%)</label>
+                                                <input type="text" id="lname2" value="{{ all.merchant }}" name="merchant" placeholder="Enter charges in %">
+
+                                                <input class="btn btn-primary btn-block mt-15" type="submit" value="Submit">
+
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======================================
+    ********* Page Wrapper Area End ***********
+    ======================================= -->
+
+    <!-- Must needed plugins to the run this Template -->
+   {% include 'foot.html' %}
+</body>
+</html>

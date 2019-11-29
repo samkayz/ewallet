@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<body onload="document.my_form.submit()">
+<form action="http://{{ success_url }}" name="my_form" method="GET">
+    <input type="hidden" name="email" value="{{ email }}" />
+    <input type="hidden" name="status" value="{{ status }}" />
+    <input type="hidden" name="ref_no" value="{{ ref_no }}" />
+    <input type="hidden" name="amount" value="{{ amount }}" />
+    <input type="hidden" name="username" value="{{ username }}" />
+</form>
+</body>
+</html>

@@ -1,0 +1,94 @@
+{% load static %}
+{% block main %}
+    <!doctype html>
+    <html lang="en">
+    {% include 'head.html' %}
+
+    <body>
+    <!-- Preloader -->
+    {% include 'preloader.html' %}
+    <!-- Preloader -->
+    <!-- ======================================
+    ******* Page Wrapper Area Start **********
+    ======================================= -->
+    <div class="ecaps-page-wrapper">
+        <!-- Sidemenu Area -->
+        {% include 'sidebar.html' %}
+
+        <!-- Page Content -->
+        <div class="ecaps-page-content">
+            <!-- Top Header Area -->
+            {% include 'header.html' %}
+            <!-- Main Content Area -->
+            <div class="main-content">
+                <div class="container-fluid">
+                    <!-- Form Validation area Start -->
+                    <div class="row">
+                        <div class="col-12 box-margin height-card">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Deposit Amount</h4>
+                                    {% for message in messages %}
+                                        <div class="alert alert-success" role="alert">
+                                            {{ message }}
+                                        </div>
+                                    {% endfor %}
+                                    <form class="cmxform" id="commentForm" method="post" action="airtime">
+                                        {% csrf_token %}
+                                        <fieldset>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Amount</span>
+                                                </div>
+                                                <input type="hidden" name="username" class="form-control" value="{{ user.username }}">
+                                                <input type="hidden" name="email" class="form-control" value="{{ user.email }}">
+                                                <input type="number" class="form-control" name="amount" placeholder="Enter Amount" aria-label="Amount (to the nearest dollar)">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">.00</span>
+                                                </div>
+                                            </div>
+                                            <input class="btn btn-primary" type="submit" value="Confirm">
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======================================
+    ********* Page Wrapper Area End ***********
+    ======================================= -->
+    <script src="{% static 'js/jquery.min.js'%}"></script>
+    <script src="{% static 'js/popper.min.js'%}"></script>
+    <script src="{% static 'js/bootstrap.min.js'%}"></script>
+    <script src="{% static 'js/bundle.js'%}"></script>
+    <script src="{% static 'js/default-assets/date-time.js'%}"></script>
+    <script src="{% static 'js/default-assets/setting.js'%}"></script>
+    <script src="{% static 'js/default-assets/fullscreen.js'%}"></script>
+    <script src="{% static 'js/default-assets/bootstrap-growl.js'%}"></script>
+    <script src="{% static 'js/default-assets/notification-active.js'%}"></script>
+    <script src="{% static 'js/default-assets/active.js'%}"></script>
+
+    <!-- Must needed plugins to the run this Template -->
+    <script src="{% static 'js/default-assets/jquery.datatables.min.js'%}"></script>
+    <script src="{% static 'js/default-assets/datatables.bootstrap4.js'%}"></script>
+    <script src="{% static 'js/default-assets/datatable-responsive.min.js'%}"></script>
+    <script src="{% static 'js/default-assets/responsive.bootstrap4.min.js'%}"></script>
+    <script src="{% static 'js/default-assets/datatable-button.min.js'%}"></script>
+    <script src="{% static 'js/default-assets/button.bootstrap4.min.js'%}"></script>
+    <script src="{% static 'js/default-assets/button.html5.min.js'%}"></script>
+    <script src="{% static 'js/default-assets/button.flash.min.js'%}"></script>
+    <script src="{% static 'js/default-assets/button.print.min.js'%}"></script>
+    <script src="{% static 'js/default-assets/datatables.keytable.min.js'%}"></script>
+    <script src="{% static 'js/default-assets/datatables.select.min.js'%}"></script>
+    <script src="{% static 'js/default-assets/demo.datatable-init.js'%}"></script>
+    <script src="{% static 'js/default-assets/bootstrap-growl.js'%}"></script>
+
+    </body>
+    </html>
+{% endblock %}

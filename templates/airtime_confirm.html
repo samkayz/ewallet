@@ -1,0 +1,159 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+{% include 'head.html' %}
+<body>
+<!-- Preloader -->
+{% include 'preloader.html' %}
+<!-- Preloader -->
+<!-- Setting Panel -->
+<!-- ======================================
+******* Page Wrapper Area Start **********
+======================================= -->
+<div class="ecaps-page-wrapper">
+    <!-- Sidemenu Area -->
+    {% include 'sidebar.html' %}
+
+    <!-- Page Content -->
+    <div class="ecaps-page-content">
+        <!-- Top Header Area -->
+        {% include 'header.html' %}
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 box-margin">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-6 pb-4">
+
+                                        <div class="media align-items-center">
+                                            <!-- Logo -->
+                                            <div class="card-body-login mb-30">
+                                                <img src="{% static 'img/core-img/small-logo.png'%}" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6 text-right pb-4">
+
+                                        <h6 class="font-15 mb-3">INVOICE: #{{ ref_no }}</h6>
+                                        <div class="mb-1 font-15">Username: <strong class="font-weight-semibold">{{ username }}</strong></div>
+                                        <div class="font-15">Email: <strong class="font-weight-semibold">{{ email }}</strong></div>
+                                        <div class="font-15">Mobile No: <strong class="font-weight-semibold">{{ show }}</strong></div>
+
+                                    </div>
+                                </div>
+
+                                <hr class="mb-4">
+
+                                <div class="row">
+                                    <div class="col-sm-6 mb-4">
+                                    </div>
+                                </div>
+
+                                <div class="table-responsive mb-4">
+                                    <table class="table m-0">
+                                        <thead>
+                                        <tr>
+                                            <th class="py-3">
+                                                Payment description
+                                            </th>
+                                            <th class="py-3">
+                                                Amount
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td class="py-3">
+                                                <div class="font-weight-semibold">Card Payment With Paystack</div>
+                                            </td>
+                                            <td class="py-3">
+                                                <strong>₦ {{ amount }}</strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" class="text-right py-3">
+                                                Subtotal:<br>
+                                                Charge({{ charge }}%):<br>
+                                                <span class="d-block text-big mt-2">Total:</span>
+                                            </td>
+                                            <td class="py-3">
+                                                <strong>₦ {{ amount }}</strong><br>
+                                                <strong>₦ {{ c_amt }}</strong><br>
+                                                <strong class="d-block text-big mt-2">₦ {{ t_amt }}</strong>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div>
+                                    <p> <strong>Note:</strong> All Payment should be done using your card and immediately the transaction is completed, the exact amount will be added your wallet account.</p>
+                                </div>
+                                <form>
+                                    <script src="https://aimtoget.com/assets/webpay/inline.js"></script>
+                                    <div class="text-right">
+                                        <button type="button" onclick="callAtgPay()"><i class="arrow_right"></i>&nbsp; Pay Now</button>
+
+                                    </div>
+                                </form>
+                            </div>
+                            <script>
+                                function callAtgPay(e) {
+                                    AtgPayment.pay({
+                                        //customer's email address
+                                        email: '{{ email }}',
+                                        //Customer's phone number (Optional)
+                                        phone: '{{ show }}',
+                                        //customer's description
+                                        description: 'Pay for house rent',
+                                        // Amount to pay in naira
+                                        amount:{{ amount }},
+                                        //Payment reference
+                                        //If not specified, a reference will be generated for you
+                                        reference: '{{ ref_no }}',
+                                        // Merchant's aimotget PUBLIC KEY
+                                        key:'b730aaa48afecc933a1553d1376f39a4943dfb32d273daf1',
+                                        //Url to the logo you want displayed on the payment modal
+                                        logo_url:'https://example.com/logo.png',
+                                        onclose: function () {
+                                            console.log('Modal closed');
+                                        },
+                                        onerror: function (data) {
+                                            let reference = data.reference
+                                            //payment failed, do something with reference
+                                            console.log(reference)
+                                        },
+                                        onsuccess: function (data) {
+                                            let reference = data.reference
+                                            $.ajax({
+                                                type: "POST",
+                                                url: "airtime_verify",
+                                                data: {reference: reference}
+                                            })
+                                        }
+                                    })
+                                    e.preventDefault()
+                                }
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ======================================
+********* Page Wrapper Area End ***********
+======================================= -->
+
+<!-- Must needed plugins to the run this Template -->
+{% include 'foot.html' %}
+
+</body>
+</html>
