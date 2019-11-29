@@ -2,54 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d3ade1ae-30bc-495c-8e24-c4c4297fa993" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Pulse.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Pulse.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pay/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/pay/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pay/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/pay/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/super/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/super/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/activity.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/activity.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/add_bank_acc.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/add_bank_acc.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/header2.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/header2.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/sidebar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/sidebar2.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/sidebar2.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/confirm.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/confirm.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/dashboard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/foot.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/foot.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/head.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/head.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/header2.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/header2.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/footer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home/head.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/head.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/home/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/invoice.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/invoice.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/load.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/load.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mail/deposit.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/mail/deposit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mail/payme_sender.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/mail/payme_sender.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mail/s_mail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/mail/s_mail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mail/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/mail/signup.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/paid_invoice.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/paid_invoice.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/pay-me.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pay-me.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/pay.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pay.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/pay_invoice.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pay_invoice.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/registration/password_reset_email.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration/password_reset_email.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/settings.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/settings.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/sidebar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/sidebar2.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/sidebar2.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/transfer.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/transfer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/voucher.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/voucher.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/withdraw.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/withdraw.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Scripts/vdjango-admin.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wallet/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/wallet/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wallet/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/wallet/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -88,27 +42,29 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="html" value="25" />
+          <entry key="html" value="26" />
           <entry key="py" value="2" />
           <entry key="url" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="HTML" value="25" />
+          <entry key="HTML" value="26" />
           <entry key="PLAIN_TEXT" value="1" />
           <entry key="Python" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="html" value="377" />
+          <entry key="html" value="391" />
           <entry key="py" value="68" />
+          <entry key="txt" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="377" />
+          <entry key="HTML" value="391" />
+          <entry key="PLAIN_TEXT" value="6" />
           <entry key="Python" value="68" />
         </counts>
       </usages-collector>
@@ -137,7 +93,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/register.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="200">
@@ -146,11 +102,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/sidebar.html">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/home/header.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="14" column="33" lean-forward="true" selection-end-line="53" selection-end-column="14" />
+            <state relative-caret-position="222">
+              <caret line="26" column="32" lean-forward="true" selection-end-line="83" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -309,7 +265,6 @@
         <option value="$PROJECT_DIR$/templates/head.html" />
         <option value="$PROJECT_DIR$/templates/home/head.html" />
         <option value="$PROJECT_DIR$/templates/login.html" />
-        <option value="$PROJECT_DIR$/templates/home/header.html" />
         <option value="$PROJECT_DIR$/templates/admin/index.html" />
         <option value="$PROJECT_DIR$/templates/dashboard.html" />
         <option value="$PROJECT_DIR$/templates/header2.html" />
@@ -318,6 +273,7 @@
         <option value="$PROJECT_DIR$/templates/admin/sidebar2.html" />
         <option value="$PROJECT_DIR$/templates/register.html" />
         <option value="$PROJECT_DIR$/account/views.py" />
+        <option value="$PROJECT_DIR$/templates/home/header.html" />
       </list>
     </option>
   </component>
@@ -363,6 +319,12 @@
               <item name="Ewallet" type="b2602c69:ProjectViewProjectNode" />
               <item name="Ewallet" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Ewallet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Ewallet" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="home" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Ewallet" type="b2602c69:ProjectViewProjectNode" />
@@ -627,7 +589,28 @@
       <option name="project" value="LOCAL" />
       <updated>1573988834010</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Update">
+      <created>1575039648562</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1575039648563</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Update">
+      <created>1575039673858</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1575039673858</updated>
+    </task>
+    <task id="LOCAL-00027" summary="header">
+      <created>1575040009504</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1575040009504</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -648,7 +631,7 @@
     <layout>
       <window_info id="Structure" order="0" sideWeight="0.50438595" side_tool="true" weight="0.20816326" />
       <window_info id="Favorites" order="1" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="2" sideWeight="0.49561402" visible="true" weight="0.1603631" />
+      <window_info content_ui="combo" id="Project" order="2" sideWeight="0.49561402" visible="true" weight="0.1603631" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -659,8 +642,8 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32956153" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5015129" side_tool="true" weight="0.2672131" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49848714" visible="true" weight="0.06065574" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50226927" side_tool="true" weight="0.06065574" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4977307" visible="true" weight="0.06065574" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.3281471" />
       <window_info anchor="bottom" id="Inspection Results" order="13" weight="0.3289689" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -711,7 +694,8 @@
     <MESSAGE value="Reset Password" />
     <MESSAGE value="New Version" />
     <MESSAGE value="Update" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update" />
+    <MESSAGE value="header" />
+    <option name="LAST_COMMIT_MESSAGE" value="header" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/templates/add_bank_acc.html">
@@ -918,13 +902,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/home/header.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="21" column="49" lean-forward="true" selection-start-line="21" selection-start-column="49" selection-end-line="21" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/home/footer.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="181">
@@ -1030,6 +1007,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
           <caret line="34" column="33" lean-forward="true" selection-start-line="34" selection-start-column="33" selection-end-line="34" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/home/header.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="222">
+          <caret line="26" column="32" lean-forward="true" selection-end-line="83" selection-end-column="9" />
         </state>
       </provider>
     </entry>
