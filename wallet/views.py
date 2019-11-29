@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
+from wallet.settings import EMAIL_FROM
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 import uuid
@@ -105,7 +106,7 @@ def success(request):
     del request.session['ref_no']
     del request.session['sender']
     context = {'sender': sender, 'amount': amount, 'username': username}
-    subject, from_email, to = 'Money From Pay-Me', 'noreply@wallet.com', email
+    subject, from_email, to = 'Money From Pay-Me', EMAIL_FROM, email
     html_content = render_to_string('mail/payme.html',
                                     {'username': username, 'amount': amount, 'ref_no': ref_no,
                                      'sender': sender, 'new': new})
@@ -114,7 +115,7 @@ def success(request):
     msg.attach_alternative(html_content, "text/html")
     msg.send()
     # Sender Email
-    subject, from_email, to = 'Payment Confirmation', 'noreply@wallet.com', s_email
+    subject, from_email, to = 'Payment Confirmation', EMAIL_FROM, s_email
     html_content = render_to_string('mail/payme_sender.html',
                                     {'sender': sender, 'amount': amount,
                                      'username': username, 'c_amt': c_amt})
@@ -141,7 +142,7 @@ def subscribe(request):
             s_save.save()
             messages.info(request, 'Thank You for Subscribing to our Newsletter')
 
-            subject, from_email, to = 'Subscription', 'noreply@wallet.com', sub
+            subject, from_email, to = 'Subscription', EMAIL_FROM, sub
             html_content = render_to_string('mail/news.html')
             text_content = strip_tags(html_content)
             msg = EmailMultiAlternatives(subject, text_content, from_email, [to])

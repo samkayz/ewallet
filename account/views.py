@@ -3,15 +3,20 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.models import User, auth
 from django.contrib.auth.decorators import login_required
-from .models import Account, Transactions, Voucher, Ticket, Merchant, Bank, Withdraw, Invoice
+from .models import Account, Transactions, Voucher, Ticket, Merchant, Bank, Withdraw, Invoice, Banks, VirtualCard
 from super.models import Resolution, Settings, Commission
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
+from django.db.models import Sum
+from wallet.settings import EMAIL_FROM
+from  typing import Union
+from collections import namedtuple
 import random
 import string
 import uuid
 import datetime
+from datetime import datetime
 
 
 # Login view function that handle all the login
@@ -24,6 +29,7 @@ def login(request):
 
         if user is not None:
             auth.login(request, user)
+            request.session.set_expiry(300)
             return redirect('dashboard')
         else:
             messages.info(request, 'Invalid Credentials')
@@ -53,6 +59,9 @@ def register(request):
             elif User.objects.filter(email=email).exists():
                 messages.info(request, 'Email Taken')
                 return redirect('register')
+            elif Account.objects.filter(phone_no=phone_no).exists():
+                messages.info(request, 'Mobile Number Used')
+                return redirect('register')
             else:
                 user = User.objects.create_user(username=username,
                                                 password=password1,
@@ -65,19 +74,21 @@ def register(request):
                                 last_name=last_name,
                                 phone_no=phone_no,
                                 customer_id=cus_id,
-                                bal='0',)
+                                bal='0',
+                                status='unhold')
             users.save()
             user.save()
-            messages.info(request, 'Account Created Successfully')
-            subject, from_email, to = 'Account Registration', 'noreply@wallet.com', email
+            # messages.info(request, 'Account Created Successfully, Kindly login with Your Username and Password')
+            subject, from_email, to = 'Account Registration', EMAIL_FROM, email
             html_content = render_to_string('mail/signup.html',
-                                            {'first_name': first_name, 'cus_id': cus_id, 'username': username,
-                                             'password': password1})
+                                            {'first_name': first_name, 'cus_id': cus_id, 'username': username})
             text_content = strip_tags(html_content)
             msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
             msg.attach_alternative(html_content, "text/html")
             msg.send()
-            return redirect('register')
+            user = auth.authenticate(username=username, password=password1)
+            auth.login(request, user)
+            return redirect('dashboard')
         else:
             messages.info(request, 'Password not Matching')
             return redirect('register')
@@ -91,7 +102,11 @@ def register(request):
 def dashboard(request):
     c_user = request.user.username
     show = Account.objects.all().get(username=c_user)
-    context = {'show': show}
+    shows = VirtualCard.objects.filter(card_user=c_user)
+    # check = VirtualCard.objects.values('card_user').get(card_user=c_user)['card_user']
+    vendor = Transactions.objects.filter(receiver=c_user).filter(
+        description='Merchant').aggregate(Sum('amount'))['amount__sum']
+    context = {'show': show, 'vendor': vendor, 'shows': shows}
     return render(request, 'dashboard.html', context)
 
 
@@ -151,7 +166,7 @@ def transfer(request):
             messages.info(request, "Transaction Successful!!")
 
             # Sender Email Notification
-            subject, from_email, to = 'Fund Transfer', 'noreply@wallet.com', r_mail
+            subject, from_email, to = 'Fund Transfer', EMAIL_FROM, r_mail
             html_content = render_to_string('mail/s_mail.html',
                                             {'first_name': first_name, 'new_2': new_2, 'ref_no': ref_no, 'amount': am,
                                              'receiver': r_number, 'c_amt': c_amt})
@@ -161,7 +176,7 @@ def transfer(request):
             msg.send()
 
             #         Receiver Email Notification
-            subject, from_email, to = 'Fund Transfer', 'noreply@wallet.com', m_email
+            subject, from_email, to = 'Fund Transfer', EMAIL_FROM, m_email
             html_content = render_to_string('mail/r_mail.html',
                                             {'r_first_name': r_first_name, 'new': new, 'ref_no': ref_no, 'amount': am,
                                              'sender': first_name})
@@ -431,8 +446,9 @@ def bank(request):
             s_bank.save()
             messages.info(request, "Added Successful!!")
             return redirect('bank')
+    all_bank = Banks.objects.filter()
     show = Bank.objects.filter(Q(username=c_user))
-    context = {'show': show}
+    context = {'show': show, 'bank': all_bank}
     return render(request, 'add_bank_acc.html', context)
 
 
@@ -484,7 +500,7 @@ def withdraw(request):
             trans.save()
             s_withdraw.save()
             messages.info(request, "Successful!!")
-            subject, from_email, to = 'Fund Withdrawal', 'noreply@wallet.com', email
+            subject, from_email, to = 'Fund Withdrawal', EMAIL_FROM, email
             html_content = render_to_string('mail/withdraw.html',
                                             {'bank_name': bank_name, 'amount': amount,
                                              'new': new, 'ref_no': ref_no,
@@ -516,6 +532,32 @@ def deposit(request):
         return render(request, 'confirm.html', context)
     else:
         return render(request, 'deposit.html')
+
+
+def airtime_verify(request, reference):
+    return render(request, 'airtime.html')
+
+
+@login_required(login_url='login')
+def airtime(request):
+    ref_no = uuid.uuid4().hex[:10].upper()
+    if request.method == 'POST':
+        username = request.POST['username']
+        email = request.POST['email']
+        amount = request.POST['amount']
+        show = Account.objects.values().get(username=username)['phone_no']
+
+        request.session['ref_no'] = ref_no
+        request.session['username'] = username
+        request.session['amount'] = amount
+        context = {'username': username, 'email': email, 'amount': amount, 'show': show, 'ref_no': ref_no}
+        return render(request, 'airtime_confirm.html', context)
+    else:
+        return render(request, 'airtime.html')
+
+
+def airtime_confirm(request):
+    return render(request, 'airtime_confirm.html')
 
 
 @login_required(login_url='login')
@@ -584,7 +626,7 @@ def invoice(request):
             s_invoice.save()
         messages.info(request, 'Invoice Created')
         # Sender
-        subject, from_email, to = 'Invoice', 'noreply@wallet.com', s_email
+        subject, from_email, to = 'Invoice', EMAIL_FROM, s_email
         html_content = render_to_string('mail/s_invoice.html',
                                         {'r_username': r_username, 's_username': s_username,
                                          'amount': amount})
@@ -593,7 +635,7 @@ def invoice(request):
         msg.attach_alternative(html_content, "text/html")
         msg.send()
     #     Receiver
-        subject, from_email, to = 'Invoice', 'noreply@wallet.com', r_email
+        subject, from_email, to = 'Invoice', EMAIL_FROM, r_email
         html_content = render_to_string('mail/r_invoice.html',
                                         {'r_username': r_username, 's_username': s_username,
                                          'amount': amount, 'content': content})
@@ -616,7 +658,8 @@ def pay_invoice(request):
 
 @login_required(login_url='login')
 def success(request, id):
-    now = datetime.datetime.now()
+    base_date_time = datetime.now()
+    now = (datetime.strftime(base_date_time, "%Y-%m-%d %H:%M %p"))
     ref_no = uuid.uuid4().hex[:10].upper()
     r_username = Invoice.objects.values('receiver').get(id=id)['receiver']
     s_username = Invoice.objects.values('sender').get(id=id)['sender']
@@ -654,7 +697,7 @@ def success(request, id):
                                  ref_no=ref_no)
         s_invoice.save()
         messages.info(request, "You Have Successfully Paid The Invoice")
-        subject, from_email, to = 'Invoice', 'noreply@wallet.com', s_email
+        subject, from_email, to = 'Invoice', EMAIL_FROM, s_email
         html_content = render_to_string('mail/s_mail_invoice.html',
                                         {'r_username': r_username, 's_username': s_username,
                                          'amount': amount, 'ref_no': ref_no, 'new2': new2})
@@ -745,7 +788,7 @@ def payment(request):
     t_reg = Transactions(sender='Card Deposit', receiver=username, amount=amount, description='Deposit', ref_no=ref_no)
     t_reg.save()
     messages.info(request, 'Transaction Successful')
-    subject, from_email, to = 'Fund Deposit', 'noreply@wallet.com', email
+    subject, from_email, to = 'Fund Deposit', EMAIL_FROM, email
     html_content = render_to_string('mail/deposit.html',
                                     {'username': username, 'amount': amount,
                                      'new': new, 'ref_no': ref_no,
@@ -763,6 +806,7 @@ def fail(request):
     return redirect('deposit')
 
 
+@login_required(login_url='login')
 def int_mode(request):
     if request.method == 'POST':
         user = request.POST['user']
@@ -772,6 +816,7 @@ def int_mode(request):
         return redirect('settings')
 
 
+@login_required(login_url='login')
 def w_pay(request):
     if request.method == 'POST':
         user = request.POST['user']
@@ -781,4 +826,72 @@ def w_pay(request):
         return redirect('settings')
 
 
+def card(request):
+    N = 16
+    card_no = ''.join(random.choices(string.digits, k=N))
+    P = 4
+    pin = ''.join(random.choices(string.digits, k=P))
+    c_user = request.user.username
+    if request.method == 'POST':
+        card_user = request.POST['username']
+        if VirtualCard.objects.filter(card_user=card_user).exists():
+            return redirect('dashboard')
+        else:
+            virtual = VirtualCard(card_user=card_user, card_no=card_no, pin=pin, card_bal='0.00')
+            virtual.save()
+        return redirect('dashboard')
+
+
+@login_required(login_url='login')
+def virtual_card(request):
+    ref_no = uuid.uuid4().hex[:10].upper()
+    if request.method == 'POST':
+        s_username = request.POST['s_username']
+        card_no = request.POST['card_no']
+        amount = request.POST['amount']
+        sender_bal = Account.objects.values('bal').get(username=s_username)['bal']
+        card_bal = VirtualCard.objects.values('card_bal').get(card_no=card_no)['card_bal']
+        status = Account.objects.values('status').get(username=s_username)['status']
+        charge = Commission.objects.values('transfer').get(id=1)['transfer']
+        f_charge = (float(charge))
+        am = (float(amount))
+        s_bal = (float(sender_bal))
+        c_bal = (float(card_bal))
+        c_amt = am * (f_charge / 100)
+        if am > s_bal:
+            messages.info(request, 'Insufficient Fund')
+            return redirect('virtual_card')
+        elif status == 'hold':
+            messages.info(request, 'Your Account is on Hold. Contact Admin to rectify')
+            return redirect('virtual_card')
+        else:
+            new = (s_bal - (am + c_amt))
+            Account.objects.filter(username=s_username).update(bal=new)
+
+            new2 = c_bal + am
+            VirtualCard.objects.filter(card_no=card_no).update(card_bal=new2)
+
+            trans = Transactions(sender=s_username, receiver=card_no, amount=amount, ref_no=ref_no, description="E-Card TopUp")
+            trans.save()
+            messages.info(request, 'Transaction Successful')
+            return redirect('virtual_card')
+    return render(request, 'virtual_card.html')
+
+
+@login_required(login_url='login')
+def check(request):
+    if request.method == 'POST':
+        card_no = request.POST['card_no']
+        card_check = VirtualCard.objects.filter(card_no=card_no).exists()
+        if card_check:
+            check = VirtualCard.objects.all().get(card_no=card_no)
+            name = VirtualCard.objects.values('card_user').get(card_no=card_no)['card_user']
+            first = User.objects.values('first_name').get(username=name)['first_name']
+            last = User.objects.values('last_name').get(username=name)['last_name']
+            cont = {'check': check, 'card_check': card_check, 'first': first, 'last': last}
+            return render(request, 'virtual_card.html', cont)
+        else:
+            messages.info(request, 'Card Not Found')
+            return redirect('virtual_card')
+    return render(request, 'virtual_card.html')
 

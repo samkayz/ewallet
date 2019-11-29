@@ -5,7 +5,7 @@
         <!-- Mobile Logo -->
         <div class="mobile-logo mr-3 mr-sm-4">
             <a href="home">
-                <img src="{% static 'img/core-img/2.PNG'%}" alt="Mobile Logo"></a>
+                <img src="{% static 'img/core-img/jcollect.png'%}" alt="Mobile Logo"></a>
         </div>
 
         <!-- Triggers -->
@@ -32,7 +32,7 @@
 
             <li class="nav-item dropdown">
                 <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="zmdi zmdi-account profile-icon bg-primary" aria-hidden="true"></i></button>
+                        <i class="zmdi zmdi-account-circle" aria-hidden="true"></i>{{ user.first_name }}</button>
                 <div class="dropdown-menu dropdown-menu-right">
                     <!-- User Profile Area -->
                     <div class="user-profile-area">

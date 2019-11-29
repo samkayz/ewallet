@@ -1,4 +1,5 @@
 {% load static %}
+{% load humanize %}
 {% block main %}
     <!doctype html>
     <html lang="en">
@@ -50,7 +51,7 @@
                                         {% for shows in show %}
                                             <tr>
                                                 <td>{{ shows.sender }}</td>
-                                                <td>₦ {{ shows.amount }}</td>
+                                                <td>₦ {{ shows.amount|intcomma }}</td>
                                                 <td>{{ shows.content }}</td>
                                                 <td>{{ shows.status }}</td>
                                                 <td>{{ shows.date }}</td>

@@ -1,4 +1,5 @@
 {% load static %}
+{% load humanize %}
 {% block main %}
     <!DOCTYPE html>
     <html>
@@ -30,7 +31,7 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <h3 class="text-center">Payment Details</h3>
-                                <h3 class="text-center">₦ {{ t_amt }}</h3>
+                                <h3 class="text-center">₦ {{ t_amt|intcomma }}</h3>
                                 <img class="img-responsive cc-img" src="http://www.prepbootstrap.com/Content/images/shared/misc/creditcardicons.png">
                             </div>
                         </div>

@@ -1,8 +1,10 @@
 {% load static %}
 {% block main %}
+    {% load humanize %}
     <!doctype html>
     <html lang="en">
     {% include 'head.html' %}
+    <link rel="stylesheet" href="{% static 'css/default-assets/modal.css'%}">
     <body>
     <!-- Preloader -->
     {% include 'preloader.html' %}
@@ -69,7 +71,7 @@
                                                     <div class="tab-pane fade active show" id="earnings-sun" role="tabpanel" aria-labelledby="pills-earnings-sun">
                                                         <div class="d-flex align-items-center justify-content-between">
                                                             <div>
-                                                                <h2 class="text-white font-36 font-weight-bold">₦ {{ show.bal }}</h2>
+                                                                <h2 class="text-white font-36 font-weight-bold">₦ {{ show.bal|intcomma }}</h2>
                                                                 <span class="text-white mb-3 d-block">Account balance</span>
                                                             </div>
                                                             <div class="dashboard-tab-thumb">
@@ -93,12 +95,16 @@
                                         <p class="mb-20">Best seller of the month</p>
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="dashboard-content-right">
-                                                <h2 class="text-success font-36 font-weight-bold">₦ 0.00</h2>
+                                                {% if vendor == None %}
+                                                    <h2 class="text-success font-36 font-weight-bold">₦ 0.00</h2>
+                                                {% else %}
+                                                    <h2 class="text-success font-36 font-weight-bold">₦ {{ vendor|intcomma }}</h2>
+                                                {% endif %}
                                                 <p class="font-15 font-weight-bold">You have done 65.6% more <br>sales today.</p>
                                                 <a href="activity"><button type="button" class="btn btn-primary mt-15">View Sales</button></a>
                                             </div>
                                             <div class="dashboard-content-left wow shake" data-wow-delay="0.6s">
-                                                <img src="{% static 'img/bg-img/5.jpg'%}" class="img-fluid" alt="Dashboard" width="180" height="180">
+                                                <img src="{% static 'img/bg-img/5.jpg'%}" class="img-fluid" alt="Dashboard" width="100" height="100">
                                             </div>
                                         </div>
                                     </div>
@@ -117,6 +123,7 @@
                             <div class="col-md-4 box-margin">
                                 <div class="card">
                                     <div class="card-body">
+                                        <button class="btn btn-primary md-trigger mr-2 mb-2" data-modal="modal-13">Virtual Card</button>
                                         <div class="stacked-form-area">
                                             <h4 class="card-title mb-1">Pay-Me</h4>
                                             <p class="mb-30">With Pay me link, You can receive money from anyone around the world and get the money directly
@@ -131,6 +138,29 @@
                                                 </div>
                                             </form>
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="md-modal md-effect-13" id="modal-13">
+                                <div class="md-content">
+                                    <h3 class="bg-info">Virtual Card Detail</h3>
+                                    <div>
+                                        <div class="widget---stats d-flex justify-content-between align-items-center mb-15">
+                                            <div class="widget---content-text">
+                                                <p class="mb-0">{{ user.last_name|upper }} {{ user.first_name|upper }}</p>
+                                                {% for data in shows %}
+                                                    <h6>{{ data.card_no }}</h6>
+                                                     <h6>Pin: {{ data.pin }}</h6>
+                                                    </div>
+                                                    <h6 class="mb-0 text-success">₦ {{ data.card_bal|intcomma }}</h6>
+                                                    </div>
+                                                {% endfor %}
+                                        <form action="card" method="post">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="username" value="{{ user.username }}">
+                                            <button type="submit" class="btn btn-primary">Apply</button><br>
+                                        </form>
+                                        <button class="btn btn-primary md-close">Close me!</button>
                                     </div>
                                 </div>
                             </div>

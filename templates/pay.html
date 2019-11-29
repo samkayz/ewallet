@@ -1,102 +1,123 @@
 {% load static %}
+{% load humanize %}
 {% block main %}
+
     <!DOCTYPE html>
-    <html lang="en">
+    <html>
     <head>
         <title>jCollect</title>
-        <!-- Meta-Tags -->
+        <!-- for-mobile-apps -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta charset="utf-8">
-        <meta name="keywords" content="Business Login Form a Responsive Web Template, Bootstrap Web Templates, Flat Web Templates, Android Compatible Web Template, Smartphone Compatible Web Template, Free Webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola Web Design">
-        <script>
-            addEventListener("load", function () {
-                setTimeout(hideURLbar, 0);
-            }, false);
-
-            function hideURLbar() {
-                window.scrollTo(0, 1);
-            }
-        </script>
-        <!-- //Meta-Tags -->
-
-        <!-- css files -->
-        <link href="{% static 'new/css/font-awesome.min.css'%}" rel="stylesheet" type="text/css" media="all">
-        <link href="{% static 'new/css/style.css'%}" rel="stylesheet" type="text/css" media="all"/>
-        <link rel="stylesheet" href="{% static 'style.css'%}">
-        <!-- //css files -->
-
-        <!-- google fonts -->
-        <link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-        <!-- //google fonts -->
-
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="keywords" content="Payment Form Widget Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+        <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+        function hideURLbar(){ window.scrollTo(0,1); } </script>
+        <!-- //for-mobile-apps -->
+        <link href="{% static 'new2/css/style.css'%}" rel="stylesheet" type="text/css" media="all" />
+        <link href='//fonts.googleapis.com/css?family=Fugaz+One' rel='stylesheet' type='text/css'>
+        <link href='//fonts.googleapis.com/css?family=Alegreya+Sans:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,800,800italic,900,900italic' rel='stylesheet' type='text/css'>
+        <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+        <script type="text/javascript" src="{% static 'new2/js/jquery.min.js'%}"></script>
     </head>
     <body>
+    <div class="main">
+        <h1>{{ show_merchant }}</h1>
+        <div class="content">
 
-    <div class="signupform">
-        <div class="container">
-            <!-- main content -->
-            <div class="agile_info">
-                <div class="w3l_form">
-                    <div class="left_grid_info">
-                        <h1>{{ show_merchant }}</h1>
-                        <div class="table-responsive">
-                            <table class="table table-bordered">
-                                <thead>
-                                <tr>
-                                    <th scope="col">Description</th>
-                                    <th scope="col">Amount</th>
-                                    <th scope="col">Charges</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>{{ desc }}</td>
-                                    <td>₦ {{ amount }}</td>
-                                    {% if who == 'customer' %}
-                                    <td>({{ charge }}%) ₦ {{ c_amt }}</td>
-                                    {% else %}
-                                    <td>₦ 0.00</td>
-                                    {% endif %}
-                                </tr>
-                                </tbody>
-                            </table>
+            <script src="{% static 'new2/js/easyResponsiveTabs.js'%}" type="text/javascript"></script>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $('#horizontalTab').easyResponsiveTabs({
+                        type: 'default', //Types: default, vertical, accordion
+                        width: 'auto', //auto or any width like 600px
+                        fit: true   // 100% fit in a container
+                    });
+                });
+
+            </script>
+            <div class="sap_tabs">
+                <div id="horizontalTab" style="display: block; width: 100%; margin: 0px;">
+                    <div class="pay-tabs">
+                        <h2>{{ desc }}</h2>
+                        <h2>₦ {{ amount|intcomma }}
+                            {% if mode == 'customer' %}
+                                + {{ c_amt|intcomma }}
+                            {% else %}
+                            {% endif %}
+                        </h2>
+                        <ul class="resp-tabs-list">
+                            <li class="resp-tab-item" aria-controls="tab_item-2" role="tab"><span><label class="pic4"></label>jCollect</span></li>
+                            <li class="resp-tab-item" aria-controls="tab_item-3" role="tab"><span><label class="pic2"></label>Virtual Card</span></li>
+                            <div class="clear"></div>
+                        </ul>
+                    </div>
+                    <div class="resp-tabs-container">
+                        <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-2">
+                            <div class="payment-info">
+                                <h3>LOGIN</h3>
+                                <div class="login-tab">
+                                    <div class="user-login">
+                                        <form action="initiate" method="post">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="amount" value="{{ amount }}">
+                                            <input type="hidden" name="merchant" value="{{ m_username }}">
+                                            <input type="hidden" name="success_url" value="{{ success_url }}">
+                                            <input type="text" name="username" value="jCollect Username" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'jCollect Username';}" required="">
+                                            <input type="password" name="password" value="PASSWORD" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'PASSWORD';}" required="">
+                                            <div class="user-grids">
+                                                <div class="user-right">
+                                                    <input type="submit" value="Pay">
+                                                </div>
+                                                <div class="clear"></div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <p>Integrate jCollect to your website and receive money from your customer with ease and get your money to your account within minutes.</p>
-                        <img src="{% static 'new/images/ab.jpg'%}" alt="" />
+                        <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-3">
+                            <div class="payment-info">
+
+                                <h3 class="pay-title">Virtual Card Info</h3>
+                                <form action="virtual" method="post">
+                                    {% csrf_token %}
+                                    <div class="tab-for">
+                                        <h5>CARD NUMBER</h5>
+                                        <input type="hidden" name="amount" value="{{ amount }}">
+                                        <input type="hidden" name="merchant" value="{{ m_username }}">
+                                        <input type="hidden" name="success_url" value="{{ success_url }}">
+                                        <input class="pay-logo" type="text" name="card_no" value="0000-0000-0000-0000" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '0000-0000-0000-0000';}" required="">
+                                    </div>
+                                    <div class="transaction">
+                                        <div class="tab-form-left user-form">
+                                            <h5>PIN</h5>
+                                            <ul>
+                                                <li>
+                                                    <input type="number" name="pin" class="text_box" type="text" value="" min="1" />
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div><br>
+                                    <input type="submit" value="Pay">
+                                </form>
+                                <div class="single-bottom">
+                                    <ul>
+                                        <li>
+                                            <input type="checkbox"  id="brand" value="">
+                                            <label for="brand"><span></span>By checking this box, I agree to the Terms & Conditions & Privacy Policy.</label>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="w3_info">
-                    <h2>{{ first_name }} {{ last_name }}</h2>
-                    <form action="initiate" method="post">
-                        {% csrf_token %}
-                        <label>Username</label>
-                        <div class="input-group">
-                            <span class="fa fa-user" aria-hidden="true"></span>
-                            <input type="hidden" name="amount" value="{{ amount }}">
-                            <input type="hidden" name="merchant" value="{{ m_username }}">
-                            <input type="hidden" name="success_url" value="{{ success_url }}">
-                            <input type="text" name="username" placeholder="jCollect Username" required="">
-                        </div>
-                        <label>Password</label>
-                        <div class="input-group">
-                            <span class="fa fa-user-secret" aria-hidden="true"></span>
-                            <input type="password" name="password"  placeholder="jCollect Password" required="">
-                        </div>
-                        <input class="btn btn-primary" type="submit" value="Pay Now">
-                    </form>
-                    <p class="account">By clicking Confirm, you agree to our <a href="#">Terms & Conditions!</a></p>
-                    <p class="account1">Dont have an account? <a href="/account/register">Register here</a></p>
-                </div>
             </div>
-            <!-- //main content -->
-        </div>
-        <!-- footer -->
-        <div class="footer">
-            <p>Copyright jCollect &copy; {% now "Y" %}</p>
-        </div>
-        <!-- footer -->
-    </div>
 
+        </div>
+        <p class="footer">Copyright jCollect &copy; {% now "Y" %}</p>
+    </div>
     </body>
     </html>
 {% endblock %}

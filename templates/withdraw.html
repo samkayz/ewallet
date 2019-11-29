@@ -1,4 +1,5 @@
 {% load static %}
+{% load humanize %}
 {% block main %}
     <!doctype html>
     <html lang="en">
@@ -83,7 +84,7 @@
                                             <tr>
                                                 <td>{{ withdraw.bank_name }}</td>
                                                 <td>{{ withdraw.ref_no }}</td>
-                                                <td><div class="badge badge-success badge-shadow">₦ {{ withdraw.amount }}</div></td>
+                                                <td><div class="badge badge-success badge-shadow">₦ {{ withdraw.amount|intcomma }}</div></td>
                                                 <td>{{ withdraw.date }}</td>
                                                 <td><div class="badge badge-success badge-shadow">{{ withdraw.status }}</div></td>
                                             </tr>

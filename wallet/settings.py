@@ -31,12 +31,14 @@ EMAIL_HOST = 'smtp.mailtrap.io'
 EMAIL_HOST_USER = '38c207b30aaed1'
 EMAIL_HOST_PASSWORD = '268069f96f1e35'
 EMAIL_PORT = '2525'
+EMAIL_FROM = 'info@jcollect.com'
 
 ADMINS = (
     ('You', 'you@email.com'),
 )
 MANAGERS = ADMINS
 
+SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
 PAYSTACK = 'pk_test_fea4f2c1aab20408e00605bca8bf3d2602db4324'
 
 # Application definition
@@ -48,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     'rest_framework',
     'account',
     'super',
@@ -57,6 +60,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django_session_timeout.middleware.SessionTimeoutMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -146,3 +150,4 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+SESSION_EXPIRE_SECONDS = 1200  # 300 seconds = 5 minutes

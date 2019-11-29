@@ -60,7 +60,13 @@
                                                     <div class="input-group-prepend">
                                                         <span class="form-control">Bank Name</span>
                                                     </div>
-                                                    <input class="form-control" id="single-input" type="text" name="bank_name" value="" placeholder="Enter Bank Name">
+                                                    <select class="form-control" id="single-input" name="bank_name">
+                                                        <option>Select Bank</option>
+                                                        <option></option>
+                                                        {% for banks in bank %}
+                                                        <option value="{{ banks.name }}">{{ banks.name }}</option>
+                                                        {% endfor %}
+                                                    </select>
                                                 </div>
                                             </div>
                                             <input class="btn btn-primary" type="submit" value="Add Bank">

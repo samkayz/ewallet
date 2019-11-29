@@ -1,97 +1,87 @@
 {% load static %}
 <!doctype html>
 <html lang="en">
-{% include 'home/head.html' %}
-<body>
-<!-- loading -->
-<div id="loading">
-    <div id="loading-center">
-        <img src="{% static 'home/images/loader.gif'%}" alt="loder">
-    </div>
-</div>
-<!-- loading End -->
+{% include 'head.html' %}
 
-<div class="login-from header-navbar register-form light-gray-bg position-relative">
-    <div class="row no-gutters">
-        <div class="col-lg-6 align-items-stretch position-relative white-bg">
-            <nav class="navbar navbar-expand-lg navbar-light">
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="privacy-policy.html">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="javascript:void(0)">Terms</a>
-                        </li>
-                    </ul>
+<body class="login-area">
+<!-- Preloader -->
+{% include 'preloader.html' %}
+<!-- Preloader -->
+
+
+<!-- ======================================
+******* Page Wrapper Area Start **********
+======================================= -->
+<div class="main-content- h-100vh">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center justify-content-center">
+            <div class="col-12">
+                <!-- Middle Box -->
+                <div class="middle-box">
+                    <div class="card">
+                        <div class="card-body p-4">
+                            <div class="row align-items-center">
+                                <div class="col-md-6">
+                                    <div class="xs-d-none mb-50-xs break-320-576-none">
+                                        <img src="{% static 'img/bg-img/2.png'%}" alt="">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <h4 class="font-18 mb-30">Create a free account.</h4>
+                                    {% for message in messages %}
+                                        <div class="alert alert-success" role="alert">
+                                            {{ message }}
+                                        </div>
+                                    {% endfor %}
+                                    <form action="/account/register" method="post">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <input class="form-control" name="first_name" type="text" id="fullname" placeholder="Enter your First Name" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-control" type="text" name="last_name" id="fullname" placeholder="Enter your Last Name" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-control" type="text" name="username" id="username" placeholder="Username" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input class="form-control" type="email" name="email" id="emailaddress" required placeholder="Enter your email">
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-control" type="number" name="phone_no" id="fullname" placeholder="Enter your Mobile No" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-control" type="password" name="password1" required id="password" placeholder="Enter your password">
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-control" type="password" name="password2" required id="password" placeholder="Confirm your password">
+                                        </div>
+                                        <div class="form-group mb-0 mt-15">
+                                            <button class="btn btn-primary btn-block" type="submit">Sign Up</button>
+                                        </div>
+
+                                        <div class="text-center mt-15"><span class="mr-2 font-13 font-weight-bold">Already have an account?</span><a class="font-13 font-weight-bold" href="/account/login">Sign in</a></div>
+
+                                    </form>
+                                </div> <!-- end card-body -->
+                            </div>
+                            <!-- end card -->
+                        </div>
+                    </div>
                 </div>
-            </nav>
-            <div class="login-info">
-                <h2 class="iq-fw-8 mb-3">Register</h2>
-                <form action="/account/register" method="post">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <input type="text" name="first_name" class="form-control"   placeholder="First Name">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="last_name" class="form-control"   placeholder="Last Name">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="username" class="form-control"   placeholder="Username">
-                    </div>
-                    <div class="form-group">
-                        <input type="email" name="email" class="form-control"   placeholder="Email Address">
-                    </div>
-                    <div class="form-group">
-                        <input type="number" name="phone_no" class="form-control"   placeholder="Mobile Number">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" name="password1" class="form-control"  placeholder="Password">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" name="password2" class="form-control"  placeholder="Confirm Password">
-                    </div>
-                    <button type="submit" name="submit" class="slide-button button mr-3" >
-                        <a class="slide-button">
-                            <div class="first">Register</div>
-                            <div class="second">Register</div>
-                        </a>
-                    </button>
-                    <a class="slide-button button bt-border" href="/account/login">
-                        <div class="first">Login</div>
-                        <div class="second">Login</div>
-                    </a>
-                </form>
             </div>
-            <ul class="social-list">
-                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
-            </ul>
-        </div>
-        <div class="col-lg-6 align-self-center position-relative">
-            <div class="login-right-bar h-100 text-center">
-                <img src="{% static 'home/images/login/register.png'%}" class="img-fluid" alt="">
-            </div>
-
         </div>
     </div>
-    <img  src="{% static 'home/images/login/2.png'%}" class="img-fluid login-footer-one" alt="">
-    <img  src="{% static 'home/images/login/3.png'%}" class="img-fluid login-footer-two" alt="">
-    <img  src="{% static 'home/images/login/1.png'%}" class="img-fluid login-footer-three" alt="">
-    <!-- back-to-top -->
-    <div id="back-to-top">
-        <a class="top" id="top" href="#top"><i class="ion-ios-arrow-thin-up"></i></a>
-    </div>
-    <!-- back-to-top End -->
 </div>
 
+<!-- ======================================
+********* Page Wrapper Area End ***********
+======================================= -->
 
+<!-- Must needed plugins to the run this template -->
+{% include 'foot.html' %}
 
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-{% include 'home/script.html' %}
 </body>
 </html>

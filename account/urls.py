@@ -36,5 +36,11 @@ urlpatterns = [
     path('fail', views.fail, name='fail'),
     path('int_mode', views.int_mode, name='mode'),
     path('w_pay', views.w_pay, name='who-pay-charges'),
+    path('airtime', views.airtime, name='airtime'),
+    path('airtime_confirm', views.airtime_confirm, name='airtime-confirm'),
+    path('card', views.card, name='card'),
+    path('virtual_card', views.virtual_card, name='virtual_card'),
+    path('card_check', views.check, name='check'),
+    path('airtime_verify/<reference>', views.airtime_verify, name='airtime_verify'),
 
 ]

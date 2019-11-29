@@ -1,3 +1,4 @@
+{% load humanize %}
 <!doctype html>
 <html lang="en">
 {% include 'head.html' %}
@@ -71,19 +72,19 @@
                                                 <div class="font-weight-semibold">Card Payment With Paystack</div>
                                             </td>
                                             <td class="py-3">
-                                                <strong>₦ {{ amount }}</strong>
+                                                <strong>₦ {{ amount|intcomma }}</strong>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td colspan="3" class="text-right py-3">
                                                 Subtotal:<br>
-                                                Charge({{ charge }}%):<br>
+                                                Charge({{ charge|intcomma }}%):<br>
                                                 <span class="d-block text-big mt-2">Total:</span>
                                             </td>
                                             <td class="py-3">
-                                                <strong>₦ {{ amount }}</strong><br>
-                                                <strong>₦ {{ c_amt }}</strong><br>
-                                                <strong class="d-block text-big mt-2">₦ {{ t_amt }}</strong>
+                                                <strong>₦ {{ amount|intcomma }}</strong><br>
+                                                <strong>₦ {{ c_amt|intcomma }}</strong><br>
+                                                <strong class="d-block text-big mt-2">₦ {{ t_amt|intcomma }}</strong>
                                             </td>
                                         </tr>
                                         </tbody>
@@ -104,7 +105,7 @@
                             <script>
                                 function payWithPaystack(){
                                     var handler = PaystackPop.setup({
-                                        key: 'pk_test_fea4f2c1aab20408e00605bca8bf3d2602db4324',
+                                        key: 'pk_test_5df8509f10efa958a831953159feb7d3a8273241',
                                         email: '{{ email }}',
                                         amount: {{ t_amt }} * 100,
                                         currency: "NGN",

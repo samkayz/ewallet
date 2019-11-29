@@ -125,3 +125,22 @@ class Subscription(models.Model):
 
     class Meta:
         db_table = "subscription"
+
+
+class Banks(models.Model):
+    name = models.CharField(max_length=100)
+    code = models.CharField(max_length=100)
+
+    class Meta:
+        db_table = "banks"
+
+
+class VirtualCard(models.Model):
+    card_user = models.CharField(max_length=100)
+    card_no = models.CharField(max_length=100)
+    pin = models.CharField(max_length=10)
+    card_bal = models.CharField(max_length=1000)
+
+    class Meta:
+        db_table = "virtual_card"
+

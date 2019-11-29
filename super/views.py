@@ -9,6 +9,7 @@ from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.db.models import Sum
+from wallet.settings import EMAIL_FROM
 import uuid
 import re
 
@@ -35,7 +36,7 @@ def index(request):
 
 def logout(request):
     auth.logout(request)
-    return redirect('/index')
+    return redirect('index')
 
 
 @login_required(login_url='index')
@@ -162,7 +163,8 @@ def send(request):
             trans = Transactions(sender='System', receiver=show, amount=amount, ref_no=ref_no, )
             trans.save()
             messages.info(request, "Transaction Successful!!")
-            subject, from_email, to = 'Fund Received', 'noreply@wallet.com', email
+            # Email
+            subject, from_email, to = 'Fund Received', EMAIL_FROM, email
             html_content = render_to_string('mail/credit_user.html',
                                             {'first_name': first_name, 'amount': amount, 'new': new, 'ref_no': ref_no})
             text_content = strip_tags(html_content)
@@ -203,7 +205,9 @@ def approve(request, id):
     else:
         Withdraw.objects.filter(id=id).update(status='Processed')
         messages.info(request, "Payment Approved Successfully!")
-        subject, from_email, to = 'Withdrawal Confirmation', 'noreply@wallet.com', email
+
+        # Email
+        subject, from_email, to = 'Withdrawal Confirmation', EMAIL_FROM, email
         html_content = render_to_string('mail/confirm-withdrawal.html',
                                         {'amount': amount,
                                          'first_name': first_name})
@@ -294,8 +298,8 @@ def voucher_issue(request):
     if request.method == 'POST':
         r_number = request.POST['r_number']
         v_code = request.POST['v_code']
-        status = Voucher.objects.values('v_status').get(v_code=v_code)['v_status']
         if Voucher.objects.filter(v_code=v_code).exists():
+            status = Voucher.objects.values('v_status').get(v_code=v_code)['v_status']
             if status == 'open':
                 amount = Voucher.objects.values('v_amount').get(v_code=v_code)['v_amount']
                 bal = Account.objects.values('bal').get(phone_no=r_number)['bal']
@@ -334,12 +338,15 @@ def lock(request):
     return render(request, 'admin/lock.html')
 
 
+@login_required(login_url='index')
 def hold(request, id):
     Account.objects.filter(id=id).update(status="hold")
     username = Account.objects.values('username').get(id=id)['username']
     email = User.objects.values('email').get(username=username)['email']
     first_name = User.objects.values('first_name').get(username=username)['first_name']
-    subject, from_email, to = 'Account Suspension', 'noreply@wallet.com', email
+
+    # Email
+    subject, from_email, to = 'Account Suspension', EMAIL_FROM, email
     html_content = render_to_string('mail/acct_suspend.html',
                                     {'first_name': first_name})
     text_content = strip_tags(html_content)
@@ -349,12 +356,14 @@ def hold(request, id):
     return redirect('user')
 
 
+@login_required(login_url='index')
 def un_hold(request, id):
     Account.objects.filter(id=id).update(status="unhold")
     username = Account.objects.values('username').get(id=id)['username']
     email = User.objects.values('email').get(username=username)['email']
     first_name = User.objects.values('first_name').get(username=username)['first_name']
-    subject, from_email, to = 'Account Re-Activation', 'noreply@wallet.com', email
+    #Emaill
+    subject, from_email, to = 'Account Re-Activation', EMAIL_FROM, email
     html_content = render_to_string('mail/acct_active.html',
                                     {'first_name': first_name})
     text_content = strip_tags(html_content)
@@ -364,6 +373,7 @@ def un_hold(request, id):
     return redirect('user')
 
 
+@login_required(login_url='index')
 def mail(request):
     if request.method == "POST":
         users = request.POST['user']
@@ -373,7 +383,7 @@ def mail(request):
         e_save.save()
         if users == 'all':
             for user in User.objects.all():
-                subject, from_email, to = subject, 'noreply@wallet.com', user.email
+                subject, from_email, to = subject, EMAIL_FROM, user.email
                 html_content = render_to_string('mail/general_message.html',
                                                 {'first_name': user.first_name, 'message': message, 'subject': subject})
                 text_content = strip_tags(html_content)
@@ -383,7 +393,7 @@ def mail(request):
             messages.info(request, 'Email Sent to All user ')
         elif users == 'sub':
             for data in Subscription.objects.all():
-                subject, from_email, to = subject, 'noreply@wallet.com', data.email
+                subject, from_email, to = subject, EMAIL_FROM, data.email
                 html_content = render_to_string('mail/news2.html', {'message': message})
                 text_content = strip_tags(html_content)
                 msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
@@ -393,7 +403,7 @@ def mail(request):
 
         else:
             first_name = User.objects.values('first_name').get(email=users)['first_name']
-            subject, from_email, to = subject, 'noreply@wallet.com', users
+            subject, from_email, to = subject, EMAIL_FROM, users
             html_content = render_to_string('mail/general_message.html',
                                             {'first_name': first_name, 'message': message, 'subject': subject})
             text_content = strip_tags(html_content)
@@ -406,6 +416,7 @@ def mail(request):
     return render(request, 'admin/mail.html', context)
 
 
+@login_required(login_url='index')
 def user_trans(request, username):
     show = Transactions.objects.filter(Q(sender=username) | Q(receiver=username))
     name = User.objects.values('first_name').get(username=username)['first_name']
@@ -413,6 +424,7 @@ def user_trans(request, username):
     return render(request, 'admin/user_trans.html', context)
 
 
+@login_required(login_url='index')
 def charges(request):
     if request.method == 'POST':
         payme = request.POST['payme']
