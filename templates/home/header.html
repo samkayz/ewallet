@@ -49,7 +49,6 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li><a href="contact">Contact us</a></li>
                             {% if user.is_authenticated %}
                                 {% if request.user.is_superuser %}
                                     <li>
@@ -83,6 +82,7 @@
                                     </ul>
                                 </li>
                             {% endif %}
+                            <li><a href="contact">Contact us</a></li>
                         </ul>
                     </div>
                 </div>
