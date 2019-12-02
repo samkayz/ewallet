@@ -1,87 +1,106 @@
 {% load static %}
 {% load humanize %}
 {% block main %}
-<!doctype html>
-<html lang="en">
-{% include 'head.html' %}
+    <!doctype html>
+    <html lang="en">
+    {% include 'head.html' %}
 
-<body>
-<!-- Preloader -->
-{% include 'preloader.html' %}
-<!-- Preloader -->
-<!-- ======================================
-******* Page Wrapper Area Start **********
-======================================= -->
-<div class="ecaps-page-wrapper">
-    <!-- Sidemenu Area -->
-    {% include 'sidebar.html' %}
+    <body>
+    <!-- Preloader -->
+    {% include 'preloader.html' %}
+    <!-- Preloader -->
+    <!-- ======================================
+    ******* Page Wrapper Area Start **********
+    ======================================= -->
+    <div class="ecaps-page-wrapper">
+        <!-- Sidemenu Area -->
+        {% include 'sidebar.html' %}
 
-    <!-- Page Content -->
-    <div class="ecaps-page-content">
-        <!-- Top Header Area -->
-        {% include 'header.html' %}
-        <!-- Main Content Area -->
-        <div class="main-content">
-            <div class="container-fluid">
-                <!-- Form Validation area Start -->
-                <div class="row">
-                    <div class="col-12 box-margin height-card">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Create Invoice</h4>
-                                        {% for message in messages %}
-                                            <div class="alert alert-success" role="alert">
-                                                {{ message }}
+        <!-- Page Content -->
+        <div class="ecaps-page-content">
+            <!-- Top Header Area -->
+            {% include 'header.html' %}
+            <!-- Main Content Area -->
+            <div class="main-content">
+                <div class="container-fluid">
+                    <!-- Form Validation area Start -->
+                    <div class="row">
+                        <div class="col-12 box-margin height-card">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Create Invoice</h4>
+                                    {% for message in messages %}
+                                        {% if message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+                                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                <strong>Warning - </strong> {{ message }}
                                             </div>
-                                        {% endfor %}
-                                <form class="cmxform" id="commentForm" method="post" action="invoice_verify">
-                                    {% csrf_token %}
-                                    <fieldset>
-                                        <div class="form-group mb-3">
-                                            <label>Enter Receiver's Username</label>
-                                            <div class="input-group m-b-20">
-                                                <div class="input-group-prepend">
-                                                    <span class="form-control">Username</span>
-                                                </div>
-                                                <input class="form-control" id="single-input" type="text" name="username" value="{{ check.username }}" placeholder="Enter Receiver's Username">
-                                                <div class="input-group-append">
-                                                    <button type="submits" class="btn waves-effect waves-light btn-primary">Verify </button>
+                                        {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                                            <div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                <strong>Success - </strong> {{ message }}
+                                            </div>
+                                        {% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                                            <div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert">
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                <strong>Error - </strong> {{ message }}
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                    <form class="cmxform" id="commentForm" method="post" action="invoice_verify">
+                                        {% csrf_token %}
+                                        <fieldset>
+                                            <div class="form-group mb-3">
+                                                <label>Enter Receiver's Username</label>
+                                                <div class="input-group m-b-20">
+                                                    <div class="input-group-prepend">
+                                                        <span class="form-control">Username</span>
+                                                    </div>
+                                                    <input class="form-control" id="single-input" type="text" name="username" value="{{ check.username }}" placeholder="Enter Receiver's Username">
+                                                    <div class="input-group-append">
+                                                        <button type="submits" class="btn waves-effect waves-light btn-primary">Verify </button>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        </form>
-                                 {% if check_user %}
+                                    </form>
+                                    {% if check_user %}
                                         <div class="form-group">
                                             <label for="curl">Receiver's Info</label>
                                             <input id="curl" class="form-control" type="text" value="{{ check.first_name }} {{ check.last_name }}" readonly>
                                         </div>
                                         <form action="invoice" method="post">
-                                        {% csrf_token %}
+                                            {% csrf_token %}
                                             <input type="hidden" name="s_username" class="form-control" value="{{ user.username }}">
                                             <input type="hidden" name="r_username" class="form-control" value="{{ check.username }}">
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">₦</span>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">₦</span>
+                                                </div>
+                                                <input type="number" class="form-control" name="amount" step=any placeholder="Enter Amount" aria-label="Amount (to the nearest dollar)">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">.00</span>
+                                                </div>
                                             </div>
-                                            <input type="number" class="form-control" name="amount" step=any placeholder="Enter Amount" aria-label="Amount (to the nearest dollar)">
-                                            <div class="input-group-append">
-                                                <span class="input-group-text">.00</span>
-                                            </div>
-                                        </div>
-                                         <div class="form-group">
+                                            <div class="form-group">
                                                 <label for="ccomment">Your comment</label>
                                                 <textarea id="ccomment" class="form-control" name="content"></textarea>
-                                         </div>
-                                        <input class="btn btn-primary" type="submit" value="Send Invoice">
-                                    </fieldset>
-                                </form>
-                                {% endif %}
+                                            </div>
+                                            <input class="btn btn-primary" type="submit" value="Send Invoice">
+                                            </fieldset>
+                                        </form>
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                </div>
-                <div class="row">
+                    </div>
+                    <div class="row">
                         <div class="col-12 box-margin">
                             <div class="card">
                                 <div class="card-body">
@@ -119,15 +138,15 @@
                             </div> <!-- end card -->
                         </div><!-- end col-->
                     </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- ======================================
-********* Page Wrapper Area End ***********
-======================================= -->
-<script src="{% static 'js/jquery.min.js'%}"></script>
+    <!-- ======================================
+    ********* Page Wrapper Area End ***********
+    ======================================= -->
+    <script src="{% static 'js/jquery.min.js'%}"></script>
     <script src="{% static 'js/popper.min.js'%}"></script>
     <script src="{% static 'js/bootstrap.min.js'%}"></script>
     <script src="{% static 'js/bundle.js'%}"></script>
@@ -136,10 +155,10 @@
     <script src="{% static 'js/default-assets/fullscreen.js'%}"></script>
     <script src="{% static 'js/default-assets/bootstrap-growl.js'%}"></script>
     <script src="{% static 'js/default-assets/notification-active.js'%}"></script>
-<script src="{% static 'js/default-assets/active.js'%}"></script>
+    <script src="{% static 'js/default-assets/active.js'%}"></script>
 
-<!-- Must needed plugins to the run this Template -->
-<script src="{% static 'js/default-assets/jquery.datatables.min.js'%}"></script>
+    <!-- Must needed plugins to the run this Template -->
+    <script src="{% static 'js/default-assets/jquery.datatables.min.js'%}"></script>
     <script src="{% static 'js/default-assets/datatables.bootstrap4.js'%}"></script>
     <script src="{% static 'js/default-assets/datatable-responsive.min.js'%}"></script>
     <script src="{% static 'js/default-assets/responsive.bootstrap4.min.js'%}"></script>
@@ -153,6 +172,6 @@
     <script src="{% static 'js/default-assets/demo.datatable-init.js'%}"></script>
     <script src="{% static 'js/default-assets/bootstrap-growl.js'%}"></script>
 
-</body>
-</html>
+    </body>
+    </html>
 {% endblock %}

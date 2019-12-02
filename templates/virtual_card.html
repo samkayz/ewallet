@@ -25,15 +25,34 @@
                     <div class="col-12 box-margin height-card">
                         <div class="card">
                             <div class="card-body">
-                            <div>
-                                   <span style="float: right"><a href="transfer" ><button class="btn btn-primary">Transfer</button></a></span>
+                                <div>
+                                    <span style="float: right"><a href="transfer" ><button class="btn btn-primary">Transfer</button></a></span>
                                 </div>
                                 <h4 class="card-title">Credit Virtual Card</h4>
-                                        {% for message in messages %}
-                                            <div class="alert alert-success" role="alert">
-                                                {{ message }}
-                                            </div>
-                                        {% endfor %}
+                                {% for message in messages %}
+                                    {% if message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+                                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            <strong>Warning - </strong> {{ message }}
+                                        </div>
+                                    {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                                        <div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            <strong>Success - </strong> {{ message }}
+                                        </div>
+                                    {% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                                        <div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            <strong>Error - </strong> {{ message }}
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
                                 <form class="cmxform" id="commentForm" method="post" action="card_check">
                                     {% csrf_token %}
                                     <fieldset>
@@ -49,16 +68,16 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        </form>
-                                 {% if card_check %}
-                                        <div class="form-group">
-                                            <label for="curl">Card Owner Info</label>
-                                            <input id="curl" class="form-control" type="text" value="{{ first }} {{ last }}" readonly>
-                                        </div>
-                                        <form action="virtual_card" method="post">
+                                </form>
+                                {% if card_check %}
+                                    <div class="form-group">
+                                        <label for="curl">Card Owner Info</label>
+                                        <input id="curl" class="form-control" type="text" value="{{ first }} {{ last }}" readonly>
+                                    </div>
+                                    <form action="virtual_card" method="post">
                                         {% csrf_token %}
-                                           <input type="hidden" name="s_username" class="form-control" value="{{ user.username }}">
-                                           <input type="hidden" name="card_no" class="form-control" value="{{ check.card_no }}">
+                                        <input type="hidden" name="s_username" class="form-control" value="{{ user.username }}">
+                                        <input type="hidden" name="card_no" class="form-control" value="{{ check.card_no }}">
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">₦</span>
@@ -69,8 +88,8 @@
                                             </div>
                                         </div>
                                         <input class="btn btn-primary" type="submit" value="Transfer">
-                                    </fieldset>
-                                </form>
+                                        </fieldset>
+                                    </form>
                                 {% endif %}
                             </div>
                         </div>

@@ -37,9 +37,9 @@
                                 <div class="profile-heading-text">
                                     <div class="d-md-flex align-items-center justify-content-between">
                                         <div class="info d-flex align-items-center mb-30-xs">
-{#                                            <div class="profile-heading-thumb mr-3">#}
-{#                                                <img class="border-radius-50" src="{% static 'img/member-img/3.png'%}" alt="">#}
-{#                                            </div>#}
+                                            {#                                            <div class="profile-heading-thumb mr-3">#}
+                                            {#                                                <img class="border-radius-50" src="{% static 'img/member-img/3.png'%}" alt="">#}
+                                            {#                                            </div>#}
                                             <div class="text">
                                                 <h4>{{ user.first_name }} {{ user.last_name }}</h4>
                                                 <p class="mb-0">Customer ID: {{ cus_id }}</p>
@@ -105,9 +105,28 @@
                         </div>
                         <div class="col-md-6 col-xl-4">
                             {% for message in messages %}
-                                <div class="alert alert-success" role="alert">
-                                    {{ message }}
-                                </div>
+                                {% if message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+                                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <strong>Warning - </strong> {{ message }}
+                                    </div>
+                                {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                                    <div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <strong>Success - </strong> {{ message }}
+                                    </div>
+                                {% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                                    <div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <strong>Error - </strong> {{ message }}
+                                    </div>
+                                {% endif %}
                             {% endfor %}
                             <!-- Profile contacts -->
                             <div class="card">
@@ -163,8 +182,8 @@
                                             {% csrf_token %}
                                             <input type="hidden" name="user" value="{{ user.username }}" class="form-control" readonly>
                                             <div class="container" style="background-color:white">
-{#                                                <label for="checkbox-2" class="cr">Live API</label>#}
-{#                                                <input type="text" value="{{ s_show.api_live_key }}" >#}
+                                                {#                                                <label for="checkbox-2" class="cr">Live API</label>#}
+                                                {#                                                <input type="text" value="{{ s_show.api_live_key }}" >#}
                                                 <label for="checkbox-2" class="cr">Merchant API</label>
                                                 <input type="text" value="{{ s_show.api_test_key }}">
                                             </div>
@@ -176,21 +195,21 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                        <div class="stacked-form-area">
-                                            <h4 class="card-title">Integration Mode</h4>
-                                            <form action="int_mode" method="post">
-                                                {% csrf_token %}
-                                                <input type="hidden" name="user" value="{{ user.username }}" class="form-control" >
-                                                <select id="country" name="int_mode">
-                                                    <option>Select Mode</option>
-                                                    <option value="test">Test Mode</option>
-                                                    <option value="live">Live Mode</option>
-                                                </select>
+                                    <div class="stacked-form-area">
+                                        <h4 class="card-title">Integration Mode</h4>
+                                        <form action="int_mode" method="post">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="user" value="{{ user.username }}" class="form-control" >
+                                            <select id="country" name="int_mode">
+                                                <option>Select Mode</option>
+                                                <option value="test">Test Mode</option>
+                                                <option value="live">Live Mode</option>
+                                            </select>
 
-                                                <input class="btn btn-primary btn-block mt-15" type="submit" value="Submit">
-                                            </form>
-                                        </div>
+                                            <input class="btn btn-primary btn-block mt-15" type="submit" value="Submit">
+                                        </form>
                                     </div>
+                                </div>
                             </div>
                         </div>
                     </div>

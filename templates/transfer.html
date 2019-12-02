@@ -25,15 +25,34 @@
                     <div class="col-12 box-margin height-card">
                         <div class="card">
                             <div class="card-body">
-                            <div>
-                                   <span style="float: right"><a href="virtual_card" ><button class="btn btn-primary">Load Virtual Card</button></a></span>
+                                <div>
+                                    <span style="float: right"><a href="virtual_card" ><button class="btn btn-primary">Load Virtual Card</button></a></span>
                                 </div>
                                 <h4 class="card-title">Transfer Fund</h4>
-                                        {% for message in messages %}
-                                            <div class="alert alert-success" role="alert">
-                                                {{ message }}
-                                            </div>
-                                        {% endfor %}
+                                {% for message in messages %}
+                                    {% if message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+                                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            <strong>Warning - </strong> {{ message }}
+                                        </div>
+                                    {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                                        <div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            <strong>Success - </strong> {{ message }}
+                                        </div>
+                                    {% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                                        <div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            <strong>Error - </strong> {{ message }}
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
                                 <form class="cmxform" id="commentForm" method="post" action="verify">
                                     {% csrf_token %}
                                     <fieldset>
@@ -49,16 +68,16 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        </form>
-                                 {% if num %}
-                                        <div class="form-group">
-                                            <label for="curl">Receiver's Info</label>
-                                            <input id="curl" class="form-control" type="text" value="{{ check.first_name }} {{ check.last_name }}" readonly>
-                                        </div>
-                                        <form action="transfer" method="post">
+                                </form>
+                                {% if num %}
+                                    <div class="form-group">
+                                        <label for="curl">Receiver's Info</label>
+                                        <input id="curl" class="form-control" type="text" value="{{ check.first_name }} {{ check.last_name }}" readonly>
+                                    </div>
+                                    <form action="transfer" method="post">
                                         {% csrf_token %}
-                                           <input type="hidden" name="s_username" class="form-control" value="{{ user.username }}">
-                                           <input type="hidden" name="r_number" class="form-control" value="{{ check.phone_no }}">
+                                        <input type="hidden" name="s_username" class="form-control" value="{{ user.username }}">
+                                        <input type="hidden" name="r_number" class="form-control" value="{{ check.phone_no }}">
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">₦</span>
@@ -69,8 +88,8 @@
                                             </div>
                                         </div>
                                         <input class="btn btn-primary" type="submit" value="Transfer">
-                                    </fieldset>
-                                </form>
+                                        </fieldset>
+                                    </form>
                                 {% endif %}
                             </div>
                         </div>
@@ -87,6 +106,29 @@
 
 <!-- Must needed plugins to the run this Template -->
 {% include 'foot.html' %}
+<script>
+    // Get all elements with class="closebtn"
+    var close = document.getElementsByClassName("closebtn");
+    var i;
+
+    // Loop through all close buttons
+    for (i = 0; i < close.length; i++) {
+        // When someone clicks on a close button
+        close[i].onclick = function() {
+
+            // Get the parent of <span class="closebtn"> (<div class="alert">)
+            var div = this.parentElement;
+
+            // Set the opacity of div to 0 (transparent)
+            div.style.opacity = "0";
+
+            // Hide the div after 600ms (the same amount of milliseconds it takes to fade out)
+            setTimeout(function() {
+                div.style.display = "none";
+            }, 600);
+        }
+    }
+</script>
 
 </body>
 

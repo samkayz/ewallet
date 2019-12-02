@@ -27,14 +27,33 @@
                         <div class="col-12 box-margin height-card">
                             <div class="card">
                                 <div class="card-body">
-                                <div>
-                                   <span style="float: right"><a href="voucher" ><button class="btn btn-primary">Create Voucher</button></a></span>
-                                </div>
+                                    <div>
+                                        <span style="float: right"><a href="voucher" ><button class="btn btn-primary">Create Voucher</button></a></span>
+                                    </div>
                                     <h4 class="card-title">Redeem Voucher</h4>
                                     {% for message in messages %}
-                                        <div class="alert alert-success" role="alert">
-                                            {{ message }}
-                                        </div>
+                                        {% if message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+                                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                <strong>Warning - </strong> {{ message }}
+                                            </div>
+                                        {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                                            <div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                <strong>Success - </strong> {{ message }}
+                                            </div>
+                                        {% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                                            <div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert">
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                <strong>Error - </strong> {{ message }}
+                                            </div>
+                                        {% endif %}
                                     {% endfor %}
                                     <form class="cmxform" id="commentForm" method="post" action="load_voucher">
                                         {% csrf_token %}
