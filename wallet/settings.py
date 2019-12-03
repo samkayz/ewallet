@@ -32,6 +32,7 @@ EMAIL_HOST_USER = '38c207b30aaed1'
 EMAIL_HOST_PASSWORD = '268069f96f1e35'
 EMAIL_PORT = '2525'
 EMAIL_FROM = 'info@jcollect.com'
+DEFAULT_FROM_EMAIL = 'info@jcollect.com'
 
 ADMINS = (
     ('You', 'you@email.com'),

@@ -519,13 +519,11 @@ def withdraw(request):
 @login_required(login_url='login')
 def deposit(request):
     ref_no = uuid.uuid4().hex[:10].upper()
-    api_pk = Settings.objects.all()
     if request.method == 'POST':
         username = request.POST['username']
         email = request.POST['email']
         amount = request.POST['amount']
         show = Account.objects.values().get(username=username)['phone_no']
-
         request.session['ref_no'] = ref_no
         request.session['username'] = username
         request.session['amount'] = amount
@@ -750,6 +748,7 @@ def deposit(request):
         amount = request.POST['amount']
         show = Account.objects.values('phone_no').get(username=username)['phone_no']
         status = Account.objects.values('status').get(username=username)['status']
+        api_pk = Settings.objects.values('paystack_api').get(id=1)['paystack_api']
         charge = Commission.objects.values('deposit').get(id=1)['deposit']
         f_charge = (float(charge))
         am = (float(amount))
@@ -766,7 +765,7 @@ def deposit(request):
             request.session['c_amt'] = c_amt
             context = {'username': username, 'email': email, 't_amt': t_amt,
                        'ref_no': ref_no, 'show': show, 'amount': amount,
-                       'c_amt': c_amt, 'charge': charge}
+                       'c_amt': c_amt, 'charge': charge, 'api_pk': api_pk}
             return render(request, 'confirm.html', context)
     else:
         return render(request, 'deposit.html')

@@ -105,7 +105,7 @@
                             <script>
                                 function payWithPaystack(){
                                     var handler = PaystackPop.setup({
-                                        key: 'pk_test_5df8509f10efa958a831953159feb7d3a8273241',
+                                        key: '{{ api_pk }}',
                                         email: '{{ email }}',
                                         amount: {{ t_amt }} * 100,
                                         currency: "NGN",

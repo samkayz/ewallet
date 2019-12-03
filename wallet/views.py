@@ -6,6 +6,7 @@ from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from wallet.settings import EMAIL_FROM
+from super.models import Settings
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 import uuid
@@ -65,6 +66,7 @@ def initiate(request):
         s_email = request.POST['s_email']
         f_name = request.POST['f_name']
         charge = Commission.objects.values('pay_me').get(id=1)['pay_me']
+        api_pk = Settings.objects.values('paystack_api').get(id=1)['paystack_api']
         f_charge = (float(charge))
         am = (float(amount))
         c_amt = am * (f_charge / 100)
@@ -77,7 +79,7 @@ def initiate(request):
         request.session['f_name'] = f_name
         request.session['c_amt'] = c_amt
         context = {'amount': amount, 'email': email, 'username': username,
-                   'phone': phone, 'sender': sender, 'ref_no': ref_no,
+                   'phone': phone, 'sender': sender, 'ref_no': ref_no, 'api_pk': api_pk,
                    'f_name': f_name, 's_email': s_email, 'c_amt': c_amt, 't_amt': t_amt}
         return render(request, 'pay-me.html', context)
     else:
