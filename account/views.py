@@ -710,7 +710,8 @@ def success(request, id):
 @login_required(login_url='login')
 def reject(request, id):
     c_user = request.user.username
-    now = datetime.datetime.now()
+    base_date_time = datetime.now()
+    now = (datetime.strftime(base_date_time, "%Y-%m-%d %H:%M %p"))
     if Account.objects.values('status').get(username=c_user)['status'] == "hold":
         messages.error(request, 'Your Account is on hold')
         return redirect('pay-invoice')
