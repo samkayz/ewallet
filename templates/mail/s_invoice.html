@@ -1,3 +1,4 @@
+{% load humanize %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
  
@@ -95,7 +96,7 @@
             </tr>
             <tr>
               <td class="bodycopy">
-                  Your Invoice of ₦ {{ amount }} to {{ r_username  }} has been sent successfully. You will be notify of any action taken by the receiver
+                  Your Invoice of ₦ {{ amount|intcomma }} to {{ r_username  }} has been sent successfully. You will be notify of any action taken by the receiver
                   <p>Thanks <br/>
                       jCollect Inc.<br/>
                       08022301477, 08069475532

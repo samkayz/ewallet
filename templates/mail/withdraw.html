@@ -1,3 +1,4 @@
+{% load humanize %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
  
@@ -95,7 +96,7 @@
             </tr>
             <tr>
               <td class="bodycopy">
-                  Your Withdrawal of ₦ {{ amount }} was successfully. You will be notify when your withdrawal request is processed
+                  Your Withdrawal of ₦ {{ amount|intcomma }} was successfully. You will be notify when your withdrawal request is processed
                   <p>Thanks <br/>
                       jCollect Inc.<br/>
                       08022301477, 08069475532
@@ -142,7 +143,7 @@
                             </tr>
                             <tr>
                                 <th>Amount &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                                <td>₦ {{ amount }}</td>
+                                <td>₦ {{ amount|intcomma }}</td>
                             </tr>
                             <tr>
                                 <th>Ref No &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
@@ -150,7 +151,7 @@
                             </tr>
                             <tr>
                                 <th>Acct Bal  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                                <td>{{ new }}</td>
+                                <td>{{ new|intcomma }}</td>
                             </tr>
                         </table>
                     </td>
