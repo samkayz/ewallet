@@ -2,7 +2,7 @@ from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.models import User, auth
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from account.models import Transactions, Account, Voucher, Ticket, Merchant, Withdraw, Subscription, Invoice
 from .models import Resolution, Settings, Details, Emails, Commission
 from django.core.mail import EmailMultiAlternatives
@@ -18,17 +18,17 @@ def index(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-        staff = User.objects.values('is_superuser').get(username=username)['is_superuser']
-        if staff == 1:
+        if User.objects.filter(is_superuser=1).exists():
             users = auth.authenticate(username=username, password=password)
 
             if users is not None:
                 auth.login(request, users)
                 return redirect('home')
             else:
-                messages.info(request, 'Access Denied!!')
+                messages.error(request, 'Access Denied!!')
                 return redirect('index')
         else:
+            messages.error(request, 'User not found')
             return redirect('index')
     else:
         return render(request, 'admin/index.html')
@@ -39,7 +39,7 @@ def logout(request):
     return redirect('index')
 
 
-@login_required(login_url='index')
+@permission_required('is_superuser', login_url='index')
 def home(request):
     show = Transactions.objects.aggregate(Sum('amount'))['amount__sum']
     merchant = Merchant.objects.all().count()
@@ -54,21 +54,21 @@ def home(request):
     return render(request, 'admin/home.html', context)
 
 
-@login_required(login_url='index')
+@permission_required('is_superuser', login_url='index')
 def activity(request):
     show = Transactions.objects.filter()
     context = {'show': show}
     return render(request, 'admin/activity.html', context)
 
 
-@login_required(login_url='index')
+@permission_required('is_superuser', login_url='index')
 def user(request):
     show = Account.objects.filter()
     context = {'show': show}
     return render(request, 'admin/user.html', context)
 
 
-@login_required(login_url='index')
+@permission_required('is_superuser', login_url='index')
 def view(request, id):
     show = Account.objects.all().get(id=id)
     username = Account.objects.values('username').get(id=id)['username']
@@ -81,21 +81,21 @@ def view(request, id):
         return render(request, 'admin/view.html', context)
 
 
-@login_required(login_url='index')
+@permission_required('is_superuser', login_url='index')
 def voucher(request):
     show = Voucher.objects.filter()
     context = {'show': show}
     return render(request, 'admin/voucher.html', context)
 
 
-@login_required(login_url='index')
+@permission_required('is_superuser', login_url='index')
 def dispute(request):
     show = Ticket.objects.filter()
     context = {'show': show}
     return render(request, 'admin/dispute.html', context)
 
 
-@login_required(login_url='index')
+@permission_required('is_superuser', login_url='index')
 def solve(request, ticket_id):
     show = Resolution.objects.filter(Q(ticket_id=ticket_id))
     r_show = Resolution.objects.filter(Q(ticket_id=ticket_id))
@@ -104,7 +104,7 @@ def solve(request, ticket_id):
     return render(request, 'admin/dispute.html', context)
 
 
-@login_required(login_url='index')
+@permission_required('is_superuser', login_url='index')
 def resolution(request):
     if request.method == 'POST':
         ticket_id = request.POST['ticket_id']
@@ -120,12 +120,12 @@ def resolution(request):
         return redirect('/super/dispute')
 
 
-@login_required(login_url='index')
+@permission_required('is_superuser', login_url='index')
 def page(request):
     return render(request, 'admin/page.html')
 
 
-@login_required(login_url='index')
+@permission_required('is_superuser', login_url='index')
 def verify(request):
     if request.method == 'POST':
         r_number = request.POST['number']
@@ -140,7 +140,7 @@ def verify(request):
     return render(request, 'admin/send.html')
 
 
-@login_required(login_url='index')
+@permission_required('is_superuser', login_url='index')
 def send(request):
     ref_no = uuid.uuid4().hex[:10].upper()
     if request.method == 'POST':
@@ -174,7 +174,7 @@ def send(request):
     return render(request, 'admin/send.html')
 
 
-@login_required(login_url='index')
+@permission_required('is_superuser', login_url='index')
 def about(request):
     if request.method == 'POST':
         abouts = request.POST['about']
@@ -185,14 +185,14 @@ def about(request):
     return render(request, 'admin/page.html')
 
 
-@login_required(login_url='index')
+@permission_required('is_superuser', login_url='index')
 def withdraw(request):
     show = Withdraw.objects.filter()
     context = {'show': show}
     return render(request, 'admin/withdraw.html', context)
 
 
-@login_required(login_url='index')
+@permission_required('is_superuser', login_url='index')
 def approve(request, id):
     status = Withdraw.objects.values('status').get(id=id)['status']
     amount = Withdraw.objects.values('amount').get(id=id)['amount']
@@ -218,7 +218,7 @@ def approve(request, id):
         return redirect('/super/withdraw')
 
 
-@login_required(login_url='index')
+@permission_required('is_superuser', login_url='index')
 def details(request):
     if request.method == 'POST':
         address = request.POST['address']
@@ -240,7 +240,7 @@ def details(request):
     return render(request, 'details.html', context)
 
 
-@login_required(login_url='index')
+@permission_required('is_superuser', login_url='index')
 def contact(request):
     if request.method == 'POST':
         email = request.POST['email']
@@ -260,6 +260,7 @@ def contact(request):
     return render(request, 'admin/contact.html', context)
 
 
+@permission_required('is_superuser', login_url='index')
 def payment_api(request):
     if request.method == 'POST':
         paystack = request.POST['paystack']
@@ -277,7 +278,7 @@ def payment_api(request):
     return render(request, 'admin/payment_api.html', context)
 
 
-@login_required(login_url='index')
+@permission_required('is_superuser', login_url='index')
 def v_verify(request):
     if request.method == 'POST':
         r_number = request.POST['number']
@@ -292,7 +293,7 @@ def v_verify(request):
     return render(request, 'admin/solve_voucher.html')
 
 
-@login_required(login_url='index')
+@permission_required('is_superuser', login_url='index')
 def voucher_issue(request):
     ref_no = uuid.uuid4().hex[:10].upper()
     if request.method == 'POST':
@@ -322,7 +323,7 @@ def voucher_issue(request):
     return render(request, 'admin/solve_voucher.html')
 
 
-@login_required(login_url='index')
+@permission_required('is_superuser', login_url='index')
 def lock(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -338,7 +339,7 @@ def lock(request):
     return render(request, 'admin/lock.html')
 
 
-@login_required(login_url='index')
+@permission_required('is_superuser', login_url='index')
 def hold(request, id):
     Account.objects.filter(id=id).update(status="hold")
     username = Account.objects.values('username').get(id=id)['username']
@@ -356,7 +357,7 @@ def hold(request, id):
     return redirect('user')
 
 
-@login_required(login_url='index')
+@permission_required('is_superuser', login_url='index')
 def un_hold(request, id):
     Account.objects.filter(id=id).update(status="unhold")
     username = Account.objects.values('username').get(id=id)['username']
@@ -373,7 +374,7 @@ def un_hold(request, id):
     return redirect('user')
 
 
-@login_required(login_url='index')
+@permission_required('is_superuser', login_url='index')
 def mail(request):
     if request.method == "POST":
         users = request.POST['user']
@@ -416,7 +417,7 @@ def mail(request):
     return render(request, 'admin/mail.html', context)
 
 
-@login_required(login_url='index')
+@permission_required('is_superuser', login_url='index')
 def user_trans(request, username):
     show = Transactions.objects.filter(Q(sender=username) | Q(receiver=username))
     name = User.objects.values('first_name').get(username=username)['first_name']
@@ -424,7 +425,7 @@ def user_trans(request, username):
     return render(request, 'admin/user_trans.html', context)
 
 
-@login_required(login_url='index')
+@permission_required('is_superuser', login_url='index')
 def charges(request):
     if request.method == 'POST':
         payme = request.POST['payme']

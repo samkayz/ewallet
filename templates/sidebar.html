@@ -1,54 +1,56 @@
 {% load static %}
 {% block main %}
-<div class="ecaps-sidemenu-area">
-    <!-- Desktop Logo -->
-    <div class="ecaps-logo">
-        <a href="/account/dashboard">
-            <img class="desktop-logo" src="{% static 'img/core-img/jcollect.png'%}" alt="Desktop Logo">
-            <img class="small-logo" src="{% static 'img/core-img/jcollect.png'%}" alt="Mobile Logo"></a>
-    </div>
+    <div class="ecaps-sidemenu-area">
+        <!-- Desktop Logo -->
+        <div class="ecaps-logo">
+            <a href="/account/dashboard">
+                <img class="desktop-logo" src="{% static 'img/core-img/jcollect.png'%}" alt="Desktop Logo">
+                <img class="small-logo" src="{% static 'img/core-img/jcollect.png'%}" alt="Mobile Logo"></a>
+        </div>
 
-    <!-- Side Nav -->
-    <div class="ecaps-sidenav" id="ecapsSideNav">
-        <!-- Side Menu Area -->
-        <div class="side-menu-area">
-            <!-- Sidebar Menu -->
-            <nav>
-                <ul class="sidebar-menu" data-widget="tree">
-                    <li class=""><a href="/account/dashboard">
-                        <i class="zmdi zmdi-home"></i><span>Dashboard</span></a></li>
-                    <li class="">
-                        <a href="/account/transfer"><i class="zmdi zmdi-money">
-                        </i> <span>Transfer</span></a>
-                    </li>
-                    <li class="treeview">
-                        <a href="javascript:void(0)"><i class="zmdi zmdi-fast-forward"></i> <span>Invoice</span> <i class="fa fa-angle-right"></i></a>
-                        <ul class="treeview-menu">
-                            <li><a href="/account/invoice">Create Invoice</a></li>
-                            <li><a href="/account/pay_invoice">Pay Invoices</a></li>
-                            <li><a href="/account/paid_invoice">Paid Invoices</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="/account/withdraw"><i class="zmdi zmdi-balance"></i><span>Withdraw</span></a></li>
-                    <li><a href="/account/activity"><i class="zmdi zmdi-search-in-file"></i><span>Activity</span></a></li>
-                    <li class="">
-                        <a href="/account/voucher"><i class="zmdi zmdi-card-giftcard"></i><span>Voucher</span></a>
-                    </li>
-                    <li class="">
-                        <a href="/account/load"><i class="zmdi zmdi-balance-wallet"></i><span>Load Wallet</span></a>
-                    </li>
-                    <li class="">
-                        <a href="/account/bank"><i class="zmdi zmdi-balance"></i> <span>Add Bank</span></a>
-                    </li>
-                     <li class="">
-                        <a href="/account/ticket"><i class="zmdi zmdi-outlook"></i><span>Support</span></a>
-                    </li>
-                    <li class="">
-                        <a href="/account/settings"><i class="zmdi zmdi-wrench"></i><span>Settings</span></a>
-                    </li>
-                </ul>
-            </nav>
+        <!-- Side Nav -->
+        <div class="ecaps-sidenav" id="ecapsSideNav">
+            <!-- Side Menu Area -->
+            <div class="side-menu-area">
+                <!-- Sidebar Menu -->
+                <nav>
+                    <ul class="sidebar-menu" data-widget="tree">
+                        <li class=""><a href="/account/dashboard">
+                            <i class="zmdi zmdi-home"></i><span>Dashboard</span></a></li>
+                        <li class="">
+                            <a href="/account/transfer"><i class="zmdi zmdi-money">
+                            </i> <span>Transfer</span></a>
+                        </li>
+                        <li class="treeview">
+                            <a href="javascript:void(0)"><i class="zmdi zmdi-fast-forward"></i> <span>Invoice</span> <i class="fa fa-angle-right"></i></a>
+                            <ul class="treeview-menu">
+                                <li><a href="/account/invoice">Create Invoice</a></li>
+                                <li><a href="/account/pay_invoice">Pay Invoices</a></li>
+                                <li><a href="/account/paid_invoice">Paid Invoices</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="/account/withdraw"><i class="zmdi zmdi-balance"></i><span>Withdraw</span></a></li>
+                        <li><a href="/account/activity"><i class="zmdi zmdi-search-in-file"></i><span>Activity</span></a></li>
+                        <li><a href="/account/customer"><i class="zmdi zmdi-accounts-outline"></i><span>Customer</span></a></li>
+                        <li><a href="/account/staff"><i class="zmdi zmdi-case"></i><span>Staff</span></a></li>
+                        <li class="">
+                            <a href="/account/voucher"><i class="zmdi zmdi-card-giftcard"></i><span>Voucher</span></a>
+                        </li>
+                        <li class="">
+                            <a href="/account/load"><i class="zmdi zmdi-balance-wallet"></i><span>Load Wallet</span></a>
+                        </li>
+                        <li class="">
+                            <a href="/account/bank"><i class="zmdi zmdi-balance"></i> <span>Add Bank</span></a>
+                        </li>
+                        <li class="">
+                            <a href="/account/ticket"><i class="zmdi zmdi-outlook"></i><span>Support</span></a>
+                        </li>
+                        <li class="">
+                            <a href="/account/settings"><i class="zmdi zmdi-wrench"></i><span>Settings</span></a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </div>
     </div>
-</div>
 {% endblock %}

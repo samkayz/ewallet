@@ -144,3 +144,27 @@ class VirtualCard(models.Model):
     class Meta:
         db_table = "virtual_card"
 
+
+class Customer(models.Model):
+    merchant_id = models.IntegerField()
+    first_name = models.CharField(max_length=200)
+    last_name = models.CharField(max_length=200)
+    email = models.EmailField()
+    phone_no = models.CharField(max_length=100)
+
+    class Meta:
+        db_table = 'customer'
+
+
+class Staff(models.Model):
+    merchant_id = models.IntegerField()
+    first_name = models.CharField(max_length=200)
+    last_name = models.CharField(max_length=200)
+    email = models.EmailField()
+    phone_no = models.CharField(max_length=100)
+    amount = models.FloatField()
+
+    class Meta:
+        db_table = 'staff'
+
+

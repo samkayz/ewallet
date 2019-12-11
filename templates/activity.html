@@ -33,9 +33,11 @@
                                         <thead>
                                         <tr>
                                             <th>Sender</th>
+                                            <th>Receiver</th>
                                             <th>Ref No</th>
                                             <th>Date</th>
                                             <th>Amount</th>
+                                            <th>Desc</th>
                                         </tr>
                                         </thead>
 
@@ -44,9 +46,11 @@
                                         {% for data in show %}
                                             <tr>
                                                 <td>{{ data.sender }}</td>
+                                                <td>{{ data.receiver }}</td>
                                                 <td>{{ data.ref_no }}</td>
                                                 <td>{{ data.date }}</td>
                                                 <td><div class="badge badge-success badge-shadow">₦ {{ data.amount|intcomma }}</div></td>
+                                                <td>{{ data.description }}</td>
                                             </tr>
                                         {% endfor %}
                                         </tbody>

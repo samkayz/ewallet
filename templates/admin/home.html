@@ -1,4 +1,5 @@
 {% load static %}
+{% load humanize %}
 {% block main %}
     <!doctype html>
     <html lang="en">
@@ -63,14 +64,14 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <h5 class="card-title">TOTAL TRANSACTION</h5>
-                                        <h5>₦ {{ show }}</h5>
+                                        <h5>₦ {{ show|intcomma }}</h5>
                                         <span class="d-block pt-1 pb-3"></span>
                                         <div id="chart-percent1" class="chart-percent1" style="height:200px;"></div>
                                         <div class="client-name">
                                             <div class="row">
                                                 <div class="col-sm-12 pt-2 pb-2">
                                                     <span class="mr-3"><i class="feather icon-circle text-c-green  mr-2"></i>Total Voucher</span>
-                                                    <span class="float-right text-muted">₦ {{ t_v }}</span>
+                                                    <span class="float-right text-muted">₦ {{ t_v|intcomma }}</span>
                                                 </div>
                                                 <div class="col-sm-12 pt-2 pb-2">
                                                     <span class="mr-3"><i class="feather icon-circle text-c-blue  mr-2"></i>Total User</span>
@@ -93,15 +94,15 @@
                                         <h5 class="card-title">Yearly Summary</h5>
                                         <div class="row pb-3">
                                             <div class="col-md-4 col-6 text-center">
-                                                <h5 class="f-w-300">₦ {{ t_inv }}</h5>
+                                                <h5 class="f-w-300">₦ {{ t_inv|intcomma }}</h5>
                                                 <span>Total Invoice</span>
                                             </div>
                                             <div class="col-md-4 col-6 text-center">
-                                                <h5 class="f-w-300">₦ {{ t_v }}</h5>
+                                                <h5 class="f-w-300">₦ {{ t_v|intcomma }}</h5>
                                                 <span>Total Vouchers</span>
                                             </div>
                                             <div class="col-md-4 col-12 text-center">
-                                                <h5 class="f-w-300">₦ {{ s_withdraw }}</h5>
+                                                <h5 class="f-w-300">₦ {{ s_withdraw|intcomma }}</h5>
                                                 <span>Total Withdrawal</span>
                                             </div>
                                         </div>

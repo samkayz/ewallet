@@ -42,5 +42,13 @@ urlpatterns = [
     path('virtual_card', views.virtual_card, name='virtual_card'),
     path('card_check', views.check, name='check'),
     path('airtime_verify/<reference>', views.airtime_verify, name='airtime_verify'),
+    path('customer', views.customer, name='customer'),
+    path('add_customer', views.add_customer, name='add'),
+    path('staff', views.staff, name='staff'),
+    path('add_staff', views.add_staff, name='add-staff'),
+    path('pay_staff', views.pay_staff, name='pay_staff'),
+    path('upload_staff', views.upload_staff, name='upload_staff'),
+    path('delete_staff/<id>', views.delete_staff, name='delete_staff'),
+    path('pay_single/<id>', views.pay_single, name='pay_single'),
 
 ]

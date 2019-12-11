@@ -4,19 +4,22 @@ from django.contrib import messages
 from django.contrib.auth.models import User, auth
 from django.contrib.auth.decorators import login_required
 from .models import Account, Transactions, Voucher, Ticket, Merchant, Bank, Withdraw, Invoice, Banks, VirtualCard
+from .models import Customer, Staff
 from super.models import Resolution, Settings, Commission
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.db.models import Sum
 from wallet.settings import EMAIL_FROM
-from  typing import Union
+from typing import Union
 from collections import namedtuple
 import random
 import string
 import uuid
 import datetime
 from datetime import datetime
+import csv
+import io
 
 
 # Login view function that handle all the login
@@ -120,6 +123,8 @@ def logout(request):
 @login_required(login_url='login')
 def transfer(request):
     ref_no = uuid.uuid4().hex[:10].upper()
+    base_date_time = datetime.now()
+    now = (datetime.strftime(base_date_time, "%Y-%m-%d %H:%M %p"))
     if request.method == 'POST':
         s_username = request.POST['s_username']
         r_number = request.POST['r_number']
@@ -169,7 +174,7 @@ def transfer(request):
             subject, from_email, to = 'Fund Transfer', EMAIL_FROM, r_mail
             html_content = render_to_string('mail/s_mail.html',
                                             {'first_name': first_name, 'new_2': new_2, 'ref_no': ref_no, 'amount': am,
-                                             'receiver': r_number, 'c_amt': c_amt})
+                                             'receiver': r_number, 'c_amt': c_amt, 'date': now})
             text_content = strip_tags(html_content)
             msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
             msg.attach_alternative(html_content, "text/html")
@@ -179,7 +184,7 @@ def transfer(request):
             subject, from_email, to = 'Fund Transfer', EMAIL_FROM, m_email
             html_content = render_to_string('mail/r_mail.html',
                                             {'r_first_name': r_first_name, 'new': new, 'ref_no': ref_no, 'amount': am,
-                                             'sender': first_name})
+                                             'sender': first_name, 'date': now})
             text_content = strip_tags(html_content)
             msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
             msg.attach_alternative(html_content, "text/html")
@@ -462,6 +467,8 @@ def delete(request, id):
 
 @login_required(login_url='login')
 def withdraw(request):
+    base_date_time = datetime.now()
+    now = (datetime.strftime(base_date_time, "%Y-%m-%d %H:%M %p"))
     ref_no = uuid.uuid4().hex[:10].upper()
     c_user = request.user.username
     if request.method == 'POST':
@@ -504,7 +511,7 @@ def withdraw(request):
             subject, from_email, to = 'Fund Withdrawal', EMAIL_FROM, email
             html_content = render_to_string('mail/withdraw.html',
                                             {'bank_name': bank_name, 'amount': amount,
-                                             'new': new, 'ref_no': ref_no,
+                                             'new': new, 'ref_no': ref_no, 'date': now,
                                              'first_name': first_name, 'acct_name': acct_name, 'acct_no': acct_no})
             text_content = strip_tags(html_content)
             msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
@@ -599,6 +606,8 @@ def invoice_verify(request):
 
 @login_required(login_url='login')
 def invoice(request):
+    base_date_time = datetime.now()
+    now = (datetime.strftime(base_date_time, "%Y-%m-%d %H:%M %p"))
     c_user = request.user.username
     if request.method == 'POST':
         s_username = request.POST['s_username']
@@ -628,16 +637,16 @@ def invoice(request):
         subject, from_email, to = 'Invoice', EMAIL_FROM, s_email
         html_content = render_to_string('mail/s_invoice.html',
                                         {'r_username': r_username, 's_username': s_username,
-                                         'amount': amount})
+                                         'amount': amount, 'date': now})
         text_content = strip_tags(html_content)
         msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
         msg.attach_alternative(html_content, "text/html")
         msg.send()
-    #     Receiver
+        #     Receiver
         subject, from_email, to = 'Invoice', EMAIL_FROM, r_email
         html_content = render_to_string('mail/r_invoice.html',
                                         {'r_username': r_username, 's_username': s_username,
-                                         'amount': amount, 'content': content})
+                                         'amount': amount, 'content': content, 'date': now})
         text_content = strip_tags(html_content)
         msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
         msg.attach_alternative(html_content, "text/html")
@@ -699,7 +708,7 @@ def success(request, id):
         subject, from_email, to = 'Invoice', EMAIL_FROM, s_email
         html_content = render_to_string('mail/s_mail_invoice.html',
                                         {'r_username': r_username, 's_username': s_username,
-                                         'amount': amount, 'ref_no': ref_no, 'new2': new2})
+                                         'amount': amount, 'ref_no': ref_no, 'new2': new2, 'date': now})
         text_content = strip_tags(html_content)
         msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
         msg.attach_alternative(html_content, "text/html")
@@ -774,6 +783,8 @@ def deposit(request):
 
 @login_required(login_url='login')
 def payment(request):
+    base_date_time = datetime.now()
+    now = (datetime.strftime(base_date_time, "%Y-%m-%d %H:%M %p"))
     amount = request.session['amount']
     username = request.session['username']
     ref_no = request.session['ref_no']
@@ -792,7 +803,7 @@ def payment(request):
     subject, from_email, to = 'Fund Deposit', EMAIL_FROM, email
     html_content = render_to_string('mail/deposit.html',
                                     {'username': username, 'amount': amount,
-                                     'new': new, 'ref_no': ref_no,
+                                     'new': new, 'ref_no': ref_no, 'date': now,
                                      'first_name': first_name, 't_amt': t_amt, 'c_amt': c_amt})
     text_content = strip_tags(html_content)
     msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
@@ -895,4 +906,225 @@ def check(request):
             messages.error(request, 'Card Not Found')
             return redirect('virtual_card')
     return render(request, 'virtual_card.html')
+
+
+@login_required(login_url='login')
+def customer(request):
+    c_user = request.user.id
+    show = Customer.objects.filter(merchant_id=c_user)
+    context = {'show': show}
+    return render(request, 'customer.html', context)
+
+
+@login_required(login_url='login')
+def add_customer(request):
+    c_user = request.user.id
+    if request.method == 'POST':
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        email = request.POST['email']
+        mobile_no = request.POST['mobile_no']
+        if Customer.objects.filter(email=email).exists():
+            messages.error(request, 'Customer Already Exist')
+            return redirect('customer')
+        elif Customer.objects.filter(phone_no=mobile_no).exists():
+            messages.error(request, 'Mobile Number Already Exist')
+            return redirect('customer')
+        else:
+            cus = Customer(merchant_id=c_user, first_name=first_name, last_name=last_name, email=email,
+                           phone_no=mobile_no)
+            cus.save()
+            messages.success(request, 'Customer Added Successfully')
+            return redirect('customer')
+    else:
+        messages.error(request, 'Error Adding Customer')
+        return redirect('customer')
+
+
+@login_required(login_url='login')
+def staff(request):
+    c_user = request.user.id
+    show = Staff.objects.filter(merchant_id=c_user)
+    context = {'show': show}
+    return render(request, 'staff.html', context)
+
+
+@login_required(login_url='login')
+def add_staff(request):
+    c_user = request.user.id
+    if request.method == 'POST':
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        email = request.POST['email']
+        mobile_no = request.POST['mobile_no']
+        amount = request.POST['amount']
+        if Staff.objects.filter(email=email).exists():
+            messages.error(request, 'Staff Already Exist')
+            return redirect('staff')
+        elif Staff.objects.filter(phone_no=mobile_no).exists():
+            messages.error(request, 'Mobile Number Already Exist')
+            return redirect('staff')
+        else:
+            cus = Staff(merchant_id=c_user, first_name=first_name, last_name=last_name,
+                        email=email, phone_no=mobile_no, amount=amount)
+            cus.save()
+            messages.success(request, 'Staff Added Successfully')
+            return redirect('staff')
+    else:
+        messages.error(request, 'Error Adding Staff')
+        return redirect('staff')
+
+
+@login_required(login_url='login')
+def upload_staff(request):
+    c_user = request.user.id
+    if request.method == 'POST':
+        csv_file = request.FILES['file']
+        if not csv_file.name.endswith('.csv'):
+            messages.error(request, 'File not csv')
+            return redirect('staff')
+
+        decoded_file = csv_file.read().decode('utf-8')
+        io_string = io.StringIO(decoded_file)
+        # next(io_string)
+        for data in csv.reader(io_string, delimiter=',', quotechar='|'):
+            # print(data[1])
+            Staff.objects.update_or_create(merchant_id=c_user,
+                                           first_name=data[0],
+                                           last_name=data[1],
+                                           email=data[2],
+                                           phone_no=data[3],
+                                           amount=data[4])
+        messages.success(request, 'Record Updated')
+        return redirect('staff')
+
+
+def delete_staff(request, id):
+    Staff.objects.filter(id=id).delete()
+    messages.success(request, 'Record Deleted')
+    return redirect('staff')
+
+
+@login_required(login_url='login')
+def pay_staff(request):
+    base_date_time = datetime.now()
+    now = (datetime.strftime(base_date_time, "%Y-%m-%d %H:%M %p"))
+    ref_no = uuid.uuid4().hex[:10].upper()
+    c_user = request.user.username
+    if request.method == 'POST':
+        month = request.POST['month']
+        comment = request.POST['comment']
+        status = Account.objects.values('status').get(username=c_user)['status']
+        sender = Merchant.objects.values('bus_name').get(bus_owner_username=c_user)['bus_name']
+        s_bal = Account.objects.values('bal').get(username=c_user)['bal']
+        am = [float(staffs.amount) for staffs in Staff.objects.all()]
+        amt = (sum(am))
+        sb = (float(s_bal))
+
+        if status == 'hold':
+            messages.error(request, 'Your Account is on Hold, Please contact our agent')
+            return redirect('staff')
+        else:
+            for staffs in Staff.objects.all():
+                if Account.objects.filter(phone_no=staffs.phone_no).exists():
+                    bal = Account.objects.values('bal').get(phone_no=staffs.phone_no)['bal']
+                    r_username = Account.objects.values('username').get(phone_no=staffs.phone_no)['username']
+                    # print(am)
+                    amount = Staff.objects.values('amount').get(phone_no=staffs.phone_no)['amount']
+                    rb = (float(bal))
+                    # print(amount)
+                    new = rb + amount
+                    Account.objects.filter(phone_no=staffs.phone_no).update(bal=new)
+
+                    new2 = sb - amt
+                    Account.objects.filter(username=c_user).update(bal=new2)
+
+                    bulk = Transactions(sender=c_user, receiver=r_username, amount=staffs.amount,
+                                        ref_no=ref_no, description=comment)
+                    bulk.save()
+                    subject, from_email, to = 'Payment', EMAIL_FROM, staffs.email
+                    html_content = render_to_string('mail/email.html', {'username': r_username, 'amount': staffs.amount,
+                                                                        'comment': comment, 'bal': new, 'sender': sender,
+                                                                        'rb': rb, 'ref': ref_no, 'date': now})
+                    text_content = strip_tags(html_content)
+                    msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+                    msg.attach_alternative(html_content, "text/html")
+                    msg.send()
+
+                else:
+                    messages.warning(request, 'Some Users info is wrong')
+            messages.success(request, 'Done')
+        return redirect('staff')
+    else:
+        messages.error(request, 'Transaction Fail')
+        return redirect('staff')
+
+
+def pay_single(request, id):
+    base_date_time = datetime.now()
+    now = (datetime.strftime(base_date_time, "%Y-%m-%d %H:%M %p"))
+    ref_no = uuid.uuid4().hex[:10].upper()
+    c_user = request.user.username
+    r_no = Staff.objects.values('phone_no').get(id=id)['phone_no']
+    # ch = Account.objects.values('phone_no').get(phone_no=r_no)['phone_no']
+    if Account.objects.filter(phone_no=r_no).exists():
+        amount = Staff.objects.values('amount').get(id=id)['amount']
+        r_no = Staff.objects.values('phone_no').get(id=id)['phone_no']
+        r_bal = Account.objects.values('bal').get(phone_no=r_no)['bal']
+        s_bal = Account.objects.values('bal').get(username=c_user)['bal']
+        r_email = Staff.objects.values('email').get(id=id)['email']
+        s_email = User.objects.values('email').get(username=c_user)['email']
+        r_username = Account.objects.values('username').get(phone_no=r_no)['username']
+        r_status = Account.objects.values('status').get(phone_no=r_no)['status']
+        s_status = Account.objects.values('status').get(username=c_user)['status']
+        rb = (float(r_bal))
+        sb = (float(s_bal))
+        if amount > sb:
+            messages.error(request, 'Insufficient Balance')
+            return redirect('staff')
+        elif r_status == 'hold':
+            messages.error(request, 'User can not Recieve fun at the Moment')
+            return redirect('staff')
+        elif s_status == 'hold':
+            messages.error(request, 'Sorry You Account is on hold')
+            return redirect('staff')
+        else:
+            # credit Receiver
+            new = rb + amount
+            Account.objects.filter(phone_no=r_no).update(bal=new)
+
+            # Debit Sender
+            new2 = sb - amount
+            Account.objects.filter(username=c_user).update(bal=new2)
+
+            Transactions.objects.create(sender=c_user,
+                                        receiver=r_username,
+                                        amount=amount,
+                                        ref_no=ref_no,
+                                        description='Payment')
+
+            # Receiver
+            subject, from_email, to = 'Payment', EMAIL_FROM, r_email
+            html_content = render_to_string('mail/email.html', {'username': r_username, 'amount': amount,
+                                                                'comment': 'Payment', 'bal': new, 'sender': c_user,
+                                                                'rb': rb, 'ref': ref_no, 'date': now})
+            text_content = strip_tags(html_content)
+            msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+            msg.attach_alternative(html_content, "text/html")
+            msg.send()
+
+            # Sender
+            subject, from_email, to = 'Payment', EMAIL_FROM, s_email
+            html_content = render_to_string('mail/remail.html', {'username': c_user, 'amount': amount,
+                                                                 'comment': 'Payment', 'bal': new2, 'sender': r_username,
+                                                                 'rb': sb, 'ref': ref_no, 'date': now})
+            text_content = strip_tags(html_content)
+            msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+            msg.attach_alternative(html_content, "text/html")
+            msg.send()
+            messages.success(request, 'Transaction Successful')
+            return redirect('staff')
+    else:
+        messages.error(request, 'User not found')
+        return redirect('staff')
 
