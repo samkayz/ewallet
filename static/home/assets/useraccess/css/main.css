@@ -1,0 +1,423 @@
+* {
+    box-sizing: border-box;
+}
+html {
+    font-size: 100%;
+    height: 100%;
+}
+body {
+    background-color: #fff;
+    color: #000;
+    font-family: 'Mukta';
+    font-size: 0.85em;
+    line-height: 1.5;
+}
+.auth {
+    background: #fafafa url('../images/authbg.png') no-repeat;
+    background-position: center 100%;
+    background-size: 100%;
+    background-attachment: fixed;
+}
+.app {
+    background-color: #fff;
+}
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+}
+a {
+    color: #209e1e;
+    text-decoration: none;
+}
+button, input[type=submit] {
+    cursor: pointer;
+}
+.auth__title {
+    font-size: 1.7em;
+    padding: 0.5em;
+    text-align: center;
+}
+.auth__title::after {
+    border: 1px solid #209e1e;
+    content: ' ';
+    display: block;
+    max-width: 40px;
+    margin: auto;
+}
+.auth__subtitle {
+    color: #777;
+    font-size: 0.9em;
+    padding: 0.5em 2em 1em 2em;
+    text-align: center;
+}
+.auth__container {
+    max-width: 550px;
+    margin: auto;
+}
+.auth__content {
+    background: #209e1e url('../images/brown-brunette-female-finger-41551.html') no-repeat -40px;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+}
+.auth__main-content {
+    background-color: #fff;
+    flex: 1;
+    padding: 2em 1em;
+}
+.auth__side-container {
+    background: linear-gradient(175deg, #209e1e, #5e6d09);
+    color: #fff;
+    flex: 0;
+    opacity: 0.94;
+}
+
+@media (max-width: 600px){
+    .auth__side-container {
+       display: none;
+    }
+}
+
+.auth__side-slide {
+    font-size: 1.5em;
+    padding: 1.5em;
+    width: 270px;
+}
+.auth__logo {
+    margin: 2em 0;
+    text-align: center;
+}
+.auth__logo img {
+    height: 55px;
+    width: auto;
+}
+.app__body {
+    background-color: #f0f0f0;
+}
+.app__header {
+    background-color: #fff;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.01);
+    position: fixed;
+    top: 0%;
+    left: 240px;
+    right: 0%;
+}
+.app__header ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.app__header li {
+    display: inline-block;
+    vertical-align: middle;
+}
+.app__header a {
+    color: #777;
+    display: block;
+    padding: 1em;
+    text-transform: uppercase;
+    transition: all ease-in-out 0.3s;
+}
+.app__header a:hover {
+    color: #555;
+}
+.app__sidebar {
+    background: transparent url('../images/sidebar-1.html') no-repeat;
+    background-size: cover;
+    color: #fff;
+    position: fixed;
+    left: 0%;
+    width: 240px;
+    top: 0%;
+    bottom: 0%;
+}
+.app__sidebar-gradient {
+    background: linear-gradient(175deg, #209e1e, #5e6d09);
+    content: '';
+    opacity: 0.97;
+    position: absolute;
+    top: 0%;
+    right: 0%;
+    left: 0%;
+    bottom: 0%;
+}
+.app__sidebar-content {
+    position: relative;
+    z-index: 1;
+}
+.app__sidebar a {
+    color: #fff;
+    display: block;
+    font-weight: bold;
+    padding: 0.5em 2em;
+    transition: all ease-in-out 0.2s;
+}
+.app__sidebar a:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+.app__sidebar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.app__sidebar-dp {
+    border: 2px solid #fff;
+    border-radius: 100%;
+    width: 80%;
+    height: auto;
+}
+.app__sidebar-title {
+    padding: 0 2em;
+}
+.app__sidebar-title:not(:first-child) {
+    padding-top: 1.5em;
+}
+.app__sidebar-title::after {
+    border-bottom: 1px solid rgba(225, 225, 225, 0.4);
+    content: '';
+    display: block;
+    width: 20px;
+    margin: 0 0 0.5em 2px;
+}
+.app__content {
+    margin: 3.5em 0 0 240px;
+}
+.dash-savings {
+    text-align: right;
+}
+.dash-savings__icon {
+    position: absolute;
+    font-size: 2.8em;
+    font-weight: 100;
+    left: 0.8em;
+    top: 20%;
+}
+.dash-savings__item {
+    background-color: #fff;
+    border-radius: 0.3em;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, .05);
+    margin: 1em;
+    position: relative;
+}
+.dash-savings__amount {
+    font-size: 1.8em;
+    font-weight: bold;
+    padding: 1em 1.5em 0 1.5em;
+}
+.dash-savings__title {
+    font-weight: bold;
+    padding: 1em 1.5em;
+}
+.inform {
+    background-color: #fff;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.013);
+    color: #555;
+    padding: 1em;
+    margin: 1em;
+}
+.inform__note {
+    margin: 0.7em 0;
+}
+.inform__btn {
+    animation: btn-anim 4s linear infinite;
+    background-color: #2a972a;
+    border-radius: 2.5em;
+    color: #fff;
+    display: inline-block;
+    font-weight: bold;
+    padding: 0.7em 1.1em;
+}
+.glist {
+    background-color: #fff;
+    border-radius: 0.2em;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, .05);
+    margin: 1em;
+}
+.glist__title {
+    padding: 1em;
+}
+.glist__title a {
+    background-color: #f0f0f0;
+    border-radius: 0.3em;
+    color: #444;
+    display: inline-block;
+    padding: 0.3em 0.5em;
+}
+.glist__item {
+    border-bottom: 1px solid #f5f5f5;
+}
+.glist__item-title {
+    color: #555;
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 0.4em 1em;
+}
+.glist__item-progress {
+    color: #333;
+    padding: 1em;
+}
+.glist__item-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.glist__item-list a {
+    display: block;
+    font-size: 1.1em;
+    padding: 0.5em 1em;
+}
+.minibar {
+    padding: 1em 1em 0 1em;
+    width: 100%;
+}
+.minibar__link {
+    border-radius: 2em;
+    color: #909090;
+    display: inline-block;
+    font-weight: bold;
+    padding: 0.3em 1em;
+    vertical-align: middle;
+}
+.minibar__title {
+    display: inline-block;
+    font-weight: bold;
+    font-size: 1.5em;
+    margin: 0 0 0 1.1em;
+    vertical-align: middle;
+    text-align: center;
+}
+.main-form {
+    padding: 1em;
+}
+.main-form__container {
+    background-color: #fff;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.05);
+    border-radius: 0.2em;
+    margin: 1em auto;
+}
+.main-form__topbar {
+    background: #fafafa;
+    background: linear-gradient(to bottom, #fafafa, #f5f5f5);
+    border-bottom: 1px solid #e0e0e0;
+    overflow: hidden;
+    padding: 0.5em;
+}
+.main-form__subbar {
+    background-color: #fafafa;
+}
+.main-form__subbar a {
+    color: #000 !important;
+}
+.main-form__title {
+    color: #444;
+    float: left;
+    font-size: 1.1em;
+    font-weight: bold;
+    padding: 0.5em;
+}
+.main-form__buttons {
+    float: right;
+}
+.main-form__buttons a {
+    border-radius: 1em;
+    display: inline-block;
+    font-size: 0.9em;
+    padding: 0.3em 1em;
+    margin: 0.5em;
+    vertical-align: middle;
+}
+.main-form__buttons a.red {
+    background-color: #862f2f;
+    color: #fff;
+}
+.main-form__buttons a.main {
+    background-color: #209e1e;
+    color: #fff;
+}
+.main-form__table {
+    border-collapse: collapse;
+    width: 100%;
+}
+.main-form__table thead {
+    text-transform: uppercase;
+}
+.main-form__table thead td {
+    background-color: #fafafa;
+}
+.main-form__table td {
+    padding: 1em;
+}
+.main-form__label {
+    background-color: #f5f5f5;
+    border: 1px solid #e0e0e0;
+    border-radius: 0.2em;
+    padding: 1em;
+    max-width: 450px;
+    margin: auto;
+    margin-top: 5em;
+    text-align: center;
+}
+.main-form__label-image {
+    display: inline-block;
+    height: 60px;
+    margin: 1em;
+    width: auto;
+}
+.main-form__label-title {
+    color: #404040;
+    font-size: 1.7em;
+    font-weight: bold;
+    padding: 0.1em 1em 0.5em 1em;
+}
+.main-form__label-text {
+    color: #505050;
+}
+.main-form__label-text p {
+    line-height: 1.3;
+    margin: 0.7em 0.3em;
+}
+.form-modal {
+    animation: fadeIn 0.5s;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 5em 1em 1em 1em;
+    position: fixed;
+    top: 0%;
+    right: 0%;
+    left: 0%;
+    bottom: 0%;
+    overflow-y: scroll;
+}
+.form-modal__container {
+    background: #fff;
+    max-width: 600px;
+    margin: auto;
+}
+.form-modal__title {
+    background-color: #f5f5f5;
+    border: 1px solid #dfdfdf;
+    font-weight: bold;
+    padding: 0.7em 1em;
+    text-transform: uppercase;
+    font-size: 1.11em;
+}
+.form-modal__form {
+    padding: 1em;
+}
+.form-modal__buttons {
+    background: #fafafa;
+    border-top: 1px solid #eaeaea;
+    padding: 0.5em;
+    text-align: right;
+}
+.form-modal__button {
+    background-color: #f0f0f0;
+    color: #505050;
+    border: 0;
+    border-radius: 0.2em;
+    padding: 0.4em 0.8em 0.3em 0.8em;
+}
+.form-modal__button--close {
+    background-color: #862f2f;
+    color: #fff;
+}
+.form-modal__button--submit {
+    background-color: #378337;
+    color: #fff;
+}

@@ -1,0 +1,180 @@
+{% load static %}
+{% load humanize %}
+<!doctype html>
+<html lang="en">
+{% include 'head.html' %}
+
+<body>
+<!-- Preloader -->
+{% include 'preloader.html' %}
+<!-- Preloader -->
+
+
+<!-- Setting Panel -->
+
+<!-- ======================================
+******* Page Wrapper Area Start **********
+======================================= -->
+<div class="ecaps-page-wrapper">
+    <!-- Sidemenu Area -->
+    {% include 'sidebar2.html' %}
+
+    <!-- Page Content -->
+    <div class="ecaps-page-content">
+        <!-- Top Header Area -->
+        {% include 'header2.html' %}
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 box-margin">
+                        <div class="card" id="printableArea">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-6 pb-4">
+
+                                        <div class="media align-items-center">
+                                            <!-- Logo -->
+                                            <div class="card-body-login mb-30">
+                                                <img src="{% static 'img/core-img/jcollect.png'%}" alt="">
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-1 font-15">21, Ladoke Akintola Avenue, New Bodija</div>
+                                        <div class="mb-1 font-15">Ibadan Oyo State Nigeria</div>
+                                        <div class="font-15">+234 (0) 809 4636015</div>
+
+                                    </div>
+
+                                    <div class="col-sm-6 text-right pb-4">
+
+                                        <h6 class="font-15 mb-3">INVOICE #{{ show.ref_no }}</h6>
+                                        <div class="mb-1 font-15">Date: <strong class="font-weight-semibold">{{ show.date }}</strong></div>
+
+                                    </div>
+                                </div>
+
+                                <hr class="mb-4">
+
+                                <div class="row">
+                                    <div class="col-sm-6 mb-4">
+                                        <div class="font-14 mb-1"><strong>{{ user.first_name }} {{ user.last_name }}</strong></div>
+                                        {% if user.bus_owner_username == user_p.username %}
+                                            <div class="font-14 mb-1">{{ user_p.bus_name }}</div>
+                                            <div class="font-14 mb-1">{{ user_p.bus_address }}</div>
+                                            <div class="font-14 mb-1">{{ user_p.bus_website }}</div>
+                                        {% endif %}
+                                        <div class="font-14 mb-1">{{ phone }}</div>
+                                        <div class="font-14">{{ user.email }}</div>
+                                    </div>
+
+                                    <div class="col-sm-6 mb-4">
+                                        <div class="mb-2"><strong>Payment Details:</strong></div>
+                                        <table>
+                                            <tbody>
+                                            <tr>
+                                                <td class="pr-3 font-14">Total Due:</td>
+                                                <td class="font-14"><strong>₦ {{ show.amount|intcomma }}</strong></td>
+                                            </tr>
+                                            {% if show.sender == user.username %}
+                                                <tr>
+                                                    <td class="pr-3 font-14">Sender:</td>
+                                                    <td class="font-14"><strong>{{ show.sender }}</strong></td>
+                                                </tr>
+                                            {% else %}
+                                                <tr>
+                                                    <td class="pr-3 font-14">Receiver:</td>
+                                                    <td class="font-14"><strong>{{ show.receiver }}</strong></td>
+                                                </tr>
+                                            {% endif %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="table-responsive mb-4">
+                                    <table class="table m-0">
+                                        <thead>
+                                        <tr>
+                                            <th class="py-3">
+                                                Description
+                                            </th>
+                                            <th class="py-3">
+                                                Sender
+                                            </th>
+                                            <th class="py-3">
+                                                Receiver
+                                            </th>
+                                            <th class="py-3">
+                                                Amount
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td class="py-3">
+                                                <div class="font-weight-semibold">{{ show.description }}</div>
+                                            </td>
+                                            <td class="py-3">
+                                                <strong>{{ show.sender }}</strong>
+                                            </td>
+                                            <td class="py-3">
+                                                <strong>{{ show.receiver }}</strong>
+                                            </td>
+                                            <td class="py-3">
+                                                <strong>₦ {{ show.amount|intcomma }}</strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" class="text-right py-3">
+                                                Subtotal:<br>
+                                                Tax(%):<br>
+                                                <span class="d-block text-big mt-2">Total:</span>
+                                            </td>
+                                            <td class="py-3">
+                                                <strong>₦ {{ show.amount|intcomma }}</strong><br>
+                                                <strong>₦ 0.00</strong><br>
+                                                <strong class="d-block text-big mt-2">₦ {{ show.amount|intcomma }}</strong>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div>
+                                    <p> <strong>Note:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras laoreet, dolor id dapibus dapibus, neque mi tincidunt quam, quis congue ligula risus vitae magna. Curabitur ultrices nisi massa, nec viverra lorem feugiat sed. Mauris non porttitor nunc. Integer eu orci in magna auctor vestibulum.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <button onclick="printDiv('printableArea')" class="btn btn-info mb-2">Print this page</button>
+                            <!-- <a href="#" target="_blank" class="btn btn-info mb-2"><i class="icon_printer"></i>&nbsp; Print</a> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ======================================
+********* Page Wrapper Area End ***********
+======================================= -->
+
+<!-- Must needed plugins to the run this Template -->
+{% include 'foot.html' %}
+<script>
+    function printDiv(divName) {
+        var printContents = document.getElementById(divName).innerHTML;
+        var originalContents = document.body.innerHTML;
+
+        document.body.innerHTML = printContents;
+
+        window.print();
+
+        document.body.innerHTML = originalContents;
+    }
+</script>
+</body>
+</html>
