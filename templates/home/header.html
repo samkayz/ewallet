@@ -1,84 +1,42 @@
 {% load static %}
-<header id="main-header" class="header-one">
-    <!-- menu start -->
-    <nav id="menu-1" class="mega-menu" data-color="">
-        <!-- menu list items container -->
-        <div class="menu-list-items">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <!-- menu logo -->
-                        <ul class="menu-logo">
-                            <li>
-                                <a href="index"><img src="{% static 'home/images/jcollect.png'%}" style="height: 60px; width: 150px;" alt="logo" class="img-fluid"></a>
-                            </li>
-                        </ul>
-                        <!-- menu search bar -->
-                        <ul class="menu-search-bar">
-                            <li class="menu-contact iq-fw-5"><a href="tel:+234(0)8094636015" ><i class="fas fa-phone pr-1 "></i>+234(0)8094636015</a></li>
-                        </ul>
-                        <!-- menu links -->
-                        <ul class="menu-links">
-                            <!-- active class -->
-                            <li >
-                                <a href="index">Home</a>
-                                <!-- drop down multilevel  -->
-                            </li>
-                            <li>
-                                <a href="service">Services</a>
-                                <!-- drop down third level -->
-                                <ul class="drop-down-multilevel">
-                                    <li><a href="about">About jCollect</a></li>
-                                    <li>
-                                        <a href="javascript:void(0)"> Developer <i class="fas fa-angle-right "></i></a>
-                                        <!-- drop down third level -->
-                                        <ul class="drop-down-multilevel">
-                                            <li><a href="#">PHP Integration</a></li>
-                                            <li><a href="#">Python Integration</a></li>
-                                            <li><a href="#">Other Language</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            {% if user.is_authenticated %}
-                                {% if request.user.is_superuser %}
-                                    <li>
-                                        <a href="javascript:void(0)">My Account</a>
-                                        <!-- drop down third level -->
-                                        <ul class="drop-down-multilevel">
-                                            <li><a href="#">Howdy {{ user.first_name }} !</a></li>
-                                            <li><a href="/account/dashboard">Account</a></li>
-                                            <li><a href="/super/home" target="_blank">Admin</a></li>
-                                            <li><a href="/super/logout">Logout</a></li>
-                                        </ul>
-                                    </li>
-                                {% else %}
-                                    <li>
-                                        <a href="javascript:void(0)">My Account</a>
-                                        <!-- drop down third level -->
-                                        <ul class="drop-down-multilevel">
-                                            <li><a href="#">Howdy {{ user.first_name }} !</a></li>
-                                            <li><a href="/account/dashboard">Dashboard</a></li>
-                                            <li><a href="/account/logout">Logout</a></li>
-                                        </ul>
-                                    </li>
-                                {% endif %}
-                            {% elif not user.is_authenticated %}
-                                <li>
-                                    <a href="javascript:void(0)">Account</a>
-                                    <!-- drop down third level -->
-                                    <ul class="drop-down-multilevel">
-                                        <li><a href="/account/login">Login</a></li>
-                                        <li><a href="/account/register">Register</a></li>
-                                    </ul>
-                                </li>
-                            {% endif %}
-                            <li><a href="contact">Contact us</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light top-nav" id="ftco-navbar">
+    <div class="container">
+        <a href="" class="inverted1">
+            <img src="{% static 'home/images/jcollect_logo.png'%}" alt="jcollect_home">
+        </a>
+        <a href="" class="inverted2">
+            <img src="{% static 'home/images/jcollect_logo_inv.png'%}" alt="jcollect_home">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="oi oi-menu"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="ftco-nav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item ">
+                    <a href="#projects" class="nav-link"> Features</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact" class="nav-link">Contact Us</a>
+                </li>
+                <li class="nav-item">
+                    <a href="faq" class="nav-link">FAQs</a>
+                </li>
+                {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a href="/account/logout" class="nav-link"> <i class="fa fa-sign-in"> </i> Logout</a>
+                        </li>
+                        <li class="nav-item cta">
+                            <a href="/account/dashboard" class="nav-link"><span> <i class="fa fa-user-plus"> </i> Dashboard</span></a>
+                        </li>
+                {% elif not user.is_authenticated %}
+                    <li class="nav-item">
+                        <a href="/account/login" class="nav-link"> <i class="fa fa-sign-in"> </i> Sign in</a>
+                    </li>
+                    <li class="nav-item cta">
+                        <a href="/account/register" class="nav-link"><span> <i class="fa fa-user-plus"> </i> Register</span></a>
+                    </li>
+                {% endif %}
+            </ul>
         </div>
-    </nav>
-    <!-- menu end -->
-</header>
+    </div>
+</nav>

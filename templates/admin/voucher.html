@@ -1,5 +1,6 @@
 {% load static %}
 {% block main %}
+{% load humanize %}
     <!doctype html>
     <html lang="en">
     {% include 'head.html' %}
@@ -50,7 +51,7 @@
                                                 <td>{{ data.v_code }}</td>
                                                 <td>{{ data.ref_no }}</td>
                                                 <td>{{ data.v_status }}</td>
-                                                <td><div class="badge badge-success badge-shadow">₦ {{ data.v_amount }}</div></td>
+                                                <td><div class="badge badge-success badge-shadow">₦ {{ data.v_amount|intcomma }}</div></td>
                                                 <td>{{ data.v_loader }}</td>
                                                 <td>{{ data.v_date }}</td>
                                                 <td>{{ data.v_date_load }}</td>

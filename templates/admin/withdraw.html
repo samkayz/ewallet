@@ -1,5 +1,6 @@
 {% load static %}
 {% block main %}
+{% load humanize %}
     <!doctype html>
     <html lang="en">
     {% include 'head.html' %}
@@ -53,7 +54,7 @@
                                         {% for shows in show %}
                                             <tr>
                                                 <td>{{ shows.username }}</td>
-                                                <td><div class="badge badge-success badge-shadow">₦ {{ shows.amount }}</div></td>
+                                                <td><div class="badge badge-success badge-shadow">₦ {{ shows.amount|intcomma }}</div></td>
                                                 <td>{{ shows.ref_no }}</td>
                                                 <td>{{ shows.acct_name }}</td>
                                                 <td>{{ shows.acct_no }}</td>

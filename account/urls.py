@@ -50,5 +50,6 @@ urlpatterns = [
     path('upload_staff', views.upload_staff, name='upload_staff'),
     path('delete_staff/<id>', views.delete_staff, name='delete_staff'),
     path('pay_single/<id>', views.pay_single, name='pay_single'),
+    path('receipt/<id>', views.receipt, name='receipt'),
 
 ]

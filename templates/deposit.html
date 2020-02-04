@@ -3,7 +3,6 @@
     <!doctype html>
     <html lang="en">
     {% include 'head.html' %}
-
     <body>
     <!-- Preloader -->
     {% include 'preloader.html' %}
@@ -14,7 +13,6 @@
     <div class="ecaps-page-wrapper">
         <!-- Sidemenu Area -->
         {% include 'sidebar.html' %}
-
         <!-- Page Content -->
         <div class="ecaps-page-content">
             <!-- Top Header Area -->
@@ -61,7 +59,7 @@
                                                 </div>
                                                 <input type="hidden" name="username" class="form-control" value="{{ user.username }}">
                                                 <input type="hidden" name="email" class="form-control" value="{{ user.email }}">
-                                                <input type="number" class="form-control" name="amount" placeholder="Enter Amount" aria-label="Amount (to the nearest dollar)">
+                                                <input type="number" class="form-control" name="amount" placeholder="Enter Amount" aria-label="Amount (to the nearest dollar)" required>
                                                 <div class="input-group-append">
                                                     <span class="input-group-text">.00</span>
                                                 </div>
@@ -72,7 +70,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>

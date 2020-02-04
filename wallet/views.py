@@ -151,3 +151,11 @@ def subscribe(request):
             msg.attach_alternative(html_content, "text/html")
             msg.send()
             return redirect('/index')
+
+
+def faq(request):
+    return render(request, 'home/faq.html')
+
+
+def term(request):
+    return render(request, 'home/terms.html')

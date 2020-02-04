@@ -360,4 +360,5 @@ def virtual(request):
         else:
             messages.info(request, 'Invalid Credentials')
             return redirect('error')
-    return render(request, 'pay.html')
+    else:
+        return render(request, 'pay.html')

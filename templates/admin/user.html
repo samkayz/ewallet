@@ -1,5 +1,6 @@
 {% load static %}
 {% block main %}
+{% load humanize %}
     <!doctype html>
     <html lang="en">
     {% include 'head.html' %}
@@ -50,7 +51,7 @@
                                                 <td>{{ data.first_name }} {{ data.last_name }}</td>
                                                 <td>{{ data.customer_id }}</td>
                                                 <td>{{ data.phone_no }}</td>
-                                                <td><div class="badge badge-success badge-shadow">₦ {{ data.bal }}</div></td>
+                                                <td><div class="badge badge-success badge-shadow">₦ {{ data.bal|intcomma }}</div></td>
                                                 <td>
                                                     {% if data.status == "hold" %}
                                                         <div class="badge badge-danger badge-shadow">{{ data.status }}</div>

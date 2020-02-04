@@ -1128,3 +1128,12 @@ def pay_single(request, id):
         messages.error(request, 'User not found')
         return redirect('staff')
 
+
+@login_required(login_url='login')
+def receipt(request, id):
+    c_user = request.user.username
+    user = Merchant.objects.all().get(bus_owner_username=c_user)
+    show = Transactions.objects.all().get(id=id)
+    phone = Account.objects.values('phone_no').get(username=c_user)['phone_no']
+    return render(request, 'receipt.html', {'show': show, 'user_p': user, 'phone': phone})
+

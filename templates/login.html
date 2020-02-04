@@ -1,104 +1,106 @@
 {% load static %}
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
-{% include 'head.html' %}
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<head>
+    <meta charset="utf-8" />
+    <title>JCollect</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta name="description" content="JB desks,job portal,job" />
+    <meta name="keywords" content="JB desks,job portal,job" />
+    <meta name="author" content="" />
+    <meta name="MobileOptimized" content="320" />
 
-<body class="login-area">
 
-<!-- Preloader -->
-{% include 'preloader.html' %}
-<!-- Preloader -->
+    <link rel="stylesheet" type="text/css" href="{% static 'home/css/temp/bootstrap.min.css'%}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'home/css/temp/fonts.css'%}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'home/css/temp/flaticon.css'%}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'home/css/temp/font-awesome.css'%}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'home/css/temp/style.css'%}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'home/css/temp/responsive.css'%}" />
+    <link rel="stylesheet" href="{% static 'home/fonts/css/font-awesome.min.css'%}">
 
+    <link rel="shortcut icon" type="image/png" href="{% static 'home/images/favicon.png'%}" />
+</head>
+<body>
+<!-- top header wrapper start -->
 
-<!-- ======================================
-******* Page Wrapper Area Start **********
-======================================= -->
-<div class="main-content- h-100vh">
-    <div class="container h-100">
-        <div class="row h-100 align-items-center justify-content-center">
-            <div class="col-12">
-                <!-- Middle Box -->
-                <div class="middle-box">
-                    <div class="card">
-                        <div class="card-body p-4">
-                            <div class="row align-items-center">
-                                <div class="col-md-6">
-                                    <div class="xs-d-none mb-50-xs break-320-576-none">
-                                        <img src="{% static 'img/bg-img/1.png'%}" alt="">
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <!-- Logo -->
-                                    <h4 class="font-18 mb-30">Welcome back!</h4>
-                                    {% for message in messages %}
-                                        {% if message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
-                                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                                <strong>Warning - </strong> {{ message }}
-                                            </div>
-                                        {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
-                                            <div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
-                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                                <strong>Success - </strong> {{ message }}
-                                            </div>
-                                        {% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
-                                            <div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert">
-                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                                <strong>Error - </strong> {{ message }}
-                                            </div>
-                                        {% endif %}
-                                    {% endfor %}
-                                    <form action="/account/login" method="post">
-                                        {% csrf_token %}
-                                        <div class="form-group">
-                                            <label class="float-left" for="emailaddress">Username</label>
-                                            <input class="form-control" name="username" type="text" id="emailaddress" required placeholder="Enter your username">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <a href="forget-password.html" class="text-dark float-right"></a>
-                                            <label class="float-left" for="password">Password</label>
-                                            <input class="form-control" name="password" type="password" required id="password" placeholder="Enter your password">
-                                        </div>
-
-                                        <div class="form-group d-flex justify-content-between align-items-center mb-3">
-                                            <div class="checkbox d-inline mb-0">
-                                                <input type="checkbox" name="checkbox-1" id="checkbox-8">
-                                                <label for="checkbox-8" class="cr mb-0">Remember me</label>
-                                            </div>
-                                            <span class="font-13 text-primary"><a href="/password_reset">Forgot your password?</a></span>
-                                        </div>
-
-                                        <div class="form-group mb-0">
-                                            <button class="btn btn-primary btn-block" type="submit"> Log In </button>
-                                        </div>
-                                        <div class="text-center mt-15"><span class="mr-2 font-13 font-weight-bold">Don't have an account?</span><a class="font-13 font-weight-bold" href="/account/register">Sign up</a></div>
-
-                                    </form>
-                                </div> <!-- end card-body -->
-                            </div>
-                            <!-- end card -->
+<!-- top header wrapper end -->
+<!-- login wrapper start -->
+<div class="login_wrapper jb_cover">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="login_top_box jb_cover">
+                    <div class="login_banner_wrapper">
+                        <img src="{% static 'home/images/loginlogo7.png'%}" alt="jcollect.io">
+                        <div class="header_btn search_btn facebook_wrap jb_cover">
                         </div>
+                        <div class="header_btn search_btn google_wrap jb_cover">
+                        </div>
+                        <div class="jp_regis_center_tag_wrapper jb_register_red_or">
+                        </div>
+                    </div>
+                    <div class="login_form_wrapper">
+                        <h2>login</h2>
+                        {% for message in messages %}
+                            {% if message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <strong>Warning - </strong> {{ message }}
+                                </div>
+                            {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                                <div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <strong>Success - </strong> {{ message }}
+                                </div>
+                            {% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                                <div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <strong>Error - </strong> {{ message }}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                        <form method="post" action="/account/login">
+                            {% csrf_token %}
+                            <div class="form-group icon_form comments_form">
+
+                                <input type="text" class="form-control require" name="username" placeholder="Username*">
+                                <i class="fa fa-envelope"></i>
+                            </div>
+                            <div class="form-group icon_form comments_form">
+
+                                <input type="password" class="form-control require" name="password" placeholder="Password*">
+                                <i class="fa fa-lock"></i>
+                            </div>
+                            <div class="login_remember_box">
+                                <label class="control control--checkbox">Remember me
+                                    <input type="checkbox">
+                                    <span class="control__indicator"></span>
+                                </label>
+
+                            </div>
+                            <div class="header_btn search_btn login_btn jb_cover">
+                                <button type="submit">login</button>
+                            </div>
+                            <p>Forgotten Password? <a href="/password_reset" class="forget_password">Click Here</a></p>
+                            <div class="dont_have_account jb_cover">
+                                <p>Don’t have an acount ? <a href="/account/register">Sign up</a></p>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<!-- ======================================
-********* Page Wrapper Area End ***********
-======================================= -->
-
-<!-- Must needed plugins to the run this Template -->
-{% include 'foot.html' %}
-
+<!-- login wrapper end -->
 </body>
 </html>

@@ -86,14 +86,14 @@
                                         <input type="hidden" name="amount" value="{{ amount }}">
                                         <input type="hidden" name="merchant" value="{{ m_username }}">
                                         <input type="hidden" name="success_url" value="{{ success_url }}">
-                                        <input class="pay-logo" type="text" name="card_no" value="0000-0000-0000-0000" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '0000-0000-0000-0000';}" required="">
+                                        <input class="pay-logo" type="text" name="card_no" value="0000-0000-0000-0000" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '0000-0000-0000-0000';}" minlength="16" maxlength="16" size="16" required>
                                     </div>
                                     <div class="transaction">
                                         <div class="tab-form-left user-form">
                                             <h5>PIN</h5>
                                             <ul>
                                                 <li>
-                                                    <input type="number" name="pin" class="text_box" type="text" value="" min="1" />
+                                                    <input type="number" name="pin" class="text_box" value="" minlength="4" maxlength="4" size="4" required/>
                                                 </li>
                                             </ul>
                                         </div>

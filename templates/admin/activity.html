@@ -1,5 +1,6 @@
 {% load static %}
 {% block main %}
+{% load humanize %}
     <!doctype html>
     <html lang="en">
     {% include 'head.html' %}
@@ -47,7 +48,7 @@
                                                 <td>{{ data.receiver }}</td>
                                                 <td>{{ data.ref_no }}</td>
                                                 <td>{{ data.date }}</td>
-                                                <td><div class="badge badge-success badge-shadow">₦ {{ data.amount }}</div></td>
+                                                <td><div class="badge badge-success badge-shadow">₦ {{ data.amount|intcomma }}</div></td>
                                             </tr>
                                         {% endfor %}
                                         </tbody>

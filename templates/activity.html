@@ -38,6 +38,7 @@
                                             <th>Date</th>
                                             <th>Amount</th>
                                             <th>Desc</th>
+                                            <th>Print Invoice</th>
                                         </tr>
                                         </thead>
 
@@ -51,6 +52,9 @@
                                                 <td>{{ data.date }}</td>
                                                 <td><div class="badge badge-success badge-shadow">₦ {{ data.amount|intcomma }}</div></td>
                                                 <td>{{ data.description }}</td>
+                                                <td>
+                                                    <a href="receipt/{{ data.id }}"><button type="button" class="btn btn-success btn-circle btn-xl mb-2"><i class="fa fa-check"></i> </button></a>
+                                                </td>
                                             </tr>
                                         {% endfor %}
                                         </tbody>
